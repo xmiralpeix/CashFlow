@@ -1,0 +1,17 @@
+E:\XMR\Projects\CashFlow\CashFlow\bin\Debug\CashFlow.exe.config
+E:\XMR\Projects\CashFlow\CashFlow\bin\Debug\CashFlow.exe
+E:\XMR\Projects\CashFlow\CashFlow\bin\Debug\CashFlow.pdb
+E:\XMR\Projects\CashFlow\CashFlow\bin\Debug\CashFlow.xml
+E:\XMR\Projects\CashFlow\CashFlow\obj\Debug\CashFlow.vbprojResolveAssemblyReference.cache
+E:\XMR\Projects\CashFlow\CashFlow\obj\Debug\CashFlow.FrmCompany.resources
+E:\XMR\Projects\CashFlow\CashFlow\obj\Debug\CashFlow.FrmMain.resources
+E:\XMR\Projects\CashFlow\CashFlow\obj\Debug\CashFlow.Resources.resources
+E:\XMR\Projects\CashFlow\CashFlow\obj\Debug\CashFlow.vbproj.GenerateResource.Cache
+E:\XMR\Projects\CashFlow\CashFlow\obj\Debug\CashFlow.exe
+E:\XMR\Projects\CashFlow\CashFlow\obj\Debug\CashFlow.xml
+E:\XMR\Projects\CashFlow\CashFlow\obj\Debug\CashFlow.pdb
+E:\XMR\Projects\CashFlow\CashFlow\obj\Debug\CashFlow.FrmEntries.resources
+E:\XMR\Projects\CashFlow\CashFlow\bin\Debug\EntityFramework.dll
+E:\XMR\Projects\CashFlow\CashFlow\bin\Debug\EntityFramework.SqlServer.dll
+E:\XMR\Projects\CashFlow\CashFlow\bin\Debug\EntityFramework.xml
+E:\XMR\Projects\CashFlow\CashFlow\bin\Debug\EntityFramework.SqlServer.xml

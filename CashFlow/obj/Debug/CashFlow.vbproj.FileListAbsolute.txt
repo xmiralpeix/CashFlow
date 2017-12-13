@@ -1,0 +1,2 @@
+E:\XMR\Projects\CashFlow\CashFlow\bin\Debug\CashFlow.exe.config
+C:\Users\xavim\OneDrive\Documentos\CashFlow\CashFlow\bin\Debug\CashFlow.exe.config
