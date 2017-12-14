@@ -258,6 +258,7 @@ Public Class Deposit
     Public Property CancelDate As System.DateTime?
     Public Property Owner As Owner
     Public Property FinancialEntity As FinancialEntity
+    Public Property IsCash As Boolean
 
 End Class
 

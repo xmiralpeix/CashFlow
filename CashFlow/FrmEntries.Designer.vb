@@ -36,14 +36,20 @@ Partial Class FrmEntries
         Me.CheckBox2 = New System.Windows.Forms.CheckBox()
         Me.CheckBox3 = New System.Windows.Forms.CheckBox()
         Me.CheckBox4 = New System.Windows.Forms.CheckBox()
-        Me.CheckBox5 = New System.Windows.Forms.CheckBox()
+        Me.chkImport = New System.Windows.Forms.CheckBox()
         Me.TextBox8 = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Button3 = New System.Windows.Forms.Button()
         Me.TextBox9 = New System.Windows.Forms.TextBox()
+        Me.TextBox10 = New System.Windows.Forms.TextBox()
+        Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
+        Me.lblIncomes = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.lblExpenses = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.lblBalance = New System.Windows.Forms.ToolStripStatusLabel()
         Me.pButtons.SuspendLayout()
+        Me.StatusStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'pButtons
@@ -52,9 +58,9 @@ Partial Class FrmEntries
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.pButtons.Controls.Add(Me.btnCancel)
         Me.pButtons.Controls.Add(Me.btnOK)
-        Me.pButtons.Location = New System.Drawing.Point(1, 308)
+        Me.pButtons.Location = New System.Drawing.Point(1, 285)
         Me.pButtons.Name = "pButtons"
-        Me.pButtons.Size = New System.Drawing.Size(556, 33)
+        Me.pButtons.Size = New System.Drawing.Size(552, 33)
         Me.pButtons.TabIndex = 10
         '
         'btnCancel
@@ -175,21 +181,21 @@ Partial Class FrmEntries
         Me.CheckBox4.Text = "Concepte"
         Me.CheckBox4.UseVisualStyleBackColor = True
         '
-        'CheckBox5
+        'chkImport
         '
-        Me.CheckBox5.AutoSize = True
-        Me.CheckBox5.Checked = True
-        Me.CheckBox5.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.CheckBox5.Location = New System.Drawing.Point(12, 133)
-        Me.CheckBox5.Name = "CheckBox5"
-        Me.CheckBox5.Size = New System.Drawing.Size(55, 17)
-        Me.CheckBox5.TabIndex = 28
-        Me.CheckBox5.Text = "Import"
-        Me.CheckBox5.UseVisualStyleBackColor = True
+        Me.chkImport.AutoSize = True
+        Me.chkImport.Checked = True
+        Me.chkImport.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkImport.Location = New System.Drawing.Point(12, 133)
+        Me.chkImport.Name = "chkImport"
+        Me.chkImport.Size = New System.Drawing.Size(80, 17)
+        Me.chkImport.TabIndex = 28
+        Me.chkImport.Text = "(I/D) Import"
+        Me.chkImport.UseVisualStyleBackColor = True
         '
         'TextBox8
         '
-        Me.TextBox8.Location = New System.Drawing.Point(128, 133)
+        Me.TextBox8.Location = New System.Drawing.Point(152, 131)
         Me.TextBox8.Name = "TextBox8"
         Me.TextBox8.Size = New System.Drawing.Size(100, 20)
         Me.TextBox8.TabIndex = 29
@@ -238,18 +244,56 @@ Partial Class FrmEntries
         Me.TextBox9.Size = New System.Drawing.Size(289, 20)
         Me.TextBox9.TabIndex = 34
         '
+        'TextBox10
+        '
+        Me.TextBox10.Location = New System.Drawing.Point(128, 131)
+        Me.TextBox10.Name = "TextBox10"
+        Me.TextBox10.Size = New System.Drawing.Size(18, 20)
+        Me.TextBox10.TabIndex = 35
+        '
+        'StatusStrip1
+        '
+        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.lblIncomes, Me.lblExpenses, Me.lblBalance})
+        Me.StatusStrip1.Location = New System.Drawing.Point(0, 319)
+        Me.StatusStrip1.Name = "StatusStrip1"
+        Me.StatusStrip1.Size = New System.Drawing.Size(553, 22)
+        Me.StatusStrip1.TabIndex = 36
+        Me.StatusStrip1.Text = "StatusStrip1"
+        '
+        'lblIncomes
+        '
+        Me.lblIncomes.Name = "lblIncomes"
+        Me.lblIncomes.Size = New System.Drawing.Size(397, 17)
+        Me.lblIncomes.Spring = True
+        Me.lblIncomes.Text = "Ingressos: 0.00"
+        Me.lblIncomes.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'lblExpenses
+        '
+        Me.lblExpenses.Name = "lblExpenses"
+        Me.lblExpenses.Size = New System.Drawing.Size(82, 17)
+        Me.lblExpenses.Text = "Despeses: 0.00"
+        '
+        'lblBalance
+        '
+        Me.lblBalance.Name = "lblBalance"
+        Me.lblBalance.Size = New System.Drawing.Size(63, 17)
+        Me.lblBalance.Text = "Saldo: 0.00"
+        '
         'FrmEntries
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(557, 341)
+        Me.ClientSize = New System.Drawing.Size(553, 341)
+        Me.Controls.Add(Me.StatusStrip1)
+        Me.Controls.Add(Me.TextBox10)
         Me.Controls.Add(Me.TextBox9)
         Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.TextBox8)
-        Me.Controls.Add(Me.CheckBox5)
+        Me.Controls.Add(Me.chkImport)
         Me.Controls.Add(Me.CheckBox4)
         Me.Controls.Add(Me.CheckBox3)
         Me.Controls.Add(Me.CheckBox2)
@@ -265,6 +309,8 @@ Partial Class FrmEntries
         Me.Name = "FrmEntries"
         Me.Text = "Assentaments"
         Me.pButtons.ResumeLayout(False)
+        Me.StatusStrip1.ResumeLayout(False)
+        Me.StatusStrip1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -284,11 +330,16 @@ Partial Class FrmEntries
     Friend WithEvents CheckBox2 As CheckBox
     Friend WithEvents CheckBox3 As CheckBox
     Friend WithEvents CheckBox4 As CheckBox
-    Friend WithEvents CheckBox5 As CheckBox
+    Friend WithEvents chkImport As CheckBox
     Friend WithEvents TextBox8 As TextBox
     Friend WithEvents Label1 As Label
     Friend WithEvents Button1 As Button
     Friend WithEvents Button2 As Button
     Friend WithEvents Button3 As Button
     Friend WithEvents TextBox9 As TextBox
+    Friend WithEvents TextBox10 As TextBox
+    Friend WithEvents StatusStrip1 As StatusStrip
+    Friend WithEvents lblIncomes As ToolStripStatusLabel
+    Friend WithEvents lblExpenses As ToolStripStatusLabel
+    Friend WithEvents lblBalance As ToolStripStatusLabel
 End Class
