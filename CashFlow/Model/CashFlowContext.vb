@@ -37,7 +37,7 @@ End Class
 Public Class JournalEntry
     Implements IJournalEntry
 
-    <Required>
+    <Key>
     <DatabaseGenerated(DatabaseGeneratedOption.Identity)>
     Public Property ID As Integer Implements IJournalEntry.ID
     '
@@ -67,11 +67,9 @@ End Class
 Public Class JournalEntryTemplate
     Implements IJournalEntryTemplate
 
-    <Required>
-    <DatabaseGenerated(DatabaseGeneratedOption.Identity)>
-    Public Property ID As Integer Implements IJournalEntryTemplate.ID
+    <Key>
+    Public Property ID As String Implements IJournalEntryTemplate.ID
     Public Property Name As String Implements IJournalEntryTemplate.Name
-    Public Property AccessKey As String Implements IJournalEntryTemplate.AccessKey
     '
     Public Property EntryDate As System.DateTime? Implements IJournalEntryTemplate.EntryDate
     Public Property DocDate As System.DateTime? Implements IJournalEntryTemplate.DocDate ' Date in document
@@ -107,7 +105,7 @@ End Enum
 
 Public Class Activity
 
-    <Required>
+    <Key>
     <DatabaseGenerated(DatabaseGeneratedOption.Identity)>
     Public Property ID As Integer
     Public Property Name As String
@@ -131,7 +129,7 @@ End Class
 
 Public Class CashFlowStatus
 
-    <Required>
+    <Key>
     <DatabaseGenerated(DatabaseGeneratedOption.Identity)>
     Public Property ID As Integer
     '
@@ -148,7 +146,7 @@ End Class
 
 Public Class CashFlowEntry
 
-    <Required>
+    <Key>
     <DatabaseGenerated(DatabaseGeneratedOption.Identity)>
     Public Property ID As Integer
     '
@@ -200,9 +198,17 @@ Public Class Group
     <Key>
     <DatabaseGenerated(DatabaseGeneratedOption.Identity)>
     Public Property ID As Integer
-    Public Property Name As String
+
+    <Index(IsUnique:=True)>
+    <MaxLength(10)>
     Public Property AccessKey As String
+
+    <Index(IsUnique:=True)>
+    <MaxLength(100)>
+    Public Property Name As String
+
     Public Property SubGroups As ICollection(Of SubGroup)
+
     Public Property CancelDate As System.DateTime?
 
 End Class
@@ -214,8 +220,15 @@ Public Class SubGroup
     <Key>
     <DatabaseGenerated(DatabaseGeneratedOption.Identity)>
     Public Property ID As Integer
-    Public Property Name As String
+
+    <Index(IsUnique:=True)>
+    <MaxLength(10)>
     Public Property AccessKey As String
+
+    <Index(IsUnique:=True)>
+    <MaxLength(100)>
+    Public Property Name As String
+
     Public Property CancelDate As System.DateTime?
     Public Property Group As Group
 
@@ -229,7 +242,6 @@ Public Class Owner
     <DatabaseGenerated(DatabaseGeneratedOption.Identity)>
     Public Property ID As Integer
     Public Property Name As String
-    Public Property AccessKey As String
 
 End Class
 
@@ -241,7 +253,6 @@ Public Class FinancialEntity
     <DatabaseGenerated(DatabaseGeneratedOption.Identity)>
     Public Property ID As Integer
     Public Property Name As String
-    Public Property AccessKey As String
     Public Property CancelDate As System.DateTime?
 
 End Class
@@ -253,7 +264,6 @@ Public Class Deposit
     <DatabaseGenerated(DatabaseGeneratedOption.Identity)>
     Public Property ID As Integer
     Public Property Name As String
-    Public Property AccessKey As String
     Public Property CreationDate As System.DateTime
     Public Property CancelDate As System.DateTime?
     Public Property Owner As Owner

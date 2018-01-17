@@ -11,6 +11,7 @@ Namespace Migrations
         Public Sub New()
             AutomaticMigrationsEnabled = True
             AutomaticMigrationDataLossAllowed = True
+
         End Sub
 
         Protected Overrides Sub Seed(context As CashFlowContext)
