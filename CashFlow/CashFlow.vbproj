@@ -125,6 +125,12 @@
     </Compile>
     <Compile Include="Reports\Viewer\IPrintContent.vb" />
     <Compile Include="UIControls\ContentEditors\Interfaces\IActionsMenu.vb" />
+    <Compile Include="UIControls\ContentEditors\FinancialEntityEditor.Designer.vb">
+      <DependentUpon>FinancialEntityEditor.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\ContentEditors\FinancialEntityEditor.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UIControls\ContentEditors\OwnerEditor.Designer.vb">
       <DependentUpon>OwnerEditor.vb</DependentUpon>
     </Compile>
@@ -208,6 +214,9 @@
     <EmbeddedResource Include="Reports\Rdlc\RptGroups.rdlc" />
     <EmbeddedResource Include="Reports\Viewer\FrmViewerReport.resx">
       <DependentUpon>FrmViewerReport.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\ContentEditors\FinancialEntityEditor.resx">
+      <DependentUpon>FinancialEntityEditor.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UIControls\ContentEditors\OwnerEditor.resx">
       <DependentUpon>OwnerEditor.vb</DependentUpon>

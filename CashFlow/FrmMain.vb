@@ -37,7 +37,13 @@ Public Class FrmMain
     End Sub
 
     Private Sub EntitatsFinanceresToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EntitatsFinanceresToolStripMenuItem.Click
-
+        Dim frm As New FrmEdit
+        frm.MdiParent = Me
+        frm.Content = New FinancialEntityEditor()
+        frm.Show()
+        AddHandler frm.FormClosed, Sub()
+                                       frm.Dispose()
+                                   End Sub
     End Sub
 
     Private Sub PropietarisToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PropietarisToolStripMenuItem.Click
