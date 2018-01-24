@@ -8,6 +8,7 @@ Public Class FrmMain
 
         ' Add any initialization after the InitializeComponent() call.
         ApplicationEvents.RegisterEvents(Me.NavigateToolStrip1)
+        ApplicationEvents.RegisterEvents(Me.DadesToolStripMenuItem)
 
     End Sub
 
@@ -37,5 +38,15 @@ Public Class FrmMain
 
     Private Sub EntitatsFinanceresToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles EntitatsFinanceresToolStripMenuItem.Click
 
+    End Sub
+
+    Private Sub PropietarisToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PropietarisToolStripMenuItem.Click
+        Dim frm As New FrmEdit
+        frm.MdiParent = Me
+        frm.Content = New OwnerEditor()
+        frm.Show()
+        AddHandler frm.FormClosed, Sub()
+                                       frm.Dispose()
+                                   End Sub
     End Sub
 End Class

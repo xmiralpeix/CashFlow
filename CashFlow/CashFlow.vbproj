@@ -85,7 +85,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Events\AppicationEvents.vb" />
+    <Compile Include="Events\ApplicationEvents.vb" />
     <Compile Include="FrmCompany.Designer.vb">
       <DependentUpon>FrmCompany.vb</DependentUpon>
     </Compile>
@@ -123,7 +123,15 @@
       <DependentUpon>FrmMain.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UIControls\Interfaces\IFindContent.vb" />
+    <Compile Include="Reports\Viewer\IPrintContent.vb" />
+    <Compile Include="UIControls\ContentEditors\Interfaces\IActionsMenu.vb" />
+    <Compile Include="UIControls\ContentEditors\OwnerEditor.Designer.vb">
+      <DependentUpon>OwnerEditor.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\ContentEditors\OwnerEditor.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\ContentEditors\Interfaces\IFindContent.vb" />
     <Compile Include="Migrations\Configuration.vb" />
     <Compile Include="Model\CashFlowContext.vb" />
     <Compile Include="Model\IDeposit.vb" />
@@ -154,7 +162,11 @@
       <DependentUpon>JournalEntryEditor.vb</DependentUpon>
     </Compile>
     <Compile Include="UIControls\ContentEditors\JournalEntryEditor.vb" />
-    <Compile Include="UIControls\Interfaces\INavigateMenu.vb" />
+    <Compile Include="UIControls\ContentEditors\Interfaces\INavigateMenu.vb" />
+    <Compile Include="UIControls\ContentEditors\Interfaces\IPrintBehaviour.vb" />
+    <Compile Include="UIControls\UserControls\ActionsMenuStrip.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="UIControls\UserControls\NavigateToolStrip.vb">
       <SubType>Component</SubType>
     </Compile>
@@ -166,7 +178,7 @@
     <Compile Include="Reports\Viewer\FrmViewerReport.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UIControls\Interfaces\IEditContent.vb" />
+    <Compile Include="UIControls\ContentEditors\Interfaces\IEditContent.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="FrmCompany.resx">
@@ -196,6 +208,9 @@
     <EmbeddedResource Include="Reports\Rdlc\RptGroups.rdlc" />
     <EmbeddedResource Include="Reports\Viewer\FrmViewerReport.resx">
       <DependentUpon>FrmViewerReport.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\ContentEditors\OwnerEditor.resx">
+      <DependentUpon>OwnerEditor.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UIControls\ContentEditors\GroupEditor.resx">
       <DependentUpon>GroupEditor.vb</DependentUpon>

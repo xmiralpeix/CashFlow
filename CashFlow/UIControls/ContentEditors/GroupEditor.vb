@@ -1,7 +1,9 @@
-﻿Imports CashFlow
+﻿Imports System.Globalization
+Imports CashFlow
+Imports Microsoft.Reporting.WinForms
 
 Public Class GroupEditor
-    Implements IEditContent, IFindContent
+    Implements IEditContent, IFindContent, IPrintContent
 
 
     Private ReadOnly Property IEditContent_Text As String Implements IEditContent.Text
@@ -15,6 +17,27 @@ Public Class GroupEditor
             Return NameOf(CashFlow.CashFlowContext.Groups)
         End Get
     End Property
+
+    Private ReadOnly Property FindBehaviour As IFindBehaviour Implements IEditContent.FindBehaviour
+        Get
+            Return New EntityIDsFinder(Me)
+        End Get
+    End Property
+
+    Public ReadOnly Property PrintBehaviour As IPrintBehaviour Implements IEditContent.PrintBehaviour
+        Get
+            Return New EntityIDsPrinter(Me)
+        End Get
+    End Property
+
+    Public ReadOnly Property ReportEmbeddedResource As String Implements IPrintContent.ReportEmbeddedResource
+        Get
+            Return "CashFlow.RptGroups.rdlc"
+        End Get
+    End Property
+
+
+
 
     Private _entry As Group
 
@@ -93,7 +116,8 @@ Public Class GroupEditor
             NameOf(PreviousAppEvent),
             NameOf(NextAppEvent),
             NameOf(LastAppEvent),
-            NameOf(PrintAppEvent)}
+            NameOf(PrintAppEvent),
+            NameOf(DeleteAppEvent)}
     End Function
 
     Private Function GetUI() As IContainerControl Implements IEditContent.GetUI
@@ -208,9 +232,6 @@ Public Class GroupEditor
 
     End Function
 
-    Public Function FindBehaviour() As IFindBehaviour Implements IEditContent.FindBehaviour
-        Return New GenericFinder(Me)
-    End Function
 
     Public Function GetQuantity() As Integer Implements IFindContent.GetQuantity
 
@@ -268,5 +289,28 @@ Public Class GroupEditor
 
     End Function
 
+
+    Private _printCulture As CultureInfo
+    Public Property Culture As CultureInfo Implements IPrintContent.Culture
+        Get
+            Return _printCulture
+        End Get
+        Set(value As CultureInfo)
+            value = _printCulture
+        End Set
+    End Property
+
+
+    Private _printFromID, _printToID As Integer
+    Public Sub SetIDRange(FromID As Integer, ToID As Integer) Implements IPrintContent.SetIDRange
+        _printFromID = FromID
+        _printToID = ToID
+    End Sub
+
+    Public Function ReportDataSource() As ReportDataSource Implements IPrintContent.ReportDataSource
+        Dim rds As Microsoft.Reporting.WinForms.ReportDataSource
+        rds = New Microsoft.Reporting.WinForms.ReportDataSource("RptData", RptGroupsRow.LoadData(_printFromID, _printToID, _printCulture))
+        Return rds
+    End Function
 
 End Class

@@ -34,9 +34,7 @@ Partial Class FrmMain
         Me.AssentamentsToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ConfiguracióToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ParàmetresToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DadesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DuplicarToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.EliminarToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DadesToolStripMenuItem = New CashFlow.ActionsMenuStrip()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.NavigateToolStrip1 = New CashFlow.NavigateToolStrip()
         Me.statusbar.SuspendLayout()
@@ -68,19 +66,19 @@ Partial Class FrmMain
         '
         Me.AssentamentsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.GrupsToolStripMenuItem, Me.PropietarisToolStripMenuItem})
         Me.AssentamentsToolStripMenuItem.Name = "AssentamentsToolStripMenuItem"
-        Me.AssentamentsToolStripMenuItem.Size = New System.Drawing.Size(143, 22)
+        Me.AssentamentsToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.AssentamentsToolStripMenuItem.Text = "Definicions"
         '
         'GrupsToolStripMenuItem
         '
         Me.GrupsToolStripMenuItem.Name = "GrupsToolStripMenuItem"
-        Me.GrupsToolStripMenuItem.Size = New System.Drawing.Size(130, 22)
+        Me.GrupsToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.GrupsToolStripMenuItem.Text = "Grups"
         '
         'PropietarisToolStripMenuItem
         '
         Me.PropietarisToolStripMenuItem.Name = "PropietarisToolStripMenuItem"
-        Me.PropietarisToolStripMenuItem.Size = New System.Drawing.Size(130, 22)
+        Me.PropietarisToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.PropietarisToolStripMenuItem.Text = "Propietaris"
         '
         'FinancesToolStripMenuItem
@@ -112,7 +110,7 @@ Partial Class FrmMain
         '
         Me.ConfiguracióToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ParàmetresToolStripMenuItem})
         Me.ConfiguracióToolStripMenuItem1.Name = "ConfiguracióToolStripMenuItem1"
-        Me.ConfiguracióToolStripMenuItem1.Size = New System.Drawing.Size(143, 22)
+        Me.ConfiguracióToolStripMenuItem1.Size = New System.Drawing.Size(152, 22)
         Me.ConfiguracióToolStripMenuItem1.Text = "Configuració"
         '
         'ParàmetresToolStripMenuItem
@@ -123,22 +121,9 @@ Partial Class FrmMain
         '
         'DadesToolStripMenuItem
         '
-        Me.DadesToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DuplicarToolStripMenuItem, Me.EliminarToolStripMenuItem})
         Me.DadesToolStripMenuItem.Name = "DadesToolStripMenuItem"
         Me.DadesToolStripMenuItem.Size = New System.Drawing.Size(51, 20)
         Me.DadesToolStripMenuItem.Text = "Dades"
-        '
-        'DuplicarToolStripMenuItem
-        '
-        Me.DuplicarToolStripMenuItem.Name = "DuplicarToolStripMenuItem"
-        Me.DuplicarToolStripMenuItem.Size = New System.Drawing.Size(118, 22)
-        Me.DuplicarToolStripMenuItem.Text = "Duplicar"
-        '
-        'EliminarToolStripMenuItem
-        '
-        Me.EliminarToolStripMenuItem.Name = "EliminarToolStripMenuItem"
-        Me.EliminarToolStripMenuItem.Size = New System.Drawing.Size(118, 22)
-        Me.EliminarToolStripMenuItem.Text = "Eliminar"
         '
         'MenuStrip1
         '
@@ -192,9 +177,7 @@ Partial Class FrmMain
     Friend WithEvents AssentamentsToolStripMenuItem1 As ToolStripMenuItem
     Friend WithEvents ConfiguracióToolStripMenuItem1 As ToolStripMenuItem
     Friend WithEvents ParàmetresToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents DadesToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents DuplicarToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents EliminarToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents DadesToolStripMenuItem As ActionsMenuStrip
     Friend WithEvents MenuStrip1 As MenuStrip
     Friend WithEvents NavigateToolStrip1 As NavigateToolStrip
 End Class

@@ -18,6 +18,7 @@ Public Class NavigateToolStrip
     Public WithEvents menuNextObject As New ToolStripButton()
     Public WithEvents menuLastObject As New ToolStripButton()
     Public WithEvents menuPrint As New ToolStripButton()
+    Public WithEvents menuImportExport As New ToolStripButton()
 
     Public Sub ConfigureControls()
 
@@ -100,6 +101,17 @@ Public Class NavigateToolStrip
         '
         AddHandler Me.menuPrint.Click, Sub() RaiseEvent Print()
 
+        '
+        'menuImportExport
+        '
+        Me.menuImportExport.Image = CType(resources.GetObject("menuImportExport.Image"), System.Drawing.Image)
+        Me.menuImportExport.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.menuImportExport.Name = NameOf(menuPrint)
+        Me.menuImportExport.Size = New System.Drawing.Size(62, 22)
+        Me.menuImportExport.Text = Locate("Importar/Exportar", CAT)
+        '
+        AddHandler Me.menuImportExport.Click, Sub() RaiseEvent ImportExport()
+
 
         '
         Me.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.menuSearch,
@@ -110,7 +122,8 @@ Public Class NavigateToolStrip
                                                                     Me.menuNextObject,
                                                                     Me.menuLastObject,
                                                                     New ToolStripSeparator(),
-                                                                    Me.menuPrint})
+                                                                    Me.menuPrint(),
+                                                                    Me.menuImportExport})
         DisableAll()
 
     End Sub
@@ -128,6 +141,7 @@ Public Class NavigateToolStrip
                 Case NameOf(INavigateMenu.NextObject) : menuNextObject.Enabled = True
                 Case NameOf(INavigateMenu.LastObject) : menuLastObject.Enabled = True
                 Case NameOf(INavigateMenu.Print) : menuPrint.Enabled = True
+                Case NameOf(INavigateMenu.ImportExport) : menuImportExport.Enabled = True
             End Select
         Next
 
@@ -152,5 +166,6 @@ Public Class NavigateToolStrip
     Public Event NextObject() Implements INavigateMenu.NextObject
     Public Event LastObject() Implements INavigateMenu.LastObject
     Public Event Print() Implements INavigateMenu.Print
+    Public Event ImportExport() Implements INavigateMenu.ImportExport
 
 End Class

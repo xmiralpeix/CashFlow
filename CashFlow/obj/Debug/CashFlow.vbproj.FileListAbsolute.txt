@@ -36,3 +36,4 @@ C:\Users\xavim\OneDrive\Documentos\CashFlow\CashFlow\obj\Debug\CashFlow.FrmViewe
 C:\Users\xavim\OneDrive\Documentos\CashFlow\CashFlow\obj\Debug\CashFlow.JournalEntryEditor.resources
 C:\Users\xavim\OneDrive\Documentos\CashFlow\CashFlow\obj\Debug\CashFlow.GroupEditor.resources
 C:\Users\xavim\OneDrive\Documentos\CashFlow\CashFlow\obj\Debug\CashFlow.FrmFindEntityIDs.resources
+C:\Users\xavim\OneDrive\Documentos\CashFlow\CashFlow\obj\Debug\CashFlow.OwnerEditor.resources

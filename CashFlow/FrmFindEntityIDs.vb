@@ -77,6 +77,10 @@
 
     End Sub
 
+    Private Sub grid_DoubleClick(sender As Object, e As EventArgs) Handles grid.DoubleClick
+        btnOK.PerformClick()
+    End Sub
+
 End Class
 
 

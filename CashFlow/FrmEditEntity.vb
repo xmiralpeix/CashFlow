@@ -32,7 +32,8 @@ Public Class FrmEdit
     Private Sub FrmEdit_Load(sender As Object, e As EventArgs) Handles Me.Load
 
         Try
-            ConfigureControls()
+            Me.ConfigureControls()
+            Me.MoveToNew()
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
@@ -81,11 +82,16 @@ Public Class FrmEdit
             Case TypeOf (appEvent) Is PreviousAppEvent : MoveToPrevious()
             Case TypeOf (appEvent) Is NextAppEvent : MoveToNext()
             Case TypeOf (appEvent) Is LastAppEvent : MoveToLast()
-            Case TypeOf (appEvent) Is PrintAppEvent : MsgBox("Print")
+            Case TypeOf (appEvent) Is PrintAppEvent : ProcessPrintBehaviour()
         End Select
 
     End Sub
 
+    Private Sub ProcessPrintBehaviour()
+
+        Content.PrintBehaviour.Print(_ID.Value, _ID.Value, CAT)
+
+    End Sub
 
     Public Sub ProcessSearchBehaviour()
 
@@ -96,12 +102,14 @@ Public Class FrmEdit
 
         Me._ID = IDscollection.First()
         Content.LoadFormByID(Me.ID)
+        ChangeStatus(eStatus.Updating)
 
     End Sub
 
     Private Sub MoveToNew()
         Me._ID = Nothing
         Content.LoadFormByID(Me._ID)
+        ChangeStatus(eStatus.Adding)
     End Sub
 
     Public Sub MoveToPrevious()
@@ -119,6 +127,7 @@ Public Class FrmEdit
         End If
 
         Content.LoadFormByID(Me.ID)
+        ChangeStatus(eStatus.Updating)
 
     End Sub
 
@@ -138,6 +147,7 @@ Public Class FrmEdit
         End If
 
         Content.LoadFormByID(Me.ID)
+        ChangeStatus(eStatus.Updating)
 
     End Sub
 
@@ -151,6 +161,7 @@ Public Class FrmEdit
         End If
 
         Content.LoadFormByID(Me.ID)
+        ChangeStatus(eStatus.Updating)
 
     End Sub
 
@@ -164,6 +175,7 @@ Public Class FrmEdit
         End If
 
         Content.LoadFormByID(Me.ID)
+        ChangeStatus(eStatus.Updating)
 
     End Sub
 
