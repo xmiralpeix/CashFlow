@@ -159,14 +159,14 @@ Public Class OwnerEditor
         col.Add(New DataGridViewTextBoxColumn())
         With col(col.Count - 1)
             .HeaderText = "ID"
-            .DataPropertyName = NameOf(Group.ID)
+            .DataPropertyName = NameOf(Owner.ID)
             .Visible = False
         End With
         '
         col.Add(New DataGridViewTextBoxColumn())
         With col(col.Count - 1)
             .HeaderText = Locate("Nom", CAT)
-            .DataPropertyName = NameOf(Group.Name)
+            .DataPropertyName = NameOf(Owner.Name)
         End With
 
 

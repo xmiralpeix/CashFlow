@@ -37,3 +37,7 @@ C:\Users\xavim\OneDrive\Documentos\CashFlow\CashFlow\bin\Debug\zh-Hant\Microsoft
 C:\Users\xavim\OneDrive\Documentos\CashFlow\CashFlow\obj\Debug\CashFlow.exe
 C:\Users\xavim\OneDrive\Documentos\CashFlow\CashFlow\obj\Debug\CashFlow.xml
 C:\Users\xavim\OneDrive\Documentos\CashFlow\CashFlow\obj\Debug\CashFlow.pdb
+C:\Users\xavim\OneDrive\Documentos\CashFlow\CashFlow\obj\Debug\CashFlow.DepositEditor.resources
+C:\Users\xavim\OneDrive\Documentos\CashFlow\CashFlow\obj\Debug\CashFlow.ListBox.resources
+C:\Users\xavim\OneDrive\Documentos\CashFlow\CashFlow\obj\Debug\CashFlow.ListBox_Date.resources
+C:\Users\xavim\OneDrive\Documentos\CashFlow\CashFlow\obj\Debug\CashFlow.FrmCalendar.resources

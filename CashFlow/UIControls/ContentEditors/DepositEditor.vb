@@ -2,18 +2,18 @@
 Imports CashFlow
 Imports Microsoft.Reporting.WinForms
 
-Public Class FinancialEntityEditor
+Public Class DepositEditor
     Implements IEditContent, IFindContent
 
     Private ReadOnly Property IEditContent_Text As String Implements IEditContent.Text
         Get
-            Return Locate("Entitats Financeres", CAT)
+            Return Locate("Dipòsits", CAT)
         End Get
     End Property
 
     Private ReadOnly Property Table As String Implements IEditContent.Table
         Get
-            Return NameOf(CashFlow.CashFlowContext.FinancialEntities)
+            Return NameOf(CashFlow.CashFlowContext.Deposits)
         End Get
     End Property
 
@@ -29,7 +29,7 @@ Public Class FinancialEntityEditor
         End Get
     End Property
 
-    Private _entry As FinancialEntity
+    Private _entry As Deposit
 
     Public Sub LoadFormByID(ID? As Integer) Implements IEditContent.LoadFormByID
 
@@ -39,13 +39,13 @@ Public Class FinancialEntityEditor
 
                 Using ctx As New CashFlow.CashFlowContext()
 
-                    _entry = (From g1 In ctx.FinancialEntities
-                              Where g1.ID = ID.Value).First()
+                    _entry = (From entity In ctx.Deposits
+                              Where entity.ID = ID.Value).First()
 
                 End Using
 
             Else
-                _entry = New FinancialEntity()
+                _entry = New Deposit()
             End If
 
             Me.txtID.Text = _entry.ID
@@ -78,18 +78,19 @@ Public Class FinancialEntityEditor
 
             '
             _entry.Name = Me.txtName.Text
+            _entry.IsCash = Me.chkIsCash.Checked
 
             '
             If _entry.ID <> 0 Then
 
-                Dim dbEntry = (From g1 In ctx.FinancialEntities
-                               Where g1.ID = _entry.ID).First()
+                Dim dbEntry = (From entity In ctx.Deposits
+                               Where entity.ID = _entry.ID).First()
 
                 ctx.Entry(dbEntry).CurrentValues.SetValues(_entry)
 
             Else
 
-                ctx.FinancialEntities.Add(_entry)
+                ctx.Deposits.Add(_entry)
 
             End If
 
@@ -111,11 +112,11 @@ Public Class FinancialEntityEditor
 
         ' 1. Check if exists any object linked to this owner
         Dim entries = (From j In ctx.JournalEntries
-                       Where OwnerIDs.Contains(j.Deposit.FinancialEntity.ID)
+                       Where OwnerIDs.Contains(j.Deposit.ID)
                        Select j).Take(1)
 
         If entries.Any Then
-            msgError = Locate("Existeixen asentaments que utilitza algun producte financer de l'entitat financera a eliminar. Valora la possibilitat de marcar-lo com a inactiu.", CAT)
+            msgError = Locate("Existeixen asentaments que utilitzen el producte financer a eliminar. Valora la possibilitat de marcar-lo com a inactiu.", CAT)
             Return False
         End If
 
@@ -127,21 +128,21 @@ Public Class FinancialEntityEditor
     Public Function GetQuantity() As Integer Implements IFindContent.GetQuantity
 
         Using ctx As New CashFlow.CashFlowContext()
-            Return ctx.FinancialEntities.Count
+            Return ctx.Deposits.Count
         End Using
 
     End Function
 
     Public Function GetContent(ByVal textSearch As String) As Object Implements IFindContent.GetContent
 
-        Dim entityCollection As List(Of FinancialEntity)
+        Dim entityCollection As List(Of Deposit)
         Using ctx As New CashFlow.CashFlowContext()
             If String.IsNullOrWhiteSpace(textSearch) Then
-                entityCollection = (From oEntity In ctx.FinancialEntities
+                entityCollection = (From oEntity In ctx.Deposits
                                     Select oEntity).ToList()
             Else
 
-                entityCollection = (From oEntity In ctx.FinancialEntities
+                entityCollection = (From oEntity In ctx.Deposits
                                     Where (oEntity.Name).Contains(textSearch)
                                     Select oEntity).ToList()
             End If
@@ -159,14 +160,20 @@ Public Class FinancialEntityEditor
         col.Add(New DataGridViewTextBoxColumn())
         With col(col.Count - 1)
             .HeaderText = "ID"
-            .DataPropertyName = NameOf(FinancialEntity.ID)
+            .DataPropertyName = NameOf(Deposit.ID)
             .Visible = False
         End With
         '
         col.Add(New DataGridViewTextBoxColumn())
         With col(col.Count - 1)
             .HeaderText = Locate("Nom", CAT)
-            .DataPropertyName = NameOf(FinancialEntity.Name)
+            .DataPropertyName = NameOf(Deposit.Name)
+        End With
+        '
+        col.Add(New DataGridViewCheckBoxColumn())
+        With col(col.Count - 1)
+            .HeaderText = Locate("Efectiu", CAT)
+            .DataPropertyName = NameOf(Deposit.IsCash)
         End With
 
 

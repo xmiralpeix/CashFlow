@@ -1,41 +1,52 @@
-﻿'Imports CashFlow
+﻿Imports CashFlow
 
-'Public Class JournalEntryEditor
-'    Implements IEditContent(Of JournalEntry)
+Public Class JournalEntryEditor
+    Implements IEditContent
 
-'    Private ReadOnly Property Table As String Implements IEditContent(Of JournalEntry).Table
-'        Get
-'            Return NameOf(CashFlow.CashFlowContext.JournalEntries)
-'        End Get
-'    End Property
+    Public ReadOnly Property FindBehaviour As IFindBehaviour Implements IEditContent.FindBehaviour
+        Get
+            'Throw New NotImplementedException()
+        End Get
+    End Property
+
+    Public ReadOnly Property PrintBehaviour As IPrintBehaviour Implements IEditContent.PrintBehaviour
+        Get
+            ' Throw New NotImplementedException()
+        End Get
+    End Property
+
+    Private ReadOnly Property IEditContent_Text As String Implements IEditContent.Text
+        Get
+            ' Throw New NotImplementedException()
+        End Get
+    End Property
+
+    Private ReadOnly Property Table As String Implements IEditContent.Table
+        Get
+            Return NameOf(CashFlow.CashFlowContext.JournalEntries)
+        End Get
+    End Property
 
 
+    Public Sub LoadFormByID(ID As Integer?) Implements IEditContent.LoadFormByID
+        '  Throw New NotImplementedException()
+    End Sub
 
-'    Private ReadOnly Property Text As String Implements IEditContent(Of JournalEntry).Text
-'        Get
-'            Return "Assentaments" ' TODO Translate
-'        End Get
-'    End Property
+    Public Sub SaveEntry() Implements IEditContent.SaveEntry
+        ' Throw New NotImplementedException()
+    End Sub
 
-'    Public Sub LoadEntryByForm(ByRef entry As JournalEntry) Implements IEditContent(Of JournalEntry).LoadEntryByForm
-'        MsgBox("Loading LoadEntryByForm ")
-'    End Sub
+    Private Function AppEvents() As IEnumerable(Of String) Implements IEditContent.AppEvents
+        Return {
+            NameOf(SearchAppEvent),
+            NameOf(NewAppEvent),
+            NameOf(FirstAppEvent),
+            NameOf(PreviousAppEvent),
+            NameOf(NextAppEvent),
+            NameOf(LastAppEvent)}
+    End Function
 
-'    Public Sub LoadFormByEntry(entry As JournalEntry) Implements IEditContent(Of JournalEntry).LoadFormByEntry
-'        MsgBox("Loading LoadFormByEntry ")
-'    End Sub
-
-'    Private Function AppEvents() As IEnumerable(Of String) Implements IEditContent(Of JournalEntry).AppEvents
-'        Return {
-'            NameOf(SearchAppEvent),
-'            NameOf(NewAppEvent),
-'            NameOf(FirstAppEvent),
-'            NameOf(PreviousAppEvent),
-'            NameOf(NextAppEvent),
-'            NameOf(LastAppEvent)}
-'    End Function
-
-'    Private Function GetUI() As IContainerControl Implements IEditContent(Of JournalEntry).GetUI
-'        Return Me
-'    End Function
-'End Class
+    Private Function GetUI() As IContainerControl Implements IEditContent.GetUI
+        Return Me
+    End Function
+End Class

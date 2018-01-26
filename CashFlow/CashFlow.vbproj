@@ -86,6 +86,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Events\ApplicationEvents.vb" />
+    <Compile Include="FrmCalendar.Designer.vb">
+      <DependentUpon>FrmCalendar.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmCalendar.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FrmCompany.Designer.vb">
       <DependentUpon>FrmCompany.vb</DependentUpon>
     </Compile>
@@ -124,6 +130,12 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Reports\Viewer\IPrintContent.vb" />
+    <Compile Include="UIControls\ContentEditors\DepositEditor.Designer.vb">
+      <DependentUpon>DepositEditor.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\ContentEditors\DepositEditor.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UIControls\ContentEditors\Interfaces\IActionsMenu.vb" />
     <Compile Include="UIControls\ContentEditors\FinancialEntityEditor.Designer.vb">
       <DependentUpon>FinancialEntityEditor.vb</DependentUpon>
@@ -167,9 +179,21 @@
     <Compile Include="UIControls\ContentEditors\JournalEntryEditor.Designer.vb">
       <DependentUpon>JournalEntryEditor.vb</DependentUpon>
     </Compile>
-    <Compile Include="UIControls\ContentEditors\JournalEntryEditor.vb" />
+    <Compile Include="UIControls\ContentEditors\JournalEntryEditor.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UIControls\ContentEditors\Interfaces\INavigateMenu.vb" />
     <Compile Include="UIControls\ContentEditors\Interfaces\IPrintBehaviour.vb" />
+    <Compile Include="UIControls\ListBoxes\IListBoxEditor.vb" />
+    <Compile Include="UIControls\ListBoxes\ListBox.Designer.vb">
+      <DependentUpon>ListBox.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\ListBoxes\ListBox.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\ListBoxes\ListBox_Date.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UIControls\UserControls\ActionsMenuStrip.vb">
       <SubType>Component</SubType>
     </Compile>
@@ -187,6 +211,9 @@
     <Compile Include="UIControls\ContentEditors\Interfaces\IEditContent.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="FrmCalendar.resx">
+      <DependentUpon>FrmCalendar.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmCompany.resx">
       <DependentUpon>FrmCompany.vb</DependentUpon>
     </EmbeddedResource>
@@ -215,6 +242,9 @@
     <EmbeddedResource Include="Reports\Viewer\FrmViewerReport.resx">
       <DependentUpon>FrmViewerReport.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\ContentEditors\DepositEditor.resx">
+      <DependentUpon>DepositEditor.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UIControls\ContentEditors\FinancialEntityEditor.resx">
       <DependentUpon>FinancialEntityEditor.vb</DependentUpon>
     </EmbeddedResource>
@@ -226,6 +256,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UIControls\ContentEditors\JournalEntryEditor.resx">
       <DependentUpon>JournalEntryEditor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\ListBoxes\ListBox.resx">
+      <DependentUpon>ListBox.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\ListBoxes\ListBox_Date.resx">
+      <DependentUpon>ListBox_Date.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
