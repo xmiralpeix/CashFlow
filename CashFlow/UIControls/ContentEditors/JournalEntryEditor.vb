@@ -36,6 +36,10 @@ Public Class JournalEntryEditor
         ' Throw New NotImplementedException()
     End Sub
 
+    Public Function IsValidContent(ByRef msgError As String, ByRef invalidControl As Control) As Boolean Implements IEditContent.IsValidContent
+        'Throw New NotImplementedException()
+    End Function
+
     Private Function AppEvents() As IEnumerable(Of String) Implements IEditContent.AppEvents
         Return {
             NameOf(SearchAppEvent),

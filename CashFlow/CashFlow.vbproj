@@ -129,7 +129,12 @@
       <DependentUpon>FrmMain.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Migrations\201802021700274_financial product.Designer.vb">
+      <DependentUpon>201802021700274_financial product.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802021700274_financial product.vb" />
     <Compile Include="Reports\Viewer\IPrintContent.vb" />
+    <Compile Include="StringExtensions.vb" />
     <Compile Include="UIControls\ContentEditors\DepositEditor.Designer.vb">
       <DependentUpon>DepositEditor.vb</DependentUpon>
     </Compile>
@@ -191,6 +196,12 @@
     <Compile Include="UIControls\ListBoxes\ListBox.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="UIControls\ListBoxes\ListBox_Owner.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\ListBoxes\ListBox_FinancialEntity.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UIControls\ListBoxes\ListBox_Date.vb">
       <SubType>UserControl</SubType>
     </Compile>
@@ -232,6 +243,9 @@
     <EmbeddedResource Include="FrmMain.resx">
       <DependentUpon>FrmMain.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802021700274_financial product.resx">
+      <DependentUpon>201802021700274_financial product.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
@@ -259,6 +273,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UIControls\ListBoxes\ListBox.resx">
       <DependentUpon>ListBox.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\ListBoxes\ListBox_Owner.resx">
+      <DependentUpon>ListBox_Owner.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\ListBoxes\ListBox_FinancialEntity.resx">
+      <DependentUpon>ListBox_FinancialEntity.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UIControls\ListBoxes\ListBox_Date.resx">
       <DependentUpon>ListBox_Date.vb</DependentUpon>

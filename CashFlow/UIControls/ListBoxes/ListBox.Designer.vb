@@ -29,18 +29,20 @@ Partial Class ListBox
         '
         'txtDisplay
         '
-        Me.txtDisplay.Location = New System.Drawing.Point(132, 3)
+        Me.txtDisplay.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtDisplay.Location = New System.Drawing.Point(99, 0)
         Me.txtDisplay.Name = "txtDisplay"
         Me.txtDisplay.ReadOnly = True
-        Me.txtDisplay.Size = New System.Drawing.Size(289, 20)
+        Me.txtDisplay.Size = New System.Drawing.Size(326, 20)
         Me.txtDisplay.TabIndex = 2
         Me.txtDisplay.TabStop = False
         '
         'btnSearch
         '
-        Me.btnSearch.Location = New System.Drawing.Point(105, 3)
+        Me.btnSearch.Location = New System.Drawing.Point(77, -1)
         Me.btnSearch.Name = "btnSearch"
-        Me.btnSearch.Size = New System.Drawing.Size(17, 23)
+        Me.btnSearch.Size = New System.Drawing.Size(15, 18)
         Me.btnSearch.TabIndex = 1
         Me.btnSearch.TabStop = False
         Me.btnSearch.Text = "*"
@@ -48,9 +50,9 @@ Partial Class ListBox
         '
         'txtVisualValue
         '
-        Me.txtVisualValue.Location = New System.Drawing.Point(4, 4)
+        Me.txtVisualValue.Location = New System.Drawing.Point(0, 0)
         Me.txtVisualValue.Name = "txtVisualValue"
-        Me.txtVisualValue.Size = New System.Drawing.Size(100, 20)
+        Me.txtVisualValue.Size = New System.Drawing.Size(77, 20)
         Me.txtVisualValue.TabIndex = 0
         '
         'ListBox
@@ -61,7 +63,7 @@ Partial Class ListBox
         Me.Controls.Add(Me.btnSearch)
         Me.Controls.Add(Me.txtVisualValue)
         Me.Name = "ListBox"
-        Me.Size = New System.Drawing.Size(425, 28)
+        Me.Size = New System.Drawing.Size(425, 21)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

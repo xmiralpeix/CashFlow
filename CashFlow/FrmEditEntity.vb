@@ -219,8 +219,21 @@ Public Class FrmEdit
 
     Private Sub btnOK_Click(sender As Object, e As EventArgs) Handles btnOK.Click
 
-        Content.SaveEntry()
-        Me.MoveToNew()
+        Try
+
+            Dim msgError As String = Nothing
+            Dim invalidControl As Control = Nothing
+            If Not Content.IsValidContent(msgError, invalidControl) Then
+                invalidControl.Select()
+                Throw New Exception(msgError)
+            End If
+
+            Content.SaveEntry()
+            Me.MoveToNew()
+
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
 
     End Sub
 

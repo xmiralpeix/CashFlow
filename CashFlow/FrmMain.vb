@@ -55,4 +55,19 @@ Public Class FrmMain
                                        frm.Dispose()
                                    End Sub
     End Sub
+
+    Private Sub ProductesFinancersToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ProductesFinancersToolStripMenuItem.Click
+
+    End Sub
+
+    Private Sub DipòsitsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DipòsitsToolStripMenuItem.Click
+        Dim frm As New FrmEdit
+        frm.MdiParent = Me
+        frm.Content = New DepositEditor()
+        frm.Show()
+        AddHandler frm.FormClosed, Sub()
+                                       frm.Dispose()
+                                   End Sub
+    End Sub
+
 End Class

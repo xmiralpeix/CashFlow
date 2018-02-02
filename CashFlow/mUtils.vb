@@ -2,6 +2,41 @@
 
     Public Const NOTUSEDCHAR As String = "•"
 
+    Public Function IsEmpty(ByVal value As Object) As Boolean
+
+        If value Is Nothing Then
+            Return True
+        End If
+
+        If value Is DBNull.Value Then
+            Return True
+        End If
+
+        Select Case value.GetType()
+            Case GetType(ListBox)
+                Dim castValue As ListBox = DirectCast(value, ListBox)
+                Return castValue.HasValue()
+
+            Case GetType(TextBox)
+                Dim castValue As TextBox = DirectCast(value, TextBox)
+                Return IsEmpty(castValue.Text)
+
+            Case GetType(String)
+                Dim castValue As String = DirectCast(value, String)
+                Return castValue.Trim().Length = 0
+
+            Case GetType(DataTable)
+                Dim castValue As DataTable = DirectCast(value, DataTable)
+                Return castValue.Rows.Count = 0
+
+        End Select
+
+        Return False
+
+    End Function
+
+
+
     'Public Function CreateItemFromRow(Of T As {Class, New})(ByVal row As DataRow) As T
 
     '    Dim item = New T()
@@ -120,3 +155,7 @@
 
 
 End Module
+
+
+
+

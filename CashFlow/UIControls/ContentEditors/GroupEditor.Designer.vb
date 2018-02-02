@@ -25,7 +25,6 @@ Partial Class GroupEditor
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.grid = New System.Windows.Forms.DataGridView()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.ListBox_Date1 = New CashFlow.ListBox_Date()
         Me.chkActive = New System.Windows.Forms.CheckBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -64,7 +63,6 @@ Partial Class GroupEditor
         '
         Me.GroupBox1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.GroupBox1.Controls.Add(Me.ListBox_Date1)
         Me.GroupBox1.Controls.Add(Me.chkActive)
         Me.GroupBox1.Controls.Add(Me.Label3)
         Me.GroupBox1.Controls.Add(Me.Label2)
@@ -78,14 +76,6 @@ Partial Class GroupEditor
         Me.GroupBox1.TabIndex = 15
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Dades del grup"
-        '
-        'ListBox_Date1
-        '
-        Me.ListBox_Date1.Location = New System.Drawing.Point(69, 103)
-        Me.ListBox_Date1.Name = "ListBox_Date1"
-        Me.ListBox_Date1.Size = New System.Drawing.Size(425, 28)
-        Me.ListBox_Date1.TabIndex = 41
-        Me.ListBox_Date1.Value = Nothing
         '
         'chkActive
         '
@@ -174,5 +164,4 @@ Partial Class GroupEditor
     Friend WithEvents txtID As TextBox
     Friend WithEvents txtName As TextBox
     Friend WithEvents txtAccessKey As TextBox
-    Friend WithEvents ListBox_Date1 As ListBox_Date
 End Class

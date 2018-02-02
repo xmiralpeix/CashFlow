@@ -8,7 +8,7 @@ Public Class GroupEditor
 
     Private ReadOnly Property IEditContent_Text As String Implements IEditContent.Text
         Get
-            Return "Grups" ' TODO Translate
+            Return Locate("Grups", CAT)
         End Get
     End Property
 
@@ -35,8 +35,6 @@ Public Class GroupEditor
             Return "CashFlow.RptGroups.rdlc"
         End Get
     End Property
-
-
 
 
     Private _entry As Group
@@ -88,21 +86,23 @@ Public Class GroupEditor
                 End With
                 '
                 With .Item("AccessKey")
-                    .HeaderText = "Codi" ' TODO Translate
+                    .HeaderText = Locate("Codi", CAT)
                 End With
                 '
                 With .Item("Name")
-                    .HeaderText = "Nom" ' TODO Translate
+                    .HeaderText = Locate("Nom", CAT)
                 End With
                 '
                 With .Item("Active")
-                    .HeaderText = "Actiu" ' TODO Translate
+                    .HeaderText = Locate("Actiu", CAT)
                 End With
 
             End With
 
         Catch ex As Exception
             MsgBox(ex.Message)
+        Finally
+            Me.txtAccessKey.Select()
         End Try
 
 
@@ -124,12 +124,34 @@ Public Class GroupEditor
         Return Me
     End Function
 
+    Public Function IsValidContent(ByRef msgError As String,
+                                   ByRef invalidControl As Control) As Boolean Implements IEditContent.IsValidContent
+
+        msgError = ""
+        invalidControl = Nothing
+
+        If IsEmpty(Me.txtAccessKey) Then
+            msgError = Locate("El codi del grup és un camp obligatori", CAT)
+            invalidControl = txtAccessKey
+            Return False
+        End If
+
+        If IsEmpty(Me.txtName) Then
+            msgError = Locate("El nom del grup és un camp obligatori", CAT)
+            invalidControl = txtName
+            Return False
+        End If
+
+        Return True
+
+    End Function
+
     Public Sub SaveEntry() Implements IEditContent.SaveEntry
 
         Using ctx As New CashFlowContext()
 
             '
-            _entry.Name = Me.txtName.Text
+            _entry.Name =
             _entry.AccessKey = Me.txtAccessKey.Text
             _entry.CancelDate = If(Me.chkActive.Checked, DirectCast(Nothing, DateTime?), Now)
 

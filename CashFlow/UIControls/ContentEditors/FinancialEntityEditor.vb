@@ -53,6 +53,8 @@ Public Class FinancialEntityEditor
 
         Catch ex As Exception
             MsgBox(ex.Message)
+        Finally
+            Me.txtName.Select()
         End Try
 
     End Sub
@@ -70,6 +72,22 @@ Public Class FinancialEntityEditor
 
     Private Function GetUI() As IContainerControl Implements IEditContent.GetUI
         Return Me
+    End Function
+
+    Public Function IsValidContent(ByRef msgError As String,
+                                   ByRef invalidControl As Control) As Boolean Implements IEditContent.IsValidContent
+
+        msgError = ""
+        invalidControl = Nothing
+
+        If IsEmpty(Me.txtName) Then
+            invalidControl = Me.txtName
+            msgError = Locate("El nom de l'entitat financera, és un camp obligatori", CAT)
+            Return False
+        End If
+
+        Return True
+
     End Function
 
     Public Sub SaveEntry() Implements IEditContent.SaveEntry

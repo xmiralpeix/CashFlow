@@ -23,17 +23,15 @@ Partial Class DepositEditor
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.chkIsCash = New System.Windows.Forms.CheckBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.txtID = New System.Windows.Forms.TextBox()
         Me.txtName = New System.Windows.Forms.TextBox()
-        Me.chkIsCash = New System.Windows.Forms.CheckBox()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
+        Me.ListBox_Owner1 = New CashFlow.ListBox_Owner()
+        Me.ListBox_FinancialEntity1 = New CashFlow.ListBox_FinancialEntity()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -41,12 +39,10 @@ Partial Class DepositEditor
         '
         Me.GroupBox1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.GroupBox1.Controls.Add(Me.Button2)
+        Me.GroupBox1.Controls.Add(Me.ListBox_Owner1)
+        Me.GroupBox1.Controls.Add(Me.ListBox_FinancialEntity1)
         Me.GroupBox1.Controls.Add(Me.Label4)
-        Me.GroupBox1.Controls.Add(Me.TextBox2)
-        Me.GroupBox1.Controls.Add(Me.Button1)
         Me.GroupBox1.Controls.Add(Me.Label2)
-        Me.GroupBox1.Controls.Add(Me.TextBox1)
         Me.GroupBox1.Controls.Add(Me.chkIsCash)
         Me.GroupBox1.Controls.Add(Me.Label3)
         Me.GroupBox1.Controls.Add(Me.Label1)
@@ -54,10 +50,38 @@ Partial Class DepositEditor
         Me.GroupBox1.Controls.Add(Me.txtName)
         Me.GroupBox1.Location = New System.Drawing.Point(3, 3)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(458, 174)
+        Me.GroupBox1.Size = New System.Drawing.Size(537, 174)
         Me.GroupBox1.TabIndex = 15
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Dades"
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(11, 110)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(51, 13)
+        Me.Label4.TabIndex = 44
+        Me.Label4.Text = "Propietari"
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(11, 86)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(87, 13)
+        Me.Label2.TabIndex = 41
+        Me.Label2.Text = "Entitat Financera"
+        '
+        'chkIsCash
+        '
+        Me.chkIsCash.AutoSize = True
+        Me.chkIsCash.Location = New System.Drawing.Point(14, 138)
+        Me.chkIsCash.Name = "chkIsCash"
+        Me.chkIsCash.Size = New System.Drawing.Size(59, 17)
+        Me.chkIsCash.TabIndex = 39
+        Me.chkIsCash.Text = "Efectiu"
+        Me.chkIsCash.UseVisualStyleBackColor = True
         '
         'Label3
         '
@@ -71,7 +95,7 @@ Partial Class DepositEditor
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(11, 28)
+        Me.Label1.Location = New System.Drawing.Point(11, 32)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(18, 13)
         Me.Label1.TabIndex = 36
@@ -92,65 +116,21 @@ Partial Class DepositEditor
         Me.txtName.Size = New System.Drawing.Size(297, 20)
         Me.txtName.TabIndex = 34
         '
-        'chkIsCash
+        'ListBox_Owner1
         '
-        Me.chkIsCash.AutoSize = True
-        Me.chkIsCash.Location = New System.Drawing.Point(14, 89)
-        Me.chkIsCash.Name = "chkIsCash"
-        Me.chkIsCash.Size = New System.Drawing.Size(59, 17)
-        Me.chkIsCash.TabIndex = 39
-        Me.chkIsCash.Text = "Efectiu"
-        Me.chkIsCash.UseVisualStyleBackColor = True
+        Me.ListBox_Owner1.Location = New System.Drawing.Point(104, 102)
+        Me.ListBox_Owner1.Name = "ListBox_Owner1"
+        Me.ListBox_Owner1.Size = New System.Drawing.Size(297, 21)
+        Me.ListBox_Owner1.TabIndex = 47
+        Me.ListBox_Owner1.Value = Nothing
         '
-        'TextBox1
+        'ListBox_FinancialEntity1
         '
-        Me.TextBox1.Location = New System.Drawing.Point(104, 123)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(291, 20)
-        Me.TextBox1.TabIndex = 40
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(11, 130)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(87, 13)
-        Me.Label2.TabIndex = 41
-        Me.Label2.Text = "Entitat Financera"
-        '
-        'Button1
-        '
-        Me.Button1.Location = New System.Drawing.Point(401, 121)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(22, 23)
-        Me.Button1.TabIndex = 42
-        Me.Button1.Text = "Button1"
-        Me.Button1.UseVisualStyleBackColor = True
-        '
-        'Button2
-        '
-        Me.Button2.Location = New System.Drawing.Point(401, 146)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(22, 23)
-        Me.Button2.TabIndex = 45
-        Me.Button2.Text = "Button2"
-        Me.Button2.UseVisualStyleBackColor = True
-        '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(11, 155)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(51, 13)
-        Me.Label4.TabIndex = 44
-        Me.Label4.Text = "Propietari"
-        '
-        'TextBox2
-        '
-        Me.TextBox2.Location = New System.Drawing.Point(104, 148)
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(291, 20)
-        Me.TextBox2.TabIndex = 43
+        Me.ListBox_FinancialEntity1.Location = New System.Drawing.Point(104, 77)
+        Me.ListBox_FinancialEntity1.Name = "ListBox_FinancialEntity1"
+        Me.ListBox_FinancialEntity1.Size = New System.Drawing.Size(297, 22)
+        Me.ListBox_FinancialEntity1.TabIndex = 46
+        Me.ListBox_FinancialEntity1.Value = Nothing
         '
         'DepositEditor
         '
@@ -158,7 +138,7 @@ Partial Class DepositEditor
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.GroupBox1)
         Me.Name = "DepositEditor"
-        Me.Size = New System.Drawing.Size(464, 180)
+        Me.Size = New System.Drawing.Size(543, 204)
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.ResumeLayout(False)
@@ -170,10 +150,8 @@ Partial Class DepositEditor
     Friend WithEvents txtID As TextBox
     Friend WithEvents txtName As TextBox
     Friend WithEvents chkIsCash As CheckBox
-    Friend WithEvents Button2 As Button
     Friend WithEvents Label4 As Label
-    Friend WithEvents TextBox2 As TextBox
-    Friend WithEvents Button1 As Button
     Friend WithEvents Label2 As Label
-    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents ListBox_FinancialEntity1 As ListBox_FinancialEntity
+    Friend WithEvents ListBox_Owner1 As ListBox_Owner
 End Class

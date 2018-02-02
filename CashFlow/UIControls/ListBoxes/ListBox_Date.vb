@@ -3,6 +3,7 @@
 Public Class ListBox_Date
     Inherits ListBox
     Implements IListBoxData
+
     Private dValue? As Date
 
     Public Property Value As Object Implements IListBoxData.Value

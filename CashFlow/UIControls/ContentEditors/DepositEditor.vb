@@ -39,7 +39,7 @@ Public Class DepositEditor
 
                 Using ctx As New CashFlow.CashFlowContext()
 
-                    _entry = (From entity In ctx.Deposits
+                    _entry = (From entity In ctx.Deposits.Include(NameOf(Deposit.Owner)).Include(NameOf(Deposit.FinancialEntity))
                               Where entity.ID = ID.Value).First()
 
                 End Using
@@ -50,9 +50,22 @@ Public Class DepositEditor
 
             Me.txtID.Text = _entry.ID
             Me.txtName.Text = _entry.Name
+            If IsEmpty(_entry.Owner) Then
+                Me.ListBox_Owner1.AssignValue(String.Empty)
+            Else
+                Me.ListBox_Owner1.AssignValue(_entry.Owner.ID)
+            End If
+
+            If IsEmpty(_entry.FinancialEntity) Then
+                Me.ListBox_FinancialEntity1.AssignValue(String.Empty)
+            Else
+                Me.ListBox_FinancialEntity1.AssignValue(_entry.FinancialEntity.ID)
+            End If
 
         Catch ex As Exception
             MsgBox(ex.Message)
+        Finally
+            Me.txtName.Select()
         End Try
 
     End Sub
@@ -72,29 +85,65 @@ Public Class DepositEditor
         Return Me
     End Function
 
+
+    Public Function IsValidContent(ByRef msgError As String,
+                                   ByRef invalidControl As Control) As Boolean Implements IEditContent.IsValidContent
+
+        msgError = ""
+        invalidControl = Nothing
+
+        If IsEmpty(Me.txtName) Then
+            invalidControl = Me.txtName
+            msgError = Locate("El nom dipòsit, és un camp obligatori", CAT)
+            Return False
+        End If
+
+        If IsEmpty(Me.ListBox_FinancialEntity1) Then
+            invalidControl = Me.ListBox_FinancialEntity1
+            msgError = Locate("La entitat financera és un camp obligatori", CAT)
+            Return False
+        End If
+
+        If IsEmpty(Me.ListBox_Owner1) Then
+            invalidControl = Me.ListBox_Owner1
+            msgError = Locate("El propietari és un camp obligatori", CAT)
+            Return False
+        End If
+
+        Return True
+
+    End Function
+
+    Private Sub FillEntry()
+
+        _entry.Name = Me.txtName.Text
+        _entry.FinancialEntity = Me.ListBox_FinancialEntity1.Value
+        _entry.Owner = Me.ListBox_Owner1.Value
+        _entry.IsCash = Me.chkIsCash.Checked
+        _entry.FinancialEntity = Me.ListBox_FinancialEntity1.Value
+        _entry.Owner = Me.ListBox_Owner1.Value
+
+    End Sub
+
     Public Sub SaveEntry() Implements IEditContent.SaveEntry
 
         Using ctx As New CashFlowContext()
 
-            '
-            _entry.Name = Me.txtName.Text
-            _entry.IsCash = Me.chkIsCash.Checked
-
-            '
             If _entry.ID <> 0 Then
+                ' UPDATE
+                _entry = (From entity In ctx.Deposits.Include(NameOf(Deposit.Owner)).Include(NameOf(Deposit.FinancialEntity))
+                          Where entity.ID = _entry.ID).First()
 
-                Dim dbEntry = (From entity In ctx.Deposits
-                               Where entity.ID = _entry.ID).First()
-
-                ctx.Entry(dbEntry).CurrentValues.SetValues(_entry)
-
+                FillEntry()
+                '
+                ctx.SaveChanges()
             Else
-
+                ' ADD
+                FillEntry()
                 ctx.Deposits.Add(_entry)
-
+                '
+                ctx.SaveChanges()
             End If
-
-            ctx.SaveChanges()
 
         End Using
 
@@ -180,5 +229,6 @@ Public Class DepositEditor
         Return col
 
     End Function
+
 
 End Class

@@ -10,6 +10,8 @@ Public Interface IEditContent
     ReadOnly Property PrintBehaviour() As IPrintBehaviour
     '
     Sub LoadFormByID(ByVal ID? As Integer)
+    Function IsValidContent(ByRef msgError As String,
+                            ByRef invalidControl As Control) As Boolean
     Sub SaveEntry()
 
 End Interface

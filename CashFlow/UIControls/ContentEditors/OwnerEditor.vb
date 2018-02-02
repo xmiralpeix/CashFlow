@@ -53,6 +53,8 @@ Public Class OwnerEditor
 
         Catch ex As Exception
             MsgBox(ex.Message)
+        Finally
+            Me.txtName.Select()
         End Try
 
     End Sub
@@ -70,6 +72,22 @@ Public Class OwnerEditor
 
     Private Function GetUI() As IContainerControl Implements IEditContent.GetUI
         Return Me
+    End Function
+
+    Public Function IsValidContent(ByRef msgError As String,
+                                   ByRef invalidControl As Control) As Boolean Implements IEditContent.IsValidContent
+
+        msgError = ""
+        invalidControl = Nothing
+
+        If IsEmpty(Me.txtName) Then
+            msgError = Locate("El nom del propietari és un camp obligatori", CAT)
+            invalidControl = txtName
+            Return False
+        End If
+
+        Return True
+
     End Function
 
     Public Sub SaveEntry() Implements IEditContent.SaveEntry

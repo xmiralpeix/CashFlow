@@ -14,10 +14,13 @@ Public Class ListBox
 
     End Sub
 
+    Public Function HasValue() As Boolean
+        Return mUtils.IsEmpty(Data) OrElse mUtils.IsEmpty(Data.Value)
+    End Function
+
     Private Sub txtValue_Leave(sender As Object, e As EventArgs) Handles txtVisualValue.Leave
 
         Data.AssignValue(Me.txtVisualValue.Text)
-        LoadData()
 
     End Sub
 
@@ -43,6 +46,7 @@ Public Class ListBox
     Private Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnSearch.Click
         Try
             OnSearchClick()
+            LoadData()
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try

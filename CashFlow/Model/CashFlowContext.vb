@@ -12,6 +12,7 @@ Public Class CashFlowContext
     Public Property Owners As DbSet(Of Owner)
     Public Property FinancialEntities As DbSet(Of FinancialEntity)
     Public Property Deposits As DbSet(Of Deposit)
+    Public Property FinancialProducts As DbSet(Of FinancialProduct)
     '
     Public Property Activities As DbSet(Of Activity)
     '
@@ -241,6 +242,7 @@ Public Class Owner
     <Key>
     <DatabaseGenerated(DatabaseGeneratedOption.Identity)>
     Public Property ID As Integer
+    <MaxLength(100)>
     Public Property Name As String
 
 End Class
@@ -252,8 +254,28 @@ Public Class FinancialEntity
     <Key>
     <DatabaseGenerated(DatabaseGeneratedOption.Identity)>
     Public Property ID As Integer
+    <MaxLength(100)>
     Public Property Name As String
     Public Property CancelDate As System.DateTime?
+
+End Class
+
+Public Class FinancialProduct
+
+    <Key>
+    <DatabaseGenerated(DatabaseGeneratedOption.Identity)>
+    Public Property ID As Integer
+    <MaxLength(100)>
+    Public Property Name As String
+    <Column(TypeName:="text")>
+    Public Property Comments As String
+    Public Property CreationDate As System.DateTime
+    Public Property CancelDate As System.DateTime?
+    Public Property Deposit As Deposit
+
+    Public Sub New()
+        CreationDate = Now
+    End Sub
 
 End Class
 
@@ -263,12 +285,17 @@ Public Class Deposit
     <Key>
     <DatabaseGenerated(DatabaseGeneratedOption.Identity)>
     Public Property ID As Integer
+    <MaxLength(100)>
     Public Property Name As String
     Public Property CreationDate As System.DateTime
     Public Property CancelDate As System.DateTime?
     Public Property Owner As Owner
     Public Property FinancialEntity As FinancialEntity
     Public Property IsCash As Boolean
+
+    Public Sub New()
+        CreationDate = Now
+    End Sub
 
 End Class
 
