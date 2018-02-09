@@ -29,6 +29,26 @@ Public Class ListBox_FinancialEntity
     End Sub
 
 
+    Public Sub AssignValue(InputValue As FinancialEntity)
+        _entity = InputValue
+        LoadVisualProperties()
+        LoadData()
+    End Sub
+
+    Public Sub AssignValue(InputValue As Integer)
+
+        Using ctx As New CashFlow.CashFlowContext()
+            Dim ID As Integer = InputValue
+            Dim qry = From entiy In ctx.FinancialEntities
+                      Where entiy.ID = ID
+            _entity = qry.FirstOrDefault()
+        End Using
+        '
+        LoadVisualProperties()
+        LoadData()
+
+    End Sub
+
     Public Sub AssignValue(InputValue As String) Implements IListBoxData.AssignValue
 
 
@@ -37,20 +57,17 @@ Public Class ListBox_FinancialEntity
             If mUtils.IsEmpty(InputValue) Then
                 _entity = Nothing
             Else
+
+                If InputValue.IsNumeric() Then
+                    AssignValue(CInt(InputValue))
+                    Return
+                End If
+
                 Using ctx As New CashFlow.CashFlowContext()
-
-                    If InputValue.IsNumeric() Then
-                        Dim ID As Integer = CInt(InputValue)
-                        Dim qry = From entiy In ctx.FinancialEntities
-                                  Where entiy.ID = ID
-                        _entity = qry.FirstOrDefault()
-                    Else
-                        Dim qry = From entiy In ctx.FinancialEntities
-                                  Where entiy.Name.Contains(InputValue)
-                                  Order By Len(entiy.Name) Ascending
-                        _entity = qry.FirstOrDefault()
-                    End If
-
+                    Dim qry = From entiy In ctx.FinancialEntities
+                              Where entiy.Name.Contains(InputValue)
+                              Order By Len(entiy.Name) Ascending
+                    _entity = qry.FirstOrDefault()
                 End Using
 
             End If

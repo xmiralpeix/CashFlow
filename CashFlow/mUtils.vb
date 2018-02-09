@@ -12,20 +12,24 @@
             Return True
         End If
 
-        Select Case value.GetType()
-            Case GetType(ListBox)
-                Dim castValue As ListBox = DirectCast(value, ListBox)
-                Return castValue.HasValue()
+        Select Case True
+            Case TypeOf value Is TextEditor
+                Dim castValue As TextEditor = DirectCast(value, TextEditor)
+                Return Not castValue.HasValue()
 
-            Case GetType(TextBox)
+            Case TypeOf value Is ListBox
+                Dim castValue As ListBox = DirectCast(value, ListBox)
+                Return Not castValue.HasValue()
+
+            Case TypeOf value Is TextBox
                 Dim castValue As TextBox = DirectCast(value, TextBox)
                 Return IsEmpty(castValue.Text)
 
-            Case GetType(String)
+            Case TypeOf value Is String
                 Dim castValue As String = DirectCast(value, String)
                 Return castValue.Trim().Length = 0
 
-            Case GetType(DataTable)
+            Case TypeOf value Is DataTable
                 Dim castValue As DataTable = DirectCast(value, DataTable)
                 Return castValue.Rows.Count = 0
 

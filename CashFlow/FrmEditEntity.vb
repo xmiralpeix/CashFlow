@@ -119,13 +119,14 @@ Public Class FrmEdit
             Return
         End If
 
-        _ID = QryValue(Of Integer?)($"SELECT MAX(ID) AS R0 FROM ""{Content.Table}"" WHERE ID < {ID.Value}")
+        Dim newID = QryValue(Of Integer?)($"SELECT MAX(ID) AS R0 FROM ""{Content.Table}"" WHERE ID < {ID.Value}")
 
-        If Not _ID.HasValue Then
+        If Not newID.HasValue Then
             MsgBox(Locate("No s'han trobat registres", CAT))
             Return
         End If
 
+        _ID = newID
         Content.LoadFormByID(Me.ID)
         ChangeStatus(eStatus.Updating)
 
@@ -139,13 +140,14 @@ Public Class FrmEdit
             Return
         End If
 
-        _ID = QryValue(Of Integer?)($"SELECT MAX(ID) AS R0 FROM ""{Content.Table}"" WHERE ID > {ID.Value}")
+        Dim newID = QryValue(Of Integer?)($"SELECT MIN(ID) AS R0 FROM ""{Content.Table}"" WHERE ID > {ID.Value}")
 
-        If Not _ID.HasValue Then
+        If Not newID.HasValue Then
             MsgBox(Locate("No s'han trobat registres", CAT))
             Return
         End If
 
+        _ID = newID
         Content.LoadFormByID(Me.ID)
         ChangeStatus(eStatus.Updating)
 
@@ -153,13 +155,14 @@ Public Class FrmEdit
 
     Public Sub MoveToFirst()
 
-        _ID = QryValue(Of Integer?)($"SELECT MIN(ID) AS R0 FROM ""{Content.Table}"" ")
+        Dim newID = QryValue(Of Integer?)($"SELECT MIN(ID) AS R0 FROM ""{Content.Table}"" ")
 
-        If Not _ID.HasValue Then
+        If Not newID.HasValue Then
             MsgBox(Locate("No s'han trobat registres", CAT))
             Return
         End If
 
+        _ID = newID
         Content.LoadFormByID(Me.ID)
         ChangeStatus(eStatus.Updating)
 
@@ -167,13 +170,14 @@ Public Class FrmEdit
 
     Public Sub MoveToLast()
 
-        _ID = QryValue(Of Integer?)($"SELECT MAX(ID) AS R0 FROM ""{Content.Table}"" ")
+        Dim newID = QryValue(Of Integer?)($"SELECT MAX(ID) AS R0 FROM ""{Content.Table}"" ")
 
-        If Not _ID.HasValue Then
+        If Not newID.HasValue Then
             MsgBox(Locate("No s'han trobat registres", CAT))
             Return
         End If
 
+        _ID = newID
         Content.LoadFormByID(Me.ID)
         ChangeStatus(eStatus.Updating)
 

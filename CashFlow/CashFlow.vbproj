@@ -133,6 +133,18 @@
       <DependentUpon>201802021700274_financial product.vb</DependentUpon>
     </Compile>
     <Compile Include="Migrations\201802021700274_financial product.vb" />
+    <Compile Include="Migrations\201802060743063_DeleteFields.Designer.vb">
+      <DependentUpon>201802060743063_DeleteFields.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802060743063_DeleteFields.vb" />
+    <Compile Include="Migrations\201802091757430_evaluations.Designer.vb">
+      <DependentUpon>201802091757430_evaluations.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802091757430_evaluations.vb" />
+    <Compile Include="Migrations\201802091818543_evaluations_2.Designer.vb">
+      <DependentUpon>201802091818543_evaluations_2.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802091818543_evaluations_2.vb" />
     <Compile Include="Reports\Viewer\IPrintContent.vb" />
     <Compile Include="StringExtensions.vb" />
     <Compile Include="UIControls\ContentEditors\DepositEditor.Designer.vb">
@@ -146,6 +158,18 @@
       <DependentUpon>FinancialEntityEditor.vb</DependentUpon>
     </Compile>
     <Compile Include="UIControls\ContentEditors\FinancialEntityEditor.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\ContentEditors\FinancialProductEditor.Designer.vb">
+      <DependentUpon>FinancialProductEditor.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\ContentEditors\FinancialProductEditor.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\ContentEditors\EvaluationEditor.Designer.vb">
+      <DependentUpon>EvaluationEditor.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\ContentEditors\EvaluationEditor.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UIControls\ContentEditors\OwnerEditor.Designer.vb">
@@ -196,13 +220,26 @@
     <Compile Include="UIControls\ListBoxes\ListBox.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="UIControls\ListBoxes\ListBox_Deposit.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\ListBoxes\ListBox_Evaluation.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UIControls\ListBoxes\ListBox_Owner.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UIControls\ListBoxes\ListBox_FinancialEntity.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UIControls\ListBoxes\ListBox_Date.vb">
+    <Compile Include="UIControls\TextBoxes\ITextEditor.vb" />
+    <Compile Include="UIControls\TextBoxes\TextEditor.Designer.vb">
+      <DependentUpon>TextEditor.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\TextBoxes\TextEditor.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\TextBoxes\TextEditor_Date.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UIControls\UserControls\ActionsMenuStrip.vb">
@@ -246,6 +283,15 @@
     <EmbeddedResource Include="Migrations\201802021700274_financial product.resx">
       <DependentUpon>201802021700274_financial product.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802060743063_DeleteFields.resx">
+      <DependentUpon>201802060743063_DeleteFields.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802091757430_evaluations.resx">
+      <DependentUpon>201802091757430_evaluations.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802091818543_evaluations_2.resx">
+      <DependentUpon>201802091818543_evaluations_2.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
@@ -262,6 +308,12 @@
     <EmbeddedResource Include="UIControls\ContentEditors\FinancialEntityEditor.resx">
       <DependentUpon>FinancialEntityEditor.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\ContentEditors\FinancialProductEditor.resx">
+      <DependentUpon>FinancialProductEditor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\ContentEditors\EvaluationEditor.resx">
+      <DependentUpon>EvaluationEditor.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UIControls\ContentEditors\OwnerEditor.resx">
       <DependentUpon>OwnerEditor.vb</DependentUpon>
     </EmbeddedResource>
@@ -274,14 +326,20 @@
     <EmbeddedResource Include="UIControls\ListBoxes\ListBox.resx">
       <DependentUpon>ListBox.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\ListBoxes\ListBox_Deposit.resx">
+      <DependentUpon>ListBox_Deposit.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\ListBoxes\ListBox_Evaluation.resx">
+      <DependentUpon>ListBox_Evaluation.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UIControls\ListBoxes\ListBox_Owner.resx">
       <DependentUpon>ListBox_Owner.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UIControls\ListBoxes\ListBox_FinancialEntity.resx">
       <DependentUpon>ListBox_FinancialEntity.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UIControls\ListBoxes\ListBox_Date.resx">
-      <DependentUpon>ListBox_Date.vb</DependentUpon>
+    <EmbeddedResource Include="UIControls\TextBoxes\TextEditor.resx">
+      <DependentUpon>TextEditor.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

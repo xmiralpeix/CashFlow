@@ -15,7 +15,11 @@ Public Class ListBox
     End Sub
 
     Public Function HasValue() As Boolean
-        Return mUtils.IsEmpty(Data) OrElse mUtils.IsEmpty(Data.Value)
+        Try
+            Return Not mUtils.IsEmpty(Data.Value)
+        Catch ex As Exception
+            Return True
+        End Try
     End Function
 
     Private Sub txtValue_Leave(sender As Object, e As EventArgs) Handles txtVisualValue.Leave

@@ -13,6 +13,7 @@ Public Class CashFlowContext
     Public Property FinancialEntities As DbSet(Of FinancialEntity)
     Public Property Deposits As DbSet(Of Deposit)
     Public Property FinancialProducts As DbSet(Of FinancialProduct)
+    Public Property Evaluations As DbSet(Of Evaluation)
     '
     Public Property Activities As DbSet(Of Activity)
     '
@@ -35,6 +36,8 @@ Public Class CashFlowContext
 End Class
 
 
+
+
 Public Class JournalEntry
     Implements IJournalEntry
 
@@ -44,10 +47,6 @@ Public Class JournalEntry
     '
     Public Property CreationDate As System.DateTime Implements IJournalEntry.CreationDate
     Public Property EntryDate As System.DateTime Implements IJournalEntry.EntryDate
-    Public Property DocDate As System.DateTime? Implements IJournalEntry.DocDate ' Date in document
-
-    Public Property ExtractDate As System.DateTime? Implements IJournalEntry.ExtractDate ' Date from financial document (financial extract)
-
     Public Property CancelDate As System.DateTime? Implements IJournalEntry.CancelDate
     '
     Public Property FiscalYear As Integer? Implements IJournalEntry.FiscalYear ' NULL in current period
@@ -73,9 +72,6 @@ Public Class JournalEntryTemplate
     Public Property Name As String Implements IJournalEntryTemplate.Name
     '
     Public Property EntryDate As System.DateTime? Implements IJournalEntryTemplate.EntryDate
-    Public Property DocDate As System.DateTime? Implements IJournalEntryTemplate.DocDate ' Date in document
-
-    Public Property ExtractDate As System.DateTime? Implements IJournalEntryTemplate.ExtractDate ' Date from financial document (financial extract)
     '
     Public Property SubGroup As SubGroup Implements IJournalEntryTemplate.SubGroup
     '
@@ -104,11 +100,24 @@ Public Enum RepeatWeek
 End Enum
 
 
+Public Class Evaluation
+
+    <Key>
+    <DatabaseGenerated(DatabaseGeneratedOption.Identity)>
+    Public Property ID As Integer
+    <MaxLength(100)>
+    Public Property Name As String
+    Public Property Points As Integer
+
+End Class
+
+
 Public Class Activity
 
     <Key>
     <DatabaseGenerated(DatabaseGeneratedOption.Identity)>
     Public Property ID As Integer
+    <MaxLength(100)>
     Public Property Name As String
     '
     Public Property RepeatPeriod As RepeatPeriod
@@ -270,8 +279,12 @@ Public Class FinancialProduct
     <Column(TypeName:="text")>
     Public Property Comments As String
     Public Property CreationDate As System.DateTime
+    Public Property RegistrationDate As System.DateTime?
     Public Property CancelDate As System.DateTime?
     Public Property Deposit As Deposit
+    Public Property Evaluation As Evaluation
+    <Column(TypeName:="text")>
+    Public Property ResultComments As String
 
     Public Sub New()
         CreationDate = Now

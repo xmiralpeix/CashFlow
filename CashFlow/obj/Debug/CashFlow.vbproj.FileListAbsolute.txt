@@ -39,9 +39,15 @@ C:\Users\xavim\OneDrive\Documentos\CashFlow\CashFlow\obj\Debug\CashFlow.xml
 C:\Users\xavim\OneDrive\Documentos\CashFlow\CashFlow\obj\Debug\CashFlow.pdb
 C:\Users\xavim\OneDrive\Documentos\CashFlow\CashFlow\obj\Debug\CashFlow.DepositEditor.resources
 C:\Users\xavim\OneDrive\Documentos\CashFlow\CashFlow\obj\Debug\CashFlow.ListBox.resources
-C:\Users\xavim\OneDrive\Documentos\CashFlow\CashFlow\obj\Debug\CashFlow.ListBox_Date.resources
 C:\Users\xavim\OneDrive\Documentos\CashFlow\CashFlow\obj\Debug\CashFlow.FrmCalendar.resources
 C:\Users\xavim\OneDrive\Documentos\CashFlow\CashFlow\obj\Debug\CashFlow.ListBox_FinancialEntity.resources
 C:\Users\xavim\OneDrive\Documentos\CashFlow\CashFlow\obj\Debug\CashFlow.ListBox_Owner.resources
-C:\Users\xavim\OneDrive\Documentos\CashFlow\CashFlow\obj\Debug\CashFlow.vbprojResolveAssemblyReference.cache
 C:\Users\xavim\OneDrive\Documentos\CashFlow\CashFlow\obj\Debug\CashFlow.Migrations.financialproduct.resources
+C:\Users\xavim\OneDrive\Documentos\CashFlow\CashFlow\obj\Debug\CashFlow.FinancialProductEditor.resources
+C:\Users\xavim\OneDrive\Documentos\CashFlow\CashFlow\obj\Debug\CashFlow.Migrations.DeleteFields.resources
+C:\Users\xavim\OneDrive\Documentos\CashFlow\CashFlow\obj\Debug\CashFlow.TextEditor.resources
+C:\Users\xavim\OneDrive\Documentos\CashFlow\CashFlow\obj\Debug\CashFlow.EvaluationEditor.resources
+C:\Users\xavim\OneDrive\Documentos\CashFlow\CashFlow\obj\Debug\CashFlow.Migrations.evaluations.resources
+C:\Users\xavim\OneDrive\Documentos\CashFlow\CashFlow\obj\Debug\CashFlow.ListBox_Evaluation.resources
+C:\Users\xavim\OneDrive\Documentos\CashFlow\CashFlow\obj\Debug\CashFlow.ListBox_Deposit.resources
+C:\Users\xavim\OneDrive\Documentos\CashFlow\CashFlow\obj\Debug\CashFlow.Migrations.evaluations_2.resources

@@ -1,10 +1,10 @@
 ﻿Imports CashFlow
 
-Public Class ListBox_Owner
+Public Class ListBox_Deposit
     Inherits ListBox
     Implements IListBoxData
 
-    Private _entity As Owner
+    Private _entity As Deposit
 
     Public Property Value As Object Implements IListBoxData.Value
         Get
@@ -29,7 +29,7 @@ Public Class ListBox_Owner
     End Sub
 
 
-    Public Sub AssignValue(InputValue As Owner)
+    Public Sub AssignValue(InputValue As Deposit)
         _entity = InputValue
         LoadVisualProperties()
         LoadData()
@@ -39,7 +39,7 @@ Public Class ListBox_Owner
 
         Using ctx As New CashFlow.CashFlowContext()
             Dim ID As Integer = InputValue
-            Dim qry = From entiy In ctx.Owners
+            Dim qry = From entiy In ctx.Deposits
                       Where entiy.ID = ID
             _entity = qry.FirstOrDefault()
         End Using
@@ -64,7 +64,7 @@ Public Class ListBox_Owner
                 End If
 
                 Using ctx As New CashFlow.CashFlowContext()
-                    Dim qry = From entiy In ctx.Owners
+                    Dim qry = From entiy In ctx.Deposits
                               Where entiy.Name.Contains(InputValue)
                               Order By Len(entiy.Name) Ascending
                     _entity = qry.FirstOrDefault()
@@ -83,7 +83,7 @@ Public Class ListBox_Owner
 
     Public Overrides Sub OnSearchClick()
 
-        Dim findBehaviour As IFindBehaviour = New EntityIDsFinder(New OwnerEditor())
+        Dim findBehaviour As IFindBehaviour = New EntityIDsFinder(New DepositEditor())
         Dim IDscollection = findBehaviour.Find()
         If IsEmpty(IDscollection) Then
             Return
@@ -108,10 +108,10 @@ Public Class ListBox_Owner
     Private Sub InitializeComponent()
         Me.SuspendLayout()
         '
-        'ListBox_Date
+        'ListBox 
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.Name = "ListBox_Owner"
+        Me.Name = "ListBox"
         Me.Size = New System.Drawing.Size(426, 30)
         Me.ResumeLayout(False)
         Me.PerformLayout()

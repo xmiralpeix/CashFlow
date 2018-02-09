@@ -5,9 +5,7 @@ Public Interface IJournalEntry
     Property Concept As String
     Property CreationDate As Date
     Property Deposit As Deposit
-    Property DocDate As Date?
     Property EntryDate As Date
-    Property ExtractDate As Date?
     Property FiscalYear As Integer?
     Property ID As Integer
     Property Import As Double
@@ -21,9 +19,7 @@ Public Interface IJournalEntryTemplate
     Property Name As String
     Property Concept As String
     Property Deposit As Deposit
-    Property DocDate As Date?
     Property EntryDate As Date?
-    Property ExtractDate As Date?
     Property Import As Double
     Property SubGroup As SubGroup
 
