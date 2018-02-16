@@ -39,7 +39,7 @@ Public Class FinancialProductEditor
 
                 Using ctx As New CashFlow.CashFlowContext()
 
-                    _entry = (From g1 In ctx.FinancialProducts.Include(NameOf(FinancialProduct.Deposit)).Include(NameOf(FinancialProduct.Evaluation))
+                    _entry = (From g1 In ctx.FinancialProducts.Include(NameOf(FinancialProduct.Deposit)).Include(NameOf(FinancialProduct.Evaluation)).Include(NameOf(FinancialProduct.SubGroup))
                               Where g1.ID = ID.Value).First()
 
                 End Using
@@ -53,6 +53,7 @@ Public Class FinancialProductEditor
             Me.txtComments.Text = _entry.Comments
             Me.teRegistrationDate.AssignValue(_entry.RegistrationDate)
             Me.ListBox_Deposit1.AssignValue(_entry.Deposit)
+            Me.ListBox_SubGroup1.AssignValue(_entry.SubGroup)
             Me.ListBox_Evaluation1.AssignValue(_entry.Evaluation)
             Me.txtResult.Text = _entry.ResultComments
 
@@ -104,17 +105,26 @@ Public Class FinancialProductEditor
             Return False
         End If
 
+        If Not Me.ListBox_SubGroup1.HasValue Then
+            msgError = Locate("El subgrup és un camp obligatori", CAT)
+            invalidControl = txtName
+            Return False
+        End If
+
         Return True
 
     End Function
 
-    Private Sub FillEntry()
+    Private Sub FillEntry(ByVal ctx As CashFlowContext)
 
         _entry.Name = Me.txtName.Text
         _entry.Comments = Me.txtComments.Text
         _entry.RegistrationDate = Me.teRegistrationDate.Value
-        _entry.Deposit = Me.ListBox_Deposit1.Value
-        _entry.Evaluation = Me.ListBox_Evaluation1.Value
+        '
+        _entry.Deposit = ctx.Deposits.Where(Function(x) x.ID = Me.ListBox_Deposit1.Entity.ID).FirstOrDefault()
+        _entry.SubGroup = ctx.SubGroups.Where(Function(x) x.ID = Me.ListBox_SubGroup1.Entity.ID).FirstOrDefault()
+        _entry.Evaluation = ctx.Evaluations.Where(Function(x) x.ID = Me.ListBox_Evaluation1.Entity.ID).FirstOrDefault()
+        '
         _entry.ResultComments = Me.txtResult.Text
 
     End Sub
@@ -126,15 +136,12 @@ Public Class FinancialProductEditor
 
             If _entry.ID <> 0 Then
                 ' UPDATE
-                _entry = (From entity In ctx.FinancialProducts.Include(NameOf(FinancialProduct.Deposit)).Include(NameOf(FinancialProduct.Evaluation))
-                          Where entity.ID = _entry.ID).First()
-
-                FillEntry()
-                '
+                _entry = ctx.FinancialProducts.Where(Function(x) x.ID = _entry.ID).FirstOrDefault()
+                FillEntry(ctx)
                 ctx.SaveChanges()
             Else
                 ' ADD
-                FillEntry()
+                FillEntry(ctx)
                 ctx.FinancialProducts.Add(_entry)
                 '
                 ctx.SaveChanges()

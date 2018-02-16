@@ -4,14 +4,14 @@ Public Class ListBox_Owner
     Inherits ListBox
     Implements IListBoxData
 
-    Private _entity As Owner
+    Public Entity As Owner
 
     Public Property Value As Object Implements IListBoxData.Value
         Get
-            Return _entity
+            Return Entity
         End Get
         Set(value As Object)
-            _entity = value
+            Entity = value
             LoadVisualProperties()
         End Set
     End Property
@@ -30,7 +30,7 @@ Public Class ListBox_Owner
 
 
     Public Sub AssignValue(InputValue As Owner)
-        _entity = InputValue
+        Entity = InputValue
         LoadVisualProperties()
         LoadData()
     End Sub
@@ -41,7 +41,7 @@ Public Class ListBox_Owner
             Dim ID As Integer = InputValue
             Dim qry = From entiy In ctx.Owners
                       Where entiy.ID = ID
-            _entity = qry.FirstOrDefault()
+            Entity = qry.FirstOrDefault()
         End Using
         '
         LoadVisualProperties()
@@ -55,7 +55,7 @@ Public Class ListBox_Owner
         Try
 
             If mUtils.IsEmpty(InputValue) Then
-                _entity = Nothing
+                Entity = Nothing
             Else
 
                 If InputValue.IsNumeric() Then
@@ -67,13 +67,13 @@ Public Class ListBox_Owner
                     Dim qry = From entiy In ctx.Owners
                               Where entiy.Name.Contains(InputValue)
                               Order By Len(entiy.Name) Ascending
-                    _entity = qry.FirstOrDefault()
+                    Entity = qry.FirstOrDefault()
                 End Using
 
             End If
 
         Catch ex As Exception
-            _entity = Nothing
+            Entity = Nothing
         End Try
 
         LoadVisualProperties()
@@ -95,9 +95,9 @@ Public Class ListBox_Owner
 
     Private Sub LoadVisualProperties()
 
-        If Not IsEmpty(_entity) Then
-            _VisualValue = _entity.ID
-            _VisualText = _entity.Name
+        If Not IsEmpty(Entity) Then
+            _VisualValue = Entity.ID
+            _VisualText = Entity.Name
         Else
             _VisualValue = String.Empty
             _VisualText = String.Empty

@@ -1,10 +1,10 @@
 ﻿Imports CashFlow
 
-Public Class ListBox_Deposit
+Public Class ListBox_SubGroup
     Inherits ListBox
     Implements IListBoxData
 
-    Public Entity As Deposit
+    Public Entity As SubGroup
 
     Public Property Value As Object Implements IListBoxData.Value
         Get
@@ -29,7 +29,7 @@ Public Class ListBox_Deposit
     End Sub
 
 
-    Public Sub AssignValue(InputValue As Deposit)
+    Public Sub AssignValue(InputValue As SubGroup)
         Entity = InputValue
         LoadVisualProperties()
         LoadData()
@@ -39,7 +39,7 @@ Public Class ListBox_Deposit
 
         Using ctx As New CashFlow.CashFlowContext()
             Dim ID As Integer = InputValue
-            Dim qry = From entiy In ctx.Deposits
+            Dim qry = From entiy In ctx.SubGroups
                       Where entiy.ID = ID
             Entity = qry.FirstOrDefault()
         End Using
@@ -64,9 +64,9 @@ Public Class ListBox_Deposit
                 End If
 
                 Using ctx As New CashFlow.CashFlowContext()
-                    Dim qry = From entiy In ctx.Deposits
-                              Where entiy.Name.Contains(InputValue)
-                              Order By Len(entiy.Name) Ascending
+                    Dim qry = From entiy In ctx.SubGroups
+                              Where entiy.AccessKey.Contains(InputValue) OrElse entiy.Name.Contains(InputValue)
+                              Order By Len(entiy.AccessKey) Ascending, Len(entiy.Name) Ascending
                     Entity = qry.FirstOrDefault()
                 End Using
 
@@ -83,20 +83,20 @@ Public Class ListBox_Deposit
 
     Public Overrides Sub OnSearchClick()
 
-        Dim findBehaviour As IFindBehaviour = New EntityIDsFinder(New DepositEditor())
-        Dim IDscollection = findBehaviour.Find()
-        If IsEmpty(IDscollection) Then
-            Return
-        End If
+        'Dim findBehaviour As IFindBehaviour = New EntityIDsFinder(New EvaluationEditor())
+        'Dim IDscollection = findBehaviour.Find()
+        'If IsEmpty(IDscollection) Then
+        '    Return
+        'End If
 
-        Me.AssignValue(IDscollection.First())
+        'Me.AssignValue(IDscollection.First())
 
     End Sub
 
     Private Sub LoadVisualProperties()
 
         If Not IsEmpty(Entity) Then
-            _VisualValue = Entity.ID
+            _VisualValue = Entity.AccessKey
             _VisualText = Entity.Name
         Else
             _VisualValue = String.Empty

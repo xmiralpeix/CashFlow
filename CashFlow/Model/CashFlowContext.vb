@@ -131,6 +131,8 @@ Public Class Activity
     Public Property LinkedObjectName As String
     Public Property LinkedID As Integer?
     '
+    Public Property JournalEntryTemplates As ICollection(Of JournalEntryTemplate)
+    '
     Public Property CancelDate As System.DateTime?
 
 End Class
@@ -283,6 +285,7 @@ Public Class FinancialProduct
     Public Property CancelDate As System.DateTime?
     Public Property Deposit As Deposit
     Public Property Evaluation As Evaluation
+    Public Property SubGroup As SubGroup
     <Column(TypeName:="text")>
     Public Property ResultComments As String
 

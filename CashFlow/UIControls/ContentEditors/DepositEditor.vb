@@ -114,14 +114,14 @@ Public Class DepositEditor
 
     End Function
 
-    Private Sub FillEntry()
+    Private Sub FillEntry(ByVal ctx As CashFlowContext)
 
         _entry.Name = Me.txtName.Text
         _entry.FinancialEntity = Me.ListBox_FinancialEntity1.Value
-        _entry.Owner = Me.ListBox_Owner1.Value
+        _entry.Owner = ctx.Owners.Where(Function(x) x.ID = Me.ListBox_Owner1.Entity.ID).FirstOrDefault
         _entry.IsCash = Me.chkIsCash.Checked
-        _entry.FinancialEntity = Me.ListBox_FinancialEntity1.Value
-        _entry.Owner = Me.ListBox_Owner1.Value
+        _entry.FinancialEntity = ctx.FinancialEntities.Where(Function(x) x.ID = Me.ListBox_FinancialEntity1.Entity.ID).FirstOrDefault
+
 
     End Sub
 
@@ -134,12 +134,12 @@ Public Class DepositEditor
                 _entry = (From entity In ctx.Deposits.Include(NameOf(Deposit.Owner)).Include(NameOf(Deposit.FinancialEntity))
                           Where entity.ID = _entry.ID).First()
 
-                FillEntry()
+                FillEntry(ctx)
                 '
                 ctx.SaveChanges()
             Else
                 ' ADD
-                FillEntry()
+                FillEntry(ctx)
                 ctx.Deposits.Add(_entry)
                 '
                 ctx.SaveChanges()

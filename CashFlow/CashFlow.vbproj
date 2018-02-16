@@ -145,6 +145,14 @@
       <DependentUpon>201802091818543_evaluations_2.vb</DependentUpon>
     </Compile>
     <Compile Include="Migrations\201802091818543_evaluations_2.vb" />
+    <Compile Include="Migrations\201802121825445_02122018_1.Designer.vb">
+      <DependentUpon>201802121825445_02122018_1.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802121825445_02122018_1.vb" />
+    <Compile Include="Migrations\201802130743323_021318_001.Designer.vb">
+      <DependentUpon>201802130743323_021318_001.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802130743323_021318_001.vb" />
     <Compile Include="Reports\Viewer\IPrintContent.vb" />
     <Compile Include="StringExtensions.vb" />
     <Compile Include="UIControls\ContentEditors\DepositEditor.Designer.vb">
@@ -223,6 +231,9 @@
     <Compile Include="UIControls\ListBoxes\ListBox_Deposit.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="UIControls\ListBoxes\ListBox_SubGroup.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UIControls\ListBoxes\ListBox_Evaluation.vb">
       <SubType>UserControl</SubType>
     </Compile>
@@ -292,6 +303,12 @@
     <EmbeddedResource Include="Migrations\201802091818543_evaluations_2.resx">
       <DependentUpon>201802091818543_evaluations_2.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802121825445_02122018_1.resx">
+      <DependentUpon>201802121825445_02122018_1.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802130743323_021318_001.resx">
+      <DependentUpon>201802130743323_021318_001.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
@@ -328,6 +345,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UIControls\ListBoxes\ListBox_Deposit.resx">
       <DependentUpon>ListBox_Deposit.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\ListBoxes\ListBox_SubGroup.resx">
+      <DependentUpon>ListBox_SubGroup.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UIControls\ListBoxes\ListBox_Evaluation.resx">
       <DependentUpon>ListBox_Evaluation.vb</DependentUpon>
