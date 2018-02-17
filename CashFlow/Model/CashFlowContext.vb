@@ -215,7 +215,6 @@ Public Class Group
     <MaxLength(10)>
     Public Property AccessKey As String
 
-    <Index(IsUnique:=True)>
     <MaxLength(100)>
     Public Property Name As String
 
