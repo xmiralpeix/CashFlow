@@ -151,7 +151,7 @@ Public Class GroupEditor
         Using ctx As New CashFlowContext()
 
             '
-            _entry.Name =
+            _entry.Name = Me.txtName.Text
             _entry.AccessKey = Me.txtAccessKey.Text
             _entry.CancelDate = If(Me.chkActive.Checked, DirectCast(Nothing, DateTime?), Now)
 
