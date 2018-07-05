@@ -39,7 +39,7 @@ Public Class FinancialProductEditor
 
                 Using ctx As New CashFlow.CashFlowContext()
 
-                    _entry = (From g1 In ctx.FinancialProducts.Include(NameOf(FinancialProduct.Deposit)).Include(NameOf(FinancialProduct.Evaluation)).Include(NameOf(FinancialProduct.SubGroup))
+                    _entry = (From g1 In ctx.FinancialProducts.Include(NameOf(FinancialProduct.Deposit)).Include(NameOf(FinancialProduct.Evaluation)).Include(NameOf(FinancialProduct.Deposit)).Include(NameOf(FinancialProduct.BaseDeposit))
                               Where g1.ID = ID.Value).First()
 
                 End Using
@@ -52,8 +52,11 @@ Public Class FinancialProductEditor
             Me.txtName.Text = _entry.Name
             Me.txtComments.Text = _entry.Comments
             Me.teRegistrationDate.AssignValue(_entry.RegistrationDate)
+            '
+            Me.iBaseDeposit.AssignValue(_entry.BaseDeposit)
             Me.ListBox_Deposit1.AssignValue(_entry.Deposit)
-            Me.ListBox_SubGroup1.AssignValue(_entry.SubGroup)
+            Me.iBaseImport.Text = _entry.BaseImport
+            '
             Me.ListBox_Evaluation1.AssignValue(_entry.Evaluation)
             Me.txtResult.Text = _entry.ResultComments
 
@@ -78,7 +81,25 @@ Public Class FinancialProductEditor
     End Function
 
     Private Function GetUI() As IContainerControl Implements IEditContent.GetUI
+
+        ' Configure controls
+        Me.cbDocStatus.ValueMember = "Code"
+        Me.cbDocStatus.DisplayMember = "Name"
+        '
+        Dim dt As New DataTable()
+        dt.Columns.Add("Code", GetType(Integer))
+        dt.Columns.Add("Name", GetType(String))
+        '
+        dt.Rows.Add(CInt(Status.Pending), Locate("Pendent", CAT))
+        dt.Rows.Add(CInt(Status.Open), Locate("Obert", CAT))
+        dt.Rows.Add(CInt(Status.Close), Locate("Tancat", CAT))
+        dt.Rows.Add(CInt(Status.Cancelled), Locate("Cancel·lat", CAT))
+        '
+        Me.cbDocStatus.DataSource = dt
+
+
         Return Me
+
     End Function
 
     Public Function IsValidContent(ByRef msgError As String,
@@ -105,12 +126,6 @@ Public Class FinancialProductEditor
             Return False
         End If
 
-        If Not Me.ListBox_SubGroup1.HasValue Then
-            msgError = Locate("El subgrup és un camp obligatori", CAT)
-            invalidControl = txtName
-            Return False
-        End If
-
         Return True
 
     End Function
@@ -120,10 +135,16 @@ Public Class FinancialProductEditor
         _entry.Name = Me.txtName.Text
         _entry.Comments = Me.txtComments.Text
         _entry.RegistrationDate = Me.teRegistrationDate.Value
-        '
+        ' tag 2
+        _entry.BaseDeposit = ctx.Deposits.Where(Function(x) x.ID = Me.iBaseDeposit.Entity.ID).FirstOrDefault()
         _entry.Deposit = ctx.Deposits.Where(Function(x) x.ID = Me.ListBox_Deposit1.Entity.ID).FirstOrDefault()
-        _entry.SubGroup = ctx.SubGroups.Where(Function(x) x.ID = Me.ListBox_SubGroup1.Entity.ID).FirstOrDefault()
-        _entry.Evaluation = ctx.Evaluations.Where(Function(x) x.ID = Me.ListBox_Evaluation1.Entity.ID).FirstOrDefault()
+        _entry.BaseImport = Me.iBaseImport.Text
+
+        If Me.ListBox_Evaluation1.HasValue Then
+            _entry.Evaluation = ctx.Evaluations.Where(Function(x) x.ID = Me.ListBox_Evaluation1.Entity.ID).FirstOrDefault()
+        Else
+            _entry.Evaluation = Nothing
+        End If
         '
         _entry.ResultComments = Me.txtResult.Text
 

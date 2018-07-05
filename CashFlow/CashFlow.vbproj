@@ -46,6 +46,29 @@
   <PropertyGroup>
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DocumentationFile>CashFlow.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DocumentationFile>CashFlow.xml</DocumentationFile>
+    <Optimize>true</Optimize>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
@@ -129,32 +152,14 @@
       <DependentUpon>FrmMain.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Migrations\201802021700274_financial product.Designer.vb">
-      <DependentUpon>201802021700274_financial product.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802021700274_financial product.vb" />
-    <Compile Include="Migrations\201802060743063_DeleteFields.Designer.vb">
-      <DependentUpon>201802060743063_DeleteFields.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802060743063_DeleteFields.vb" />
-    <Compile Include="Migrations\201802091757430_evaluations.Designer.vb">
-      <DependentUpon>201802091757430_evaluations.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802091757430_evaluations.vb" />
-    <Compile Include="Migrations\201802091818543_evaluations_2.Designer.vb">
-      <DependentUpon>201802091818543_evaluations_2.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802091818543_evaluations_2.vb" />
-    <Compile Include="Migrations\201802121825445_02122018_1.Designer.vb">
-      <DependentUpon>201802121825445_02122018_1.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802121825445_02122018_1.vb" />
-    <Compile Include="Migrations\201802130743323_021318_001.Designer.vb">
-      <DependentUpon>201802130743323_021318_001.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802130743323_021318_001.vb" />
     <Compile Include="Reports\Viewer\IPrintContent.vb" />
     <Compile Include="StringExtensions.vb" />
+    <Compile Include="UIControls\ContentEditors\CashFlowEditor.Designer.vb">
+      <DependentUpon>CashFlowEditor.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\ContentEditors\CashFlowEditor.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UIControls\ContentEditors\DepositEditor.Designer.vb">
       <DependentUpon>DepositEditor.vb</DependentUpon>
     </Compile>
@@ -291,24 +296,6 @@
     <EmbeddedResource Include="FrmMain.resx">
       <DependentUpon>FrmMain.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802021700274_financial product.resx">
-      <DependentUpon>201802021700274_financial product.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802060743063_DeleteFields.resx">
-      <DependentUpon>201802060743063_DeleteFields.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802091757430_evaluations.resx">
-      <DependentUpon>201802091757430_evaluations.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802091818543_evaluations_2.resx">
-      <DependentUpon>201802091818543_evaluations_2.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802121825445_02122018_1.resx">
-      <DependentUpon>201802121825445_02122018_1.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802130743323_021318_001.resx">
-      <DependentUpon>201802130743323_021318_001.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
@@ -318,6 +305,9 @@
     <EmbeddedResource Include="Reports\Rdlc\RptGroups.rdlc" />
     <EmbeddedResource Include="Reports\Viewer\FrmViewerReport.resx">
       <DependentUpon>FrmViewerReport.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\ContentEditors\CashFlowEditor.resx">
+      <DependentUpon>CashFlowEditor.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UIControls\ContentEditors\DepositEditor.resx">
       <DependentUpon>DepositEditor.vb</DependentUpon>

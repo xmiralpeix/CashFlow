@@ -22,6 +22,7 @@ Partial Class FinancialProductEditor
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.txtResult = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
@@ -33,21 +34,27 @@ Partial Class FinancialProductEditor
         Me.txtName = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
-        Me.Page1 = New System.Windows.Forms.TabPage()
-        Me.Label7 = New System.Windows.Forms.Label()
-        Me.Page2 = New System.Windows.Forms.TabPage()
-        Me.Label8 = New System.Windows.Forms.Label()
-        Me.Page3 = New System.Windows.Forms.TabPage()
-        Me.ListBox_Deposit1 = New CashFlow.ListBox_Deposit()
-        Me.teRegistrationDate = New CashFlow.TextEditor_Date()
-        Me.ListBox_SubGroup1 = New CashFlow.ListBox_SubGroup()
-        Me.ListBox_Evaluation1 = New CashFlow.ListBox_Evaluation()
-        Me.cbDocStatus = New System.Windows.Forms.ComboBox()
+        Me.PageGeneral = New System.Windows.Forms.TabPage()
         Me.Label9 = New System.Windows.Forms.Label()
+        Me.cbDocStatus = New System.Windows.Forms.ComboBox()
+        Me.teRegistrationDate = New CashFlow.TextEditor_Date()
+        Me.PageFinancials = New System.Windows.Forms.TabPage()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.iBaseImport = New System.Windows.Forms.TextBox()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.iBaseDeposit = New CashFlow.ListBox_Deposit()
+        Me.ListBox_Deposit1 = New CashFlow.ListBox_Deposit()
+        Me.PageEvaluation = New System.Windows.Forms.TabPage()
+        Me.ListBox_Evaluation1 = New CashFlow.ListBox_Evaluation()
+        Me.PageCashFlow = New System.Windows.Forms.TabPage()
+        Me.CashFlowEditor1 = New CashFlow.CashFlowEditor()
+        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.TabControl1.SuspendLayout()
-        Me.Page1.SuspendLayout()
-        Me.Page2.SuspendLayout()
-        Me.Page3.SuspendLayout()
+        Me.PageGeneral.SuspendLayout()
+        Me.PageFinancials.SuspendLayout()
+        Me.PageEvaluation.SuspendLayout()
+        Me.PageCashFlow.SuspendLayout()
         Me.SuspendLayout()
         '
         'txtResult
@@ -72,7 +79,7 @@ Partial Class FinancialProductEditor
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(10, 127)
+        Me.Label4.Location = New System.Drawing.Point(10, 100)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(59, 13)
         Me.Label4.TabIndex = 42
@@ -82,10 +89,10 @@ Partial Class FinancialProductEditor
         '
         Me.txtComments.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.txtComments.Location = New System.Drawing.Point(106, 124)
+        Me.txtComments.Location = New System.Drawing.Point(106, 97)
         Me.txtComments.Multiline = True
         Me.txtComments.Name = "txtComments"
-        Me.txtComments.Size = New System.Drawing.Size(332, 135)
+        Me.txtComments.Size = New System.Drawing.Size(332, 162)
         Me.txtComments.TabIndex = 41
         '
         'Label2
@@ -141,9 +148,10 @@ Partial Class FinancialProductEditor
         '
         'TabControl1
         '
-        Me.TabControl1.Controls.Add(Me.Page1)
-        Me.TabControl1.Controls.Add(Me.Page2)
-        Me.TabControl1.Controls.Add(Me.Page3)
+        Me.TabControl1.Controls.Add(Me.PageGeneral)
+        Me.TabControl1.Controls.Add(Me.PageFinancials)
+        Me.TabControl1.Controls.Add(Me.PageEvaluation)
+        Me.TabControl1.Controls.Add(Me.PageCashFlow)
         Me.TabControl1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TabControl1.Location = New System.Drawing.Point(0, 0)
         Me.TabControl1.Name = "TabControl1"
@@ -151,112 +159,25 @@ Partial Class FinancialProductEditor
         Me.TabControl1.Size = New System.Drawing.Size(788, 291)
         Me.TabControl1.TabIndex = 17
         '
-        'Page1
+        'PageGeneral
         '
-        Me.Page1.Controls.Add(Me.Label9)
-        Me.Page1.Controls.Add(Me.cbDocStatus)
-        Me.Page1.Controls.Add(Me.ListBox_Deposit1)
-        Me.Page1.Controls.Add(Me.Label7)
-        Me.Page1.Controls.Add(Me.Label4)
-        Me.Page1.Controls.Add(Me.txtID)
-        Me.Page1.Controls.Add(Me.txtComments)
-        Me.Page1.Controls.Add(Me.txtName)
-        Me.Page1.Controls.Add(Me.Label2)
-        Me.Page1.Controls.Add(Me.Label1)
-        Me.Page1.Controls.Add(Me.teRegistrationDate)
-        Me.Page1.Controls.Add(Me.Label3)
-        Me.Page1.Location = New System.Drawing.Point(4, 22)
-        Me.Page1.Name = "Page1"
-        Me.Page1.Padding = New System.Windows.Forms.Padding(3)
-        Me.Page1.Size = New System.Drawing.Size(780, 265)
-        Me.Page1.TabIndex = 0
-        Me.Page1.Text = "General"
-        Me.Page1.UseVisualStyleBackColor = True
-        '
-        'Label7
-        '
-        Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(10, 99)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(39, 13)
-        Me.Label7.TabIndex = 43
-        Me.Label7.Text = "Dipòsit"
-        '
-        'Page2
-        '
-        Me.Page2.Controls.Add(Me.Label8)
-        Me.Page2.Controls.Add(Me.ListBox_SubGroup1)
-        Me.Page2.Location = New System.Drawing.Point(4, 22)
-        Me.Page2.Name = "Page2"
-        Me.Page2.Padding = New System.Windows.Forms.Padding(3)
-        Me.Page2.Size = New System.Drawing.Size(780, 265)
-        Me.Page2.TabIndex = 2
-        Me.Page2.Text = "Finances"
-        Me.Page2.UseVisualStyleBackColor = True
-        '
-        'Label8
-        '
-        Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(6, 23)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(106, 13)
-        Me.Label8.TabIndex = 37
-        Me.Label8.Text = "Subgrup contabilitzar"
-        '
-        'Page3
-        '
-        Me.Page3.Controls.Add(Me.Label6)
-        Me.Page3.Controls.Add(Me.Label5)
-        Me.Page3.Controls.Add(Me.txtResult)
-        Me.Page3.Controls.Add(Me.ListBox_Evaluation1)
-        Me.Page3.Location = New System.Drawing.Point(4, 22)
-        Me.Page3.Name = "Page3"
-        Me.Page3.Padding = New System.Windows.Forms.Padding(3)
-        Me.Page3.Size = New System.Drawing.Size(780, 265)
-        Me.Page3.TabIndex = 1
-        Me.Page3.Text = "Valoració"
-        Me.Page3.UseVisualStyleBackColor = True
-        '
-        'ListBox_Deposit1
-        '
-        Me.ListBox_Deposit1.Location = New System.Drawing.Point(106, 97)
-        Me.ListBox_Deposit1.Name = "ListBox_Deposit1"
-        Me.ListBox_Deposit1.Size = New System.Drawing.Size(332, 21)
-        Me.ListBox_Deposit1.TabIndex = 44
-        Me.ListBox_Deposit1.Value = Nothing
-        '
-        'teRegistrationDate
-        '
-        Me.teRegistrationDate.Location = New System.Drawing.Point(106, 67)
-        Me.teRegistrationDate.Name = "teRegistrationDate"
-        Me.teRegistrationDate.Size = New System.Drawing.Size(100, 24)
-        Me.teRegistrationDate.TabIndex = 39
-        Me.teRegistrationDate.Value = Nothing
-        '
-        'ListBox_SubGroup1
-        '
-        Me.ListBox_SubGroup1.Location = New System.Drawing.Point(128, 15)
-        Me.ListBox_SubGroup1.Name = "ListBox_SubGroup1"
-        Me.ListBox_SubGroup1.Size = New System.Drawing.Size(425, 21)
-        Me.ListBox_SubGroup1.TabIndex = 0
-        Me.ListBox_SubGroup1.Value = Nothing
-        '
-        'ListBox_Evaluation1
-        '
-        Me.ListBox_Evaluation1.Location = New System.Drawing.Point(102, 12)
-        Me.ListBox_Evaluation1.Name = "ListBox_Evaluation1"
-        Me.ListBox_Evaluation1.Size = New System.Drawing.Size(332, 21)
-        Me.ListBox_Evaluation1.TabIndex = 45
-        Me.ListBox_Evaluation1.Value = Nothing
-        '
-        'cbDocStatus
-        '
-        Me.cbDocStatus.Enabled = False
-        Me.cbDocStatus.FormattingEnabled = True
-        Me.cbDocStatus.Location = New System.Drawing.Point(317, 10)
-        Me.cbDocStatus.Name = "cbDocStatus"
-        Me.cbDocStatus.Size = New System.Drawing.Size(121, 21)
-        Me.cbDocStatus.TabIndex = 45
+        Me.PageGeneral.Controls.Add(Me.Label9)
+        Me.PageGeneral.Controls.Add(Me.cbDocStatus)
+        Me.PageGeneral.Controls.Add(Me.Label4)
+        Me.PageGeneral.Controls.Add(Me.txtID)
+        Me.PageGeneral.Controls.Add(Me.txtComments)
+        Me.PageGeneral.Controls.Add(Me.txtName)
+        Me.PageGeneral.Controls.Add(Me.Label2)
+        Me.PageGeneral.Controls.Add(Me.Label1)
+        Me.PageGeneral.Controls.Add(Me.teRegistrationDate)
+        Me.PageGeneral.Controls.Add(Me.Label3)
+        Me.PageGeneral.Location = New System.Drawing.Point(4, 22)
+        Me.PageGeneral.Name = "PageGeneral"
+        Me.PageGeneral.Padding = New System.Windows.Forms.Padding(3)
+        Me.PageGeneral.Size = New System.Drawing.Size(780, 265)
+        Me.PageGeneral.TabIndex = 0
+        Me.PageGeneral.Text = "General"
+        Me.PageGeneral.UseVisualStyleBackColor = True
         '
         'Label9
         '
@@ -267,6 +188,133 @@ Partial Class FinancialProductEditor
         Me.Label9.TabIndex = 46
         Me.Label9.Text = "Estat"
         '
+        'cbDocStatus
+        '
+        Me.cbDocStatus.FormattingEnabled = True
+        Me.cbDocStatus.Location = New System.Drawing.Point(317, 10)
+        Me.cbDocStatus.Name = "cbDocStatus"
+        Me.cbDocStatus.Size = New System.Drawing.Size(121, 21)
+        Me.cbDocStatus.TabIndex = 45
+        '
+        'teRegistrationDate
+        '
+        Me.teRegistrationDate.Location = New System.Drawing.Point(106, 67)
+        Me.teRegistrationDate.Name = "teRegistrationDate"
+        Me.teRegistrationDate.Size = New System.Drawing.Size(100, 24)
+        Me.teRegistrationDate.TabIndex = 39
+        Me.teRegistrationDate.Value = Nothing
+        '
+        'PageFinancials
+        '
+        Me.PageFinancials.Controls.Add(Me.Label11)
+        Me.PageFinancials.Controls.Add(Me.iBaseImport)
+        Me.PageFinancials.Controls.Add(Me.Label10)
+        Me.PageFinancials.Controls.Add(Me.Label8)
+        Me.PageFinancials.Controls.Add(Me.iBaseDeposit)
+        Me.PageFinancials.Controls.Add(Me.ListBox_Deposit1)
+        Me.PageFinancials.Location = New System.Drawing.Point(4, 22)
+        Me.PageFinancials.Name = "PageFinancials"
+        Me.PageFinancials.Padding = New System.Windows.Forms.Padding(3)
+        Me.PageFinancials.Size = New System.Drawing.Size(780, 265)
+        Me.PageFinancials.TabIndex = 2
+        Me.PageFinancials.Text = "Finances"
+        Me.PageFinancials.UseVisualStyleBackColor = True
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Location = New System.Drawing.Point(8, 76)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(36, 13)
+        Me.Label11.TabIndex = 50
+        Me.Label11.Text = "Import"
+        '
+        'iBaseImport
+        '
+        Me.iBaseImport.Location = New System.Drawing.Point(104, 69)
+        Me.iBaseImport.Name = "iBaseImport"
+        Me.iBaseImport.Size = New System.Drawing.Size(100, 20)
+        Me.iBaseImport.TabIndex = 49
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Location = New System.Drawing.Point(8, 17)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(73, 13)
+        Me.Label10.TabIndex = 47
+        Me.Label10.Text = "Dipòsit orígen"
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Location = New System.Drawing.Point(8, 44)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(39, 13)
+        Me.Label8.TabIndex = 45
+        Me.Label8.Text = "Dipòsit"
+        '
+        'iBaseDeposit
+        '
+        Me.iBaseDeposit.Location = New System.Drawing.Point(104, 15)
+        Me.iBaseDeposit.Name = "iBaseDeposit"
+        Me.iBaseDeposit.Size = New System.Drawing.Size(332, 21)
+        Me.iBaseDeposit.TabIndex = 48
+        Me.iBaseDeposit.Value = Nothing
+        '
+        'ListBox_Deposit1
+        '
+        Me.ListBox_Deposit1.Location = New System.Drawing.Point(104, 42)
+        Me.ListBox_Deposit1.Name = "ListBox_Deposit1"
+        Me.ListBox_Deposit1.Size = New System.Drawing.Size(332, 21)
+        Me.ListBox_Deposit1.TabIndex = 46
+        Me.ListBox_Deposit1.Value = Nothing
+        '
+        'PageEvaluation
+        '
+        Me.PageEvaluation.Controls.Add(Me.Label6)
+        Me.PageEvaluation.Controls.Add(Me.Label5)
+        Me.PageEvaluation.Controls.Add(Me.txtResult)
+        Me.PageEvaluation.Controls.Add(Me.ListBox_Evaluation1)
+        Me.PageEvaluation.Location = New System.Drawing.Point(4, 22)
+        Me.PageEvaluation.Name = "PageEvaluation"
+        Me.PageEvaluation.Padding = New System.Windows.Forms.Padding(3)
+        Me.PageEvaluation.Size = New System.Drawing.Size(780, 265)
+        Me.PageEvaluation.TabIndex = 1
+        Me.PageEvaluation.Text = "Valoració"
+        Me.PageEvaluation.UseVisualStyleBackColor = True
+        '
+        'ListBox_Evaluation1
+        '
+        Me.ListBox_Evaluation1.Location = New System.Drawing.Point(102, 12)
+        Me.ListBox_Evaluation1.Name = "ListBox_Evaluation1"
+        Me.ListBox_Evaluation1.Size = New System.Drawing.Size(332, 21)
+        Me.ListBox_Evaluation1.TabIndex = 45
+        Me.ListBox_Evaluation1.Value = Nothing
+        '
+        'PageCashFlow
+        '
+        Me.PageCashFlow.Controls.Add(Me.CashFlowEditor1)
+        Me.PageCashFlow.Location = New System.Drawing.Point(4, 22)
+        Me.PageCashFlow.Name = "PageCashFlow"
+        Me.PageCashFlow.Size = New System.Drawing.Size(780, 265)
+        Me.PageCashFlow.TabIndex = 3
+        Me.PageCashFlow.Text = "CashFlow"
+        Me.PageCashFlow.UseVisualStyleBackColor = True
+        '
+        'CashFlowEditor1
+        '
+        Me.CashFlowEditor1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.CashFlowEditor1.Location = New System.Drawing.Point(0, 0)
+        Me.CashFlowEditor1.Name = "CashFlowEditor1"
+        Me.CashFlowEditor1.Size = New System.Drawing.Size(780, 265)
+        Me.CashFlowEditor1.TabIndex = 0
+        '
+        'ContextMenuStrip1
+        '
+        Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(61, 4)
+        '
         'FinancialProductEditor
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -275,12 +323,13 @@ Partial Class FinancialProductEditor
         Me.Name = "FinancialProductEditor"
         Me.Size = New System.Drawing.Size(788, 291)
         Me.TabControl1.ResumeLayout(False)
-        Me.Page1.ResumeLayout(False)
-        Me.Page1.PerformLayout()
-        Me.Page2.ResumeLayout(False)
-        Me.Page2.PerformLayout()
-        Me.Page3.ResumeLayout(False)
-        Me.Page3.PerformLayout()
+        Me.PageGeneral.ResumeLayout(False)
+        Me.PageGeneral.PerformLayout()
+        Me.PageFinancials.ResumeLayout(False)
+        Me.PageFinancials.PerformLayout()
+        Me.PageEvaluation.ResumeLayout(False)
+        Me.PageEvaluation.PerformLayout()
+        Me.PageCashFlow.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -297,13 +346,18 @@ Partial Class FinancialProductEditor
     Friend WithEvents ListBox_Evaluation1 As ListBox_Evaluation
     Friend WithEvents Label6 As Label
     Friend WithEvents TabControl1 As TabControl
-    Friend WithEvents Page1 As TabPage
-    Friend WithEvents Page3 As TabPage
-    Friend WithEvents ListBox_Deposit1 As ListBox_Deposit
-    Friend WithEvents Label7 As Label
-    Friend WithEvents Page2 As TabPage
-    Friend WithEvents Label8 As Label
-    Friend WithEvents ListBox_SubGroup1 As ListBox_SubGroup
+    Friend WithEvents PageGeneral As TabPage
+    Friend WithEvents PageEvaluation As TabPage
     Friend WithEvents Label9 As Label
     Friend WithEvents cbDocStatus As ComboBox
+    Friend WithEvents PageFinancials As TabPage
+    Friend WithEvents iBaseDeposit As ListBox_Deposit
+    Friend WithEvents Label10 As Label
+    Friend WithEvents ListBox_Deposit1 As ListBox_Deposit
+    Friend WithEvents Label8 As Label
+    Friend WithEvents Label11 As Label
+    Friend WithEvents iBaseImport As TextBox
+    Friend WithEvents ContextMenuStrip1 As ContextMenuStrip
+    Friend WithEvents PageCashFlow As TabPage
+    Friend WithEvents CashFlowEditor1 As CashFlowEditor
 End Class

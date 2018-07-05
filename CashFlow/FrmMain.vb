@@ -9,6 +9,9 @@ Public Class FrmMain
         ' Add any initialization after the InitializeComponent() call.
         ApplicationEvents.RegisterEvents(Me.NavigateToolStrip1)
         ApplicationEvents.RegisterEvents(Me.DadesToolStripMenuItem)
+        '
+        CashFlow.Group.AddDefaults()
+        CashFlow.FinancialProductType.AddDefaults()
 
     End Sub
 
