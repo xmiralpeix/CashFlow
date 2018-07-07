@@ -152,6 +152,10 @@
       <DependentUpon>FrmMain.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Migrations\201807061848084_x1.Designer.vb">
+      <DependentUpon>201807061848084_x1.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807061848084_x1.vb" />
     <Compile Include="Reports\Viewer\IPrintContent.vb" />
     <Compile Include="StringExtensions.vb" />
     <Compile Include="UIControls\ContentEditors\CashFlowEditor.Designer.vb">
@@ -183,12 +187,6 @@
       <DependentUpon>EvaluationEditor.vb</DependentUpon>
     </Compile>
     <Compile Include="UIControls\ContentEditors\EvaluationEditor.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UIControls\ContentEditors\OwnerEditor.Designer.vb">
-      <DependentUpon>OwnerEditor.vb</DependentUpon>
-    </Compile>
-    <Compile Include="UIControls\ContentEditors\OwnerEditor.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UIControls\ContentEditors\Interfaces\IFindContent.vb" />
@@ -226,6 +224,18 @@
     </Compile>
     <Compile Include="UIControls\ContentEditors\Interfaces\INavigateMenu.vb" />
     <Compile Include="UIControls\ContentEditors\Interfaces\IPrintBehaviour.vb" />
+    <Compile Include="UIControls\ContentEditors\OwnerEditor.Designer.vb">
+      <DependentUpon>OwnerEditor.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\ContentEditors\OwnerEditor.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\ContentEditors\SubGroupEditor.Designer.vb">
+      <DependentUpon>SubGroupFinder.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\ContentEditors\SubGroupFinder.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UIControls\ListBoxes\IListBoxEditor.vb" />
     <Compile Include="UIControls\ListBoxes\ListBox.Designer.vb">
       <DependentUpon>ListBox.vb</DependentUpon>
@@ -234,6 +244,9 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UIControls\ListBoxes\ListBox_Deposit.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\ListBoxes\ListBox_FinancialProduct.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UIControls\ListBoxes\ListBox_SubGroup.vb">
@@ -296,6 +309,9 @@
     <EmbeddedResource Include="FrmMain.resx">
       <DependentUpon>FrmMain.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807061848084_x1.resx">
+      <DependentUpon>201807061848084_x1.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
@@ -321,20 +337,26 @@
     <EmbeddedResource Include="UIControls\ContentEditors\EvaluationEditor.resx">
       <DependentUpon>EvaluationEditor.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UIControls\ContentEditors\OwnerEditor.resx">
-      <DependentUpon>OwnerEditor.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="UIControls\ContentEditors\GroupEditor.resx">
       <DependentUpon>GroupEditor.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UIControls\ContentEditors\JournalEntryEditor.resx">
       <DependentUpon>JournalEntryEditor.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\ContentEditors\OwnerEditor.resx">
+      <DependentUpon>OwnerEditor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\ContentEditors\SubGroupEditor.resx">
+      <DependentUpon>SubGroupFinder.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UIControls\ListBoxes\ListBox.resx">
       <DependentUpon>ListBox.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UIControls\ListBoxes\ListBox_Deposit.resx">
       <DependentUpon>ListBox_Deposit.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\ListBoxes\ListBox_FinancialProduct.resx">
+      <DependentUpon>ListBox_FinancialProduct.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UIControls\ListBoxes\ListBox_SubGroup.resx">
       <DependentUpon>ListBox_SubGroup.vb</DependentUpon>

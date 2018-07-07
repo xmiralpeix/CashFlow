@@ -1,10 +1,10 @@
 ﻿Imports CashFlow
 
-Public Class ListBox_SubGroup
+Public Class ListBox_FinancialProduct
     Inherits ListBox
     Implements IListBoxData
 
-    Public Entity As SubGroup
+    Public Entity As FinancialProduct
 
     Public Property Value As Object Implements IListBoxData.Value
         Get
@@ -29,7 +29,7 @@ Public Class ListBox_SubGroup
     End Sub
 
 
-    Public Sub AssignValue(InputValue As SubGroup)
+    Public Sub AssignValue(InputValue As FinancialProduct)
         Entity = InputValue
         LoadVisualProperties()
         LoadData()
@@ -39,7 +39,7 @@ Public Class ListBox_SubGroup
 
         Using ctx As New CashFlow.CashFlowContext()
             Dim ID As Integer = InputValue
-            Dim qry = From entiy In ctx.SubGroups
+            Dim qry = From entiy In ctx.FinancialProducts
                       Where entiy.ID = ID
             Entity = qry.FirstOrDefault()
         End Using
@@ -64,9 +64,9 @@ Public Class ListBox_SubGroup
                 End If
 
                 Using ctx As New CashFlow.CashFlowContext()
-                    Dim qry = From entiy In ctx.SubGroups
-                              Where entiy.AccessKey.Contains(InputValue) OrElse entiy.Name.Contains(InputValue)
-                              Order By Len(entiy.AccessKey) Ascending, Len(entiy.Name) Ascending
+                    Dim qry = From entiy In ctx.FinancialProducts
+                              Where entiy.Name.Contains(InputValue)
+                              Order By Len(entiy.Name) Ascending
                     Entity = qry.FirstOrDefault()
                 End Using
 
@@ -83,7 +83,7 @@ Public Class ListBox_SubGroup
 
     Public Overrides Sub OnSearchClick()
 
-        Dim findBehaviour As IFindBehaviour = New EntityIDsFinder(New SubGroupFinder())
+        Dim findBehaviour As IFindBehaviour = New EntityIDsFinder(New FinancialProductEditor())
         Dim IDscollection = findBehaviour.Find()
         If IsEmpty(IDscollection) Then
             Return
@@ -96,7 +96,7 @@ Public Class ListBox_SubGroup
     Private Sub LoadVisualProperties()
 
         If Not IsEmpty(Entity) Then
-            _VisualValue = Entity.AccessKey
+            _VisualValue = Entity.ID
             _VisualText = Entity.Name
         Else
             _VisualValue = String.Empty

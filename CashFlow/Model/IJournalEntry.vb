@@ -10,6 +10,7 @@ Public Interface IJournalEntry
     Property ID As Integer
     Property Import As Double
     Property SubGroup As SubGroup
+    Property FinancialProduct As FinancialProduct
     Property Validated As Boolean
 End Interface
 

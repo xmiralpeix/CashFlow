@@ -51,15 +51,19 @@ Public Class JournalEntry
     Public Property CancelDate As System.DateTime? Implements IJournalEntry.CancelDate
     '
     Public Property FiscalYear As Integer? Implements IJournalEntry.FiscalYear ' NULL in current period
-
+    '
+    Public Property FinancialProduct As FinancialProduct Implements IJournalEntry.FinancialProduct ' Optional Field
+    Public Property Deposit As Deposit Implements IJournalEntry.Deposit ' Cash / FinancialDeposit
     '
     Public Property SubGroup As SubGroup Implements IJournalEntry.SubGroup
-    '
-    Public Property Deposit As Deposit Implements IJournalEntry.Deposit ' Cash / FinancialDeposit
     '
     Public Property Concept As System.String Implements IJournalEntry.Concept
     Public Property Import As System.Double Implements IJournalEntry.Import
     Public Property Validated As System.Boolean Implements IJournalEntry.Validated
+
+    Public Sub New()
+        Me.CreationDate = Now
+    End Sub
 End Class
 
 

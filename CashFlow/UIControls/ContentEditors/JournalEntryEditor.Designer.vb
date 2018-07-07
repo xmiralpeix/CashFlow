@@ -22,73 +22,26 @@ Partial Class JournalEntryEditor
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.TextBox10 = New System.Windows.Forms.TextBox()
-        Me.TextBox9 = New System.Windows.Forms.TextBox()
-        Me.Button3 = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.Button1 = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.TextBox8 = New System.Windows.Forms.TextBox()
+        Me.txtImport = New System.Windows.Forms.TextBox()
         Me.chkImport = New System.Windows.Forms.CheckBox()
         Me.CheckBox4 = New System.Windows.Forms.CheckBox()
         Me.CheckBox3 = New System.Windows.Forms.CheckBox()
         Me.CheckBox2 = New System.Windows.Forms.CheckBox()
         Me.CheckBox1 = New System.Windows.Forms.CheckBox()
-        Me.TextBox7 = New System.Windows.Forms.TextBox()
-        Me.TextBox6 = New System.Windows.Forms.TextBox()
-        Me.TextBox5 = New System.Windows.Forms.TextBox()
-        Me.TextBox4 = New System.Windows.Forms.TextBox()
-        Me.TextBox3 = New System.Windows.Forms.TextBox()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.txtConcept = New System.Windows.Forms.TextBox()
+        Me.txtID = New System.Windows.Forms.TextBox()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.lblIncomes = New System.Windows.Forms.ToolStripStatusLabel()
         Me.lblExpenses = New System.Windows.Forms.ToolStripStatusLabel()
         Me.lblBalance = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.txtEntryDate = New CashFlow.TextEditor_Date()
+        Me.ListBox_SubGroup1 = New CashFlow.ListBox_SubGroup()
+        Me.ListBox_FinancialProduct1 = New CashFlow.ListBox_FinancialProduct()
+        Me.ListBox_Deposit1 = New CashFlow.ListBox_Deposit()
+        Me.chkDeposit = New System.Windows.Forms.CheckBox()
         Me.StatusStrip1.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'TextBox10
-        '
-        Me.TextBox10.Location = New System.Drawing.Point(130, 137)
-        Me.TextBox10.Name = "TextBox10"
-        Me.TextBox10.Size = New System.Drawing.Size(18, 20)
-        Me.TextBox10.TabIndex = 54
-        '
-        'TextBox9
-        '
-        Me.TextBox9.Location = New System.Drawing.Point(258, 34)
-        Me.TextBox9.Name = "TextBox9"
-        Me.TextBox9.ReadOnly = True
-        Me.TextBox9.Size = New System.Drawing.Size(289, 20)
-        Me.TextBox9.TabIndex = 53
-        '
-        'Button3
-        '
-        Me.Button3.Location = New System.Drawing.Point(231, 34)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(17, 23)
-        Me.Button3.TabIndex = 52
-        Me.Button3.Text = "*"
-        Me.Button3.UseVisualStyleBackColor = True
-        '
-        'Button2
-        '
-        Me.Button2.Location = New System.Drawing.Point(231, 84)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(17, 23)
-        Me.Button2.TabIndex = 51
-        Me.Button2.Text = "*"
-        Me.Button2.UseVisualStyleBackColor = True
-        '
-        'Button1
-        '
-        Me.Button1.Location = New System.Drawing.Point(231, 59)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(17, 23)
-        Me.Button1.TabIndex = 50
-        Me.Button1.Text = "*"
-        Me.Button1.UseVisualStyleBackColor = True
         '
         'Label1
         '
@@ -99,23 +52,23 @@ Partial Class JournalEntryEditor
         Me.Label1.TabIndex = 49
         Me.Label1.Text = "ID"
         '
-        'TextBox8
+        'txtImport
         '
-        Me.TextBox8.Location = New System.Drawing.Point(154, 137)
-        Me.TextBox8.Name = "TextBox8"
-        Me.TextBox8.Size = New System.Drawing.Size(100, 20)
-        Me.TextBox8.TabIndex = 48
+        Me.txtImport.Location = New System.Drawing.Point(131, 166)
+        Me.txtImport.Name = "txtImport"
+        Me.txtImport.Size = New System.Drawing.Size(100, 20)
+        Me.txtImport.TabIndex = 48
         '
         'chkImport
         '
         Me.chkImport.AutoSize = True
         Me.chkImport.Checked = True
         Me.chkImport.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.chkImport.Location = New System.Drawing.Point(14, 139)
+        Me.chkImport.Location = New System.Drawing.Point(14, 168)
         Me.chkImport.Name = "chkImport"
-        Me.chkImport.Size = New System.Drawing.Size(80, 17)
+        Me.chkImport.Size = New System.Drawing.Size(55, 17)
         Me.chkImport.TabIndex = 47
-        Me.chkImport.Text = "(I/D) Import"
+        Me.chkImport.Text = "Import"
         Me.chkImport.UseVisualStyleBackColor = True
         '
         'CheckBox4
@@ -123,7 +76,7 @@ Partial Class JournalEntryEditor
         Me.CheckBox4.AutoSize = True
         Me.CheckBox4.Checked = True
         Me.CheckBox4.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.CheckBox4.Location = New System.Drawing.Point(14, 116)
+        Me.CheckBox4.Location = New System.Drawing.Point(14, 145)
         Me.CheckBox4.Name = "CheckBox4"
         Me.CheckBox4.Size = New System.Drawing.Size(72, 17)
         Me.CheckBox4.TabIndex = 46
@@ -166,57 +119,20 @@ Partial Class JournalEntryEditor
         Me.CheckBox1.Text = "Data"
         Me.CheckBox1.UseVisualStyleBackColor = True
         '
-        'TextBox7
+        'txtConcept
         '
-        Me.TextBox7.Location = New System.Drawing.Point(258, 87)
-        Me.TextBox7.Name = "TextBox7"
-        Me.TextBox7.ReadOnly = True
-        Me.TextBox7.Size = New System.Drawing.Size(289, 20)
-        Me.TextBox7.TabIndex = 42
+        Me.txtConcept.Location = New System.Drawing.Point(130, 142)
+        Me.txtConcept.Name = "txtConcept"
+        Me.txtConcept.Size = New System.Drawing.Size(417, 20)
+        Me.txtConcept.TabIndex = 38
         '
-        'TextBox6
+        'txtID
         '
-        Me.TextBox6.Location = New System.Drawing.Point(130, 87)
-        Me.TextBox6.Name = "TextBox6"
-        Me.TextBox6.Size = New System.Drawing.Size(100, 20)
-        Me.TextBox6.TabIndex = 41
-        '
-        'TextBox5
-        '
-        Me.TextBox5.Location = New System.Drawing.Point(258, 61)
-        Me.TextBox5.Name = "TextBox5"
-        Me.TextBox5.ReadOnly = True
-        Me.TextBox5.Size = New System.Drawing.Size(289, 20)
-        Me.TextBox5.TabIndex = 40
-        '
-        'TextBox4
-        '
-        Me.TextBox4.Location = New System.Drawing.Point(130, 61)
-        Me.TextBox4.Name = "TextBox4"
-        Me.TextBox4.Size = New System.Drawing.Size(100, 20)
-        Me.TextBox4.TabIndex = 39
-        '
-        'TextBox3
-        '
-        Me.TextBox3.Location = New System.Drawing.Point(130, 113)
-        Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(417, 20)
-        Me.TextBox3.TabIndex = 38
-        '
-        'TextBox2
-        '
-        Me.TextBox2.Location = New System.Drawing.Point(130, 35)
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(100, 20)
-        Me.TextBox2.TabIndex = 37
-        '
-        'TextBox1
-        '
-        Me.TextBox1.Location = New System.Drawing.Point(130, 9)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.ReadOnly = True
-        Me.TextBox1.Size = New System.Drawing.Size(100, 20)
-        Me.TextBox1.TabIndex = 36
+        Me.txtID.Location = New System.Drawing.Point(130, 9)
+        Me.txtID.Name = "txtID"
+        Me.txtID.ReadOnly = True
+        Me.txtID.Size = New System.Drawing.Size(100, 20)
+        Me.txtID.TabIndex = 36
         '
         'StatusStrip1
         '
@@ -247,31 +163,70 @@ Partial Class JournalEntryEditor
         Me.lblBalance.Size = New System.Drawing.Size(63, 17)
         Me.lblBalance.Text = "Saldo: 0.00"
         '
-        'EntityEditor
+        'txtEntryDate
+        '
+        Me.txtEntryDate.Location = New System.Drawing.Point(130, 34)
+        Me.txtEntryDate.Name = "txtEntryDate"
+        Me.txtEntryDate.Size = New System.Drawing.Size(118, 24)
+        Me.txtEntryDate.TabIndex = 56
+        Me.txtEntryDate.Value = Nothing
+        '
+        'ListBox_SubGroup1
+        '
+        Me.ListBox_SubGroup1.Location = New System.Drawing.Point(130, 60)
+        Me.ListBox_SubGroup1.Name = "ListBox_SubGroup1"
+        Me.ListBox_SubGroup1.Size = New System.Drawing.Size(425, 21)
+        Me.ListBox_SubGroup1.TabIndex = 57
+        Me.ListBox_SubGroup1.Value = Nothing
+        '
+        'ListBox_FinancialProduct1
+        '
+        Me.ListBox_FinancialProduct1.Location = New System.Drawing.Point(130, 86)
+        Me.ListBox_FinancialProduct1.Name = "ListBox_FinancialProduct1"
+        Me.ListBox_FinancialProduct1.Size = New System.Drawing.Size(425, 21)
+        Me.ListBox_FinancialProduct1.TabIndex = 58
+        Me.ListBox_FinancialProduct1.Value = Nothing
+        '
+        'ListBox_Deposit1
+        '
+        Me.ListBox_Deposit1.Location = New System.Drawing.Point(130, 115)
+        Me.ListBox_Deposit1.Name = "ListBox_Deposit1"
+        Me.ListBox_Deposit1.Size = New System.Drawing.Size(425, 21)
+        Me.ListBox_Deposit1.TabIndex = 59
+        Me.ListBox_Deposit1.Value = Nothing
+        '
+        'chkDeposit
+        '
+        Me.chkDeposit.AutoSize = True
+        Me.chkDeposit.Checked = True
+        Me.chkDeposit.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkDeposit.Location = New System.Drawing.Point(14, 118)
+        Me.chkDeposit.Name = "chkDeposit"
+        Me.chkDeposit.Size = New System.Drawing.Size(58, 17)
+        Me.chkDeposit.TabIndex = 60
+        Me.chkDeposit.Text = "Dipòsit"
+        Me.chkDeposit.UseVisualStyleBackColor = True
+        '
+        'JournalEntryEditor
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.chkDeposit)
+        Me.Controls.Add(Me.ListBox_Deposit1)
+        Me.Controls.Add(Me.ListBox_FinancialProduct1)
+        Me.Controls.Add(Me.ListBox_SubGroup1)
+        Me.Controls.Add(Me.txtEntryDate)
         Me.Controls.Add(Me.StatusStrip1)
-        Me.Controls.Add(Me.TextBox10)
-        Me.Controls.Add(Me.TextBox9)
-        Me.Controls.Add(Me.Button3)
-        Me.Controls.Add(Me.Button2)
-        Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.TextBox8)
+        Me.Controls.Add(Me.txtImport)
         Me.Controls.Add(Me.chkImport)
         Me.Controls.Add(Me.CheckBox4)
         Me.Controls.Add(Me.CheckBox3)
         Me.Controls.Add(Me.CheckBox2)
         Me.Controls.Add(Me.CheckBox1)
-        Me.Controls.Add(Me.TextBox7)
-        Me.Controls.Add(Me.TextBox6)
-        Me.Controls.Add(Me.TextBox5)
-        Me.Controls.Add(Me.TextBox4)
-        Me.Controls.Add(Me.TextBox3)
-        Me.Controls.Add(Me.TextBox2)
-        Me.Controls.Add(Me.TextBox1)
-        Me.Name = "EntityEditor"
+        Me.Controls.Add(Me.txtConcept)
+        Me.Controls.Add(Me.txtID)
+        Me.Name = "JournalEntryEditor"
         Me.Size = New System.Drawing.Size(565, 248)
         Me.StatusStrip1.ResumeLayout(False)
         Me.StatusStrip1.PerformLayout()
@@ -279,28 +234,22 @@ Partial Class JournalEntryEditor
         Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents TextBox10 As TextBox
-    Friend WithEvents TextBox9 As TextBox
-    Friend WithEvents Button3 As Button
-    Friend WithEvents Button2 As Button
-    Friend WithEvents Button1 As Button
     Friend WithEvents Label1 As Label
-    Friend WithEvents TextBox8 As TextBox
+    Friend WithEvents txtImport As TextBox
     Friend WithEvents chkImport As CheckBox
     Friend WithEvents CheckBox4 As CheckBox
     Friend WithEvents CheckBox3 As CheckBox
     Friend WithEvents CheckBox2 As CheckBox
     Friend WithEvents CheckBox1 As CheckBox
-    Friend WithEvents TextBox7 As TextBox
-    Friend WithEvents TextBox6 As TextBox
-    Friend WithEvents TextBox5 As TextBox
-    Friend WithEvents TextBox4 As TextBox
-    Friend WithEvents TextBox3 As TextBox
-    Friend WithEvents TextBox2 As TextBox
-    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents txtConcept As TextBox
+    Friend WithEvents txtID As TextBox
     Friend WithEvents StatusStrip1 As StatusStrip
     Friend WithEvents lblIncomes As ToolStripStatusLabel
     Friend WithEvents lblExpenses As ToolStripStatusLabel
     Friend WithEvents lblBalance As ToolStripStatusLabel
+    Friend WithEvents txtEntryDate As TextEditor_Date
+    Friend WithEvents ListBox_SubGroup1 As ListBox_SubGroup
+    Friend WithEvents ListBox_FinancialProduct1 As ListBox_FinancialProduct
+    Friend WithEvents ListBox_Deposit1 As ListBox_Deposit
+    Friend WithEvents chkDeposit As CheckBox
 End Class

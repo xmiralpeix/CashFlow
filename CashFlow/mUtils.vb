@@ -33,6 +33,10 @@
                 Dim castValue As DataTable = DirectCast(value, DataTable)
                 Return castValue.Rows.Count = 0
 
+            Case TypeOf value Is DateTime
+                Dim castValue As DateTime = DirectCast(value, DateTime)
+                Return castValue = DateTime.MinValue
+
         End Select
 
         Return False
