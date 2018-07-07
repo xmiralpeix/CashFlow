@@ -16,6 +16,8 @@ Public Class CashFlowContext
     Public Property FinancialProductTypes As DbSet(Of FinancialProductType)
     Public Property Evaluations As DbSet(Of Evaluation)
     '
+    Public Property ExternalApplications As DbSet(Of ExternalApplication)
+    '
     Public Property Activities As DbSet(Of Activity)
     '
     Public Property CashFlowStatus As DbSet(Of CashFlowStatus)
@@ -35,6 +37,25 @@ Public Class CashFlowContext
 End Class
 
 
+
+Public Class ExternalApplication
+
+    <Key>
+    <DatabaseGenerated(DatabaseGeneratedOption.Identity)>
+    Public Property ID As Integer
+
+    <MaxLength(100)>
+    Public Property Name As String
+
+    <MaxLength(30)>
+    Public Property ParentMenuID As String
+
+    <MaxLength(254)>
+    Public Property ApplicationPath As String
+
+
+
+End Class
 
 
 

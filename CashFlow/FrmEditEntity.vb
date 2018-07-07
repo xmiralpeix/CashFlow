@@ -89,7 +89,14 @@ Public Class FrmEdit
 
     Private Sub ProcessPrintBehaviour()
 
-        Content.PrintBehaviour.Print(_ID.Value, _ID.Value, CAT)
+        Try
+            If IsEmpty(_ID) Then
+                Throw New Exception(Locate("El formulari no està en mode consulta", CAT))
+            End If
+            Content.PrintBehaviour.Print(_ID.Value, _ID.Value, CAT)
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
 
     End Sub
 

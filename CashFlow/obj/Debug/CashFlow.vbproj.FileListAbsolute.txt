@@ -51,4 +51,4 @@ C:\Users\xavim\OneDrive\Documentos\CashFlow\CashFlow\obj\Debug\CashFlow.vbprojRe
 C:\Users\xavim\OneDrive\Documentos\CashFlow\CashFlow\obj\Debug\CashFlow.ListBox_SubGroup.resources
 C:\Users\xavim\OneDrive\Documentos\CashFlow\CashFlow\obj\Debug\CashFlow.CashFlowEditor.resources
 C:\Users\xavim\OneDrive\Documentos\CashFlow\CashFlow\obj\Debug\CashFlow.ListBox_FinancialProduct.resources
-C:\Users\xavim\OneDrive\Documentos\CashFlow\CashFlow\obj\Debug\CashFlow.Migrations.x1.resources
+C:\Users\xavim\OneDrive\Documentos\CashFlow\CashFlow\obj\Debug\CashFlow.SubGroupFinder.resources
