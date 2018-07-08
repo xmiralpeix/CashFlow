@@ -29,20 +29,20 @@ Partial Class FrmMain
         Me.GrupsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PropietarisToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ValoraciosToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.InformesToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.FinancesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.EntitatsFinanceresToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DipòsitsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ProductesFinancersToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AssentamentsToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.InformesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ConfiguracióToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ParàmetresToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
+        Me.ApplicationMenu = New System.Windows.Forms.MenuStrip()
         Me.NavigateToolStrip1 = New CashFlow.NavigateToolStrip()
         Me.DadesToolStripMenuItem = New CashFlow.ActionsMenuStrip()
-        Me.InformesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.InformesToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.statusbar.SuspendLayout()
-        Me.MenuStrip1.SuspendLayout()
+        Me.ApplicationMenu.SuspendLayout()
         Me.SuspendLayout()
         '
         'statusbar
@@ -91,6 +91,12 @@ Partial Class FrmMain
         Me.ValoraciosToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.ValoraciosToolStripMenuItem.Text = "Valoracions"
         '
+        'InformesToolStripMenuItem1
+        '
+        Me.InformesToolStripMenuItem1.Name = "InformesToolStripMenuItem1"
+        Me.InformesToolStripMenuItem1.Size = New System.Drawing.Size(152, 22)
+        Me.InformesToolStripMenuItem1.Text = "Informes"
+        '
         'FinancesToolStripMenuItem
         '
         Me.FinancesToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EntitatsFinanceresToolStripMenuItem, Me.DipòsitsToolStripMenuItem, Me.ProductesFinancersToolStripMenuItem, Me.AssentamentsToolStripMenuItem1, Me.InformesToolStripMenuItem})
@@ -122,6 +128,12 @@ Partial Class FrmMain
         Me.AssentamentsToolStripMenuItem1.Size = New System.Drawing.Size(185, 22)
         Me.AssentamentsToolStripMenuItem1.Text = "Moviments financers"
         '
+        'InformesToolStripMenuItem
+        '
+        Me.InformesToolStripMenuItem.Name = "InformesToolStripMenuItem"
+        Me.InformesToolStripMenuItem.Size = New System.Drawing.Size(185, 22)
+        Me.InformesToolStripMenuItem.Text = "Informes financers"
+        '
         'ConfiguracióToolStripMenuItem1
         '
         Me.ConfiguracióToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ParàmetresToolStripMenuItem})
@@ -135,14 +147,14 @@ Partial Class FrmMain
         Me.ParàmetresToolStripMenuItem.Size = New System.Drawing.Size(133, 22)
         Me.ParàmetresToolStripMenuItem.Text = "Paràmetres"
         '
-        'MenuStrip1
+        'ApplicationMenu
         '
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PrimerToolStripMenuItem, Me.DadesToolStripMenuItem})
-        Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
-        Me.MenuStrip1.Name = "MenuStrip1"
-        Me.MenuStrip1.Size = New System.Drawing.Size(802, 24)
-        Me.MenuStrip1.TabIndex = 5
-        Me.MenuStrip1.Text = "MenuStrip1"
+        Me.ApplicationMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PrimerToolStripMenuItem, Me.DadesToolStripMenuItem})
+        Me.ApplicationMenu.Location = New System.Drawing.Point(0, 0)
+        Me.ApplicationMenu.Name = "ApplicationMenu"
+        Me.ApplicationMenu.Size = New System.Drawing.Size(802, 24)
+        Me.ApplicationMenu.TabIndex = 5
+        Me.ApplicationMenu.Text = "ApplicationMenu"
         '
         'NavigateToolStrip1
         '
@@ -158,18 +170,6 @@ Partial Class FrmMain
         Me.DadesToolStripMenuItem.Size = New System.Drawing.Size(51, 20)
         Me.DadesToolStripMenuItem.Text = "Dades"
         '
-        'InformesToolStripMenuItem
-        '
-        Me.InformesToolStripMenuItem.Name = "InformesToolStripMenuItem"
-        Me.InformesToolStripMenuItem.Size = New System.Drawing.Size(185, 22)
-        Me.InformesToolStripMenuItem.Text = "Informes financers"
-        '
-        'InformesToolStripMenuItem1
-        '
-        Me.InformesToolStripMenuItem1.Name = "InformesToolStripMenuItem1"
-        Me.InformesToolStripMenuItem1.Size = New System.Drawing.Size(152, 22)
-        Me.InformesToolStripMenuItem1.Text = "Informes"
-        '
         'FrmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -177,17 +177,17 @@ Partial Class FrmMain
         Me.ClientSize = New System.Drawing.Size(802, 493)
         Me.Controls.Add(Me.NavigateToolStrip1)
         Me.Controls.Add(Me.statusbar)
-        Me.Controls.Add(Me.MenuStrip1)
+        Me.Controls.Add(Me.ApplicationMenu)
         Me.IsMdiContainer = True
-        Me.MainMenuStrip = Me.MenuStrip1
+        Me.MainMenuStrip = Me.ApplicationMenu
         Me.Name = "FrmMain"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "CashFlow"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.statusbar.ResumeLayout(False)
         Me.statusbar.PerformLayout()
-        Me.MenuStrip1.ResumeLayout(False)
-        Me.MenuStrip1.PerformLayout()
+        Me.ApplicationMenu.ResumeLayout(False)
+        Me.ApplicationMenu.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -206,7 +206,7 @@ Partial Class FrmMain
     Friend WithEvents ConfiguracióToolStripMenuItem1 As ToolStripMenuItem
     Friend WithEvents ParàmetresToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents DadesToolStripMenuItem As ActionsMenuStrip
-    Friend WithEvents MenuStrip1 As MenuStrip
+    Friend WithEvents ApplicationMenu As MenuStrip
     Friend WithEvents NavigateToolStrip1 As NavigateToolStrip
     Friend WithEvents DipòsitsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ValoraciosToolStripMenuItem As ToolStripMenuItem

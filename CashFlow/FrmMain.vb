@@ -11,7 +11,63 @@ Public Class FrmMain
         ApplicationEvents.RegisterEvents(Me.DadesToolStripMenuItem)
         '
         CashFlow.Group.AddDefaults()
-        CashFlow.FinancialProductType.AddDefaults()
+
+        Dim extAppCollection As List(Of ExternalApplication)
+        Using ctx As New CashFlow.CashFlowContext()
+            extAppCollection = (From oEntity In ctx.ExternalApplications
+                                Select oEntity).ToList()
+        End Using
+
+
+        For Each oEntity In extAppCollection
+
+            Try
+                Dim nodes() As String = oEntity.ParentMenuID.Split(">")
+                Dim findMenuItem = Function(nodeIdx As Integer, itemCollection As ToolStripItemCollection) As ToolStripMenuItem
+                                       Try
+                                           Return (From itemIdx As ToolStripItem In itemCollection
+                                                   Where String.Compare(itemIdx.Text, nodes(nodeIdx), True) = 0).FirstOrDefault()
+                                       Catch ex As Exception
+                                           Return Nothing
+                                       End Try
+                                   End Function
+
+                Dim currentMenu As ToolStripMenuItem = findMenuItem(0, Me.ApplicationMenu.Items)
+                For idx As Integer = 1 To nodes.Count - 1
+                    currentMenu = findMenuItem(idx, currentMenu.dropdownitems)
+                Next
+
+                Dim x As New ToolStripMenuItem()
+                x.Name = oEntity.Name
+                x.Text = oEntity.Name
+                x.Tag = oEntity.ApplicationPath
+                '
+                AddHandler x.Click, Sub(sender As Object, e As EventArgs)
+                                        Try
+                                            Dim menu As ToolStripMenuItem = sender
+                                            System.Diagnostics.Process.Start(menu.Tag)
+                                        Catch ex As Exception
+                                            MsgBox(ex.Message)
+                                        End Try
+                                    End Sub
+
+                currentMenu.DropDownItems.Add(x)
+
+            Catch ex As Exception
+
+            End Try
+
+
+
+
+        Next
+
+
+
+
+    End Sub
+
+    Public Sub OpenApplication()
 
     End Sub
 
@@ -89,4 +145,13 @@ Public Class FrmMain
                                    End Sub
     End Sub
 
+    Private Sub InformesToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles InformesToolStripMenuItem1.Click
+        Dim frm As New FrmEdit
+        frm.MdiParent = Me
+        frm.Content = New ExternalApplicationEditor()
+        frm.Show()
+        AddHandler frm.FormClosed, Sub()
+                                       frm.Dispose()
+                                   End Sub
+    End Sub
 End Class

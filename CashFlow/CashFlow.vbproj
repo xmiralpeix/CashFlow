@@ -152,6 +152,34 @@
       <DependentUpon>FrmMain.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Migrations\201807071354489_m001.Designer.vb">
+      <DependentUpon>201807071354489_m001.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807071354489_m001.vb" />
+    <Compile Include="Migrations\201807071844480_M002.Designer.vb">
+      <DependentUpon>201807071844480_M002.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807071844480_M002.vb" />
+    <Compile Include="Migrations\201807081001108_M003.Designer.vb">
+      <DependentUpon>201807081001108_M003.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807081001108_M003.vb" />
+    <Compile Include="Migrations\201807081039388_M004.Designer.vb">
+      <DependentUpon>201807081039388_M004.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807081039388_M004.vb" />
+    <Compile Include="Migrations\201807081404021_M005.Designer.vb">
+      <DependentUpon>201807081404021_M005.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807081404021_M005.vb" />
+    <Compile Include="Migrations\201807081456263_M006.Designer.vb">
+      <DependentUpon>201807081456263_M006.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807081456263_M006.vb" />
+    <Compile Include="Migrations\201807081541365_M007.Designer.vb">
+      <DependentUpon>201807081541365_M007.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807081541365_M007.vb" />
     <Compile Include="Reports\Viewer\IPrintContent.vb" />
     <Compile Include="StringExtensions.vb" />
     <Compile Include="UIControls\ContentEditors\CashFlowEditor.Designer.vb">
@@ -164,6 +192,12 @@
       <DependentUpon>DepositEditor.vb</DependentUpon>
     </Compile>
     <Compile Include="UIControls\ContentEditors\DepositEditor.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\ContentEditors\ExternalApplicationEditor.Designer.vb">
+      <DependentUpon>ExternalApplicationEditor.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\ContentEditors\ExternalApplicationEditor.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UIControls\ContentEditors\Interfaces\IActionsMenu.vb" />
@@ -305,6 +339,27 @@
     <EmbeddedResource Include="FrmMain.resx">
       <DependentUpon>FrmMain.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807071354489_m001.resx">
+      <DependentUpon>201807071354489_m001.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807071844480_M002.resx">
+      <DependentUpon>201807071844480_M002.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807081001108_M003.resx">
+      <DependentUpon>201807081001108_M003.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807081039388_M004.resx">
+      <DependentUpon>201807081039388_M004.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807081404021_M005.resx">
+      <DependentUpon>201807081404021_M005.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807081456263_M006.resx">
+      <DependentUpon>201807081456263_M006.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807081541365_M007.resx">
+      <DependentUpon>201807081541365_M007.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
@@ -320,6 +375,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UIControls\ContentEditors\DepositEditor.resx">
       <DependentUpon>DepositEditor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\ContentEditors\ExternalApplicationEditor.resx">
+      <DependentUpon>ExternalApplicationEditor.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UIControls\ContentEditors\FinancialEntityEditor.resx">
       <DependentUpon>FinancialEntityEditor.vb</DependentUpon>
@@ -377,7 +435,9 @@
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />

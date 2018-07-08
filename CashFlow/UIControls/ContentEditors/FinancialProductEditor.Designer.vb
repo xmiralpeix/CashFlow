@@ -44,12 +44,14 @@ Partial Class FinancialProductEditor
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.iBaseDeposit = New CashFlow.ListBox_Deposit()
-        Me.ListBox_Deposit1 = New CashFlow.ListBox_Deposit()
+        Me.iDeposit = New CashFlow.ListBox_Deposit()
         Me.PageEvaluation = New System.Windows.Forms.TabPage()
         Me.ListBox_Evaluation1 = New CashFlow.ListBox_Evaluation()
         Me.PageCashFlow = New System.Windows.Forms.TabPage()
         Me.CashFlowEditor1 = New CashFlow.CashFlowEditor()
         Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.iProductDeposit = New CashFlow.ListBox_Deposit()
         Me.TabControl1.SuspendLayout()
         Me.PageGeneral.SuspendLayout()
         Me.PageFinancials.SuspendLayout()
@@ -93,7 +95,7 @@ Partial Class FinancialProductEditor
         Me.txtComments.Multiline = True
         Me.txtComments.Name = "txtComments"
         Me.txtComments.Size = New System.Drawing.Size(332, 162)
-        Me.txtComments.TabIndex = 41
+        Me.txtComments.TabIndex = 4
         '
         'Label2
         '
@@ -128,14 +130,14 @@ Partial Class FinancialProductEditor
         Me.txtID.Name = "txtID"
         Me.txtID.ReadOnly = True
         Me.txtID.Size = New System.Drawing.Size(100, 20)
-        Me.txtID.TabIndex = 35
+        Me.txtID.TabIndex = 0
         '
         'txtName
         '
         Me.txtName.Location = New System.Drawing.Point(106, 41)
         Me.txtName.Name = "txtName"
         Me.txtName.Size = New System.Drawing.Size(332, 20)
-        Me.txtName.TabIndex = 34
+        Me.txtName.TabIndex = 2
         '
         'Label6
         '
@@ -194,24 +196,26 @@ Partial Class FinancialProductEditor
         Me.cbDocStatus.Location = New System.Drawing.Point(317, 10)
         Me.cbDocStatus.Name = "cbDocStatus"
         Me.cbDocStatus.Size = New System.Drawing.Size(121, 21)
-        Me.cbDocStatus.TabIndex = 45
+        Me.cbDocStatus.TabIndex = 1
         '
         'teRegistrationDate
         '
         Me.teRegistrationDate.Location = New System.Drawing.Point(106, 67)
         Me.teRegistrationDate.Name = "teRegistrationDate"
         Me.teRegistrationDate.Size = New System.Drawing.Size(100, 24)
-        Me.teRegistrationDate.TabIndex = 39
+        Me.teRegistrationDate.TabIndex = 3
         Me.teRegistrationDate.Value = Nothing
         '
         'PageFinancials
         '
+        Me.PageFinancials.Controls.Add(Me.Label7)
+        Me.PageFinancials.Controls.Add(Me.iProductDeposit)
         Me.PageFinancials.Controls.Add(Me.Label11)
         Me.PageFinancials.Controls.Add(Me.iBaseImport)
         Me.PageFinancials.Controls.Add(Me.Label10)
         Me.PageFinancials.Controls.Add(Me.Label8)
         Me.PageFinancials.Controls.Add(Me.iBaseDeposit)
-        Me.PageFinancials.Controls.Add(Me.ListBox_Deposit1)
+        Me.PageFinancials.Controls.Add(Me.iDeposit)
         Me.PageFinancials.Location = New System.Drawing.Point(4, 22)
         Me.PageFinancials.Name = "PageFinancials"
         Me.PageFinancials.Padding = New System.Windows.Forms.Padding(3)
@@ -223,7 +227,7 @@ Partial Class FinancialProductEditor
         'Label11
         '
         Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(8, 76)
+        Me.Label11.Location = New System.Drawing.Point(8, 103)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(36, 13)
         Me.Label11.TabIndex = 50
@@ -231,10 +235,10 @@ Partial Class FinancialProductEditor
         '
         'iBaseImport
         '
-        Me.iBaseImport.Location = New System.Drawing.Point(104, 69)
+        Me.iBaseImport.Location = New System.Drawing.Point(104, 96)
         Me.iBaseImport.Name = "iBaseImport"
         Me.iBaseImport.Size = New System.Drawing.Size(100, 20)
-        Me.iBaseImport.TabIndex = 49
+        Me.iBaseImport.TabIndex = 3
         '
         'Label10
         '
@@ -259,16 +263,16 @@ Partial Class FinancialProductEditor
         Me.iBaseDeposit.Location = New System.Drawing.Point(104, 15)
         Me.iBaseDeposit.Name = "iBaseDeposit"
         Me.iBaseDeposit.Size = New System.Drawing.Size(332, 21)
-        Me.iBaseDeposit.TabIndex = 48
+        Me.iBaseDeposit.TabIndex = 0
         Me.iBaseDeposit.Value = Nothing
         '
-        'ListBox_Deposit1
+        'iDeposit
         '
-        Me.ListBox_Deposit1.Location = New System.Drawing.Point(104, 42)
-        Me.ListBox_Deposit1.Name = "ListBox_Deposit1"
-        Me.ListBox_Deposit1.Size = New System.Drawing.Size(332, 21)
-        Me.ListBox_Deposit1.TabIndex = 46
-        Me.ListBox_Deposit1.Value = Nothing
+        Me.iDeposit.Location = New System.Drawing.Point(104, 42)
+        Me.iDeposit.Name = "iDeposit"
+        Me.iDeposit.Size = New System.Drawing.Size(332, 21)
+        Me.iDeposit.TabIndex = 1
+        Me.iDeposit.Value = Nothing
         '
         'PageEvaluation
         '
@@ -315,6 +319,24 @@ Partial Class FinancialProductEditor
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
         Me.ContextMenuStrip1.Size = New System.Drawing.Size(61, 4)
         '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Location = New System.Drawing.Point(8, 71)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(84, 13)
+        Me.Label7.TabIndex = 51
+        Me.Label7.Text = "Dipòsit producte"
+        '
+        'iProductDeposit
+        '
+        Me.iProductDeposit.Enabled = False
+        Me.iProductDeposit.Location = New System.Drawing.Point(104, 69)
+        Me.iProductDeposit.Name = "iProductDeposit"
+        Me.iProductDeposit.Size = New System.Drawing.Size(332, 21)
+        Me.iProductDeposit.TabIndex = 2
+        Me.iProductDeposit.Value = Nothing
+        '
         'FinancialProductEditor
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -353,11 +375,13 @@ Partial Class FinancialProductEditor
     Friend WithEvents PageFinancials As TabPage
     Friend WithEvents iBaseDeposit As ListBox_Deposit
     Friend WithEvents Label10 As Label
-    Friend WithEvents ListBox_Deposit1 As ListBox_Deposit
+    Friend WithEvents iDeposit As ListBox_Deposit
     Friend WithEvents Label8 As Label
     Friend WithEvents Label11 As Label
     Friend WithEvents iBaseImport As TextBox
     Friend WithEvents ContextMenuStrip1 As ContextMenuStrip
     Friend WithEvents PageCashFlow As TabPage
     Friend WithEvents CashFlowEditor1 As CashFlowEditor
+    Friend WithEvents Label7 As Label
+    Friend WithEvents iProductDeposit As ListBox_Deposit
 End Class

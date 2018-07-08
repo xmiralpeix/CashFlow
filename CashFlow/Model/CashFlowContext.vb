@@ -13,7 +13,7 @@ Public Class CashFlowContext
     Public Property FinancialEntities As DbSet(Of FinancialEntity)
     Public Property Deposits As DbSet(Of Deposit)
     Public Property FinancialProducts As DbSet(Of FinancialProduct)
-    Public Property FinancialProductTypes As DbSet(Of FinancialProductType)
+    Public Property CashFlowGroups As DbSet(Of CashFlowGroup)
     Public Property Evaluations As DbSet(Of Evaluation)
     '
     Public Property ExternalApplications As DbSet(Of ExternalApplication)
@@ -47,7 +47,7 @@ Public Class ExternalApplication
     <MaxLength(100)>
     Public Property Name As String
 
-    <MaxLength(30)>
+    <MaxLength(254)>
     Public Property ParentMenuID As String
 
     <MaxLength(254)>
@@ -66,6 +66,10 @@ Public Class JournalEntry
     <Key>
     <DatabaseGenerated(DatabaseGeneratedOption.Identity)>
     Public Property ID As Integer Implements IJournalEntry.ID
+
+    <MaxLength(100)>
+    Public Property ExternalID As String
+
     '
     Public Property CreationDate As System.DateTime Implements IJournalEntry.CreationDate
     Public Property EntryDate As System.DateTime Implements IJournalEntry.EntryDate
@@ -131,6 +135,14 @@ Public Enum RepeatWeek
     FourthWeek = 4
     LastWeek = 5
 End Enum
+
+Public Enum CashFlowQuarterZone
+    Income = 0
+    Expenses = 1
+    Assets = 2
+    Liabilities = 3
+End Enum
+
 
 
 Public Class Evaluation
@@ -202,7 +214,7 @@ Public Class CashFlowStatus
 End Class
 
 
-Public Class FinancialProductType
+Public Class CashFlowGroup
 
     <Key>
     Public Property ID As Integer
@@ -210,96 +222,8 @@ Public Class FinancialProductType
     <MaxLength(100)>
     Public Property Name As System.String
 
-    Public Property SubGroup As SubGroup
+    Public Property QuarterZone As CashFlowQuarterZone
 
-
-    Public Shared TransferID As Integer = 0
-    Public Shared SalaryID As Integer = 1
-    Public Shared InterestID As Integer = 2
-    Public Shared DividendsID As Integer = 3
-    Public Shared InvoiceID As Integer = 4 ' Ex: Watter invoice
-    Public Shared DebtID As Integer = 5 ' Ex: House mortage payment,  
-
-
-    Public Shared Sub AddDefaults()
-
-        Using ctx As New CashFlowContext()
-
-            Try
-
-                Dim oGroup As New FinancialProductType()
-                oGroup.ID = TransferID
-                oGroup.Name = Locate("Traspàs", CAT)
-                oGroup.SubGroup = ctx.SubGroups.First(Function(x) x.AccessKey = SubGroup.TransferAccessKey)
-                ctx.FinancialProductTypes.Add(oGroup)
-                ctx.SaveChanges()
-
-            Catch ex As Exception
-            End Try
-
-            Try
-
-                Dim oGroup As New FinancialProductType()
-                oGroup.ID = SalaryID
-                oGroup.Name = Locate("Salari", CAT)
-                oGroup.SubGroup = ctx.SubGroups.First(Function(x) x.AccessKey = SubGroup.SalaryAccessKey)
-                ctx.FinancialProductTypes.Add(oGroup)
-                ctx.SaveChanges()
-
-            Catch ex As Exception
-            End Try
-
-            Try
-
-                Dim oGroup As New FinancialProductType()
-                oGroup.ID = InterestID
-                oGroup.Name = Locate("Interessos", CAT)
-                oGroup.SubGroup = ctx.SubGroups.First(Function(x) x.AccessKey = SubGroup.InterestAccessKey)
-                ctx.FinancialProductTypes.Add(oGroup)
-                ctx.SaveChanges()
-
-            Catch ex As Exception
-            End Try
-
-            Try
-
-                Dim oGroup As New FinancialProductType()
-                oGroup.ID = DividendsID
-                oGroup.Name = Locate("Dividends", CAT)
-                oGroup.SubGroup = ctx.SubGroups.First(Function(x) x.AccessKey = SubGroup.DividendAccessKey)
-                ctx.FinancialProductTypes.Add(oGroup)
-                ctx.SaveChanges()
-
-            Catch ex As Exception
-            End Try
-
-            Try
-
-                Dim oGroup As New FinancialProductType()
-                oGroup.ID = InvoiceID
-                oGroup.Name = Locate("Rebuts", CAT)
-                oGroup.SubGroup = ctx.SubGroups.First(Function(x) x.AccessKey = SubGroup.InvoiceAccessKey)
-                ctx.FinancialProductTypes.Add(oGroup)
-                ctx.SaveChanges()
-
-            Catch ex As Exception
-            End Try
-
-            Try
-
-                Dim oGroup As New FinancialProductType()
-                oGroup.ID = DebtID
-                oGroup.Name = Locate("Deutes", CAT)
-                oGroup.SubGroup = ctx.SubGroups.First(Function(x) x.AccessKey = SubGroup.DebtAccessKey)
-                ctx.FinancialProductTypes.Add(oGroup)
-                ctx.SaveChanges()
-
-            Catch ex As Exception
-            End Try
-
-        End Using
-
-    End Sub
 
 End Class
 
@@ -311,16 +235,15 @@ Public Class CashFlowEntry
     '
     Public Property Owner As Owner
     Public Property Concept As System.String
-    Public Property CashFlowGroup As FinancialProductType
+    Public Property CashFlowGroup As CashFlowGroup
+    '
+    Public Property FinancialProduct As FinancialProduct
     '
     Public Property CancelDate As System.DateTime?
     Public Property FromDate As System.DateTime?
     Public Property ToDate As System.DateTime?
     '
-    Public Property IncomeImport As Double ' Ex: Dividends --> 100$
-    Public Property ExpenseImport As Double ' Ex: Car Loans --> 5.000$
-    Public Property TotalAsset As Double  ' Ex: 250 Shares of MYT4U --> 5$
-    Public Property TotalLiability As Double ' Ex: Car Loan Payment --> 100$
+    Public Property Import As Decimal
 
 End Class
 
@@ -356,20 +279,13 @@ Public Class Group
 
                 Dim oGroup As New Group()
                 oGroup.AccessKey = GroupFinancialOperationsAccessKey
-                oGroup.Name = Locate("Operacions financeres", CAT)
+                oGroup.Name = Locate("OPERACIONS FINANCERES", CAT)
                 oGroup.SubGroups = New List(Of SubGroup)()
                 oGroup.SubGroups.Add(New SubGroup() With {.AccessKey = SubGroup.TransferAccessKey,
                                                           .Name = Locate("Traspàs", CAT)})
-                oGroup.SubGroups.Add(New SubGroup() With {.AccessKey = SubGroup.SalaryAccessKey,
-                                                          .Name = Locate("Nòmina", CAT)})
-                oGroup.SubGroups.Add(New SubGroup() With {.AccessKey = SubGroup.InterestAccessKey,
-                                                       .Name = Locate("Interessos", CAT)})
-                oGroup.SubGroups.Add(New SubGroup() With {.AccessKey = SubGroup.DividendAccessKey,
-                                                       .Name = Locate("Dividends", CAT)})
-                oGroup.SubGroups.Add(New SubGroup() With {.AccessKey = SubGroup.InvoiceAccessKey,
-                                                       .Name = Locate("Rebuts", CAT)})
-                oGroup.SubGroups.Add(New SubGroup() With {.AccessKey = SubGroup.DebtAccessKey,
-                                                       .Name = Locate("Deutes", CAT)})
+                oGroup.SubGroups.Add(New SubGroup() With {.AccessKey = SubGroup.CapitalAccessKey,
+                                                          .Name = Locate("Capital", CAT)})
+
 
                 ctx.Groups.Add(oGroup)
                 ctx.SaveChanges()
@@ -394,7 +310,7 @@ Public Class SubGroup
     Public Property ID As Integer
 
     <Index(IsUnique:=True)>
-    <MaxLength(10)>
+    <MaxLength(25)>
     Public Property AccessKey As String
 
     <Index(IsUnique:=True)>
@@ -404,13 +320,8 @@ Public Class SubGroup
     Public Property CancelDate As System.DateTime?
     Public Property Group As Group
 
-
-    Public Shared TransferAccessKey As String = "OFTRA"
-    Public Shared SalaryAccessKey As String = "OFNOM"
-    Public Shared InterestAccessKey As String = "OFINT"
-    Public Shared DividendAccessKey As String = "OFDIV"
-    Public Shared InvoiceAccessKey As String = "OFREB"
-    Public Shared DebtAccessKey As String = "OFDEU"
+    Public Shared TransferAccessKey As String = "OF.TRA"
+    Public Shared CapitalAccessKey As String = "OF.CAP"
 
 End Class
 
@@ -451,14 +362,16 @@ Public Class FinancialProduct
     Public Property CreationDate As System.DateTime
     Public Property RegistrationDate As System.DateTime?
     Public Property CancelDate As System.DateTime?
-    Public Property BaseDeposit As Deposit ' Ex: Current Account - ES000-00-0-00
+    Public Property BaseDeposit As Deposit ' Optional Ex: Current Account - ES000-00-0-00
     Public Property BaseImport As Decimal
-    Public Property Deposit As Deposit ' Ex: Apple Stock - APPL
+    Public Property Deposit As Deposit ' Ex: Broker Account
+
+    Public Property ProductDeposit As Deposit ' Ex: Apple Stock - APPL (Automátic creation by Financial Product Name when open product)
+
     Public Property Evaluation As Evaluation
     <Column(TypeName:="text")>
     Public Property ResultComments As String
     Public Property Status As Status
-    Public Property CashFlowEntry As CashFlowEntry
 
     Public Sub New()
         CreationDate = Now
@@ -473,7 +386,7 @@ Public Class Deposit
     <Key>
     <DatabaseGenerated(DatabaseGeneratedOption.Identity)>
     Public Property ID As Integer
-    <MaxLength(100)>
+    <MaxLength(150)>
     Public Property Name As String
     Public Property CreationDate As System.DateTime
     Public Property CancelDate As System.DateTime?

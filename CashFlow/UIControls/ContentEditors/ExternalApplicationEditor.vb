@@ -2,18 +2,18 @@
 Imports CashFlow
 Imports Microsoft.Reporting.WinForms
 
-Public Class FinancialProductEditor
+Public Class ExternalApplicationEditor
     Implements IEditContent, IFindContent
 
     Private ReadOnly Property IEditContent_Text As String Implements IEditContent.Text
         Get
-            Return Locate("Productes financers", CAT)
+            Return Locate("Aplicacions externes", CAT)
         End Get
     End Property
 
     Private ReadOnly Property Table As String Implements IEditContent.Table
         Get
-            Return NameOf(CashFlow.CashFlowContext.FinancialProducts)
+            Return NameOf(CashFlow.CashFlowContext.ExternalApplications)
         End Get
     End Property
 
@@ -29,7 +29,7 @@ Public Class FinancialProductEditor
         End Get
     End Property
 
-    Private _entry As FinancialProduct
+    Private _entry As ExternalApplication
 
     Public Sub LoadFormByID(ID? As Integer) Implements IEditContent.LoadFormByID
 
@@ -39,27 +39,19 @@ Public Class FinancialProductEditor
 
                 Using ctx As New CashFlow.CashFlowContext()
 
-                    _entry = (From g1 In ctx.FinancialProducts.Include(NameOf(FinancialProduct.Deposit)).Include(NameOf(FinancialProduct.Evaluation)).Include(NameOf(FinancialProduct.Deposit)).Include(NameOf(FinancialProduct.BaseDeposit))
+                    _entry = (From g1 In ctx.ExternalApplications
                               Where g1.ID = ID.Value).First()
 
                 End Using
 
             Else
-                _entry = New FinancialProduct()
+                _entry = New ExternalApplication()
             End If
 
             Me.txtID.Text = _entry.ID
             Me.txtName.Text = _entry.Name
-            Me.txtComments.Text = _entry.Comments
-            Me.teRegistrationDate.AssignValue(_entry.RegistrationDate)
-            '
-            Me.iBaseDeposit.AssignValue(_entry.BaseDeposit)
-            Me.iDeposit.AssignValue(_entry.Deposit)
-            Me.iBaseImport.Text = _entry.BaseImport
-            '
-            Me.ListBox_Evaluation1.AssignValue(_entry.Evaluation)
-            Me.txtResult.Text = _entry.ResultComments
-
+            Me.txtApplicationPath.Text = _entry.ApplicationPath
+            Me.txtParentMenuId.Text = _entry.ParentMenuID
 
         Catch ex As Exception
             MsgBox(ex.Message)
@@ -81,25 +73,7 @@ Public Class FinancialProductEditor
     End Function
 
     Private Function GetUI() As IContainerControl Implements IEditContent.GetUI
-
-        ' Configure controls
-        Me.cbDocStatus.ValueMember = "Code"
-        Me.cbDocStatus.DisplayMember = "Name"
-        '
-        Dim dt As New DataTable()
-        dt.Columns.Add("Code", GetType(Integer))
-        dt.Columns.Add("Name", GetType(String))
-        '
-        dt.Rows.Add(CInt(Status.Pending), Locate("Pendent", CAT))
-        dt.Rows.Add(CInt(Status.Open), Locate("Obert", CAT))
-        dt.Rows.Add(CInt(Status.Close), Locate("Tancat", CAT))
-        dt.Rows.Add(CInt(Status.Cancelled), Locate("Cancel·lat", CAT))
-        '
-        Me.cbDocStatus.DataSource = dt
-
-
         Return Me
-
     End Function
 
     Public Function IsValidContent(ByRef msgError As String,
@@ -109,20 +83,20 @@ Public Class FinancialProductEditor
         invalidControl = Nothing
 
         If IsEmpty(Me.txtName) Then
-            msgError = Locate("El nom del propietari és un camp obligatori", CAT)
+            msgError = Locate("El nom de l'aplicació és un camp obligatori", CAT)
             invalidControl = txtName
             Return False
         End If
 
-        If Not Me.teRegistrationDate.HasValue Then
-            msgError = Locate("El camp de data d'alta del producte és un camp obligatori", CAT)
-            invalidControl = txtName
+        If IsEmpty(Me.txtApplicationPath) Then
+            msgError = Locate("L'aplicació és un camp obligatori", CAT)
+            invalidControl = txtApplicationPath
             Return False
         End If
 
-        If Not Me.iDeposit.HasValue Then
-            msgError = Locate("El dipòsit és un camp obligatori", CAT)
-            invalidControl = txtName
+        If IsEmpty(Me.txtParentMenuId) Then
+            msgError = Locate("El punt de menú és un camp obligatori", CAT)
+            invalidControl = txtParentMenuId
             Return False
         End If
 
@@ -130,43 +104,29 @@ Public Class FinancialProductEditor
 
     End Function
 
-    Private Sub FillEntry(ByVal ctx As CashFlowContext)
-
-        _entry.Name = Me.txtName.Text
-        _entry.Comments = Me.txtComments.Text
-        _entry.RegistrationDate = Me.teRegistrationDate.Value
-        ' tag 2
-        _entry.BaseDeposit = ctx.Deposits.Where(Function(x) x.ID = Me.iBaseDeposit.Entity.ID).FirstOrDefault()
-        _entry.Deposit = ctx.Deposits.Where(Function(x) x.ID = Me.iDeposit.Entity.ID).FirstOrDefault()
-        _entry.BaseImport = Me.iBaseImport.Text
-
-        If Me.ListBox_Evaluation1.HasValue Then
-            _entry.Evaluation = ctx.Evaluations.Where(Function(x) x.ID = Me.ListBox_Evaluation1.Entity.ID).FirstOrDefault()
-        Else
-            _entry.Evaluation = Nothing
-        End If
-        '
-        _entry.ResultComments = Me.txtResult.Text
-
-    End Sub
-
-
     Public Sub SaveEntry() Implements IEditContent.SaveEntry
 
         Using ctx As New CashFlowContext()
 
+            '
+            _entry.Name = Me.txtName.Text
+            _entry.ApplicationPath = Me.txtApplicationPath.Text
+            _entry.ParentMenuID = Me.txtParentMenuId.Text
+            '
             If _entry.ID <> 0 Then
-                ' UPDATE
-                _entry = ctx.FinancialProducts.Where(Function(x) x.ID = _entry.ID).FirstOrDefault()
-                FillEntry(ctx)
-                ctx.SaveChanges()
+
+                Dim dbEntry = (From g1 In ctx.ExternalApplications
+                               Where g1.ID = _entry.ID).First()
+
+                ctx.Entry(dbEntry).CurrentValues.SetValues(_entry)
+
             Else
-                ' ADD
-                FillEntry(ctx)
-                ctx.FinancialProducts.Add(_entry)
-                '
-                ctx.SaveChanges()
+
+                ctx.ExternalApplications.Add(_entry)
+
             End If
+
+            ctx.SaveChanges()
 
         End Using
 
@@ -176,10 +136,8 @@ Public Class FinancialProductEditor
 
     Public Function CanDelete(ByVal ctx As CashFlow.CashFlowContext,
                               ByRef msgError As String,
-                              ByVal IDs As IEnumerable(Of Integer)) As Boolean
-
-        msgError = Locate("No es poden eliminar productes financers. Valora la possibilitat d'anul·lar-lo", CAT)
-        Return False
+                              ByVal EntityIDs As IEnumerable(Of Integer)) As Boolean
+        Return True
 
     End Function
 
@@ -187,21 +145,21 @@ Public Class FinancialProductEditor
     Public Function GetQuantity() As Integer Implements IFindContent.GetQuantity
 
         Using ctx As New CashFlow.CashFlowContext()
-            Return ctx.FinancialProducts.Count
+            Return ctx.ExternalApplications.Count
         End Using
 
     End Function
 
     Public Function GetContent(ByVal textSearch As String) As Object Implements IFindContent.GetContent
 
-        Dim entityCollection As List(Of FinancialProduct)
+        Dim entityCollection As List(Of ExternalApplication)
         Using ctx As New CashFlow.CashFlowContext()
             If String.IsNullOrWhiteSpace(textSearch) Then
-                entityCollection = (From oEntity In ctx.FinancialProducts
+                entityCollection = (From oEntity In ctx.ExternalApplications
                                     Select oEntity).ToList()
             Else
 
-                entityCollection = (From oEntity In ctx.FinancialProducts
+                entityCollection = (From oEntity In ctx.ExternalApplications
                                     Where (oEntity.Name).Contains(textSearch)
                                     Select oEntity).ToList()
             End If
@@ -219,14 +177,14 @@ Public Class FinancialProductEditor
         col.Add(New DataGridViewTextBoxColumn())
         With col(col.Count - 1)
             .HeaderText = "ID"
-            .DataPropertyName = NameOf(FinancialProduct.ID)
+            .DataPropertyName = NameOf(ExternalApplication.ID)
             .Visible = False
         End With
         '
         col.Add(New DataGridViewTextBoxColumn())
         With col(col.Count - 1)
             .HeaderText = Locate("Nom", CAT)
-            .DataPropertyName = NameOf(FinancialProduct.Name)
+            .DataPropertyName = NameOf(ExternalApplication.Name)
         End With
 
 
@@ -234,5 +192,12 @@ Public Class FinancialProductEditor
 
     End Function
 
-
+    Private Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnSearch.Click
+        Using dlg As New OpenFileDialog()
+            If dlg.ShowDialog() <> DialogResult.OK Then
+                Return
+            End If
+            Me.txtApplicationPath.Text = dlg.FileName
+        End Using
+    End Sub
 End Class

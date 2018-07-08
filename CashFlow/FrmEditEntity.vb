@@ -58,15 +58,16 @@ Public Class FrmEdit
 
     Public Sub ChangeStatus(ByVal newStatus As eStatus)
 
-        Select Case newStatus
+        Me.Status = newStatus
+        Select Case Status
             Case eStatus.Adding
-                Me.btnOK.Text = "Afegir" ' TODO Traduir
+                Me.btnOK.Text = Locate("Afegir", CAT)
 
             Case eStatus.Finding
-                Me.btnOK.Text = "OK"
+                Me.btnOK.Text = Locate("OK", CAT)
 
             Case eStatus.Updating
-                Me.btnOK.Text = "Actualitzar" ' TODO Traduir
+                Me.btnOK.Text = Locate("Actualitzar", CAT)
 
         End Select
 
@@ -134,6 +135,18 @@ Public Class FrmEdit
         End If
 
         _ID = newID
+        Content.LoadFormByID(Me.ID)
+        ChangeStatus(eStatus.Updating)
+
+    End Sub
+
+    Public Sub Reload()
+
+        If Not ID.HasValue OrElse ID = 0 Then
+            MsgBox(Locate("No hi ha cap registre per recarregar", CAT))
+            Return
+        End If
+
         Content.LoadFormByID(Me.ID)
         ChangeStatus(eStatus.Updating)
 
@@ -240,11 +253,34 @@ Public Class FrmEdit
             End If
 
             Content.SaveEntry()
-            Me.MoveToNew()
+            Select Case Status
+
+                Case eStatus.Updating
+                    Me.Reload()
+
+                Case Else
+                    Me.MoveToNew()
+
+            End Select
+
+
 
         Catch ex As Exception
-            MsgBox(ex.Message)
+            Dim exMessages As New Stack(Of String)()
+            StackExceptionMessages(exMessages, ex)
+            MsgBox(String.Join(vbCrLf, exMessages.ToArray()))
         End Try
+
+    End Sub
+
+    Private Sub StackExceptionMessages(ByRef exMessages As Stack(Of String), ex As Exception)
+
+        If IsEmpty(ex) Then
+            Return
+        End If
+
+        StackExceptionMessages(exMessages, ex.InnerException)
+        exMessages.Push(ex.Message)
 
     End Sub
 

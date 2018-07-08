@@ -62,6 +62,8 @@ Public Class DepositEditor
                 Me.ListBox_FinancialEntity1.AssignValue(_entry.FinancialEntity.ID)
             End If
 
+            Me.chkIsCash.Checked = _entry.IsCash
+
         Catch ex As Exception
             MsgBox(ex.Message)
         Finally
