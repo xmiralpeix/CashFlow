@@ -180,12 +180,16 @@
       <DependentUpon>201807081541365_M007.vb</DependentUpon>
     </Compile>
     <Compile Include="Migrations\201807081541365_M007.vb" />
+    <Compile Include="Migrations\201807101623162_M008.Designer.vb">
+      <DependentUpon>201807101623162_M008.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807101623162_M008.vb" />
     <Compile Include="Reports\Viewer\IPrintContent.vb" />
     <Compile Include="StringExtensions.vb" />
-    <Compile Include="UIControls\ContentEditors\CashFlowEditor.Designer.vb">
-      <DependentUpon>CashFlowEditor.vb</DependentUpon>
+    <Compile Include="UIControls\ContentEditors\CashFlowEntryEditor.Designer.vb">
+      <DependentUpon>CashFlowEntryEditor.vb</DependentUpon>
     </Compile>
-    <Compile Include="UIControls\ContentEditors\CashFlowEditor.vb">
+    <Compile Include="UIControls\ContentEditors\CashFlowEntryEditor.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UIControls\ContentEditors\DepositEditor.Designer.vb">
@@ -360,6 +364,9 @@
     <EmbeddedResource Include="Migrations\201807081541365_M007.resx">
       <DependentUpon>201807081541365_M007.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807101623162_M008.resx">
+      <DependentUpon>201807101623162_M008.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
@@ -370,8 +377,8 @@
     <EmbeddedResource Include="Reports\Viewer\FrmViewerReport.resx">
       <DependentUpon>FrmViewerReport.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UIControls\ContentEditors\CashFlowEditor.resx">
-      <DependentUpon>CashFlowEditor.vb</DependentUpon>
+    <EmbeddedResource Include="UIControls\ContentEditors\CashFlowEntryEditor.resx">
+      <DependentUpon>CashFlowEntryEditor.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UIControls\ContentEditors\DepositEditor.resx">
       <DependentUpon>DepositEditor.vb</DependentUpon>

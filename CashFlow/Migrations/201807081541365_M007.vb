@@ -11,7 +11,7 @@ Namespace Migrations
         End Sub
         
         Public Overrides Sub Down()
-            AlterColumn("dbo.Deposits", "Name", Function(c) c.String(maxLength := 100))
+            'AlterColumn("dbo.Deposits", "Name", Function(c) c.String(maxLength:=150))
         End Sub
     End Class
 End Namespace

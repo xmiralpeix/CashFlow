@@ -29,11 +29,13 @@ Public Class FrmEdit
 
     End Sub
 
+    Property DefaultAppEvent As AppEvent = New NewAppEvent()
+
     Private Sub FrmEdit_Load(sender As Object, e As EventArgs) Handles Me.Load
 
         Try
             Me.ConfigureControls()
-            Me.MoveToNew()
+            PerformEvent(DefaultAppEvent)
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
@@ -84,6 +86,7 @@ Public Class FrmEdit
             Case TypeOf (appEvent) Is NextAppEvent : MoveToNext()
             Case TypeOf (appEvent) Is LastAppEvent : MoveToLast()
             Case TypeOf (appEvent) Is PrintAppEvent : ProcessPrintBehaviour()
+            Case TypeOf (appEvent) Is MoveToIdAppEvent : MoveToID(DirectCast(appEvent, MoveToIdAppEvent).ID)
         End Select
 
     End Sub
@@ -101,6 +104,7 @@ Public Class FrmEdit
 
     End Sub
 
+
     Public Sub ProcessSearchBehaviour()
 
         Dim IDscollection As IEnumerable(Of Integer) = Content.FindBehaviour.Find()
@@ -114,10 +118,25 @@ Public Class FrmEdit
 
     End Sub
 
+    Public Sub MoveToID(ByVal ProposedID? As Integer)
+        Me._ID = ProposedID
+        MoveToCurrentID()
+    End Sub
+
+    Public Sub MoveToCurrentID()
+
+        Content.LoadFormByID(Me._ID)
+        If _ID.HasValue Then
+            ChangeStatus(eStatus.Updating)
+        Else
+            ChangeStatus(eStatus.Adding)
+        End If
+
+    End Sub
+
     Private Sub MoveToNew()
         Me._ID = Nothing
-        Content.LoadFormByID(Me._ID)
-        ChangeStatus(eStatus.Adding)
+        MoveToCurrentID()
     End Sub
 
     Public Sub MoveToPrevious()
@@ -135,8 +154,7 @@ Public Class FrmEdit
         End If
 
         _ID = newID
-        Content.LoadFormByID(Me.ID)
-        ChangeStatus(eStatus.Updating)
+        MoveToCurrentID()
 
     End Sub
 
@@ -147,8 +165,7 @@ Public Class FrmEdit
             Return
         End If
 
-        Content.LoadFormByID(Me.ID)
-        ChangeStatus(eStatus.Updating)
+        MoveToCurrentID()
 
     End Sub
 
@@ -168,8 +185,7 @@ Public Class FrmEdit
         End If
 
         _ID = newID
-        Content.LoadFormByID(Me.ID)
-        ChangeStatus(eStatus.Updating)
+        MoveToCurrentID()
 
     End Sub
 
@@ -183,8 +199,7 @@ Public Class FrmEdit
         End If
 
         _ID = newID
-        Content.LoadFormByID(Me.ID)
-        ChangeStatus(eStatus.Updating)
+        MoveToCurrentID()
 
     End Sub
 
@@ -198,8 +213,7 @@ Public Class FrmEdit
         End If
 
         _ID = newID
-        Content.LoadFormByID(Me.ID)
-        ChangeStatus(eStatus.Updating)
+        MoveToCurrentID()
 
     End Sub
 

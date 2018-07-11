@@ -39,7 +39,7 @@ Public Class FinancialProductEditor
 
                 Using ctx As New CashFlow.CashFlowContext()
 
-                    _entry = (From g1 In ctx.FinancialProducts.Include(NameOf(FinancialProduct.Deposit)).Include(NameOf(FinancialProduct.Evaluation)).Include(NameOf(FinancialProduct.Deposit)).Include(NameOf(FinancialProduct.BaseDeposit))
+                    _entry = (From g1 In ctx.FinancialProducts.Include(NameOf(FinancialProduct.ProductDeposit)).Include(NameOf(FinancialProduct.Evaluation)).Include(NameOf(FinancialProduct.Deposit)).Include(NameOf(FinancialProduct.BaseDeposit))
                               Where g1.ID = ID.Value).First()
 
                 End Using
@@ -55,6 +55,7 @@ Public Class FinancialProductEditor
             '
             Me.iBaseDeposit.AssignValue(_entry.BaseDeposit)
             Me.iDeposit.AssignValue(_entry.Deposit)
+            Me.iProductDeposit.AssignValue(_entry.ProductDeposit)
             Me.iBaseImport.Text = _entry.BaseImport
             '
             Me.ListBox_Evaluation1.AssignValue(_entry.Evaluation)
@@ -137,7 +138,18 @@ Public Class FinancialProductEditor
         _entry.RegistrationDate = Me.teRegistrationDate.Value
         ' tag 2
         _entry.BaseDeposit = ctx.Deposits.Where(Function(x) x.ID = Me.iBaseDeposit.Entity.ID).FirstOrDefault()
-        _entry.Deposit = ctx.Deposits.Where(Function(x) x.ID = Me.iDeposit.Entity.ID).FirstOrDefault()
+        _entry.Deposit = ctx.Deposits.Include(NameOf(Deposit.FinancialEntity)).Include(NameOf(Deposit.Owner)).Where(Function(x) x.ID = Me.iDeposit.Entity.ID).FirstOrDefault()
+        Try
+            _entry.ProductDeposit = ctx.Deposits.Where(Function(x) x.ID = Me.iProductDeposit.Entity.ID).First()
+        Catch ex As Exception
+            Dim dep As New Deposit()
+            dep.FinancialEntity = _entry.Deposit.FinancialEntity
+            dep.Owner = _entry.Deposit.Owner
+            dep.Name = _entry.Name
+            ctx.Deposits.Add(dep)
+            _entry.ProductDeposit = dep
+        End Try
+
         _entry.BaseImport = Me.iBaseImport.Text
 
         If Me.ListBox_Evaluation1.HasValue Then
@@ -234,5 +246,56 @@ Public Class FinancialProductEditor
 
     End Function
 
+    Private Sub CashFlowToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CashFlowToolStripMenuItem.Click
+
+
+        Dim oProductDeposit As Deposit
+
+        Dim cashFlowEntryID As Integer
+
+        Using ctx As New CashFlow.CashFlowContext()
+
+
+
+            Dim linkedEntity = (From entity In ctx.CashFlowEntries.Include(NameOf(CashFlowEntry.FinancialProduct))
+                                Where entity.FinancialProduct.ID = _entry.ID).FirstOrDefault()
+
+            If Not IsEmpty(linkedEntity) Then
+                cashFlowEntryID = linkedEntity.ID
+            Else
+
+                oProductDeposit = (From entity In ctx.Deposits.Include(NameOf(Deposit.Owner))
+                                   Where entity.ID = _entry.Deposit.ID).First
+
+                Dim oCashFlowEntry = New CashFlowEntry()
+                oCashFlowEntry.Concept = _entry.Name
+                oCashFlowEntry.FromDate = _entry.RegistrationDate
+                oCashFlowEntry.Owner = oProductDeposit.Owner
+                oCashFlowEntry.FinancialProduct = _entry
+                oCashFlowEntry.AssetsImport = _entry.BaseImport
+                ctx.CashFlowEntries.Add(oCashFlowEntry)
+                ctx.SaveChanges()
+                '
+                cashFlowEntryID = oCashFlowEntry.ID
+
+            End If
+
+        End Using
+
+
+
+        Dim frm As New FrmEdit
+        Dim defaultAppEvent As New MoveToIDAppEvent()
+        defaultAppEvent.ID = cashFlowEntryID
+        frm.DefaultAppEvent = defaultAppEvent
+        frm.MdiParent = Me.ParentForm.MdiParent
+        frm.Content = New CashFlow.CashFlowEntryEditor()
+        frm.Show()
+
+        AddHandler frm.FormClosed, Sub()
+                                       frm.Dispose()
+                                   End Sub
+
+    End Sub
 
 End Class

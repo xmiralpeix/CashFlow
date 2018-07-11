@@ -34,29 +34,28 @@ Partial Class FinancialProductEditor
         Me.txtName = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
+        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.CashFlowToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PageGeneral = New System.Windows.Forms.TabPage()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.cbDocStatus = New System.Windows.Forms.ComboBox()
         Me.teRegistrationDate = New CashFlow.TextEditor_Date()
         Me.PageFinancials = New System.Windows.Forms.TabPage()
+        Me.Label7 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.iBaseImport = New System.Windows.Forms.TextBox()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
+        Me.iProductDeposit = New CashFlow.ListBox_Deposit()
         Me.iBaseDeposit = New CashFlow.ListBox_Deposit()
         Me.iDeposit = New CashFlow.ListBox_Deposit()
         Me.PageEvaluation = New System.Windows.Forms.TabPage()
         Me.ListBox_Evaluation1 = New CashFlow.ListBox_Evaluation()
-        Me.PageCashFlow = New System.Windows.Forms.TabPage()
-        Me.CashFlowEditor1 = New CashFlow.CashFlowEditor()
-        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.Label7 = New System.Windows.Forms.Label()
-        Me.iProductDeposit = New CashFlow.ListBox_Deposit()
         Me.TabControl1.SuspendLayout()
+        Me.ContextMenuStrip1.SuspendLayout()
         Me.PageGeneral.SuspendLayout()
         Me.PageFinancials.SuspendLayout()
         Me.PageEvaluation.SuspendLayout()
-        Me.PageCashFlow.SuspendLayout()
         Me.SuspendLayout()
         '
         'txtResult
@@ -150,16 +149,28 @@ Partial Class FinancialProductEditor
         '
         'TabControl1
         '
+        Me.TabControl1.ContextMenuStrip = Me.ContextMenuStrip1
         Me.TabControl1.Controls.Add(Me.PageGeneral)
         Me.TabControl1.Controls.Add(Me.PageFinancials)
         Me.TabControl1.Controls.Add(Me.PageEvaluation)
-        Me.TabControl1.Controls.Add(Me.PageCashFlow)
         Me.TabControl1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TabControl1.Location = New System.Drawing.Point(0, 0)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
         Me.TabControl1.Size = New System.Drawing.Size(788, 291)
         Me.TabControl1.TabIndex = 17
+        '
+        'ContextMenuStrip1
+        '
+        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CashFlowToolStripMenuItem})
+        Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(153, 48)
+        '
+        'CashFlowToolStripMenuItem
+        '
+        Me.CashFlowToolStripMenuItem.Name = "CashFlowToolStripMenuItem"
+        Me.CashFlowToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.CashFlowToolStripMenuItem.Text = "CashFlow"
         '
         'PageGeneral
         '
@@ -209,11 +220,11 @@ Partial Class FinancialProductEditor
         'PageFinancials
         '
         Me.PageFinancials.Controls.Add(Me.Label7)
-        Me.PageFinancials.Controls.Add(Me.iProductDeposit)
         Me.PageFinancials.Controls.Add(Me.Label11)
         Me.PageFinancials.Controls.Add(Me.iBaseImport)
         Me.PageFinancials.Controls.Add(Me.Label10)
         Me.PageFinancials.Controls.Add(Me.Label8)
+        Me.PageFinancials.Controls.Add(Me.iProductDeposit)
         Me.PageFinancials.Controls.Add(Me.iBaseDeposit)
         Me.PageFinancials.Controls.Add(Me.iDeposit)
         Me.PageFinancials.Location = New System.Drawing.Point(4, 22)
@@ -223,6 +234,15 @@ Partial Class FinancialProductEditor
         Me.PageFinancials.TabIndex = 2
         Me.PageFinancials.Text = "Finances"
         Me.PageFinancials.UseVisualStyleBackColor = True
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Location = New System.Drawing.Point(8, 71)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(84, 13)
+        Me.Label7.TabIndex = 51
+        Me.Label7.Text = "Dipòsit producte"
         '
         'Label11
         '
@@ -257,6 +277,15 @@ Partial Class FinancialProductEditor
         Me.Label8.Size = New System.Drawing.Size(39, 13)
         Me.Label8.TabIndex = 45
         Me.Label8.Text = "Dipòsit"
+        '
+        'iProductDeposit
+        '
+        Me.iProductDeposit.Enabled = False
+        Me.iProductDeposit.Location = New System.Drawing.Point(104, 69)
+        Me.iProductDeposit.Name = "iProductDeposit"
+        Me.iProductDeposit.Size = New System.Drawing.Size(332, 21)
+        Me.iProductDeposit.TabIndex = 2
+        Me.iProductDeposit.Value = Nothing
         '
         'iBaseDeposit
         '
@@ -296,47 +325,6 @@ Partial Class FinancialProductEditor
         Me.ListBox_Evaluation1.TabIndex = 45
         Me.ListBox_Evaluation1.Value = Nothing
         '
-        'PageCashFlow
-        '
-        Me.PageCashFlow.Controls.Add(Me.CashFlowEditor1)
-        Me.PageCashFlow.Location = New System.Drawing.Point(4, 22)
-        Me.PageCashFlow.Name = "PageCashFlow"
-        Me.PageCashFlow.Size = New System.Drawing.Size(780, 265)
-        Me.PageCashFlow.TabIndex = 3
-        Me.PageCashFlow.Text = "CashFlow"
-        Me.PageCashFlow.UseVisualStyleBackColor = True
-        '
-        'CashFlowEditor1
-        '
-        Me.CashFlowEditor1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.CashFlowEditor1.Location = New System.Drawing.Point(0, 0)
-        Me.CashFlowEditor1.Name = "CashFlowEditor1"
-        Me.CashFlowEditor1.Size = New System.Drawing.Size(780, 265)
-        Me.CashFlowEditor1.TabIndex = 0
-        '
-        'ContextMenuStrip1
-        '
-        Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(61, 4)
-        '
-        'Label7
-        '
-        Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(8, 71)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(84, 13)
-        Me.Label7.TabIndex = 51
-        Me.Label7.Text = "Dipòsit producte"
-        '
-        'iProductDeposit
-        '
-        Me.iProductDeposit.Enabled = False
-        Me.iProductDeposit.Location = New System.Drawing.Point(104, 69)
-        Me.iProductDeposit.Name = "iProductDeposit"
-        Me.iProductDeposit.Size = New System.Drawing.Size(332, 21)
-        Me.iProductDeposit.TabIndex = 2
-        Me.iProductDeposit.Value = Nothing
-        '
         'FinancialProductEditor
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -345,13 +333,13 @@ Partial Class FinancialProductEditor
         Me.Name = "FinancialProductEditor"
         Me.Size = New System.Drawing.Size(788, 291)
         Me.TabControl1.ResumeLayout(False)
+        Me.ContextMenuStrip1.ResumeLayout(False)
         Me.PageGeneral.ResumeLayout(False)
         Me.PageGeneral.PerformLayout()
         Me.PageFinancials.ResumeLayout(False)
         Me.PageFinancials.PerformLayout()
         Me.PageEvaluation.ResumeLayout(False)
         Me.PageEvaluation.PerformLayout()
-        Me.PageCashFlow.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -380,8 +368,8 @@ Partial Class FinancialProductEditor
     Friend WithEvents Label11 As Label
     Friend WithEvents iBaseImport As TextBox
     Friend WithEvents ContextMenuStrip1 As ContextMenuStrip
-    Friend WithEvents PageCashFlow As TabPage
-    Friend WithEvents CashFlowEditor1 As CashFlowEditor
+    Friend WithEvents CashFlowEditor1 As CashFlowEntryEditor
     Friend WithEvents Label7 As Label
     Friend WithEvents iProductDeposit As ListBox_Deposit
+    Friend WithEvents CashFlowToolStripMenuItem As ToolStripMenuItem
 End Class

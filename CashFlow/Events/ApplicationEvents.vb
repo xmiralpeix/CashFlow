@@ -91,6 +91,18 @@ Public MustInherit Class AppEvent
 
 End Class
 
+Public Class MoveToIDAppEvent
+    Inherits AppEvent
+
+    Property ID As Integer?
+
+    Public Sub New()
+        MyBase.New(NameOf(MoveToIDAppEvent))
+    End Sub
+
+End Class
+
+
 Public Class SearchAppEvent
     Inherits AppEvent
 

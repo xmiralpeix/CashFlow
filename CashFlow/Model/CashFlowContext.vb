@@ -13,7 +13,6 @@ Public Class CashFlowContext
     Public Property FinancialEntities As DbSet(Of FinancialEntity)
     Public Property Deposits As DbSet(Of Deposit)
     Public Property FinancialProducts As DbSet(Of FinancialProduct)
-    Public Property CashFlowGroups As DbSet(Of CashFlowGroup)
     Public Property Evaluations As DbSet(Of Evaluation)
     '
     Public Property ExternalApplications As DbSet(Of ExternalApplication)
@@ -136,12 +135,6 @@ Public Enum RepeatWeek
     LastWeek = 5
 End Enum
 
-Public Enum CashFlowQuarterZone
-    Income = 0
-    Expenses = 1
-    Assets = 2
-    Liabilities = 3
-End Enum
 
 
 
@@ -214,18 +207,27 @@ Public Class CashFlowStatus
 End Class
 
 
-Public Class CashFlowGroup
+'Public Class CashFlowGroup
 
-    <Key>
-    Public Property ID As Integer
+'    <Key>
+'    Public Property ID As Integer
 
-    <MaxLength(100)>
-    Public Property Name As System.String
+'    <MaxLength(100)>
+'    Public Property Name As System.String
 
-    Public Property QuarterZone As CashFlowQuarterZone
+'    Public Property QuarterZone As CashFlowQuarterZone
 
 
-End Class
+'End Class
+
+
+Public Enum CashFlowQuarterZone
+    Income = 0
+    Expenses = 1
+    Assets = 2
+    Liabilities = 3
+End Enum
+
 
 Public Class CashFlowEntry
 
@@ -235,7 +237,7 @@ Public Class CashFlowEntry
     '
     Public Property Owner As Owner
     Public Property Concept As System.String
-    Public Property CashFlowGroup As CashFlowGroup
+
     '
     Public Property FinancialProduct As FinancialProduct
     '
@@ -243,7 +245,10 @@ Public Class CashFlowEntry
     Public Property FromDate As System.DateTime?
     Public Property ToDate As System.DateTime?
     '
-    Public Property Import As Decimal
+    Public Property IncomeImport As Decimal
+    Public Property ExpensesImport As Decimal
+    Public Property AssetsImport As Decimal
+    Public Property LiabilitiesImport As Decimal
 
 End Class
 

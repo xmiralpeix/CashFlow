@@ -8,9 +8,9 @@ Namespace Migrations
 
         Public Overrides Sub Up()
 
-            DropForeignKey("dbo.FinancialProductTypes", "SubGroup_ID", "dbo.SubGroups")
+            '  DropForeignKey("dbo.FinancialProductTypes", "SubGroup_ID", "dbo.SubGroups")
             DropForeignKey("dbo.FinancialProducts", "CashFlowEntry_ID", "dbo.CashFlowEntries")
-            DropIndex("dbo.FinancialProductTypes", New String() {"SubGroup_ID"})
+            ' DropIndex("dbo.FinancialProductTypes", New String() {"SubGroup_ID"})
             DropIndex("dbo.FinancialProducts", New String() {"CashFlowEntry_ID"})
 
             CreateTable(
@@ -32,7 +32,7 @@ Namespace Migrations
             DropColumn("dbo.CashFlowEntries", "TotalAsset")
             DropColumn("dbo.CashFlowEntries", "TotalLiability")
             DropColumn("dbo.FinancialProducts", "CashFlowEntry_ID")
-            DropTable("dbo.FinancialProductTypes")
+            ' DropTable("dbo.FinancialProductTypes")
         End Sub
 
         Public Overrides Sub Down()
