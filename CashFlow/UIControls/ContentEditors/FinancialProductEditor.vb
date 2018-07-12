@@ -60,6 +60,7 @@ Public Class FinancialProductEditor
             '
             Me.ListBox_Evaluation1.AssignValue(_entry.Evaluation)
             Me.txtResult.Text = _entry.ResultComments
+            Me.cbDocStatus.SelectedValue = _entry.Status
 
 
         Catch ex As Exception
@@ -137,7 +138,11 @@ Public Class FinancialProductEditor
         _entry.Comments = Me.txtComments.Text
         _entry.RegistrationDate = Me.teRegistrationDate.Value
         ' tag 2
-        _entry.BaseDeposit = ctx.Deposits.Where(Function(x) x.ID = Me.iBaseDeposit.Entity.ID).FirstOrDefault()
+        If Me.iBaseDeposit.HasValue Then
+            _entry.BaseDeposit = ctx.Deposits.Where(Function(x) x.ID = Me.iBaseDeposit.Entity.ID).FirstOrDefault()
+        Else
+            ctx.Entry(_entry).Reference(NameOf(FinancialProduct.BaseDeposit)).CurrentValue = Nothing
+        End If
         _entry.Deposit = ctx.Deposits.Include(NameOf(Deposit.FinancialEntity)).Include(NameOf(Deposit.Owner)).Where(Function(x) x.ID = Me.iDeposit.Entity.ID).FirstOrDefault()
         Try
             _entry.ProductDeposit = ctx.Deposits.Where(Function(x) x.ID = Me.iProductDeposit.Entity.ID).First()
@@ -155,10 +160,11 @@ Public Class FinancialProductEditor
         If Me.ListBox_Evaluation1.HasValue Then
             _entry.Evaluation = ctx.Evaluations.Where(Function(x) x.ID = Me.ListBox_Evaluation1.Entity.ID).FirstOrDefault()
         Else
-            _entry.Evaluation = Nothing
+            ctx.Entry(_entry).Reference(NameOf(FinancialProduct.Evaluation)).CurrentValue = Nothing
         End If
         '
         _entry.ResultComments = Me.txtResult.Text
+        _entry.Status = Me.cbDocStatus.SelectedValue
 
     End Sub
 
