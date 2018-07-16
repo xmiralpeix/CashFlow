@@ -20,6 +20,7 @@ Public Class ListBox_Deposit
 
     Public ReadOnly Property VisualValue As String Implements IListBoxData.VisualValue
 
+    Public Property EntitiesScopeCollection As IEnumerable(Of Object) Implements IListBoxData.EntitiesScopeCollection
 
     Public Sub New()
         MyBase.New()
@@ -67,6 +68,17 @@ Public Class ListBox_Deposit
                     Dim qry = From entiy In ctx.Deposits
                               Where entiy.Name.Contains(InputValue)
                               Order By Len(entiy.Name) Ascending
+
+                    If Not IsEmpty(EntitiesScopeCollection) Then
+                        For Each oEntity In EntitiesScopeCollection
+                            If TypeOf oEntity Is Owner Then
+                                Dim oOwner As Owner = oEntity
+                                qry = qry.Where(Function(x) x.Owner.ID = oOwner.ID)
+                                Continue For
+                            End If
+                        Next
+                    End If
+
                     Entity = qry.FirstOrDefault()
                 End Using
 
@@ -83,7 +95,10 @@ Public Class ListBox_Deposit
 
     Public Overrides Sub OnSearchClick()
 
-        Dim findBehaviour As IFindBehaviour = New EntityIDsFinder(New DepositEditor())
+        Dim findContent = New DepositEditor()
+        findContent.EntitiesScopeCollection = Me.EntitiesScopeCollection
+
+        Dim findBehaviour As IFindBehaviour = New EntityIDsFinder(findContent)
         Dim IDscollection = findBehaviour.Find()
         If IsEmpty(IDscollection) Then
             Return

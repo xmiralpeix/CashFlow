@@ -29,6 +29,9 @@ Public Class DepositEditor
         End Get
     End Property
 
+    Public Property EntitiesScopeCollection As IEnumerable(Of Object) Implements IFindContent.EntitiesScopeCollection
+
+
     Private _entry As Deposit
 
     Public Sub LoadFormByID(ID? As Integer) Implements IEditContent.LoadFormByID
@@ -39,8 +42,20 @@ Public Class DepositEditor
 
                 Using ctx As New CashFlow.CashFlowContext()
 
-                    _entry = (From entity In ctx.Deposits.Include(NameOf(Deposit.Owner)).Include(NameOf(Deposit.FinancialEntity))
-                              Where entity.ID = ID.Value).First()
+                    Dim qry = (From entity In ctx.Deposits.Include(NameOf(Deposit.Owner)).Include(NameOf(Deposit.FinancialEntity))
+                               Where entity.ID = ID.Value)
+
+                    If Not IsEmpty(EntitiesScopeCollection) Then
+                        For Each oEntity In EntitiesScopeCollection
+                            If TypeOf oEntity Is Owner Then
+                                Dim oOwner As Owner = oEntity
+                                Qry = Qry.Where(Function(x) x.Owner.ID = oOwner.ID)
+                                Continue For
+                            End If
+                        Next
+                    End If
+
+                    _entry = qry.First()
 
                 End Using
 
@@ -188,15 +203,25 @@ Public Class DepositEditor
 
         Dim entityCollection As List(Of Deposit)
         Using ctx As New CashFlow.CashFlowContext()
-            If String.IsNullOrWhiteSpace(textSearch) Then
-                entityCollection = (From oEntity In ctx.Deposits
-                                    Select oEntity).ToList()
-            Else
 
-                entityCollection = (From oEntity In ctx.Deposits
-                                    Where (oEntity.Name).Contains(textSearch)
-                                    Select oEntity).ToList()
+            Dim qry = (From oEntity In ctx.Deposits
+                       Select oEntity)
+
+            If Not IsEmpty(textSearch) Then
+                qry = qry.Where(Function(x) (x.Name).Contains(textSearch))
             End If
+
+            If Not IsEmpty(EntitiesScopeCollection) Then
+                For Each oEntity In EntitiesScopeCollection
+                    If TypeOf oEntity Is Owner Then
+                        Dim oOwner As Owner = oEntity
+                        qry = qry.Where(Function(x) x.Owner.ID = oOwner.ID)
+                        Continue For
+                    End If
+                Next
+            End If
+
+            entityCollection = qry.ToList()
 
         End Using
 

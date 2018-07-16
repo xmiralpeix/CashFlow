@@ -29,6 +29,8 @@ Public Class FinancialProductEditor
         End Get
     End Property
 
+    Public Property EntitiesScopeCollection As IEnumerable(Of Object) Implements IFindContent.EntitiesScopeCollection
+
     Private _entry As FinancialProduct
 
     Public Sub LoadFormByID(ID? As Integer) Implements IEditContent.LoadFormByID
@@ -39,7 +41,7 @@ Public Class FinancialProductEditor
 
                 Using ctx As New CashFlow.CashFlowContext()
 
-                    _entry = (From g1 In ctx.FinancialProducts.Include(NameOf(FinancialProduct.ProductDeposit)).Include(NameOf(FinancialProduct.Evaluation)).Include(NameOf(FinancialProduct.Deposit)).Include(NameOf(FinancialProduct.BaseDeposit))
+                    _entry = (From g1 In ctx.FinancialProducts.Include(NameOf(FinancialProduct.Owner)).Include(NameOf(FinancialProduct.ProductDeposit)).Include(NameOf(FinancialProduct.Evaluation)).Include(NameOf(FinancialProduct.Deposit)).Include(NameOf(FinancialProduct.BaseDeposit))
                               Where g1.ID = ID.Value).First()
 
                 End Using
@@ -49,24 +51,50 @@ Public Class FinancialProductEditor
             End If
 
             Me.txtID.Text = _entry.ID
+
+            Dim AssignScopes = Sub()
+                                   Dim oOwner = Me.iOwner.Entity
+                                   Me.iBaseDeposit.EntitiesScopeCollection = {oOwner}
+                                   Me.iDeposit.EntitiesScopeCollection = {oOwner}
+                                   Me.iProductDeposit.EntitiesScopeCollection = {oOwner}
+                               End Sub
+            Me.iOwner.AssignValue(_entry.Owner)
+            AddHandler Me.iOwner.OnEntityChanged, AssignScopes
+            If iOwner.HasValue Then
+                iOwner.Enabled = False
+            End If
             Me.txtName.Text = _entry.Name
             Me.txtComments.Text = _entry.Comments
             Me.teRegistrationDate.AssignValue(_entry.RegistrationDate)
             '
+            ' Deposits
             Me.iBaseDeposit.AssignValue(_entry.BaseDeposit)
+            If iBaseDeposit.HasValue Then
+                iBaseDeposit.Enabled = False
+            End If
             Me.iDeposit.AssignValue(_entry.Deposit)
+            If iDeposit.HasValue Then
+                iDeposit.Enabled = False
+            End If
             Me.iProductDeposit.AssignValue(_entry.ProductDeposit)
+            If iProductDeposit.HasValue Then
+                iProductDeposit.Enabled = False
+            End If
+            AssignScopes()
+            '
             Me.iBaseImport.Text = _entry.BaseImport
             '
-            Me.ListBox_Evaluation1.AssignValue(_entry.Evaluation)
+            Me.iEvaluation.AssignValue(_entry.Evaluation)
             Me.txtResult.Text = _entry.ResultComments
+            '
             Me.cbDocStatus.SelectedValue = _entry.Status
-
+            Me.cbDocStatus.Enabled = False
 
         Catch ex As Exception
             MsgBox(ex.Message)
         Finally
             Me.txtName.Select()
+            Me.iOwner.Select()
         End Try
 
     End Sub
@@ -110,8 +138,14 @@ Public Class FinancialProductEditor
         msgError = ""
         invalidControl = Nothing
 
-        If IsEmpty(Me.txtName) Then
+        If IsEmpty(Me.iOwner) Then
             msgError = Locate("El nom del propietari és un camp obligatori", CAT)
+            invalidControl = iOwner
+            Return False
+        End If
+
+        If IsEmpty(Me.txtName) Then
+            msgError = Locate("El nom del producte financer és un camp obligatori", CAT)
             invalidControl = txtName
             Return False
         End If
@@ -128,6 +162,38 @@ Public Class FinancialProductEditor
             Return False
         End If
 
+        Using ctx As New CashFlow.CashFlowContext()
+
+            Dim CommonOwnerId As Integer = Me.iOwner.Entity.ID
+
+            Dim deposit As Deposit = ctx.Deposits.Include(NameOf(deposit.Owner)).Where(Function(x) x.ID = Me.iDeposit.Entity.ID).FirstOrDefault()
+            If deposit.Owner.ID <> CommonOwnerId Then
+                msgError = Locate("El propietari entre els dipòsits no coincideix. Valida el propietari del dipòsit base.", CAT)
+                invalidControl = txtName
+                Return False
+            End If
+
+            If Me.iBaseDeposit.HasValue() Then
+                Dim bDeposit = ctx.Deposits.Include(NameOf(deposit.Owner)).Where(Function(x) x.ID = Me.iBaseDeposit.Entity.ID).FirstOrDefault()
+                If bDeposit.Owner.ID <> CommonOwnerId Then
+                    msgError = Locate("El propietari entre els dipòsits no coincideix. Valida el propietari del dipòsit base.", CAT)
+                    invalidControl = txtName
+                    Return False
+                End If
+            End If
+
+            If Me.iProductDeposit.HasValue() Then
+                Dim pDeposit = ctx.Deposits.Include(NameOf(deposit.Owner)).Where(Function(x) x.ID = Me.iProductDeposit.Entity.ID).FirstOrDefault()
+                If pDeposit.Owner.ID <> CommonOwnerId Then
+                    msgError = Locate("El propietari entre els dipòsits no coincideix. Valida el propietari del dipòsit del producte.", CAT)
+                    invalidControl = txtName
+                    Return False
+                End If
+            End If
+
+        End Using
+
+
         Return True
 
     End Function
@@ -135,8 +201,12 @@ Public Class FinancialProductEditor
     Private Sub FillEntry(ByVal ctx As CashFlowContext)
 
         _entry.Name = Me.txtName.Text
+        _entry.Owner = ctx.Owners.Where(Function(x) x.ID = Me.iOwner.Entity.ID).FirstOrDefault()
         _entry.Comments = Me.txtComments.Text
         _entry.RegistrationDate = Me.teRegistrationDate.Value
+        _entry.ResultComments = Me.txtResult.Text
+        _entry.Status = Me.cbDocStatus.SelectedValue
+        '
         ' tag 2
         If Me.iBaseDeposit.HasValue Then
             _entry.BaseDeposit = ctx.Deposits.Where(Function(x) x.ID = Me.iBaseDeposit.Entity.ID).FirstOrDefault()
@@ -147,24 +217,26 @@ Public Class FinancialProductEditor
         Try
             _entry.ProductDeposit = ctx.Deposits.Where(Function(x) x.ID = Me.iProductDeposit.Entity.ID).First()
         Catch ex As Exception
-            Dim dep As New Deposit()
-            dep.FinancialEntity = _entry.Deposit.FinancialEntity
-            dep.Owner = _entry.Deposit.Owner
-            dep.Name = _entry.Name
-            ctx.Deposits.Add(dep)
-            _entry.ProductDeposit = dep
+            If _entry.Status = Status.Open Then
+                If MsgBox(Locate("Vols que el sistema et crei el dipòsit automàticament?", CAT), MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+                    Dim dep As New Deposit()
+                    dep.FinancialEntity = _entry.Deposit.FinancialEntity
+                    dep.Owner = _entry.Owner
+                    dep.Name = _entry.Name
+                    ctx.Deposits.Add(dep)
+                    _entry.ProductDeposit = dep
+                End If
+            End If
         End Try
 
         _entry.BaseImport = Me.iBaseImport.Text
 
-        If Me.ListBox_Evaluation1.HasValue Then
-            _entry.Evaluation = ctx.Evaluations.Where(Function(x) x.ID = Me.ListBox_Evaluation1.Entity.ID).FirstOrDefault()
+        If Me.iEvaluation.HasValue Then
+            _entry.Evaluation = ctx.Evaluations.Where(Function(x) x.ID = Me.iEvaluation.Entity.ID).FirstOrDefault()
         Else
             ctx.Entry(_entry).Reference(NameOf(FinancialProduct.Evaluation)).CurrentValue = Nothing
         End If
         '
-        _entry.ResultComments = Me.txtResult.Text
-        _entry.Status = Me.cbDocStatus.SelectedValue
 
     End Sub
 
@@ -247,55 +319,61 @@ Public Class FinancialProductEditor
             .DataPropertyName = NameOf(FinancialProduct.Name)
         End With
 
-
         Return col
 
     End Function
 
-    Private Sub CashFlowToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CashFlowToolStripMenuItem.Click
+    Private Sub CashFlowToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CashFlowNewEntryToolStripMenuItem.Click
 
-
-        Dim oProductDeposit As Deposit
+        If IsEmpty(Me._entry.ID) Then
+            MsgBox(Locate("Opció disponible només en mode de consulta", CAT))
+            Return
+        End If
 
         Dim cashFlowEntryID As Integer
 
         Using ctx As New CashFlow.CashFlowContext()
 
-
-
-            Dim linkedEntity = (From entity In ctx.CashFlowEntries.Include(NameOf(CashFlowEntry.FinancialProduct))
-                                Where entity.FinancialProduct.ID = _entry.ID).FirstOrDefault()
-
-            If Not IsEmpty(linkedEntity) Then
-                cashFlowEntryID = linkedEntity.ID
-            Else
-
-                oProductDeposit = (From entity In ctx.Deposits.Include(NameOf(Deposit.Owner))
-                                   Where entity.ID = _entry.Deposit.ID).First
-
-                Dim oCashFlowEntry = New CashFlowEntry()
-                oCashFlowEntry.Concept = _entry.Name
-                oCashFlowEntry.FromDate = _entry.RegistrationDate
-                oCashFlowEntry.Owner = oProductDeposit.Owner
-                oCashFlowEntry.FinancialProduct = _entry
-                oCashFlowEntry.AssetsImport = _entry.BaseImport
-                ctx.CashFlowEntries.Add(oCashFlowEntry)
-                ctx.SaveChanges()
-                '
-                cashFlowEntryID = oCashFlowEntry.ID
-
-            End If
+            Dim oCashFlowEntry = New CashFlowEntry()
+            oCashFlowEntry.Concept = _entry.Name
+            oCashFlowEntry.FromDate = Today
+            oCashFlowEntry.Owner = _entry.Owner
+            oCashFlowEntry.FinancialProduct = _entry
+            oCashFlowEntry.AssetsImport = _entry.BaseImport
+            oCashFlowEntry.Status = Status.Open
+            ctx.CashFlowEntries.Add(oCashFlowEntry)
+            ctx.SaveChanges()
+            '
+            cashFlowEntryID = oCashFlowEntry.ID
 
         End Using
 
+        OpenCashFlowEntry(cashFlowEntryID)
 
+    End Sub
 
-        Dim frm As New FrmEdit
-        Dim defaultAppEvent As New MoveToIDAppEvent()
-        defaultAppEvent.ID = cashFlowEntryID
+    Public Sub OpenCashFlowEntry(ByVal cashFlowEntryID? As Integer)
+
+        If IsEmpty(Me._entry.ID) Then
+            MsgBox(Locate("Opció disponible només en mode de consulta", CAT))
+            Return
+        End If
+
+        Dim frm As New FrmEdit()
+        Dim defaultAppEvent As AppEvent
+        If cashFlowEntryID.HasValue Then
+            Dim specificEvent = New MoveToIDAppEvent()
+            specificEvent.ID = cashFlowEntryID
+            '
+            defaultAppEvent = specificEvent
+        Else
+            defaultAppEvent = New SearchAppEvent()
+        End If
         frm.DefaultAppEvent = defaultAppEvent
+        Dim content = New CashFlow.CashFlowEntryEditor()
+        content.EntitiesScopeCollection = {_entry}
         frm.MdiParent = Me.ParentForm.MdiParent
-        frm.Content = New CashFlow.CashFlowEntryEditor()
+        frm.Content = content
         frm.Show()
 
         AddHandler frm.FormClosed, Sub()
@@ -303,5 +381,13 @@ Public Class FinancialProductEditor
                                    End Sub
 
     End Sub
+
+
+    Private Sub ListaDeEntradasDeCashFlowToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ListaDeEntradasDeCashFlowToolStripMenuItem.Click
+
+        OpenCashFlowEntry(Nothing)
+
+    End Sub
+
 
 End Class

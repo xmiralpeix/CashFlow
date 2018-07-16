@@ -29,6 +29,8 @@ Public Class OwnerEditor
         End Get
     End Property
 
+    Public Property EntitiesScopeCollection As IEnumerable(Of Object) Implements IFindContent.EntitiesScopeCollection
+
     Private _entry As Owner
 
     Public Sub LoadFormByID(ID? As Integer) Implements IEditContent.LoadFormByID

@@ -8,6 +8,7 @@ Public Class SubGroupFinder
 
     Private _entry As SubGroup
 
+    Public Property EntitiesScopeCollection As IEnumerable(Of Object) Implements IFindContent.EntitiesScopeCollection
 
     Public Function GetQuantity() As Integer Implements IFindContent.GetQuantity
 

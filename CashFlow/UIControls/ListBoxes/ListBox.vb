@@ -5,6 +5,11 @@ Public Class ListBox
 
     Public Data As IListBoxData
 
+    Public Event OnEntityChanged()
+    Private Sub EntityChanged()
+        RaiseEvent OnEntityChanged()
+    End Sub
+
     Public Sub New()
 
         ' This call is required by the designer.
@@ -40,6 +45,8 @@ Public Class ListBox
             Me.txtVisualValue.Clear()
             Me.txtVisualValue.Clear()
         End Try
+
+        EntityChanged()
 
     End Sub
 

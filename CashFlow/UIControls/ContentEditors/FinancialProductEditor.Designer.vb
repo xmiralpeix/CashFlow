@@ -35,7 +35,8 @@ Partial Class FinancialProductEditor
         Me.Label6 = New System.Windows.Forms.Label()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.CashFlowToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CashFlowNewEntryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ListaDeEntradasDeCashFlowToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PageGeneral = New System.Windows.Forms.TabPage()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.cbDocStatus = New System.Windows.Forms.ComboBox()
@@ -50,7 +51,9 @@ Partial Class FinancialProductEditor
         Me.iBaseDeposit = New CashFlow.ListBox_Deposit()
         Me.iDeposit = New CashFlow.ListBox_Deposit()
         Me.PageEvaluation = New System.Windows.Forms.TabPage()
-        Me.ListBox_Evaluation1 = New CashFlow.ListBox_Evaluation()
+        Me.iEvaluation = New CashFlow.ListBox_Evaluation()
+        Me.iOwner = New CashFlow.ListBox_Owner()
+        Me.Label12 = New System.Windows.Forms.Label()
         Me.TabControl1.SuspendLayout()
         Me.ContextMenuStrip1.SuspendLayout()
         Me.PageGeneral.SuspendLayout()
@@ -80,7 +83,7 @@ Partial Class FinancialProductEditor
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(10, 100)
+        Me.Label4.Location = New System.Drawing.Point(10, 126)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(59, 13)
         Me.Label4.TabIndex = 42
@@ -90,16 +93,16 @@ Partial Class FinancialProductEditor
         '
         Me.txtComments.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.txtComments.Location = New System.Drawing.Point(106, 97)
+        Me.txtComments.Location = New System.Drawing.Point(106, 126)
         Me.txtComments.Multiline = True
         Me.txtComments.Name = "txtComments"
-        Me.txtComments.Size = New System.Drawing.Size(332, 162)
-        Me.txtComments.TabIndex = 4
+        Me.txtComments.Size = New System.Drawing.Size(332, 133)
+        Me.txtComments.TabIndex = 5
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(10, 72)
+        Me.Label2.Location = New System.Drawing.Point(10, 96)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(25, 13)
         Me.Label2.TabIndex = 40
@@ -108,7 +111,7 @@ Partial Class FinancialProductEditor
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(10, 48)
+        Me.Label3.Location = New System.Drawing.Point(10, 70)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(29, 13)
         Me.Label3.TabIndex = 38
@@ -133,10 +136,10 @@ Partial Class FinancialProductEditor
         '
         'txtName
         '
-        Me.txtName.Location = New System.Drawing.Point(106, 41)
+        Me.txtName.Location = New System.Drawing.Point(106, 70)
         Me.txtName.Name = "txtName"
         Me.txtName.Size = New System.Drawing.Size(332, 20)
-        Me.txtName.TabIndex = 2
+        Me.txtName.TabIndex = 3
         '
         'Label6
         '
@@ -162,18 +165,26 @@ Partial Class FinancialProductEditor
         '
         'ContextMenuStrip1
         '
-        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CashFlowToolStripMenuItem})
+        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CashFlowNewEntryToolStripMenuItem, Me.ListaDeEntradasDeCashFlowToolStripMenuItem})
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(153, 48)
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(233, 48)
         '
-        'CashFlowToolStripMenuItem
+        'CashFlowNewEntryToolStripMenuItem
         '
-        Me.CashFlowToolStripMenuItem.Name = "CashFlowToolStripMenuItem"
-        Me.CashFlowToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.CashFlowToolStripMenuItem.Text = "CashFlow"
+        Me.CashFlowNewEntryToolStripMenuItem.Name = "CashFlowNewEntryToolStripMenuItem"
+        Me.CashFlowNewEntryToolStripMenuItem.Size = New System.Drawing.Size(232, 22)
+        Me.CashFlowNewEntryToolStripMenuItem.Text = "Nueva entrada de CashFlow"
+        '
+        'ListaDeEntradasDeCashFlowToolStripMenuItem
+        '
+        Me.ListaDeEntradasDeCashFlowToolStripMenuItem.Name = "ListaDeEntradasDeCashFlowToolStripMenuItem"
+        Me.ListaDeEntradasDeCashFlowToolStripMenuItem.Size = New System.Drawing.Size(232, 22)
+        Me.ListaDeEntradasDeCashFlowToolStripMenuItem.Text = "Lista de entradas de CashFlow"
         '
         'PageGeneral
         '
+        Me.PageGeneral.Controls.Add(Me.Label12)
+        Me.PageGeneral.Controls.Add(Me.iOwner)
         Me.PageGeneral.Controls.Add(Me.Label9)
         Me.PageGeneral.Controls.Add(Me.cbDocStatus)
         Me.PageGeneral.Controls.Add(Me.Label4)
@@ -211,10 +222,10 @@ Partial Class FinancialProductEditor
         '
         'teRegistrationDate
         '
-        Me.teRegistrationDate.Location = New System.Drawing.Point(106, 67)
+        Me.teRegistrationDate.Location = New System.Drawing.Point(106, 96)
         Me.teRegistrationDate.Name = "teRegistrationDate"
         Me.teRegistrationDate.Size = New System.Drawing.Size(100, 24)
-        Me.teRegistrationDate.TabIndex = 3
+        Me.teRegistrationDate.TabIndex = 4
         Me.teRegistrationDate.Value = Nothing
         '
         'PageFinancials
@@ -280,7 +291,6 @@ Partial Class FinancialProductEditor
         '
         'iProductDeposit
         '
-        Me.iProductDeposit.Enabled = False
         Me.iProductDeposit.Location = New System.Drawing.Point(104, 69)
         Me.iProductDeposit.Name = "iProductDeposit"
         Me.iProductDeposit.Size = New System.Drawing.Size(332, 21)
@@ -308,7 +318,7 @@ Partial Class FinancialProductEditor
         Me.PageEvaluation.Controls.Add(Me.Label6)
         Me.PageEvaluation.Controls.Add(Me.Label5)
         Me.PageEvaluation.Controls.Add(Me.txtResult)
-        Me.PageEvaluation.Controls.Add(Me.ListBox_Evaluation1)
+        Me.PageEvaluation.Controls.Add(Me.iEvaluation)
         Me.PageEvaluation.Location = New System.Drawing.Point(4, 22)
         Me.PageEvaluation.Name = "PageEvaluation"
         Me.PageEvaluation.Padding = New System.Windows.Forms.Padding(3)
@@ -319,11 +329,28 @@ Partial Class FinancialProductEditor
         '
         'ListBox_Evaluation1
         '
-        Me.ListBox_Evaluation1.Location = New System.Drawing.Point(102, 12)
-        Me.ListBox_Evaluation1.Name = "ListBox_Evaluation1"
-        Me.ListBox_Evaluation1.Size = New System.Drawing.Size(332, 21)
-        Me.ListBox_Evaluation1.TabIndex = 45
-        Me.ListBox_Evaluation1.Value = Nothing
+        Me.iEvaluation.Location = New System.Drawing.Point(102, 12)
+        Me.iEvaluation.Name = "ListBox_Evaluation1"
+        Me.iEvaluation.Size = New System.Drawing.Size(332, 21)
+        Me.iEvaluation.TabIndex = 45
+        Me.iEvaluation.Value = Nothing
+        '
+        'ListBox_Owner1
+        '
+        Me.iOwner.Location = New System.Drawing.Point(106, 41)
+        Me.iOwner.Name = "ListBox_Owner1"
+        Me.iOwner.Size = New System.Drawing.Size(425, 21)
+        Me.iOwner.TabIndex = 2
+        Me.iOwner.Value = Nothing
+        '
+        'Label12
+        '
+        Me.Label12.AutoSize = True
+        Me.Label12.Location = New System.Drawing.Point(10, 41)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(51, 13)
+        Me.Label12.TabIndex = 48
+        Me.Label12.Text = "Propietari"
         '
         'FinancialProductEditor
         '
@@ -353,7 +380,7 @@ Partial Class FinancialProductEditor
     Friend WithEvents teRegistrationDate As TextEditor_Date
     Friend WithEvents txtResult As TextBox
     Friend WithEvents Label5 As Label
-    Friend WithEvents ListBox_Evaluation1 As ListBox_Evaluation
+    Friend WithEvents iEvaluation As ListBox_Evaluation
     Friend WithEvents Label6 As Label
     Friend WithEvents TabControl1 As TabControl
     Friend WithEvents PageGeneral As TabPage
@@ -371,5 +398,8 @@ Partial Class FinancialProductEditor
     Friend WithEvents CashFlowEditor1 As CashFlowEntryEditor
     Friend WithEvents Label7 As Label
     Friend WithEvents iProductDeposit As ListBox_Deposit
-    Friend WithEvents CashFlowToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents CashFlowNewEntryToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ListaDeEntradasDeCashFlowToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents Label12 As Label
+    Friend WithEvents iOwner As ListBox_Owner
 End Class

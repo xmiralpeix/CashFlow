@@ -57,13 +57,7 @@ Public Class FrmMain
 
             End Try
 
-
-
-
         Next
-
-
-
 
     End Sub
 

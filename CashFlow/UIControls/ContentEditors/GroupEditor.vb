@@ -322,6 +322,8 @@ Public Class GroupEditor
         End Set
     End Property
 
+    Public Property EntitiesScopeCollection As IEnumerable(Of Object) Implements IFindContent.EntitiesScopeCollection
+
 
     Private _printFromID, _printToID As Integer
     Public Sub SetIDRange(FromID As Integer, ToID As Integer) Implements IPrintContent.SetIDRange

@@ -250,6 +250,8 @@ Public Class CashFlowEntry
     Public Property AssetsImport As Decimal
     Public Property LiabilitiesImport As Decimal
 
+    Public Property Status As Status
+
 End Class
 
 
@@ -367,9 +369,11 @@ Public Class FinancialProduct
     Public Property CreationDate As System.DateTime
     Public Property RegistrationDate As System.DateTime?
     Public Property CancelDate As System.DateTime?
+    Public Property Owner As Owner
     Public Property BaseDeposit As Deposit ' Optional Ex: Current Account - ES000-00-0-00
     Public Property BaseImport As Decimal
     Public Property Deposit As Deposit ' Ex: Broker Account
+    Public Property CashFlowEntries As IEnumerable(Of CashFlowEntry)
 
     Public Property ProductDeposit As Deposit ' Ex: Apple Stock - APPL (Automátic creation by Financial Product Name when open product)
 

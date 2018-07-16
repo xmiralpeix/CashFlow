@@ -20,6 +20,8 @@ Public Class ListBox_FinancialEntity
 
     Public ReadOnly Property VisualValue As String Implements IListBoxData.VisualValue
 
+    Public Property EntitiesScopeCollection As IEnumerable(Of Object) Implements IListBoxData.EntitiesScopeCollection
+
 
     Public Sub New()
         MyBase.New()

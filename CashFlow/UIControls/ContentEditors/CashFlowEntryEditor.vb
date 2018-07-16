@@ -5,6 +5,8 @@ Imports Microsoft.Reporting.WinForms
 Public Class CashFlowEntryEditor
     Implements IEditContent, IFindContent
 
+    Public Property FinancialProductScope As FinancialProduct
+
     Private ReadOnly Property IEditContent_Text As String Implements IEditContent.Text
         Get
             Return Locate("Registre CashFlow", CAT)
@@ -29,6 +31,8 @@ Public Class CashFlowEntryEditor
         End Get
     End Property
 
+    Public Property EntitiesScopeCollection As IEnumerable(Of Object) Implements IFindContent.EntitiesScopeCollection
+
     Private _entry As CashFlowEntry
 
     Public Sub LoadFormByID(ID? As Integer) Implements IEditContent.LoadFormByID
@@ -39,8 +43,20 @@ Public Class CashFlowEntryEditor
 
                 Using ctx As New CashFlow.CashFlowContext()
 
-                    _entry = (From entity In ctx.CashFlowEntries.Include(NameOf(CashFlowEntry.FinancialProduct)).Include(NameOf(CashFlowEntry.Owner))
-                              Where entity.ID = ID.Value).First()
+                    Dim qry = (From entity In ctx.CashFlowEntries.Include(NameOf(CashFlowEntry.FinancialProduct)).Include(NameOf(CashFlowEntry.Owner))
+                               Where entity.ID = ID.Value)
+
+                    If Not IsEmpty(EntitiesScopeCollection) Then
+                        For Each eScope In EntitiesScopeCollection
+                            If TypeOf eScope Is FinancialProduct Then
+                                Dim fpScope As FinancialProduct = eScope
+                                qry = qry.Where(Function(x) x.FinancialProduct.ID = fpScope.ID)
+                                Continue For
+                            End If
+                        Next
+                    End If
+
+                    _entry = qry.First
 
                 End Using
 
@@ -125,6 +141,12 @@ Public Class CashFlowEntryEditor
             Return False
         End If
 
+        If Not IsEmpty(Me.FinancialProductScope) AndAlso ListBox_FinancialProduct1.Entity.ID <> FinancialProductScope.ID Then
+            invalidControl = Me.ListBox_FinancialProduct1
+            msgError = Locate("Només s'admenten entrades del producte financer ", CAT) & FinancialProductScope.Name
+            Return False
+        End If
+
         Return True
 
     End Function
@@ -204,15 +226,26 @@ Public Class CashFlowEntryEditor
 
         Dim entityCollection As List(Of CashFlowEntry)
         Using ctx As New CashFlow.CashFlowContext()
-            If String.IsNullOrWhiteSpace(textSearch) Then
-                entityCollection = (From oEntity In ctx.CashFlowEntries
-                                    Select oEntity).ToList()
-            Else
 
-                entityCollection = (From oEntity In ctx.CashFlowEntries
-                                    Where (oEntity.Concept).Contains(textSearch)
-                                    Select oEntity).ToList()
+            Dim qry = (From oEntity In ctx.CashFlowEntries
+                       Select oEntity)
+            If Not IsEmpty(textSearch) Then
+                qry = qry.Where(Function(x) x.Concept.Contains(textSearch))
             End If
+
+
+            If Not IsEmpty(EntitiesScopeCollection) Then
+                For Each eScope In EntitiesScopeCollection
+                    If TypeOf eScope Is FinancialProduct Then
+                        Dim fpScope As FinancialProduct = eScope
+                        Qry = Qry.Where(Function(x) x.FinancialProduct.ID = fpScope.ID)
+                        Continue For
+                    End If
+                Next
+            End If
+
+            entityCollection = Qry.tolist
+
 
         End Using
 
@@ -235,6 +268,20 @@ Public Class CashFlowEntryEditor
         With col(col.Count - 1)
             .HeaderText = Locate("Concepte", CAT)
             .DataPropertyName = NameOf(CashFlowEntry.Concept)
+        End With
+
+        '
+        col.Add(New DataGridViewTextBoxColumn())
+        With col(col.Count - 1)
+            .HeaderText = Locate("Inici", CAT)
+            .DataPropertyName = NameOf(CashFlowEntry.FromDate)
+        End With
+
+        '
+        col.Add(New DataGridViewTextBoxColumn())
+        With col(col.Count - 1)
+            .HeaderText = Locate("Fi", CAT)
+            .DataPropertyName = NameOf(CashFlowEntry.ToDate)
         End With
 
         Return col

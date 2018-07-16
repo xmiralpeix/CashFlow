@@ -184,6 +184,14 @@
       <DependentUpon>201807101623162_M008.vb</DependentUpon>
     </Compile>
     <Compile Include="Migrations\201807101623162_M008.vb" />
+    <Compile Include="Migrations\201807140829122_M009.Designer.vb">
+      <DependentUpon>201807140829122_M009.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807140829122_M009.vb" />
+    <Compile Include="Migrations\201807141630332_M010.Designer.vb">
+      <DependentUpon>201807141630332_M010.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807141630332_M010.vb" />
     <Compile Include="Reports\Viewer\IPrintContent.vb" />
     <Compile Include="StringExtensions.vb" />
     <Compile Include="UIControls\ContentEditors\CashFlowEntryEditor.Designer.vb">
@@ -367,6 +375,12 @@
     <EmbeddedResource Include="Migrations\201807101623162_M008.resx">
       <DependentUpon>201807101623162_M008.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807140829122_M009.resx">
+      <DependentUpon>201807140829122_M009.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807141630332_M010.resx">
+      <DependentUpon>201807141630332_M010.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
@@ -447,7 +461,9 @@
     </None>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="SQL\CashFlow.sql" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
