@@ -43,6 +43,7 @@ Public Class ExternalApplication
     <DatabaseGenerated(DatabaseGeneratedOption.Identity)>
     Public Property ID As Integer
 
+    <Index(IsUnique:=True)>
     <MaxLength(100)>
     Public Property Name As String
 
@@ -143,6 +144,8 @@ Public Class Evaluation
     <Key>
     <DatabaseGenerated(DatabaseGeneratedOption.Identity)>
     Public Property ID As Integer
+
+    <Index(IsUnique:=True)>
     <MaxLength(100)>
     Public Property Name As String
     Public Property Points As Integer
@@ -169,6 +172,8 @@ Public Class Activity
     <Key>
     <DatabaseGenerated(DatabaseGeneratedOption.Identity)>
     Public Property ID As Integer
+
+    <Index(IsUnique:=True)>
     <MaxLength(100)>
     Public Property Name As String
     '
@@ -267,6 +272,7 @@ Public Class Group
     <MaxLength(10)>
     Public Property AccessKey As String
 
+    <Index(IsUnique:=True)>
     <MaxLength(100)>
     Public Property Name As String
 
@@ -339,6 +345,8 @@ Public Class Owner
     <Key>
     <DatabaseGenerated(DatabaseGeneratedOption.Identity)>
     Public Property ID As Integer
+
+    <Index(IsUnique:=True)>
     <MaxLength(100)>
     Public Property Name As String
 
@@ -351,6 +359,8 @@ Public Class FinancialEntity
     <Key>
     <DatabaseGenerated(DatabaseGeneratedOption.Identity)>
     Public Property ID As Integer
+
+    <Index(IsUnique:=True)>
     <MaxLength(100)>
     Public Property Name As String
     Public Property CancelDate As System.DateTime?
@@ -362,6 +372,8 @@ Public Class FinancialProduct
     <Key>
     <DatabaseGenerated(DatabaseGeneratedOption.Identity)>
     Public Property ID As Integer
+
+    <Index(IsUnique:=True)>
     <MaxLength(100)>
     Public Property Name As String
     <Column(TypeName:="text")>
@@ -395,6 +407,8 @@ Public Class Deposit
     <Key>
     <DatabaseGenerated(DatabaseGeneratedOption.Identity)>
     Public Property ID As Integer
+
+    <Index(IsUnique:=True)>
     <MaxLength(150)>
     Public Property Name As String
     Public Property CreationDate As System.DateTime

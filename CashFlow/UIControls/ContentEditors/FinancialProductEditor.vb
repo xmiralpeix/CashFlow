@@ -60,33 +60,31 @@ Public Class FinancialProductEditor
                                End Sub
             Me.iOwner.AssignValue(_entry.Owner)
             AddHandler Me.iOwner.OnEntityChanged, AssignScopes
-            If iOwner.HasValue Then
-                iOwner.Enabled = False
-            End If
+            iOwner.Enabled = Not iOwner.HasValue
             Me.txtName.Text = _entry.Name
             Me.txtComments.Text = _entry.Comments
             Me.teRegistrationDate.AssignValue(_entry.RegistrationDate)
             '
             ' Deposits
             Me.iBaseDeposit.AssignValue(_entry.BaseDeposit)
-            If iBaseDeposit.HasValue Then
-                iBaseDeposit.Enabled = False
-            End If
+            iBaseDeposit.Enabled = Not iBaseDeposit.HasValue
+            '
             Me.iDeposit.AssignValue(_entry.Deposit)
-            If iDeposit.HasValue Then
-                iDeposit.Enabled = False
-            End If
+            iDeposit.Enabled = Not iDeposit.HasValue
+            '
             Me.iProductDeposit.AssignValue(_entry.ProductDeposit)
-            If iProductDeposit.HasValue Then
-                iProductDeposit.Enabled = False
-            End If
+            iProductDeposit.Enabled = Not iProductDeposit.HasValue
+            '
             AssignScopes()
             '
+            ' Import
             Me.iBaseImport.Text = _entry.BaseImport
             '
+            ' Evaluation
             Me.iEvaluation.AssignValue(_entry.Evaluation)
             Me.txtResult.Text = _entry.ResultComments
             '
+            '  Status
             Me.cbDocStatus.SelectedValue = _entry.Status
             Me.cbDocStatus.Enabled = False
 
@@ -334,11 +332,22 @@ Public Class FinancialProductEditor
 
         Using ctx As New CashFlow.CashFlowContext()
 
+            ' 
+            Dim oOwner As Owner = (From dbOwner In ctx.Owners
+                                   Where dbOwner.ID = Me.iOwner.Entity.ID).First()
+            ctx.Owners.Attach(oOwner)
+
+            '
+            Dim oFinancialProduct As FinancialProduct = (From dbFinancialProduct In ctx.FinancialProducts
+                                                         Where dbFinancialProduct.ID = _entry.ID).First()
+            ctx.FinancialProducts.Attach(oFinancialProduct)
+
+            '
             Dim oCashFlowEntry = New CashFlowEntry()
             oCashFlowEntry.Concept = _entry.Name
             oCashFlowEntry.FromDate = Today
-            oCashFlowEntry.Owner = _entry.Owner
-            oCashFlowEntry.FinancialProduct = _entry
+            oCashFlowEntry.Owner = oOwner
+            oCashFlowEntry.FinancialProduct = oFinancialProduct
             oCashFlowEntry.AssetsImport = _entry.BaseImport
             oCashFlowEntry.Status = Status.Open
             ctx.CashFlowEntries.Add(oCashFlowEntry)
