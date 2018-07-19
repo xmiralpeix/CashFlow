@@ -12,7 +12,7 @@ Public Class FrmEdit
 
 
     Public Enum eStatus
-        Finding = 0
+        Consulting = 0
         Adding = 1
         Updating = 2
     End Enum
@@ -58,15 +58,74 @@ Public Class FrmEdit
 
     End Sub
 
+    Public Sub ChangeUpdatingWhenValueChanged(collection As System.Windows.Forms.Control.ControlCollection)
+
+        If IsEmpty(collection) Then
+            Return
+        End If
+
+        Dim xChangeStatus = Sub()
+                                If Status = eStatus.Consulting Then
+                                    ChangeStatus(eStatus.Updating)
+                                End If
+                            End Sub
+        For Each controlIdx As Windows.Forms.Control In collection
+            If TypeOf controlIdx Is ListBox Then
+                Dim oListBox As ListBox = controlIdx
+                RemoveHandler oListBox.OnEntityChanged, xChangeStatus
+                AddHandler oListBox.OnEntityChanged, xChangeStatus
+                '
+                Continue For
+            End If
+
+            If TypeOf controlIdx Is TextBox Then
+                Dim oTextBox As TextBox = controlIdx
+                RemoveHandler oTextBox.TextChanged, xChangeStatus
+                AddHandler oTextBox.TextChanged, xChangeStatus
+                '
+                Continue For
+            End If
+
+            If TypeOf controlIdx Is CheckBox Then
+                Dim oCheckBox As CheckBox = controlIdx
+                RemoveHandler oCheckBox.CheckedChanged, xChangeStatus
+                AddHandler oCheckBox.CheckedChanged, xChangeStatus
+                '
+                Continue For
+            End If
+
+            If TypeOf controlIdx Is System.Windows.Forms.DataGridView Then
+                Dim oDataGrid As System.Windows.Forms.DataGridView = controlIdx
+                RemoveHandler oDataGrid.CellValueChanged, xChangeStatus
+                AddHandler oDataGrid.CellValueChanged, xChangeStatus
+                '
+                Continue For
+            End If
+            If TypeOf controlIdx Is System.Windows.Forms.TabControl Then
+                Dim oTabControl As System.Windows.Forms.TabControl = controlIdx
+                For Each oTabPage As System.Windows.Forms.TabPage In oTabControl.TabPages
+                    ChangeUpdatingWhenValueChanged(oTabPage.Controls)
+                Next
+                '
+                Continue For
+            End If
+            '
+            ChangeUpdatingWhenValueChanged(controlIdx.Controls)
+        Next
+
+    End Sub
+
     Public Sub ChangeStatus(ByVal newStatus As eStatus)
 
         Me.Status = newStatus
+
         Select Case Status
             Case eStatus.Adding
                 Me.btnOK.Text = Locate("Afegir", CAT)
 
-            Case eStatus.Finding
+            Case eStatus.Consulting
                 Me.btnOK.Text = Locate("OK", CAT)
+                ChangeUpdatingWhenValueChanged(Me.Controls)
 
             Case eStatus.Updating
                 Me.btnOK.Text = Locate("Actualitzar", CAT)
@@ -86,7 +145,7 @@ Public Class FrmEdit
             Case TypeOf (appEvent) Is NextAppEvent : MoveToNext()
             Case TypeOf (appEvent) Is LastAppEvent : MoveToLast()
             Case TypeOf (appEvent) Is PrintAppEvent : ProcessPrintBehaviour()
-            Case TypeOf (appEvent) Is MoveToIdAppEvent : MoveToID(DirectCast(appEvent, MoveToIdAppEvent).ID)
+            Case TypeOf (appEvent) Is MoveToIDAppEvent : MoveToID(DirectCast(appEvent, MoveToIDAppEvent).ID)
         End Select
 
     End Sub
@@ -127,7 +186,7 @@ Public Class FrmEdit
 
         Content.LoadFormByID(Me._ID)
         If _ID.HasValue Then
-            ChangeStatus(eStatus.Updating)
+            ChangeStatus(eStatus.Consulting)
         Else
             ChangeStatus(eStatus.Adding)
         End If
@@ -258,6 +317,11 @@ Public Class FrmEdit
     Private Sub btnOK_Click(sender As Object, e As EventArgs) Handles btnOK.Click
 
         Try
+
+            If Status = eStatus.Consulting Then
+                Me.Close()
+                Return
+            End If
 
             Dim msgError As String = Nothing
             Dim invalidControl As Control = Nothing
