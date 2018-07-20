@@ -6,7 +6,9 @@ Public Class CashFlowContext
     Inherits DbContext
 
     Public Property JournalEntries As DbSet(Of JournalEntry)
+    <Obsolete("Utilitzar v2", True)>
     Public Property JournalEntryTemplates As DbSet(Of JournalEntryTemplate)
+    Public Property JournalEntryTemplatesv2 As DbSet(Of JournalEntryTemplatev2)
     Public Property Groups As DbSet(Of Group)
     Public Property SubGroups As DbSet(Of SubGroup)
     Public Property Owners As DbSet(Of Owner)
@@ -92,8 +94,32 @@ Public Class JournalEntry
 End Class
 
 
+' Templates of Journal Entries
+Public Class JournalEntryTemplatev2
+    Implements IJournalEntryTemplatev2
+
+    <Key>
+    <DatabaseGenerated(DatabaseGeneratedOption.Identity)>
+    Public Property ID As Integer Implements IJournalEntryTemplatev2.ID
+
+    <MaxLength(100)>
+    Public Property Name As String Implements IJournalEntryTemplatev2.Name
+    '
+    Public Property EntryDate As System.DateTime? Implements IJournalEntryTemplatev2.EntryDate
+    '
+    Public Property SubGroup As SubGroup Implements IJournalEntryTemplatev2.SubGroup
+    '
+    Public Property FinancialProduct As FinancialProduct Implements IJournalEntryTemplatev2.FinancialProduct
+    Public Property Deposit As Deposit Implements IJournalEntryTemplatev2.Deposit ' Cash / FinancialDeposit
+    '
+    Public Property Concept As System.String Implements IJournalEntryTemplatev2.Concept
+    Public Property Import As System.Double Implements IJournalEntryTemplatev2.Import
+
+End Class
+
 
 ' Templates of Journal Entries
+<Obsolete("Utilitzar v2", False)>
 Public Class JournalEntryTemplate
     Implements IJournalEntryTemplate
 
@@ -295,9 +321,11 @@ Public Class Group
                 oGroup.Name = Locate("OPERACIONS FINANCERES", CAT)
                 oGroup.SubGroups = New List(Of SubGroup)()
                 oGroup.SubGroups.Add(New SubGroup() With {.AccessKey = SubGroup.TransferAccessKey,
-                                                          .Name = Locate("Traspàs", CAT)})
+                                                          .Name = Locate("TRASPÀS", CAT)})
                 oGroup.SubGroups.Add(New SubGroup() With {.AccessKey = SubGroup.CapitalAccessKey,
-                                                          .Name = Locate("Capital", CAT)})
+                                                          .Name = Locate("CAPITAL", CAT)})
+                oGroup.SubGroups.Add(New SubGroup() With {.AccessKey = SubGroup.DividendAccessKey,
+                                                          .Name = Locate("DIVIDENDS", CAT)})
 
 
                 ctx.Groups.Add(oGroup)
@@ -335,6 +363,7 @@ Public Class SubGroup
 
     Public Shared TransferAccessKey As String = "OF.TRA"
     Public Shared CapitalAccessKey As String = "OF.CAP"
+    Public Shared DividendAccessKey As String = "OF.DIV"
 
 End Class
 

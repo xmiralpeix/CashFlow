@@ -192,6 +192,18 @@
       <DependentUpon>201807141630332_M010.vb</DependentUpon>
     </Compile>
     <Compile Include="Migrations\201807141630332_M010.vb" />
+    <Compile Include="Migrations\201807171920592_M11.Designer.vb">
+      <DependentUpon>201807171920592_M11.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807171920592_M11.vb" />
+    <Compile Include="Migrations\201807201729329_M012.Designer.vb">
+      <DependentUpon>201807201729329_M012.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807201729329_M012.vb" />
+    <Compile Include="Migrations\201807201744282_M013.Designer.vb">
+      <DependentUpon>201807201744282_M013.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807201744282_M013.vb" />
     <Compile Include="Reports\Viewer\IPrintContent.vb" />
     <Compile Include="StringExtensions.vb" />
     <Compile Include="UIControls\ContentEditors\CashFlowEntryEditor.Designer.vb">
@@ -258,14 +270,20 @@
     <Compile Include="UIControls\ContentEditors\GroupEditor.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="UIControls\ContentEditors\Interfaces\INavigateMenu.vb" />
+    <Compile Include="UIControls\ContentEditors\Interfaces\IPrintBehaviour.vb" />
     <Compile Include="UIControls\ContentEditors\JournalEntryEditor.Designer.vb">
       <DependentUpon>JournalEntryEditor.vb</DependentUpon>
     </Compile>
     <Compile Include="UIControls\ContentEditors\JournalEntryEditor.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UIControls\ContentEditors\Interfaces\INavigateMenu.vb" />
-    <Compile Include="UIControls\ContentEditors\Interfaces\IPrintBehaviour.vb" />
+    <Compile Include="UIControls\ContentEditors\JournalEntryTemplateEditor.Designer.vb">
+      <DependentUpon>JournalEntryTemplateEditor.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\ContentEditors\JournalEntryTemplateEditor.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UIControls\ContentEditors\OwnerEditor.Designer.vb">
       <DependentUpon>OwnerEditor.vb</DependentUpon>
     </Compile>
@@ -381,6 +399,15 @@
     <EmbeddedResource Include="Migrations\201807141630332_M010.resx">
       <DependentUpon>201807141630332_M010.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807171920592_M11.resx">
+      <DependentUpon>201807171920592_M11.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807201729329_M012.resx">
+      <DependentUpon>201807201729329_M012.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807201744282_M013.resx">
+      <DependentUpon>201807201744282_M013.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
@@ -414,6 +441,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UIControls\ContentEditors\JournalEntryEditor.resx">
       <DependentUpon>JournalEntryEditor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\ContentEditors\JournalEntryTemplateEditor.resx">
+      <DependentUpon>JournalEntryTemplateEditor.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UIControls\ContentEditors\OwnerEditor.resx">
       <DependentUpon>OwnerEditor.vb</DependentUpon>

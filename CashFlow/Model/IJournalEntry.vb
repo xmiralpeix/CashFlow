@@ -26,3 +26,15 @@ Public Interface IJournalEntryTemplate
 
 End Interface
 
+Public Interface IJournalEntryTemplatev2
+
+    Property ID As Integer
+    Property Name As String
+    Property Concept As String
+    Property Deposit As Deposit
+    Property EntryDate As Date?
+    Property Import As Double
+    Property SubGroup As SubGroup
+    Property FinancialProduct As FinancialProduct
+
+End Interface

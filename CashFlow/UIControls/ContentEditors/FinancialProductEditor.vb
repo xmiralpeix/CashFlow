@@ -398,5 +398,79 @@ Public Class FinancialProductEditor
 
     End Sub
 
+    Private Sub NovaPlantillaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles NovaPlantillaToolStripMenuItem.Click
+
+        If IsEmpty(Me._entry.ID) Then
+            MsgBox(Locate("Opció disponible només en mode de consulta", CAT))
+            Return
+        End If
+
+        Dim templateID As Integer
+        Try
+
+
+            Using ctx As New CashFlowContext()
+
+                Dim oDividendsSubGroup As SubGroup = ctx.SubGroups.Where(Function(x) x.AccessKey = SubGroup.DividendAccessKey).First
+                ctx.Deposits.Attach(_entry.Deposit)
+                ctx.SubGroups.Attach(oDividendsSubGroup)
+                ctx.FinancialProducts.Attach(_entry)
+                '
+                Dim oTemplate As New JournalEntryTemplatev2()
+                oTemplate.Concept = _entry.Name
+                oTemplate.Deposit = _entry.Deposit
+                oTemplate.Import = 0
+                oTemplate.Name = Locate("Plantilla ", CAT) & $"{Now:dd/MM/yyyy HH:mm:ss}"
+                oTemplate.SubGroup = oDividendsSubGroup
+                oTemplate.FinancialProduct = _entry
+
+                ctx.JournalEntryTemplatesv2.Add(oTemplate)
+                ctx.SaveChanges()
+                '
+                templateID = oTemplate.ID
+            End Using
+
+
+            OpenTemplate(templateID)
+
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+
+    End Sub
+
+    Public Sub OpenTemplate(ByVal templateID? As Integer)
+
+        If IsEmpty(Me._entry.ID) Then
+            MsgBox(Locate("Opció disponible només en mode de consulta", CAT))
+            Return
+        End If
+
+        Dim frm As New FrmEdit()
+        Dim defaultAppEvent As AppEvent
+        If templateID.HasValue Then
+            Dim specificEvent = New MoveToIDAppEvent()
+            specificEvent.ID = templateID
+            '
+            defaultAppEvent = specificEvent
+        Else
+            defaultAppEvent = New SearchAppEvent()
+        End If
+        frm.DefaultAppEvent = defaultAppEvent
+        Dim content = New CashFlow.JournalEntryTemplateEditor()
+        content.EntitiesScopeCollection = {_entry}
+        frm.MdiParent = Me.ParentForm.MdiParent
+        frm.Content = content
+        frm.Show()
+
+        AddHandler frm.FormClosed, Sub()
+                                       frm.Dispose()
+                                   End Sub
+
+    End Sub
+
+    Private Sub LlistaDePlantillesXToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LlistaDePlantillesXToolStripMenuItem.Click
+        OpenTemplate(Nothing)
+    End Sub
 
 End Class

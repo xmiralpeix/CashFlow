@@ -37,23 +37,25 @@ Partial Class FinancialProductEditor
         Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.CashFlowNewEntryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ListaDeEntradasDeCashFlowToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.NovaPlantillaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PageGeneral = New System.Windows.Forms.TabPage()
+        Me.Label12 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.cbDocStatus = New System.Windows.Forms.ComboBox()
-        Me.teRegistrationDate = New CashFlow.TextEditor_Date()
         Me.PageFinancials = New System.Windows.Forms.TabPage()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.iBaseImport = New System.Windows.Forms.TextBox()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
+        Me.PageEvaluation = New System.Windows.Forms.TabPage()
+        Me.iOwner = New CashFlow.ListBox_Owner()
+        Me.teRegistrationDate = New CashFlow.TextEditor_Date()
         Me.iProductDeposit = New CashFlow.ListBox_Deposit()
         Me.iBaseDeposit = New CashFlow.ListBox_Deposit()
         Me.iDeposit = New CashFlow.ListBox_Deposit()
-        Me.PageEvaluation = New System.Windows.Forms.TabPage()
         Me.iEvaluation = New CashFlow.ListBox_Evaluation()
-        Me.iOwner = New CashFlow.ListBox_Owner()
-        Me.Label12 = New System.Windows.Forms.Label()
+        Me.LlistaDePlantillesXToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TabControl1.SuspendLayout()
         Me.ContextMenuStrip1.SuspendLayout()
         Me.PageGeneral.SuspendLayout()
@@ -165,21 +167,27 @@ Partial Class FinancialProductEditor
         '
         'ContextMenuStrip1
         '
-        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CashFlowNewEntryToolStripMenuItem, Me.ListaDeEntradasDeCashFlowToolStripMenuItem})
+        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CashFlowNewEntryToolStripMenuItem, Me.ListaDeEntradasDeCashFlowToolStripMenuItem, Me.NovaPlantillaToolStripMenuItem, Me.LlistaDePlantillesXToolStripMenuItem})
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(233, 48)
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(268, 114)
         '
         'CashFlowNewEntryToolStripMenuItem
         '
         Me.CashFlowNewEntryToolStripMenuItem.Name = "CashFlowNewEntryToolStripMenuItem"
-        Me.CashFlowNewEntryToolStripMenuItem.Size = New System.Drawing.Size(232, 22)
-        Me.CashFlowNewEntryToolStripMenuItem.Text = "Nueva entrada de CashFlow"
+        Me.CashFlowNewEntryToolStripMenuItem.Size = New System.Drawing.Size(267, 22)
+        Me.CashFlowNewEntryToolStripMenuItem.Text = "Crear una nova entrada de CashFlow"
         '
         'ListaDeEntradasDeCashFlowToolStripMenuItem
         '
         Me.ListaDeEntradasDeCashFlowToolStripMenuItem.Name = "ListaDeEntradasDeCashFlowToolStripMenuItem"
-        Me.ListaDeEntradasDeCashFlowToolStripMenuItem.Size = New System.Drawing.Size(232, 22)
-        Me.ListaDeEntradasDeCashFlowToolStripMenuItem.Text = "Lista de entradas de CashFlow"
+        Me.ListaDeEntradasDeCashFlowToolStripMenuItem.Size = New System.Drawing.Size(267, 22)
+        Me.ListaDeEntradasDeCashFlowToolStripMenuItem.Text = "Llista de entrades de CashFlow"
+        '
+        'NovaPlantillaToolStripMenuItem
+        '
+        Me.NovaPlantillaToolStripMenuItem.Name = "NovaPlantillaToolStripMenuItem"
+        Me.NovaPlantillaToolStripMenuItem.Size = New System.Drawing.Size(267, 22)
+        Me.NovaPlantillaToolStripMenuItem.Text = "Crear una nova plantilla"
         '
         'PageGeneral
         '
@@ -203,6 +211,15 @@ Partial Class FinancialProductEditor
         Me.PageGeneral.Text = "General"
         Me.PageGeneral.UseVisualStyleBackColor = True
         '
+        'Label12
+        '
+        Me.Label12.AutoSize = True
+        Me.Label12.Location = New System.Drawing.Point(10, 41)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(51, 13)
+        Me.Label12.TabIndex = 48
+        Me.Label12.Text = "Propietari"
+        '
         'Label9
         '
         Me.Label9.AutoSize = True
@@ -219,14 +236,6 @@ Partial Class FinancialProductEditor
         Me.cbDocStatus.Name = "cbDocStatus"
         Me.cbDocStatus.Size = New System.Drawing.Size(121, 21)
         Me.cbDocStatus.TabIndex = 1
-        '
-        'teRegistrationDate
-        '
-        Me.teRegistrationDate.Location = New System.Drawing.Point(106, 96)
-        Me.teRegistrationDate.Name = "teRegistrationDate"
-        Me.teRegistrationDate.Size = New System.Drawing.Size(100, 24)
-        Me.teRegistrationDate.TabIndex = 4
-        Me.teRegistrationDate.Value = Nothing
         '
         'PageFinancials
         '
@@ -289,30 +298,6 @@ Partial Class FinancialProductEditor
         Me.Label8.TabIndex = 45
         Me.Label8.Text = "Dipòsit"
         '
-        'iProductDeposit
-        '
-        Me.iProductDeposit.Location = New System.Drawing.Point(104, 69)
-        Me.iProductDeposit.Name = "iProductDeposit"
-        Me.iProductDeposit.Size = New System.Drawing.Size(332, 21)
-        Me.iProductDeposit.TabIndex = 2
-        Me.iProductDeposit.Value = Nothing
-        '
-        'iBaseDeposit
-        '
-        Me.iBaseDeposit.Location = New System.Drawing.Point(104, 15)
-        Me.iBaseDeposit.Name = "iBaseDeposit"
-        Me.iBaseDeposit.Size = New System.Drawing.Size(332, 21)
-        Me.iBaseDeposit.TabIndex = 0
-        Me.iBaseDeposit.Value = Nothing
-        '
-        'iDeposit
-        '
-        Me.iDeposit.Location = New System.Drawing.Point(104, 42)
-        Me.iDeposit.Name = "iDeposit"
-        Me.iDeposit.Size = New System.Drawing.Size(332, 21)
-        Me.iDeposit.TabIndex = 1
-        Me.iDeposit.Value = Nothing
-        '
         'PageEvaluation
         '
         Me.PageEvaluation.Controls.Add(Me.Label6)
@@ -327,30 +312,64 @@ Partial Class FinancialProductEditor
         Me.PageEvaluation.Text = "Valoració"
         Me.PageEvaluation.UseVisualStyleBackColor = True
         '
-        'ListBox_Evaluation1
+        'iOwner
         '
-        Me.iEvaluation.Location = New System.Drawing.Point(102, 12)
-        Me.iEvaluation.Name = "ListBox_Evaluation1"
-        Me.iEvaluation.Size = New System.Drawing.Size(332, 21)
-        Me.iEvaluation.TabIndex = 45
-        Me.iEvaluation.Value = Nothing
-        '
-        'ListBox_Owner1
-        '
+        Me.iOwner.EntitiesScopeCollection = Nothing
         Me.iOwner.Location = New System.Drawing.Point(106, 41)
-        Me.iOwner.Name = "ListBox_Owner1"
+        Me.iOwner.Name = "iOwner"
         Me.iOwner.Size = New System.Drawing.Size(425, 21)
         Me.iOwner.TabIndex = 2
         Me.iOwner.Value = Nothing
         '
-        'Label12
+        'teRegistrationDate
         '
-        Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(10, 41)
-        Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(51, 13)
-        Me.Label12.TabIndex = 48
-        Me.Label12.Text = "Propietari"
+        Me.teRegistrationDate.Location = New System.Drawing.Point(106, 96)
+        Me.teRegistrationDate.Name = "teRegistrationDate"
+        Me.teRegistrationDate.Size = New System.Drawing.Size(100, 24)
+        Me.teRegistrationDate.TabIndex = 4
+        Me.teRegistrationDate.Value = Nothing
+        '
+        'iProductDeposit
+        '
+        Me.iProductDeposit.EntitiesScopeCollection = Nothing
+        Me.iProductDeposit.Location = New System.Drawing.Point(104, 69)
+        Me.iProductDeposit.Name = "iProductDeposit"
+        Me.iProductDeposit.Size = New System.Drawing.Size(332, 21)
+        Me.iProductDeposit.TabIndex = 2
+        Me.iProductDeposit.Value = Nothing
+        '
+        'iBaseDeposit
+        '
+        Me.iBaseDeposit.EntitiesScopeCollection = Nothing
+        Me.iBaseDeposit.Location = New System.Drawing.Point(104, 15)
+        Me.iBaseDeposit.Name = "iBaseDeposit"
+        Me.iBaseDeposit.Size = New System.Drawing.Size(332, 21)
+        Me.iBaseDeposit.TabIndex = 0
+        Me.iBaseDeposit.Value = Nothing
+        '
+        'iDeposit
+        '
+        Me.iDeposit.EntitiesScopeCollection = Nothing
+        Me.iDeposit.Location = New System.Drawing.Point(104, 42)
+        Me.iDeposit.Name = "iDeposit"
+        Me.iDeposit.Size = New System.Drawing.Size(332, 21)
+        Me.iDeposit.TabIndex = 1
+        Me.iDeposit.Value = Nothing
+        '
+        'iEvaluation
+        '
+        Me.iEvaluation.EntitiesScopeCollection = Nothing
+        Me.iEvaluation.Location = New System.Drawing.Point(102, 12)
+        Me.iEvaluation.Name = "iEvaluation"
+        Me.iEvaluation.Size = New System.Drawing.Size(332, 21)
+        Me.iEvaluation.TabIndex = 45
+        Me.iEvaluation.Value = Nothing
+        '
+        'LlistaDePlantillesXToolStripMenuItem
+        '
+        Me.LlistaDePlantillesXToolStripMenuItem.Name = "LlistaDePlantillesXToolStripMenuItem"
+        Me.LlistaDePlantillesXToolStripMenuItem.Size = New System.Drawing.Size(267, 22)
+        Me.LlistaDePlantillesXToolStripMenuItem.Text = "Llista de plantilles"
         '
         'FinancialProductEditor
         '
@@ -402,4 +421,6 @@ Partial Class FinancialProductEditor
     Friend WithEvents ListaDeEntradasDeCashFlowToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents Label12 As Label
     Friend WithEvents iOwner As ListBox_Owner
+    Friend WithEvents NovaPlantillaToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents LlistaDePlantillesXToolStripMenuItem As ToolStripMenuItem
 End Class
