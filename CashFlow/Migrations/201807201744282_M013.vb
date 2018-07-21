@@ -7,9 +7,9 @@ Namespace Migrations
         Inherits DbMigration
     
         Public Overrides Sub Up()
-            AddColumn("dbo.JournalEntryTemplatev2", "FinancialProduct_ID", Function(c) c.Int())
-            CreateIndex("dbo.JournalEntryTemplatev2", "FinancialProduct_ID")
-            AddForeignKey("dbo.JournalEntryTemplatev2", "FinancialProduct_ID", "dbo.FinancialProducts", "ID")
+            'AddColumn("dbo.JournalEntryTemplatev2", "FinancialProduct_ID", Function(c) c.Int())
+            'CreateIndex("dbo.JournalEntryTemplatev2", "FinancialProduct_ID")
+            'AddForeignKey("dbo.JournalEntryTemplatev2", "FinancialProduct_ID", "dbo.FinancialProducts", "ID")
         End Sub
         
         Public Overrides Sub Down()

@@ -23,6 +23,10 @@ Public Class CashFlowContext
     '
     Public Property CashFlowStatus As DbSet(Of CashFlowStatus)
     Public Property CashFlowEntries As DbSet(Of CashFlowEntry)
+    Public Property IPCs As DbSet(Of IPC)
+    Public Property DBFileInfos As DbSet(Of DBFileInfo)
+    Public Property DBFileContents As DbSet(Of DBFileContent)
+    Public Property ObjectFiles As DbSet(Of ObjectFile)
 
 
     Public Sub New()
@@ -37,7 +41,67 @@ Public Class CashFlowContext
 
 End Class
 
+Public Class ObjectFile
 
+    <Key>
+    <DatabaseGenerated(DatabaseGeneratedOption.Identity)>
+    Public Property ID As Integer
+
+    <MaxLength(100)>
+    Public Property TableName As String
+    Public Property PrimaryKey As Integer
+    Public Property DBFileInfo As DBFileInfo
+
+End Class
+
+Public Class DBFileInfo
+
+    <Key>
+    <DatabaseGenerated(DatabaseGeneratedOption.Identity)>
+    Public Property ID As Integer
+
+    <Index(IsUnique:=True)>
+    <MaxLength(100)>
+    Public Property Name As String
+
+    Public Property CreationDate As DateTime
+
+    <Column(TypeName:="text")>
+    Public Property Comments As String
+
+    <MaxLength(4)>
+    Public Property Extension As String
+
+    Public Property Content As DBFileContent
+
+    Public Sub New()
+        CreationDate = Now
+    End Sub
+
+End Class
+
+Public Class DBFileContent
+
+    <Key>
+    <DatabaseGenerated(DatabaseGeneratedOption.Identity)>
+    Public Property ID As Integer
+
+    Public Property Content As Byte()
+
+End Class
+
+
+
+Public Class IPC
+
+    <Key>
+    <DatabaseGenerated(DatabaseGeneratedOption.Identity)>
+    Public Property ID As Integer
+    Public Property Value As Decimal
+    Public Property FromDate As DateTime
+    Public Property ToDate As DateTime?
+
+End Class
 
 Public Class ExternalApplication
 

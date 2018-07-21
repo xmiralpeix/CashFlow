@@ -204,6 +204,18 @@
       <DependentUpon>201807201744282_M013.vb</DependentUpon>
     </Compile>
     <Compile Include="Migrations\201807201744282_M013.vb" />
+    <Compile Include="Migrations\201807210648555_M014.Designer.vb">
+      <DependentUpon>201807210648555_M014.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807210648555_M014.vb" />
+    <Compile Include="Migrations\201807210724223_M015.Designer.vb">
+      <DependentUpon>201807210724223_M015.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807210724223_M015.vb" />
+    <Compile Include="Migrations\201807210729359_M016.Designer.vb">
+      <DependentUpon>201807210729359_M016.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807210729359_M016.vb" />
     <Compile Include="Reports\Viewer\IPrintContent.vb" />
     <Compile Include="StringExtensions.vb" />
     <Compile Include="UIControls\ContentEditors\CashFlowEntryEditor.Designer.vb">
@@ -408,6 +420,15 @@
     <EmbeddedResource Include="Migrations\201807201744282_M013.resx">
       <DependentUpon>201807201744282_M013.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807210648555_M014.resx">
+      <DependentUpon>201807210648555_M014.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807210724223_M015.resx">
+      <DependentUpon>201807210724223_M015.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807210729359_M016.resx">
+      <DependentUpon>201807210729359_M016.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
@@ -492,6 +513,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="SQL\InvestmentIndexs.sql" />
     <Content Include="SQL\CashFlow.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
