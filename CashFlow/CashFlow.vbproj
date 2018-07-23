@@ -216,6 +216,10 @@
       <DependentUpon>201807210729359_M016.vb</DependentUpon>
     </Compile>
     <Compile Include="Migrations\201807210729359_M016.vb" />
+    <Compile Include="Migrations\201807231803516_M017.Designer.vb">
+      <DependentUpon>201807231803516_M017.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807231803516_M017.vb" />
     <Compile Include="Reports\Viewer\IPrintContent.vb" />
     <Compile Include="StringExtensions.vb" />
     <Compile Include="UIControls\ContentEditors\CashFlowEntryEditor.Designer.vb">
@@ -346,6 +350,12 @@
     <Compile Include="UIControls\UserControls\ActionsMenuStrip.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="UIControls\UserControls\DBFilesEditor.Designer.vb">
+      <DependentUpon>DBFilesEditor.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\UserControls\DBFilesEditor.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UIControls\UserControls\NavigateToolStrip.vb">
       <SubType>Component</SubType>
     </Compile>
@@ -429,6 +439,9 @@
     <EmbeddedResource Include="Migrations\201807210729359_M016.resx">
       <DependentUpon>201807210729359_M016.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807231803516_M017.resx">
+      <DependentUpon>201807231803516_M017.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
@@ -495,6 +508,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UIControls\TextBoxes\TextEditor.resx">
       <DependentUpon>TextEditor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\UserControls\DBFilesEditor.resx">
+      <DependentUpon>DBFilesEditor.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -39,6 +39,8 @@ Partial Class FinancialProductEditor
         Me.ListaDeEntradasDeCashFlowToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.NovaPlantillaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.LlistaDePlantillesXToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AfegirUnDocumentToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.LlistaDeDocumentsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PageGeneral = New System.Windows.Forms.TabPage()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.iOwner = New CashFlow.ListBox_Owner()
@@ -56,13 +58,14 @@ Partial Class FinancialProductEditor
         Me.iDeposit = New CashFlow.ListBox_Deposit()
         Me.PageEvaluation = New System.Windows.Forms.TabPage()
         Me.iEvaluation = New CashFlow.ListBox_Evaluation()
-        Me.AfegirUnDocumentToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.LlistaDeDocumentsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PageDocuments = New System.Windows.Forms.TabPage()
+        Me.DbFilesEditor1 = New CashFlow.DBFilesEditor()
         Me.TabControl1.SuspendLayout()
         Me.ContextMenuStrip1.SuspendLayout()
         Me.PageGeneral.SuspendLayout()
         Me.PageFinancials.SuspendLayout()
         Me.PageEvaluation.SuspendLayout()
+        Me.PageDocuments.SuspendLayout()
         Me.SuspendLayout()
         '
         'txtResult
@@ -160,6 +163,7 @@ Partial Class FinancialProductEditor
         Me.TabControl1.Controls.Add(Me.PageGeneral)
         Me.TabControl1.Controls.Add(Me.PageFinancials)
         Me.TabControl1.Controls.Add(Me.PageEvaluation)
+        Me.TabControl1.Controls.Add(Me.PageDocuments)
         Me.TabControl1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TabControl1.Location = New System.Drawing.Point(0, 0)
         Me.TabControl1.Name = "TabControl1"
@@ -171,7 +175,7 @@ Partial Class FinancialProductEditor
         '
         Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CashFlowNewEntryToolStripMenuItem, Me.ListaDeEntradasDeCashFlowToolStripMenuItem, Me.NovaPlantillaToolStripMenuItem, Me.LlistaDePlantillesXToolStripMenuItem, Me.AfegirUnDocumentToolStripMenuItem, Me.LlistaDeDocumentsToolStripMenuItem})
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(268, 158)
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(268, 136)
         '
         'CashFlowNewEntryToolStripMenuItem
         '
@@ -196,6 +200,18 @@ Partial Class FinancialProductEditor
         Me.LlistaDePlantillesXToolStripMenuItem.Name = "LlistaDePlantillesXToolStripMenuItem"
         Me.LlistaDePlantillesXToolStripMenuItem.Size = New System.Drawing.Size(267, 22)
         Me.LlistaDePlantillesXToolStripMenuItem.Text = "Llista de plantilles"
+        '
+        'AfegirUnDocumentToolStripMenuItem
+        '
+        Me.AfegirUnDocumentToolStripMenuItem.Name = "AfegirUnDocumentToolStripMenuItem"
+        Me.AfegirUnDocumentToolStripMenuItem.Size = New System.Drawing.Size(267, 22)
+        Me.AfegirUnDocumentToolStripMenuItem.Text = "Afegir documents"
+        '
+        'LlistaDeDocumentsToolStripMenuItem
+        '
+        Me.LlistaDeDocumentsToolStripMenuItem.Name = "LlistaDeDocumentsToolStripMenuItem"
+        Me.LlistaDeDocumentsToolStripMenuItem.Size = New System.Drawing.Size(267, 22)
+        Me.LlistaDeDocumentsToolStripMenuItem.Text = "Llista de documents"
         '
         'PageGeneral
         '
@@ -373,17 +389,26 @@ Partial Class FinancialProductEditor
         Me.iEvaluation.TabIndex = 45
         Me.iEvaluation.Value = Nothing
         '
-        'AfegirUnDocumentToolStripMenuItem
+        'PageDocuments
         '
-        Me.AfegirUnDocumentToolStripMenuItem.Name = "AfegirUnDocumentToolStripMenuItem"
-        Me.AfegirUnDocumentToolStripMenuItem.Size = New System.Drawing.Size(267, 22)
-        Me.AfegirUnDocumentToolStripMenuItem.Text = "Afegir documents"
+        Me.PageDocuments.Controls.Add(Me.DbFilesEditor1)
+        Me.PageDocuments.Location = New System.Drawing.Point(4, 22)
+        Me.PageDocuments.Name = "PageDocuments"
+        Me.PageDocuments.Padding = New System.Windows.Forms.Padding(3)
+        Me.PageDocuments.Size = New System.Drawing.Size(780, 265)
+        Me.PageDocuments.TabIndex = 3
+        Me.PageDocuments.Text = "Documents"
+        Me.PageDocuments.UseVisualStyleBackColor = True
         '
-        'LlistaDeDocumentsToolStripMenuItem
+        'DbFilesEditor1
         '
-        Me.LlistaDeDocumentsToolStripMenuItem.Name = "LlistaDeDocumentsToolStripMenuItem"
-        Me.LlistaDeDocumentsToolStripMenuItem.Size = New System.Drawing.Size(267, 22)
-        Me.LlistaDeDocumentsToolStripMenuItem.Text = "Llista de documents"
+        Me.DbFilesEditor1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.DbFilesEditor1.Location = New System.Drawing.Point(3, 3)
+        Me.DbFilesEditor1.Name = "DbFilesEditor1"
+        Me.DbFilesEditor1.ObjectID = 0
+        Me.DbFilesEditor1.ObjectTable = Nothing
+        Me.DbFilesEditor1.Size = New System.Drawing.Size(774, 259)
+        Me.DbFilesEditor1.TabIndex = 0
         '
         'FinancialProductEditor
         '
@@ -400,6 +425,7 @@ Partial Class FinancialProductEditor
         Me.PageFinancials.PerformLayout()
         Me.PageEvaluation.ResumeLayout(False)
         Me.PageEvaluation.PerformLayout()
+        Me.PageDocuments.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -439,4 +465,6 @@ Partial Class FinancialProductEditor
     Friend WithEvents LlistaDePlantillesXToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents AfegirUnDocumentToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents LlistaDeDocumentsToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents PageDocuments As TabPage
+    Friend WithEvents DbFilesEditor1 As DBFilesEditor
 End Class

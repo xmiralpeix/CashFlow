@@ -57,6 +57,9 @@ Public Class FinancialProductEditor
                                    Me.iBaseDeposit.EntitiesScopeCollection = {oOwner}
                                    Me.iDeposit.EntitiesScopeCollection = {oOwner}
                                    Me.iProductDeposit.EntitiesScopeCollection = {oOwner}
+                                   '
+                                   Me.DbFilesEditor1.ObjectTable = Me.Table
+                                   Me.DbFilesEditor1.ObjectID = _entry.ID
                                End Sub
             Me.iOwner.AssignValue(_entry.Owner)
             AddHandler Me.iOwner.OnEntityChanged, AssignScopes
@@ -466,51 +469,6 @@ Public Class FinancialProductEditor
         AddHandler frm.FormClosed, Sub()
                                        frm.Dispose()
                                    End Sub
-
-    End Sub
-
-    Private Sub LlistaDePlantillesXToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LlistaDePlantillesXToolStripMenuItem.Click
-        OpenTemplate(Nothing)
-    End Sub
-
-    Private Sub AfegirUnDocumentToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AfegirUnDocumentToolStripMenuItem.Click
-
-        Dim fileNames() As String
-        Using dFile As New OpenFileDialog()
-            dFile.Multiselect = True
-            Dim dResult = dFile.ShowDialog()
-            If dResult <> DialogResult.OK Then
-                Return
-            End If
-            fileNames = dFile.FileNames
-        End Using
-
-        Dim ids As New List(Of Integer)()
-
-        Using ctx As New CashFlowContext
-
-            For Each fileName In fileNames
-
-                Dim oFileContent As New DBFileContent()
-                oFileContent.Content = System.IO.File.ReadAllBytes(fileName)
-                '
-                Dim oNewFileInfo As New DBFileInfo()
-                oNewFileInfo.Content = oFileContent
-                oNewFileInfo.Extension = IO.Path.GetExtension(fileName)
-                oNewFileInfo.Name = IO.Path.GetFileNameWithoutExtension(fileName) & $"{Now:dd/MM/yyyy HH:mm:ss}"
-                '
-                Dim oFiles As New ObjectFile()
-                oFiles.DBFileInfo = oNewFileInfo
-                oFiles.TableName = Me.Table
-                oFiles.PrimaryKey = _entry.ID
-                '
-                ctx.objectFiles.add(oFiles)
-                ctx.SaveChanges()
-                '
-                ids.Add(oFiles.ID)
-            Next
-
-        End Using
 
     End Sub
 

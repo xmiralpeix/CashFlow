@@ -13,6 +13,10 @@
         End If
 
         Select Case True
+            Case TypeOf value Is IEnumerable
+                Dim x = DirectCast(value, IEnumerable)
+                Return Not x.GetEnumerator().MoveNext()
+
             Case TypeOf value Is TextEditor
                 Dim castValue As TextEditor = DirectCast(value, TextEditor)
                 Return Not castValue.HasValue()
@@ -101,13 +105,52 @@
 
     Public CAT As System.Globalization.CultureInfo = System.Globalization.CultureInfo.CreateSpecificCulture("ca-ES")
 
-    Public Function PropertyValue(ByVal obj As Object, ByVal propertyName As String) As Object
+    Public Function PropertyValue(ByVal Obj As Object,
+                                  ByVal PropertyPath As String) As Object
+
+        If Not (PropertyPath.Contains(".")) Then
+            Return pPropertyValue(Obj, PropertyPath)
+        Else
+            Return pPropertyValue(Obj, 0, PropertyPath.Split("."))
+        End If
+
+    End Function
+
+    Private Function pPropertyValue(ByVal obj As Object,
+                                  ByVal propertyIdx As Integer,
+                                  ByVal propertyNames() As String) As Object
+
+        Dim data As Object
+        Try
+            data = mUtils.PropertyValue(obj, propertyNames(propertyIdx))
+        Catch ex As Exception
+            data = Nothing
+        End Try
+
+        If IsEmpty(data) Then
+            Return data
+        End If
+
+        If propertyIdx >= propertyNames.Length - 1 Then
+            Return data
+        End If
+
+        propertyIdx += 1
+        Return pPropertyValue(data, propertyIdx, propertyNames)
+
+    End Function
+
+
+    Private Function pPropertyValue(ByVal Obj As Object,
+                                    ByVal Propertyname As String) As Object
 
         Try
-            Dim pInfo = obj.GetType().GetProperty(propertyName)
-            Return pInfo.GetValue(obj)
+
+
+            Dim pInfo = Obj.GetType().GetProperty(Propertyname)
+            Return pInfo.GetValue(Obj)
         Catch ex As Exception
-            Throw New Exception(Locate(String.Format("No s'ha trobat la propietat {0} a objecte {1}.", propertyName, obj.GetType.FullName), CAT))
+            Throw New Exception(Locate(String.Format("No s'ha trobat la propietat {0} a objecte {1}.", Propertyname, Obj.GetType.FullName), CAT))
         End Try
 
     End Function

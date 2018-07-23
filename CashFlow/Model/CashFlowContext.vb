@@ -60,7 +60,6 @@ Public Class DBFileInfo
     <DatabaseGenerated(DatabaseGeneratedOption.Identity)>
     Public Property ID As Integer
 
-    <Index(IsUnique:=True)>
     <MaxLength(100)>
     Public Property Name As String
 
