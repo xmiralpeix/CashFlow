@@ -488,7 +488,124 @@ Public Class FinancialProduct
 
     Public Sub New()
         CreationDate = Now
-        Status = Status.Open
+        Status = Status.Pending
+    End Sub
+
+    Public Shared Function GetDBQuery(ByRef ctx As CashFlowContext) As System.Data.Entity.Infrastructure.DbQuery(Of FinancialProduct)
+
+        Return ctx.FinancialProducts _
+            .Include(NameOf(FinancialProduct.Owner)) _
+            .Include(NameOf(FinancialProduct.ProductDeposit)) _
+            .Include(NameOf(FinancialProduct.Evaluation)) _
+            .Include(NameOf(FinancialProduct.Deposit)) _
+            .Include(NameOf(FinancialProduct.BaseDeposit))
+
+    End Function
+
+
+    Public Shared Sub OpenProduct(ByVal ID As Integer)
+
+        Using ctx As New CashFlowContext()
+
+            Dim fp = GetDBQuery(ctx).Where(Function(x) x.ID = ID).First()
+            If fp.Status <> Status.Pending Then
+                Throw New Exception(Locate("Només es poden obrir productes en estat pendent.", CAT))
+            End If
+
+            fp.Status = Status.Open
+
+            If IsEmpty(fp.ProductDeposit) Then
+
+                ' Owner
+                ctx.Owners.Attach(fp.Owner)
+
+                ' Financial Entity
+                Dim depositRef As Deposit = ctx.Deposits.Include(NameOf(Deposit.FinancialEntity)).First(Function(d) d.ID = fp.Deposit.ID)
+                Dim fe As FinancialEntity = depositRef.FinancialEntity
+                ctx.FinancialEntities.Attach(fe)
+
+                ' Product Deposit
+                Dim dep As New Deposit()
+                dep.FinancialEntity = depositRef.FinancialEntity
+                dep.Owner = fp.Owner
+                dep.Name = Locate("DIPÒSIT", CAT) & " " & fp.Name
+                ctx.Deposits.Add(dep)
+                '
+                fp.ProductDeposit = dep
+            Else
+                ctx.Deposits.Attach(fp.ProductDeposit)
+            End If
+
+            If Not IsEmpty(fp.BaseDeposit) Then
+                ctx.Deposits.Attach(fp.BaseDeposit)
+            End If
+            ctx.Deposits.Attach(fp.Deposit)
+
+            Dim transferSubGrup = ctx.SubGroups.Where(Function(x) x.AccessKey = SubGroup.TransferAccessKey).First()
+            ctx.SubGroups.Attach(transferSubGrup)
+
+            '
+            ' 1. Find existing financial move
+            If fp.RegistrationDate.HasValue AndAlso fp.RegistrationDate.Value.Year = Today.Year Then
+                If Not ctx.JournalEntries.Any(Function(x) x.FinancialProduct.ID = fp.ID) Then
+                    ' Add journal entries
+                    ' 1/2 - Move base to deposit
+                    If Not IsEmpty(fp.BaseDeposit) Then
+                        ' Out qtty
+                        Dim jeOUT12 As New JournalEntry()
+                        jeOUT12.Concept = String.Format(Locate("{0}. Traspàs del dipòsit {1} al dipòsit {2}.", CAT), fp.Name, fp.BaseDeposit.Name, fp.Deposit.Name)
+                        jeOUT12.EntryDate = fp.RegistrationDate.Value
+                        jeOUT12.FinancialProduct = fp
+                        jeOUT12.Import = -fp.BaseImport
+                        jeOUT12.SubGroup = transferSubGrup
+                        jeOUT12.Deposit = fp.BaseDeposit
+                        '
+                        ctx.JournalEntries.Add(jeOUT12)
+
+                        ' In qtty
+                        Dim jeIN12 As New JournalEntry()
+                        jeIN12.Concept = String.Format(Locate("{0}. Traspàs del dipòsit {1} al dipòsit {2}.", CAT), fp.Name, fp.BaseDeposit.Name, fp.Deposit.Name)
+                        jeIN12.EntryDate = fp.RegistrationDate.Value
+                        jeIN12.FinancialProduct = fp
+                        jeIN12.Import = fp.BaseImport
+                        jeIN12.SubGroup = transferSubGrup
+                        jeIN12.Deposit = fp.Deposit
+                        '
+                        ctx.JournalEntries.Add(jeIN12)
+                    End If
+
+                    ' 2/2 - Move deposit to product deposit
+
+                    ' Out qtty
+                    Dim jeOUT22 As New JournalEntry()
+                    jeOUT22.Concept = String.Format(Locate("{0}. Traspàs del dipòsit {1} al dipòsit {2}.", CAT), fp.Name, fp.Deposit.Name, fp.ProductDeposit.Name)
+                    jeOUT22.EntryDate = fp.RegistrationDate.Value
+                    jeOUT22.FinancialProduct = fp
+                    jeOUT22.Import = -fp.BaseImport
+                    jeOUT22.SubGroup = transferSubGrup
+                    jeOUT22.Deposit = fp.Deposit
+                    '
+                    ctx.JournalEntries.Add(jeOUT22)
+
+                    ' In qtty
+                    Dim jeIN22 As New JournalEntry()
+                    jeIN22.Concept = String.Format(Locate("{0}. Traspàs del dipòsit {1} al dipòsit {2}.", CAT), fp.Name, fp.Deposit.Name, fp.ProductDeposit.Name)
+                    jeIN22.EntryDate = fp.RegistrationDate.Value
+                    jeIN22.FinancialProduct = fp
+                    jeIN22.Import = fp.BaseImport
+                    jeIN22.SubGroup = transferSubGrup
+                    jeIN22.Deposit = fp.ProductDeposit
+                    '
+                    ctx.JournalEntries.Add(jeIN22)
+
+                End If
+
+            End If
+
+            ctx.SaveChanges()
+
+        End Using
+
     End Sub
 
 End Class

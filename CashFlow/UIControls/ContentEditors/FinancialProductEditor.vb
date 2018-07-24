@@ -76,7 +76,9 @@ Public Class FinancialProductEditor
             iDeposit.Enabled = Not iDeposit.HasValue
             '
             Me.iProductDeposit.AssignValue(_entry.ProductDeposit)
-            iProductDeposit.Enabled = Not iProductDeposit.HasValue
+            Me.chkManualProductDeposit.Enabled = Not iProductDeposit.HasValue
+            Me.iProductDeposit.Enabled = Me.chkManualProductDeposit.Checked AndAlso Me.chkManualProductDeposit.Enabled
+
             '
             AssignScopes()
             '
@@ -220,12 +222,7 @@ Public Class FinancialProductEditor
         Catch ex As Exception
             If _entry.Status = Status.Open Then
                 If MsgBox(Locate("Vols que el sistema et crei el dipòsit automàticament?", CAT), MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
-                    Dim dep As New Deposit()
-                    dep.FinancialEntity = _entry.Deposit.FinancialEntity
-                    dep.Owner = _entry.Owner
-                    dep.Name = _entry.Name
-                    ctx.Deposits.Add(dep)
-                    _entry.ProductDeposit = dep
+
                 End If
             End If
         End Try
@@ -470,6 +467,28 @@ Public Class FinancialProductEditor
                                        frm.Dispose()
                                    End Sub
 
+    End Sub
+
+    Private Sub ObrirToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ObrirToolStripMenuItem.Click
+
+        If IsEmpty(Me._entry.ID) Then
+            MsgBox(Locate("Opció disponible només en mode de consulta", CAT))
+            Return
+        End If
+
+        Try
+            FinancialProduct.OpenProduct(_entry.ID)
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        Finally
+            LoadFormByID(_entry.ID)
+        End Try
+
+
+    End Sub
+
+    Private Sub chkManualProductDeposit_CheckedChanged(sender As Object, e As EventArgs) Handles chkManualProductDeposit.CheckedChanged
+        Me.iProductDeposit.Enabled = Me.chkManualProductDeposit.Checked
     End Sub
 
 End Class
