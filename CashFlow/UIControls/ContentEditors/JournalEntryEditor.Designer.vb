@@ -40,6 +40,8 @@ Partial Class JournalEntryEditor
         Me.ListBox_FinancialProduct1 = New CashFlow.ListBox_FinancialProduct()
         Me.ListBox_Deposit1 = New CashFlow.ListBox_Deposit()
         Me.chkDeposit = New System.Windows.Forms.CheckBox()
+        Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.ToolStripStatusLabel2 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.StatusStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -62,8 +64,6 @@ Partial Class JournalEntryEditor
         'chkImport
         '
         Me.chkImport.AutoSize = True
-        Me.chkImport.Checked = True
-        Me.chkImport.CheckState = System.Windows.Forms.CheckState.Checked
         Me.chkImport.Location = New System.Drawing.Point(14, 168)
         Me.chkImport.Name = "chkImport"
         Me.chkImport.Size = New System.Drawing.Size(55, 17)
@@ -74,8 +74,6 @@ Partial Class JournalEntryEditor
         'CheckBox4
         '
         Me.CheckBox4.AutoSize = True
-        Me.CheckBox4.Checked = True
-        Me.CheckBox4.CheckState = System.Windows.Forms.CheckState.Checked
         Me.CheckBox4.Location = New System.Drawing.Point(14, 145)
         Me.CheckBox4.Name = "CheckBox4"
         Me.CheckBox4.Size = New System.Drawing.Size(72, 17)
@@ -86,8 +84,6 @@ Partial Class JournalEntryEditor
         'CheckBox3
         '
         Me.CheckBox3.AutoSize = True
-        Me.CheckBox3.Checked = True
-        Me.CheckBox3.CheckState = System.Windows.Forms.CheckState.Checked
         Me.CheckBox3.Location = New System.Drawing.Point(14, 93)
         Me.CheckBox3.Name = "CheckBox3"
         Me.CheckBox3.Size = New System.Drawing.Size(110, 17)
@@ -98,8 +94,6 @@ Partial Class JournalEntryEditor
         'CheckBox2
         '
         Me.CheckBox2.AutoSize = True
-        Me.CheckBox2.Checked = True
-        Me.CheckBox2.CheckState = System.Windows.Forms.CheckState.Checked
         Me.CheckBox2.Location = New System.Drawing.Point(14, 67)
         Me.CheckBox2.Name = "CheckBox2"
         Me.CheckBox2.Size = New System.Drawing.Size(49, 17)
@@ -110,8 +104,6 @@ Partial Class JournalEntryEditor
         'CheckBox1
         '
         Me.CheckBox1.AutoSize = True
-        Me.CheckBox1.Checked = True
-        Me.CheckBox1.CheckState = System.Windows.Forms.CheckState.Checked
         Me.CheckBox1.Location = New System.Drawing.Point(14, 41)
         Me.CheckBox1.Name = "CheckBox1"
         Me.CheckBox1.Size = New System.Drawing.Size(49, 17)
@@ -136,7 +128,7 @@ Partial Class JournalEntryEditor
         '
         'StatusStrip1
         '
-        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.lblIncomes, Me.lblExpenses, Me.lblBalance})
+        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.lblIncomes, Me.ToolStripStatusLabel2, Me.lblExpenses, Me.ToolStripStatusLabel1, Me.lblBalance})
         Me.StatusStrip1.Location = New System.Drawing.Point(0, 226)
         Me.StatusStrip1.Name = "StatusStrip1"
         Me.StatusStrip1.Size = New System.Drawing.Size(565, 22)
@@ -145,22 +137,26 @@ Partial Class JournalEntryEditor
         '
         'lblIncomes
         '
+        Me.lblIncomes.ForeColor = System.Drawing.SystemColors.ControlText
         Me.lblIncomes.Name = "lblIncomes"
-        Me.lblIncomes.Size = New System.Drawing.Size(405, 17)
+        Me.lblIncomes.Size = New System.Drawing.Size(347, 17)
         Me.lblIncomes.Spring = True
         Me.lblIncomes.Text = "Ingressos: 0.00"
         Me.lblIncomes.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'lblExpenses
         '
+        Me.lblExpenses.ForeColor = System.Drawing.SystemColors.ControlText
         Me.lblExpenses.Name = "lblExpenses"
         Me.lblExpenses.Size = New System.Drawing.Size(82, 17)
         Me.lblExpenses.Text = "Despeses: 0.00"
         '
         'lblBalance
         '
+        Me.lblBalance.BorderStyle = System.Windows.Forms.Border3DStyle.Bump
+        Me.lblBalance.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
         Me.lblBalance.Name = "lblBalance"
-        Me.lblBalance.Size = New System.Drawing.Size(63, 17)
+        Me.lblBalance.Size = New System.Drawing.Size(67, 17)
         Me.lblBalance.Text = "Saldo: 0.00"
         '
         'txtEntryDate
@@ -173,6 +169,7 @@ Partial Class JournalEntryEditor
         '
         'ListBox_SubGroup1
         '
+        Me.ListBox_SubGroup1.EntitiesScopeCollection = Nothing
         Me.ListBox_SubGroup1.Location = New System.Drawing.Point(130, 60)
         Me.ListBox_SubGroup1.Name = "ListBox_SubGroup1"
         Me.ListBox_SubGroup1.Size = New System.Drawing.Size(425, 21)
@@ -181,6 +178,7 @@ Partial Class JournalEntryEditor
         '
         'ListBox_FinancialProduct1
         '
+        Me.ListBox_FinancialProduct1.EntitiesScopeCollection = Nothing
         Me.ListBox_FinancialProduct1.Location = New System.Drawing.Point(130, 86)
         Me.ListBox_FinancialProduct1.Name = "ListBox_FinancialProduct1"
         Me.ListBox_FinancialProduct1.Size = New System.Drawing.Size(425, 21)
@@ -189,6 +187,7 @@ Partial Class JournalEntryEditor
         '
         'ListBox_Deposit1
         '
+        Me.ListBox_Deposit1.EntitiesScopeCollection = Nothing
         Me.ListBox_Deposit1.Location = New System.Drawing.Point(130, 115)
         Me.ListBox_Deposit1.Name = "ListBox_Deposit1"
         Me.ListBox_Deposit1.Size = New System.Drawing.Size(425, 21)
@@ -198,14 +197,24 @@ Partial Class JournalEntryEditor
         'chkDeposit
         '
         Me.chkDeposit.AutoSize = True
-        Me.chkDeposit.Checked = True
-        Me.chkDeposit.CheckState = System.Windows.Forms.CheckState.Checked
         Me.chkDeposit.Location = New System.Drawing.Point(14, 118)
         Me.chkDeposit.Name = "chkDeposit"
         Me.chkDeposit.Size = New System.Drawing.Size(58, 17)
         Me.chkDeposit.TabIndex = 60
         Me.chkDeposit.Text = "Dipòsit"
         Me.chkDeposit.UseVisualStyleBackColor = True
+        '
+        'ToolStripStatusLabel1
+        '
+        Me.ToolStripStatusLabel1.Name = "ToolStripStatusLabel1"
+        Me.ToolStripStatusLabel1.Size = New System.Drawing.Size(13, 17)
+        Me.ToolStripStatusLabel1.Text = "||"
+        '
+        'ToolStripStatusLabel2
+        '
+        Me.ToolStripStatusLabel2.Name = "ToolStripStatusLabel2"
+        Me.ToolStripStatusLabel2.Size = New System.Drawing.Size(10, 17)
+        Me.ToolStripStatusLabel2.Text = "|"
         '
         'JournalEntryEditor
         '
@@ -252,4 +261,6 @@ Partial Class JournalEntryEditor
     Friend WithEvents ListBox_FinancialProduct1 As ListBox_FinancialProduct
     Friend WithEvents ListBox_Deposit1 As ListBox_Deposit
     Friend WithEvents chkDeposit As CheckBox
+    Friend WithEvents ToolStripStatusLabel2 As ToolStripStatusLabel
+    Friend WithEvents ToolStripStatusLabel1 As ToolStripStatusLabel
 End Class

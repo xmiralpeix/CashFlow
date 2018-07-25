@@ -98,6 +98,9 @@ Public Class CashFlowEntryEditor
             Me.ListBox_FinancialProduct1.AssignValue(_entry.FinancialProduct.ID)
         End If
 
+        Me.cbDocStatus.SelectedValue = _entry.Status
+        Me.cbDocStatus.Enabled = False
+
     End Sub
 
     Private Function AppEvents() As IEnumerable(Of String) Implements IEditContent.AppEvents
@@ -113,6 +116,7 @@ Public Class CashFlowEntryEditor
     End Function
 
     Private Function GetUI() As IContainerControl Implements IEditContent.GetUI
+        DocumentStatus.ConfigureCombo(Me.cbDocStatus)
         Return Me
     End Function
 

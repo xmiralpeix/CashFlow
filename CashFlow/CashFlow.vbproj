@@ -220,6 +220,9 @@
       <DependentUpon>201807231803516_M017.vb</DependentUpon>
     </Compile>
     <Compile Include="Migrations\201807231803516_M017.vb" />
+    <Compile Include="Model\Deposit.vb" />
+    <Compile Include="Model\FinancialProduct.vb" />
+    <Compile Include="Objects\DocumentStatus.vb" />
     <Compile Include="Reports\Viewer\IPrintContent.vb" />
     <Compile Include="StringExtensions.vb" />
     <Compile Include="UIControls\ContentEditors\CashFlowEntryEditor.Designer.vb">

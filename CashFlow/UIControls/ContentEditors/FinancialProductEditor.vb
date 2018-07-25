@@ -1,5 +1,6 @@
 ﻿Imports System.Globalization
 Imports CashFlow
+Imports CashFlow.DocumentStatus
 Imports Microsoft.Reporting.WinForms
 
 Public Class FinancialProductEditor
@@ -67,6 +68,7 @@ Public Class FinancialProductEditor
             Me.txtName.Text = _entry.Name
             Me.txtComments.Text = _entry.Comments
             Me.teRegistrationDate.AssignValue(_entry.RegistrationDate)
+            Me.teRegistrationDate.Enabled = Not Me.teRegistrationDate.HasValue
             '
             ' Deposits
             Me.iBaseDeposit.AssignValue(_entry.BaseDeposit)
@@ -116,20 +118,7 @@ Public Class FinancialProductEditor
     Private Function GetUI() As IContainerControl Implements IEditContent.GetUI
 
         ' Configure controls
-        Me.cbDocStatus.ValueMember = "Code"
-        Me.cbDocStatus.DisplayMember = "Name"
-        '
-        Dim dt As New DataTable()
-        dt.Columns.Add("Code", GetType(Integer))
-        dt.Columns.Add("Name", GetType(String))
-        '
-        dt.Rows.Add(CInt(Status.Pending), Locate("Pendent", CAT))
-        dt.Rows.Add(CInt(Status.Open), Locate("Obert", CAT))
-        dt.Rows.Add(CInt(Status.Close), Locate("Tancat", CAT))
-        dt.Rows.Add(CInt(Status.Cancelled), Locate("Cancel·lat", CAT))
-        '
-        Me.cbDocStatus.DataSource = dt
-
+        DocumentStatus.ConfigureCombo(Me.cbDocStatus)
 
         Return Me
 
@@ -217,15 +206,12 @@ Public Class FinancialProductEditor
             ctx.Entry(_entry).Reference(NameOf(FinancialProduct.BaseDeposit)).CurrentValue = Nothing
         End If
         _entry.Deposit = ctx.Deposits.Include(NameOf(Deposit.FinancialEntity)).Include(NameOf(Deposit.Owner)).Where(Function(x) x.ID = Me.iDeposit.Entity.ID).FirstOrDefault()
-        Try
-            _entry.ProductDeposit = ctx.Deposits.Where(Function(x) x.ID = Me.iProductDeposit.Entity.ID).First()
-        Catch ex As Exception
-            If _entry.Status = Status.Open Then
-                If MsgBox(Locate("Vols que el sistema et crei el dipòsit automàticament?", CAT), MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
 
-                End If
-            End If
-        End Try
+        If Me.iProductDeposit.HasValue Then
+            _entry.ProductDeposit = ctx.Deposits.Where(Function(x) x.ID = Me.iProductDeposit.Entity.ID).First()
+        Else
+            ctx.Entry(_entry).Reference(NameOf(FinancialProduct.ProductDeposit)).CurrentValue = Nothing
+        End If
 
         _entry.BaseImport = Me.iBaseImport.Text
 
@@ -349,7 +335,7 @@ Public Class FinancialProductEditor
             oCashFlowEntry.Owner = oOwner
             oCashFlowEntry.FinancialProduct = oFinancialProduct
             oCashFlowEntry.AssetsImport = _entry.BaseImport
-            oCashFlowEntry.Status = Status.Open
+            oCashFlowEntry.Status = _entry.Status
             ctx.CashFlowEntries.Add(oCashFlowEntry)
             ctx.SaveChanges()
             '
@@ -491,4 +477,37 @@ Public Class FinancialProductEditor
         Me.iProductDeposit.Enabled = Me.chkManualProductDeposit.Checked
     End Sub
 
+    Private Sub CancellarToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CancellarToolStripMenuItem.Click
+
+        If IsEmpty(Me._entry.ID) Then
+            MsgBox(Locate("Opció disponible només en mode de consulta", CAT))
+            Return
+        End If
+
+        Try
+            FinancialProduct.CancelProduct(_entry.ID)
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        Finally
+            LoadFormByID(_entry.ID)
+        End Try
+
+    End Sub
+
+    Private Sub CancelarToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CancelarToolStripMenuItem.Click
+
+        If IsEmpty(Me._entry.ID) Then
+            MsgBox(Locate("Opció disponible només en mode de consulta", CAT))
+            Return
+        End If
+
+        Try
+            FinancialProduct.CloseProduct(_entry.ID)
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        Finally
+            LoadFormByID(_entry.ID)
+        End Try
+
+    End Sub
 End Class

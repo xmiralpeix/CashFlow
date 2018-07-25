@@ -51,6 +51,8 @@ Public Class JournalEntryEditor
             Me.txtID.Text = _entry.ID
             Me.txtConcept.Text = _entry.Concept
             Me.ListBox_Deposit1.AssignValue(_entry.Deposit)
+            AddHandler ListBox_Deposit1.OnEntityChanged, Sub() LoadBalance()
+            '
             Me.txtEntryDate.AssignValue(If(IsEmpty(_entry.EntryDate), DirectCast(Nothing, DateTime?), _entry.EntryDate))
             Me.ListBox_FinancialProduct1.AssignValue(_entry.FinancialProduct)
             Me.txtImport.Text = Me._entry.Import
@@ -62,6 +64,28 @@ Public Class JournalEntryEditor
         Finally
             Me.txtEntryDate.Select()
         End Try
+
+    End Sub
+
+    Private Sub LoadBalance()
+
+        Dim msgIncomes As String = Locate("Ingressos {0:n2}", CAT)
+        Dim msgExpenses As String = Locate("Despeses {0:n2}", CAT)
+        Dim msgBalance As String = Locate("Saldo {0:n2}", CAT)
+        Dim incomes As Decimal = 0
+        Dim expenses As Decimal = 0
+        Dim balance As Decimal = 0
+
+        If ListBox_Deposit1.HasValue Then
+            Deposit.LoadBalance(ListBox_Deposit1.Entity.ID, incomes, expenses, balance)
+        End If
+
+        ' Values
+        Me.lblIncomes.Text = String.Format(msgIncomes, incomes)
+        Me.lblExpenses.Text = String.Format(msgExpenses, expenses)
+        Me.lblBalance.Text = String.Format(msgBalance, balance)
+        '
+        Me.lblBalance.ForeColor = If(balance >= 0, Drawing.Color.Green, Drawing.Color.Red)
 
     End Sub
 

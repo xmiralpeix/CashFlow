@@ -46,6 +46,8 @@ Partial Class CashFlowEntryEditor
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.ListBox_Owner1 = New CashFlow.ListBox_Owner()
         Me.ListBox_FinancialProduct1 = New CashFlow.ListBox_FinancialProduct()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.cbDocStatus = New System.Windows.Forms.ComboBox()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -126,6 +128,8 @@ Partial Class CashFlowEntryEditor
         '
         'GroupBox3
         '
+        Me.GroupBox3.Controls.Add(Me.Label9)
+        Me.GroupBox3.Controls.Add(Me.cbDocStatus)
         Me.GroupBox3.Controls.Add(Me.Label5)
         Me.GroupBox3.Controls.Add(Me.txtToDate)
         Me.GroupBox3.Controls.Add(Me.txtFromDate)
@@ -250,6 +254,7 @@ Partial Class CashFlowEntryEditor
         '
         'ListBox_Owner1
         '
+        Me.ListBox_Owner1.EntitiesScopeCollection = Nothing
         Me.ListBox_Owner1.Location = New System.Drawing.Point(3, 333)
         Me.ListBox_Owner1.Name = "ListBox_Owner1"
         Me.ListBox_Owner1.Size = New System.Drawing.Size(425, 21)
@@ -259,12 +264,31 @@ Partial Class CashFlowEntryEditor
         '
         'ListBox_FinancialProduct1
         '
+        Me.ListBox_FinancialProduct1.EntitiesScopeCollection = Nothing
         Me.ListBox_FinancialProduct1.Location = New System.Drawing.Point(3, 360)
         Me.ListBox_FinancialProduct1.Name = "ListBox_FinancialProduct1"
         Me.ListBox_FinancialProduct1.Size = New System.Drawing.Size(425, 21)
         Me.ListBox_FinancialProduct1.TabIndex = 40
         Me.ListBox_FinancialProduct1.Value = Nothing
         Me.ListBox_FinancialProduct1.Visible = False
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Location = New System.Drawing.Point(410, 26)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(31, 13)
+        Me.Label9.TabIndex = 48
+        Me.Label9.Text = "Estat"
+        '
+        'cbDocStatus
+        '
+        Me.cbDocStatus.Enabled = False
+        Me.cbDocStatus.FormattingEnabled = True
+        Me.cbDocStatus.Location = New System.Drawing.Point(464, 18)
+        Me.cbDocStatus.Name = "cbDocStatus"
+        Me.cbDocStatus.Size = New System.Drawing.Size(121, 21)
+        Me.cbDocStatus.TabIndex = 47
         '
         'CashFlowEntryEditor
         '
@@ -318,4 +342,6 @@ Partial Class CashFlowEntryEditor
     Friend WithEvents Label5 As Label
     Friend WithEvents txtToDate As TextEditor_Date
     Friend WithEvents txtFromDate As TextEditor_Date
+    Friend WithEvents Label9 As Label
+    Friend WithEvents cbDocStatus As ComboBox
 End Class
