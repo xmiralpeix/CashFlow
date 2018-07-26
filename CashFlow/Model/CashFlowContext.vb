@@ -28,6 +28,7 @@ Public Class CashFlowContext
     Public Property DBFileInfos As DbSet(Of DBFileInfo)
     Public Property DBFileContents As DbSet(Of DBFileContent)
     Public Property ObjectFiles As DbSet(Of ObjectFile)
+    Public Property MontlyReceipts As DbSet(Of MontlyReceipt)
 
 
     Public Sub New()
@@ -41,6 +42,31 @@ Public Class CashFlowContext
 
 
 End Class
+
+
+Public Class MontlyReceipt
+
+    <Key>
+    <DatabaseGenerated(DatabaseGeneratedOption.Identity)>
+    Public Property ID As Integer
+
+    <MaxLength(100)>
+    Public Property Name As String
+    Public Property Owner As Owner
+    Public Property CreationDate As DateTime
+    Public Property Status As DocumentStatus.Status
+    Public Property Deposit As Deposit
+    Public Property Import As Decimal
+    <Column(TypeName:="text")>
+    Public Property Comments As String
+
+
+    Public Sub New()
+        Me.CreationDate = Now
+    End Sub
+
+End Class
+
 
 Public Class ObjectFile
 
