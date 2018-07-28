@@ -39,7 +39,7 @@ Public Class JournalEntryEditor
 
                 Using ctx As New CashFlow.CashFlowContext()
 
-                    _entry = (From g1 In ctx.JournalEntries.Include(NameOf(JournalEntry.FinancialProduct)).Include(NameOf(JournalEntry.SubGroup)).Include(NameOf(JournalEntry.Deposit))
+                    _entry = (From g1 In ctx.JournalEntries.Include(NameOf(JournalEntry.SubGroup)).Include(NameOf(JournalEntry.Deposit))
                               Where g1.ID = ID.Value).First()
 
                 End Using
@@ -54,7 +54,7 @@ Public Class JournalEntryEditor
             AddHandler ListBox_Deposit1.OnEntityChanged, Sub() LoadBalance()
             '
             Me.txtEntryDate.AssignValue(If(IsEmpty(_entry.EntryDate), DirectCast(Nothing, DateTime?), _entry.EntryDate))
-            Me.ListBox_FinancialProduct1.AssignValue(_entry.FinancialProduct)
+            'Me.ListBox_FinancialProduct1.AssignValue(_entry.FinancialProduct)
             Me.txtImport.Text = Me._entry.Import
             Me.ListBox_SubGroup1.AssignValue(_entry.SubGroup)
 
@@ -147,12 +147,6 @@ Public Class JournalEntryEditor
         _entry.Deposit = ctx.Deposits.Where(Function(x) x.ID = Me.ListBox_Deposit1.Entity.ID).FirstOrDefault()
         _entry.EntryDate = Me.txtEntryDate.Value
 
-        If Me.ListBox_FinancialProduct1.HasValue Then
-            _entry.FinancialProduct = ctx.FinancialProducts.Where(Function(x) x.ID = Me.ListBox_FinancialProduct1.Entity.ID).FirstOrDefault()
-        Else
-            _entry.FinancialProduct = Nothing
-        End If
-
         If Me.ListBox_SubGroup1.HasValue Then
             _entry.SubGroup = ctx.SubGroups.Where(Function(x) x.ID = Me.ListBox_SubGroup1.Entity.ID).FirstOrDefault()
         Else
@@ -160,9 +154,6 @@ Public Class JournalEntryEditor
         End If
 
         Me._entry.Import = Me.txtImport.Text
-
-
-
 
     End Sub
 

@@ -39,8 +39,10 @@ Partial Class FrmMain
         Me.ConfiguracióToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ParàmetresToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ApplicationMenu = New System.Windows.Forms.MenuStrip()
-        Me.NavigateToolStrip1 = New CashFlow.NavigateToolStrip()
         Me.DadesToolStripMenuItem = New CashFlow.ActionsMenuStrip()
+        Me.NavigateToolStrip1 = New CashFlow.NavigateToolStrip()
+        Me.CompresToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.FacturesDeCompraToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.statusbar.SuspendLayout()
         Me.ApplicationMenu.SuspendLayout()
         Me.SuspendLayout()
@@ -61,7 +63,7 @@ Partial Class FrmMain
         '
         'PrimerToolStripMenuItem
         '
-        Me.PrimerToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AssentamentsToolStripMenuItem, Me.FinancesToolStripMenuItem, Me.ConfiguracióToolStripMenuItem1})
+        Me.PrimerToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AssentamentsToolStripMenuItem, Me.FinancesToolStripMenuItem, Me.ConfiguracióToolStripMenuItem1, Me.CompresToolStripMenuItem})
         Me.PrimerToolStripMenuItem.Name = "PrimerToolStripMenuItem"
         Me.PrimerToolStripMenuItem.Size = New System.Drawing.Size(50, 20)
         Me.PrimerToolStripMenuItem.Text = "Menú"
@@ -76,25 +78,25 @@ Partial Class FrmMain
         'GrupsToolStripMenuItem
         '
         Me.GrupsToolStripMenuItem.Name = "GrupsToolStripMenuItem"
-        Me.GrupsToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.GrupsToolStripMenuItem.Size = New System.Drawing.Size(134, 22)
         Me.GrupsToolStripMenuItem.Text = "Grups"
         '
         'PropietarisToolStripMenuItem
         '
         Me.PropietarisToolStripMenuItem.Name = "PropietarisToolStripMenuItem"
-        Me.PropietarisToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.PropietarisToolStripMenuItem.Size = New System.Drawing.Size(134, 22)
         Me.PropietarisToolStripMenuItem.Text = "Propietaris"
         '
         'ValoraciosToolStripMenuItem
         '
         Me.ValoraciosToolStripMenuItem.Name = "ValoraciosToolStripMenuItem"
-        Me.ValoraciosToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ValoraciosToolStripMenuItem.Size = New System.Drawing.Size(134, 22)
         Me.ValoraciosToolStripMenuItem.Text = "Valoracions"
         '
         'InformesToolStripMenuItem1
         '
         Me.InformesToolStripMenuItem1.Name = "InformesToolStripMenuItem1"
-        Me.InformesToolStripMenuItem1.Size = New System.Drawing.Size(152, 22)
+        Me.InformesToolStripMenuItem1.Size = New System.Drawing.Size(134, 22)
         Me.InformesToolStripMenuItem1.Text = "Informes"
         '
         'FinancesToolStripMenuItem
@@ -156,6 +158,12 @@ Partial Class FrmMain
         Me.ApplicationMenu.TabIndex = 5
         Me.ApplicationMenu.Text = "ApplicationMenu"
         '
+        'DadesToolStripMenuItem
+        '
+        Me.DadesToolStripMenuItem.Name = "DadesToolStripMenuItem"
+        Me.DadesToolStripMenuItem.Size = New System.Drawing.Size(51, 20)
+        Me.DadesToolStripMenuItem.Text = "Dades"
+        '
         'NavigateToolStrip1
         '
         Me.NavigateToolStrip1.Location = New System.Drawing.Point(0, 24)
@@ -164,11 +172,18 @@ Partial Class FrmMain
         Me.NavigateToolStrip1.TabIndex = 8
         Me.NavigateToolStrip1.Text = "NavigateToolStrip1"
         '
-        'DadesToolStripMenuItem
+        'CompresToolStripMenuItem
         '
-        Me.DadesToolStripMenuItem.Name = "DadesToolStripMenuItem"
-        Me.DadesToolStripMenuItem.Size = New System.Drawing.Size(51, 20)
-        Me.DadesToolStripMenuItem.Text = "Dades"
+        Me.CompresToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FacturesDeCompraToolStripMenuItem})
+        Me.CompresToolStripMenuItem.Name = "CompresToolStripMenuItem"
+        Me.CompresToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.CompresToolStripMenuItem.Text = "Compres"
+        '
+        'FacturesDeCompraToolStripMenuItem
+        '
+        Me.FacturesDeCompraToolStripMenuItem.Name = "FacturesDeCompraToolStripMenuItem"
+        Me.FacturesDeCompraToolStripMenuItem.Size = New System.Drawing.Size(178, 22)
+        Me.FacturesDeCompraToolStripMenuItem.Text = "Factures de compra"
         '
         'FrmMain
         '
@@ -212,4 +227,6 @@ Partial Class FrmMain
     Friend WithEvents ValoraciosToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents InformesToolStripMenuItem1 As ToolStripMenuItem
     Friend WithEvents InformesToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents CompresToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents FacturesDeCompraToolStripMenuItem As ToolStripMenuItem
 End Class

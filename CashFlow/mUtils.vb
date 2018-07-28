@@ -41,6 +41,10 @@
                 Dim castValue As DateTime = DirectCast(value, DateTime)
                 Return castValue = DateTime.MinValue
 
+            Case TypeOf value Is Integer
+                Dim castValue As Integer = DirectCast(value, Integer)
+                Return castValue = 0
+
         End Select
 
         Return False

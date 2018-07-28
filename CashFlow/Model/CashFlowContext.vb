@@ -2,6 +2,7 @@
 Imports System.ComponentModel.DataAnnotations
 Imports System.ComponentModel.DataAnnotations.Schema
 Imports CashFlow.DocumentStatus
+Imports CashFlow
 
 Public Class CashFlowContext
     Inherits DbContext
@@ -15,6 +16,7 @@ Public Class CashFlowContext
     Public Property Owners As DbSet(Of Owner)
     Public Property FinancialEntities As DbSet(Of FinancialEntity)
     Public Property Deposits As DbSet(Of Deposit)
+    Public Property PurchaseInvoices As DbSet(Of PurchaseInvoice)
     Public Property FinancialProducts As DbSet(Of FinancialProduct)
     Public Property Evaluations As DbSet(Of Evaluation)
     '
@@ -40,6 +42,44 @@ Public Class CashFlowContext
 
     End Sub
 
+
+End Class
+
+Public Class PurchaseInvoice
+
+    <Key>
+    <DatabaseGenerated(DatabaseGeneratedOption.Identity)>
+    Public Property ID As Integer
+
+    Public Property CreationDate As Date
+    Property Owner As Owner
+
+    Property NumAtCard As String
+    <MaxLength(100)>
+    Property Concept As String
+
+    Public Property DocDate As Date
+    Public Property LicTradNum As String
+    Public Property Import As Decimal
+    Public Property SubGroup As SubGroup
+    Public Property Deposit As Deposit
+    Public Property Status As DocumentStatus.Status
+
+    Public Sub New()
+        CreationDate = Now
+        Status = DocumentStatus.Status.Open
+    End Sub
+
+    Public Sub CreateJournalEntry(ByRef ctx As CashFlowContext)
+
+    End Sub
+
+    Public Shared Function GetDBQuery(ByRef ctx As CashFlowContext) As System.Data.Entity.Infrastructure.DbQuery(Of PurchaseInvoice)
+        Return ctx.PurchaseInvoices _
+        .Include(NameOf(PurchaseInvoice.Owner)) _
+        .Include(NameOf(PurchaseInvoice.Deposit)) _
+        .Include(NameOf(PurchaseInvoice.SubGroup))
+    End Function
 
 End Class
 
@@ -169,7 +209,7 @@ Public Class JournalEntry
     '
     Public Property FiscalYear As Integer? Implements IJournalEntry.FiscalYear ' NULL in current period
     '
-    Public Property FinancialProduct As FinancialProduct Implements IJournalEntry.FinancialProduct ' Optional Field
+    'Public Property FinancialProduct As FinancialProduct Implements IJournalEntry.FinancialProduct ' Optional Field
     Public Property Deposit As Deposit Implements IJournalEntry.Deposit ' Cash / FinancialDeposit
     '
     Public Property SubGroup As SubGroup Implements IJournalEntry.SubGroup
@@ -177,6 +217,10 @@ Public Class JournalEntry
     Public Property Concept As System.String Implements IJournalEntry.Concept
     Public Property Import As System.Double Implements IJournalEntry.Import
     Public Property Validated As System.Boolean Implements IJournalEntry.Validated
+
+    Public Property BaseObjectName As String Implements IJournalEntry.BaseObjectName
+    Public Property BaseObjectID As Integer Implements IJournalEntry.BaseObjectID
+
 
     Public Sub New()
         Me.CreationDate = Now

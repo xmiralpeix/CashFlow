@@ -220,6 +220,14 @@
       <DependentUpon>201807231803516_M017.vb</DependentUpon>
     </Compile>
     <Compile Include="Migrations\201807231803516_M017.vb" />
+    <Compile Include="Migrations\201807280930348_M018.Designer.vb">
+      <DependentUpon>201807280930348_M018.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807280930348_M018.vb" />
+    <Compile Include="Migrations\201807281015363_M019.Designer.vb">
+      <DependentUpon>201807281015363_M019.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807281015363_M019.vb" />
     <Compile Include="Model\Deposit.vb" />
     <Compile Include="Model\FinancialProduct.vb" />
     <Compile Include="Objects\DocumentStatus.vb" />
@@ -307,6 +315,12 @@
       <DependentUpon>OwnerEditor.vb</DependentUpon>
     </Compile>
     <Compile Include="UIControls\ContentEditors\OwnerEditor.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UIControls\ContentEditors\PurchaseInvoiceEditor.Designer.vb">
+      <DependentUpon>PurchaseInvoiceEditor.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UIControls\ContentEditors\PurchaseInvoiceEditor.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UIControls\ContentEditors\SubGroupEditor.Designer.vb">
@@ -445,6 +459,12 @@
     <EmbeddedResource Include="Migrations\201807231803516_M017.resx">
       <DependentUpon>201807231803516_M017.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807280930348_M018.resx">
+      <DependentUpon>201807280930348_M018.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807281015363_M019.resx">
+      <DependentUpon>201807281015363_M019.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
@@ -484,6 +504,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UIControls\ContentEditors\OwnerEditor.resx">
       <DependentUpon>OwnerEditor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIControls\ContentEditors\PurchaseInvoiceEditor.resx">
+      <DependentUpon>PurchaseInvoiceEditor.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UIControls\ContentEditors\SubGroupEditor.resx">
       <DependentUpon>SubGroupFinder.vb</DependentUpon>

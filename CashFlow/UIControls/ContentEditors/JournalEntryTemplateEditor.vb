@@ -39,7 +39,7 @@ Public Class JournalEntryTemplateEditor
 
                 Using ctx As New CashFlow.CashFlowContext()
 
-                    _entry = (From g1 In ctx.JournalEntryTemplatesv2.Include(NameOf(JournalEntry.FinancialProduct)).Include(NameOf(JournalEntry.SubGroup)).Include(NameOf(JournalEntry.Deposit))
+                    _entry = (From g1 In ctx.JournalEntryTemplatesv2.Include(NameOf(JournalEntry.SubGroup)).Include(NameOf(JournalEntry.Deposit))
                               Where g1.ID = ID.Value).First()
 
                 End Using
@@ -53,11 +53,10 @@ Public Class JournalEntryTemplateEditor
             Me.txtConcept.Text = _entry.Concept
             Me.ListBox_Deposit1.AssignValue(_entry.Deposit)
             Me.txtEntryDate.AssignValue(If(IsEmpty(_entry.EntryDate), DirectCast(Nothing, DateTime?), _entry.EntryDate))
-            Me.ListBox_FinancialProduct1.AssignValue(_entry.FinancialProduct)
+            'Me.ListBox_FinancialProduct1.AssignValue(_entry.FinancialProduct)
             Me.txtImport.Text = Me._entry.Import
             Me.ListBox_SubGroup1.AssignValue(_entry.SubGroup)
             '
-            Me.ListBox_FinancialProduct1.Enabled = False
             Me.ListBox_Deposit1.Enabled = False
 
         Catch ex As Exception
@@ -121,12 +120,6 @@ Public Class JournalEntryTemplateEditor
         _entry.Deposit = ctx.Deposits.Where(Function(x) x.ID = Me.ListBox_Deposit1.Entity.ID).FirstOrDefault()
         _entry.EntryDate = Me.txtEntryDate.Value
 
-        If Me.ListBox_FinancialProduct1.HasValue Then
-            _entry.FinancialProduct = ctx.FinancialProducts.Where(Function(x) x.ID = Me.ListBox_FinancialProduct1.Entity.ID).FirstOrDefault()
-        Else
-            _entry.FinancialProduct = Nothing
-        End If
-
         If Me.ListBox_SubGroup1.HasValue Then
             _entry.SubGroup = ctx.SubGroups.Where(Function(x) x.ID = Me.ListBox_SubGroup1.Entity.ID).FirstOrDefault()
         Else
@@ -134,9 +127,6 @@ Public Class JournalEntryTemplateEditor
         End If
 
         Me._entry.Import = Me.txtImport.Text
-
-
-
 
     End Sub
 

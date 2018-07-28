@@ -148,4 +148,14 @@ Public Class FrmMain
                                        frm.Dispose()
                                    End Sub
     End Sub
+
+    Private Sub FacturesDeCompraToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles FacturesDeCompraToolStripMenuItem.Click
+        Dim frm As New FrmEdit
+        frm.MdiParent = Me
+        frm.Content = New PurchaseInvoiceEditor()
+        frm.Show()
+        AddHandler frm.FormClosed, Sub()
+                                       frm.Dispose()
+                                   End Sub
+    End Sub
 End Class

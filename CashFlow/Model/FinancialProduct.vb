@@ -99,7 +99,7 @@ Public Class FinancialProduct
 
             ' Find existing financial move
             If fp.RegistrationDate.HasValue AndAlso fp.RegistrationDate.Value.Year = Today.Year Then
-                If Not ctx.JournalEntries.Any(Function(x) x.FinancialProduct.ID = fp.ID) Then
+                If Not ctx.JournalEntries.Any(Function(x) x.BaseObjectName = NameOf(FinancialProduct) AndAlso x.BaseObjectID = fp.ID) Then
                     ' Add journal entries
                     ' 1/2 - Move base to deposit
                     If Not IsEmpty(fp.BaseDeposit) Then
@@ -107,7 +107,8 @@ Public Class FinancialProduct
                         Dim jeOUT12 As New JournalEntry()
                         jeOUT12.Concept = String.Format(Locate("{0}. Traspàs del dipòsit {1} al dipòsit {2}.", CAT), fp.Name, fp.BaseDeposit.Name, fp.Deposit.Name)
                         jeOUT12.EntryDate = fp.RegistrationDate.Value
-                        jeOUT12.FinancialProduct = fp
+                        jeOUT12.BaseObjectName = NameOf(FinancialProduct)
+                        jeOUT12.BaseObjectID = fp.ID
                         jeOUT12.Import = -fp.BaseImport
                         jeOUT12.SubGroup = transferSubGrup
                         jeOUT12.Deposit = fp.BaseDeposit
@@ -118,7 +119,8 @@ Public Class FinancialProduct
                         Dim jeIN12 As New JournalEntry()
                         jeIN12.Concept = String.Format(Locate("{0}. Traspàs del dipòsit {1} al dipòsit {2}.", CAT), fp.Name, fp.BaseDeposit.Name, fp.Deposit.Name)
                         jeIN12.EntryDate = fp.RegistrationDate.Value
-                        jeIN12.FinancialProduct = fp
+                        jeIN12.BaseObjectName = NameOf(FinancialProduct)
+                        jeIN12.BaseObjectID = fp.ID
                         jeIN12.Import = fp.BaseImport
                         jeIN12.SubGroup = transferSubGrup
                         jeIN12.Deposit = fp.Deposit
@@ -132,7 +134,8 @@ Public Class FinancialProduct
                     Dim jeOUT22 As New JournalEntry()
                     jeOUT22.Concept = String.Format(Locate("{0}. Traspàs del dipòsit {1} al dipòsit {2}.", CAT), fp.Name, fp.Deposit.Name, fp.ProductDeposit.Name)
                     jeOUT22.EntryDate = fp.RegistrationDate.Value
-                    jeOUT22.FinancialProduct = fp
+                    jeOUT22.BaseObjectName = NameOf(FinancialProduct)
+                    jeOUT22.BaseObjectID = fp.ID
                     jeOUT22.Import = -fp.BaseImport
                     jeOUT22.SubGroup = transferSubGrup
                     jeOUT22.Deposit = fp.Deposit
@@ -143,7 +146,8 @@ Public Class FinancialProduct
                     Dim jeIN22 As New JournalEntry()
                     jeIN22.Concept = String.Format(Locate("{0}. Traspàs del dipòsit {1} al dipòsit {2}.", CAT), fp.Name, fp.Deposit.Name, fp.ProductDeposit.Name)
                     jeIN22.EntryDate = fp.RegistrationDate.Value
-                    jeIN22.FinancialProduct = fp
+                    jeIN22.BaseObjectName = NameOf(FinancialProduct)
+                    jeIN22.BaseObjectID = fp.ID
                     jeIN22.Import = fp.BaseImport
                     jeIN22.SubGroup = transferSubGrup
                     jeIN22.Deposit = fp.ProductDeposit
@@ -190,7 +194,8 @@ Public Class FinancialProduct
             ' Check if exists any journal entry out of current fiscal year
             Dim existsJE = From entry In ctx.JournalEntries
                            Where entry.CancelDate IsNot Nothing _
-                           AndAlso entry.FinancialProduct.ID = fp.ID _
+                           AndAlso entry.BaseObjectID = fp.ID _
+                           AndAlso entry.BaseObjectName = NameOf(FinancialProduct) _
                            AndAlso entry.FiscalYear IsNot Nothing
 
             If existsJE.Any() Then
@@ -200,7 +205,8 @@ Public Class FinancialProduct
             For Each entry As JournalEntry In From xEntry In ctx.JournalEntries
                                               Where 1 = 1 AndAlso
                                                   xEntry.CancelDate IsNot Nothing AndAlso
-                                                  xEntry.FinancialProduct.ID = fp.ID
+                                                  xEntry.BaseObjectID = fp.ID AndAlso
+                                                  xEntry.BaseObjectName = NameOf(FinancialProduct)
                 entry.CancelDate = Now
             Next
 
