@@ -52,6 +52,36 @@
     End Function
 
 
+    Public Sub ChangeReadOnly(ByVal ReadOnlyYN As Boolean,
+                              ByVal Collection As System.Windows.Forms.Control.ControlCollection)
+
+        If IsEmpty(Collection) Then
+            Return
+        End If
+
+        For Each controlIdx As Windows.Forms.Control In Collection
+            If TypeOf controlIdx Is TextBox Then
+                Dim oTextBox As TextBox = controlIdx
+                oTextBox.ReadOnly = ReadOnlyYN
+                '
+                Continue For
+            End If
+
+            If TypeOf controlIdx Is System.Windows.Forms.DataGridView Then
+                Dim oDataGrid As System.Windows.Forms.DataGridView = controlIdx
+                oDataGrid.ReadOnly = ReadOnlyYN
+                '
+                Continue For
+            End If
+
+            ChangeReadOnly(ReadOnlyYN, controlIdx.Controls)
+
+        Next
+
+    End Sub
+
+
+
 
     'Public Function CreateItemFromRow(Of T As {Class, New})(ByVal row As DataRow) As T
 

@@ -32,6 +32,8 @@ Partial Class CashFlowEntryEditor
         Me.txtAssetsImport = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.cbDocStatus = New System.Windows.Forms.ComboBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.txtToDate = New CashFlow.TextEditor_Date()
         Me.txtFromDate = New CashFlow.TextEditor_Date()
@@ -46,8 +48,6 @@ Partial Class CashFlowEntryEditor
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.ListBox_Owner1 = New CashFlow.ListBox_Owner()
         Me.ListBox_FinancialProduct1 = New CashFlow.ListBox_FinancialProduct()
-        Me.Label9 = New System.Windows.Forms.Label()
-        Me.cbDocStatus = New System.Windows.Forms.ComboBox()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -71,7 +71,7 @@ Partial Class CashFlowEntryEditor
         '
         Me.txtLiabilities.Location = New System.Drawing.Point(126, 19)
         Me.txtLiabilities.Name = "txtLiabilities"
-        Me.txtLiabilities.Size = New System.Drawing.Size(121, 20)
+        Me.txtLiabilities.Size = New System.Drawing.Size(100, 20)
         Me.txtLiabilities.TabIndex = 0
         '
         'Label4
@@ -114,7 +114,7 @@ Partial Class CashFlowEntryEditor
         '
         Me.txtAssetsImport.Location = New System.Drawing.Point(118, 19)
         Me.txtAssetsImport.Name = "txtAssetsImport"
-        Me.txtAssetsImport.Size = New System.Drawing.Size(121, 20)
+        Me.txtAssetsImport.Size = New System.Drawing.Size(100, 20)
         Me.txtAssetsImport.TabIndex = 0
         '
         'Label8
@@ -143,6 +143,24 @@ Partial Class CashFlowEntryEditor
         Me.GroupBox3.TabIndex = 12
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Informació"
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Location = New System.Drawing.Point(410, 26)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(31, 13)
+        Me.Label9.TabIndex = 48
+        Me.Label9.Text = "Estat"
+        '
+        'cbDocStatus
+        '
+        Me.cbDocStatus.Enabled = False
+        Me.cbDocStatus.FormattingEnabled = True
+        Me.cbDocStatus.Location = New System.Drawing.Point(464, 18)
+        Me.cbDocStatus.Name = "cbDocStatus"
+        Me.cbDocStatus.Size = New System.Drawing.Size(121, 21)
+        Me.cbDocStatus.TabIndex = 47
         '
         'Label5
         '
@@ -201,7 +219,7 @@ Partial Class CashFlowEntryEditor
         '
         Me.txtIncome.Location = New System.Drawing.Point(118, 19)
         Me.txtIncome.Name = "txtIncome"
-        Me.txtIncome.Size = New System.Drawing.Size(121, 20)
+        Me.txtIncome.Size = New System.Drawing.Size(100, 20)
         Me.txtIncome.TabIndex = 0
         '
         'Label1
@@ -228,7 +246,7 @@ Partial Class CashFlowEntryEditor
         '
         Me.txtExpenses.Location = New System.Drawing.Point(118, 17)
         Me.txtExpenses.Name = "txtExpenses"
-        Me.txtExpenses.Size = New System.Drawing.Size(121, 20)
+        Me.txtExpenses.Size = New System.Drawing.Size(100, 20)
         Me.txtExpenses.TabIndex = 0
         '
         'Label2
@@ -271,24 +289,6 @@ Partial Class CashFlowEntryEditor
         Me.ListBox_FinancialProduct1.TabIndex = 40
         Me.ListBox_FinancialProduct1.Value = Nothing
         Me.ListBox_FinancialProduct1.Visible = False
-        '
-        'Label9
-        '
-        Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(410, 26)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(31, 13)
-        Me.Label9.TabIndex = 48
-        Me.Label9.Text = "Estat"
-        '
-        'cbDocStatus
-        '
-        Me.cbDocStatus.Enabled = False
-        Me.cbDocStatus.FormattingEnabled = True
-        Me.cbDocStatus.Location = New System.Drawing.Point(464, 18)
-        Me.cbDocStatus.Name = "cbDocStatus"
-        Me.cbDocStatus.Size = New System.Drawing.Size(121, 21)
-        Me.cbDocStatus.TabIndex = 47
         '
         'CashFlowEntryEditor
         '

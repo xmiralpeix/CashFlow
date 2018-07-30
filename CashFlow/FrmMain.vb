@@ -158,4 +158,14 @@ Public Class FrmMain
                                        frm.Dispose()
                                    End Sub
     End Sub
+
+    Private Sub PlantillesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles PlantillesToolStripMenuItem.Click
+        Dim frm As New FrmEdit()
+        frm.MdiParent = Me
+        frm.Content = New JournalEntryTemplateEditor()
+        frm.Show()
+        AddHandler frm.FormClosed, Sub()
+                                       frm.Dispose()
+                                   End Sub
+    End Sub
 End Class

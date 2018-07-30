@@ -230,6 +230,7 @@
     <Compile Include="Migrations\201807281015363_M019.vb" />
     <Compile Include="Model\Deposit.vb" />
     <Compile Include="Model\FinancialProduct.vb" />
+    <Compile Include="Objects\ObjTypes.vb" />
     <Compile Include="Objects\DocumentStatus.vb" />
     <Compile Include="Reports\Viewer\IPrintContent.vb" />
     <Compile Include="StringExtensions.vb" />
@@ -555,6 +556,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="SQL\PurchaseInvoices.sql" />
     <Content Include="SQL\InvestmentIndexs.sql" />
     <Content Include="SQL\CashFlow.sql" />
   </ItemGroup>

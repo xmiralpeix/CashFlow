@@ -58,6 +58,18 @@ Public Class JournalEntryEditor
             Me.txtImport.Text = Me._entry.Import
             Me.ListBox_SubGroup1.AssignValue(_entry.SubGroup)
 
+            Me.lblCancelled.Visible = Not IsEmpty(_entry.CancelDate)
+
+            If IsEmpty(Me._entry.BaseObjectID) Then
+                Me.cbObjTypes.SelectedValue = NameOf(IsEmpty)
+                Me.txtBaseObjectID.Text = ""
+            Else
+                Me.cbObjTypes.SelectedValue = _entry.BaseObjectName
+                Me.txtBaseObjectID.Text = _entry.BaseObjectID
+            End If
+
+
+            ChangeReadOnly(Not IsEmpty(_entry.CancelDate) OrElse Not IsEmpty(_entry.BaseObjectID), Me.Controls)
 
         Catch ex As Exception
             MsgBox(ex.Message)
@@ -103,6 +115,7 @@ Public Class JournalEntryEditor
     Private Function GetUI() As IContainerControl Implements IEditContent.GetUI
 
         ' Configure controls
+        ObjTypes.ConfigureCombo(Me.cbObjTypes)
         Return Me
 
     End Function

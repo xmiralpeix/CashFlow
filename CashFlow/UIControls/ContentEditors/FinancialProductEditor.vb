@@ -95,6 +95,10 @@ Public Class FinancialProductEditor
             Me.cbDocStatus.SelectedValue = _entry.Status
             Me.cbDocStatus.Enabled = False
 
+            ChangeReadOnly(_entry.Status = Status.Cancelled OrElse _entry.Status = Status.Close, Me.Controls)
+
+
+
         Catch ex As Exception
             MsgBox(ex.Message)
         Finally
@@ -510,4 +514,12 @@ Public Class FinancialProductEditor
         End Try
 
     End Sub
+
+    Private Sub TraspàsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TraspàsToolStripMenuItem.Click
+
+
+
+    End Sub
+
+
 End Class

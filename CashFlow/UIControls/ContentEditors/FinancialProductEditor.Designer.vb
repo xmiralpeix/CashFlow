@@ -41,6 +41,8 @@ Partial Class FinancialProductEditor
         Me.LlistaDePlantillesXToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.ObrirToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CancelarToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CancellarToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PageGeneral = New System.Windows.Forms.TabPage()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.iOwner = New CashFlow.ListBox_Owner()
@@ -61,8 +63,8 @@ Partial Class FinancialProductEditor
         Me.iEvaluation = New CashFlow.ListBox_Evaluation()
         Me.PageDocuments = New System.Windows.Forms.TabPage()
         Me.DbFilesEditor1 = New CashFlow.DBFilesEditor()
-        Me.CancelarToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CancellarToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.TraspàsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TabControl1.SuspendLayout()
         Me.ContextMenuStrip1.SuspendLayout()
         Me.PageGeneral.SuspendLayout()
@@ -138,6 +140,7 @@ Partial Class FinancialProductEditor
         '
         'txtID
         '
+        Me.txtID.Enabled = False
         Me.txtID.Location = New System.Drawing.Point(106, 15)
         Me.txtID.Name = "txtID"
         Me.txtID.ReadOnly = True
@@ -176,9 +179,9 @@ Partial Class FinancialProductEditor
         '
         'ContextMenuStrip1
         '
-        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CashFlowNewEntryToolStripMenuItem, Me.ListaDeEntradasDeCashFlowToolStripMenuItem, Me.NovaPlantillaToolStripMenuItem, Me.LlistaDePlantillesXToolStripMenuItem, Me.ToolStripSeparator1, Me.ObrirToolStripMenuItem, Me.CancelarToolStripMenuItem, Me.CancellarToolStripMenuItem})
+        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CashFlowNewEntryToolStripMenuItem, Me.ListaDeEntradasDeCashFlowToolStripMenuItem, Me.NovaPlantillaToolStripMenuItem, Me.LlistaDePlantillesXToolStripMenuItem, Me.ToolStripSeparator1, Me.ObrirToolStripMenuItem, Me.CancelarToolStripMenuItem, Me.CancellarToolStripMenuItem, Me.ToolStripSeparator2, Me.TraspàsToolStripMenuItem})
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(268, 186)
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(268, 214)
         '
         'CashFlowNewEntryToolStripMenuItem
         '
@@ -214,6 +217,18 @@ Partial Class FinancialProductEditor
         Me.ObrirToolStripMenuItem.Name = "ObrirToolStripMenuItem"
         Me.ObrirToolStripMenuItem.Size = New System.Drawing.Size(267, 22)
         Me.ObrirToolStripMenuItem.Text = "Obrir"
+        '
+        'CancelarToolStripMenuItem
+        '
+        Me.CancelarToolStripMenuItem.Name = "CancelarToolStripMenuItem"
+        Me.CancelarToolStripMenuItem.Size = New System.Drawing.Size(267, 22)
+        Me.CancelarToolStripMenuItem.Text = "Tancar"
+        '
+        'CancellarToolStripMenuItem
+        '
+        Me.CancellarToolStripMenuItem.Name = "CancellarToolStripMenuItem"
+        Me.CancellarToolStripMenuItem.Size = New System.Drawing.Size(267, 22)
+        Me.CancellarToolStripMenuItem.Text = "Cancel·lar"
         '
         'PageGeneral
         '
@@ -425,17 +440,16 @@ Partial Class FinancialProductEditor
         Me.DbFilesEditor1.Size = New System.Drawing.Size(774, 259)
         Me.DbFilesEditor1.TabIndex = 0
         '
-        'CancelarToolStripMenuItem
+        'ToolStripSeparator2
         '
-        Me.CancelarToolStripMenuItem.Name = "CancelarToolStripMenuItem"
-        Me.CancelarToolStripMenuItem.Size = New System.Drawing.Size(267, 22)
-        Me.CancelarToolStripMenuItem.Text = "Tancar"
+        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(264, 6)
         '
-        'CancellarToolStripMenuItem
+        'TraspàsToolStripMenuItem
         '
-        Me.CancellarToolStripMenuItem.Name = "CancellarToolStripMenuItem"
-        Me.CancellarToolStripMenuItem.Size = New System.Drawing.Size(267, 22)
-        Me.CancellarToolStripMenuItem.Text = "Cancel·lar"
+        Me.TraspàsToolStripMenuItem.Name = "TraspàsToolStripMenuItem"
+        Me.TraspàsToolStripMenuItem.Size = New System.Drawing.Size(267, 22)
+        Me.TraspàsToolStripMenuItem.Text = "Traspàs"
         '
         'FinancialProductEditor
         '
@@ -497,4 +511,6 @@ Partial Class FinancialProductEditor
     Friend WithEvents chkManualProductDeposit As CheckBox
     Friend WithEvents CancelarToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents CancellarToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator2 As ToolStripSeparator
+    Friend WithEvents TraspàsToolStripMenuItem As ToolStripMenuItem
 End Class

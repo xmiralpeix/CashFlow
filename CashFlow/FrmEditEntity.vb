@@ -56,7 +56,10 @@ Public Class FrmEdit
         Me.pContentUI.ResumeLayout(False)
         Me.ResumeLayout(False)
 
+
     End Sub
+
+
 
     Public Sub ChangeUpdatingWhenValueChanged(collection As System.Windows.Forms.Control.ControlCollection)
 

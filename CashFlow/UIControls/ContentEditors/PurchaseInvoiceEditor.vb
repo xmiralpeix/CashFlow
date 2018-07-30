@@ -13,7 +13,7 @@ Public Class PurchaseInvoiceEditor
 
     Private ReadOnly Property Table As String Implements IEditContent.Table
         Get
-            Return NameOf(CashFlow.CashFlowContext.Deposits)
+            Return NameOf(CashFlow.CashFlowContext.PurchaseInvoices)
         End Get
     End Property
 
@@ -215,8 +215,9 @@ Public Class PurchaseInvoiceEditor
                 ' ADD
                 FillEntry(ctx)
                 ctx.PurchaseInvoices.Add(_entry)
-                _entry.CreateJournalEntry(ctx)
                 '
+                ctx.SaveChanges()
+                _entry.AddJournalEntry(ctx)
                 ctx.SaveChanges()
 
             End If

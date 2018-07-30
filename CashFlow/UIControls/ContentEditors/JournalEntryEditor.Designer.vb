@@ -36,10 +36,14 @@ Partial Class JournalEntryEditor
         Me.lblExpenses = New System.Windows.Forms.ToolStripStatusLabel()
         Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.lblBalance = New System.Windows.Forms.ToolStripStatusLabel()
-        Me.txtEntryDate = New CashFlow.TextEditor_Date()
-        Me.ListBox_SubGroup1 = New CashFlow.ListBox_SubGroup()
-        Me.ListBox_Deposit1 = New CashFlow.ListBox_Deposit()
         Me.chkDeposit = New System.Windows.Forms.CheckBox()
+        Me.lblCancelled = New System.Windows.Forms.Label()
+        Me.txtBaseObjectID = New System.Windows.Forms.TextBox()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.cbObjTypes = New System.Windows.Forms.ComboBox()
+        Me.ListBox_Deposit1 = New CashFlow.ListBox_Deposit()
+        Me.ListBox_SubGroup1 = New CashFlow.ListBox_SubGroup()
+        Me.txtEntryDate = New CashFlow.TextEditor_Date()
         Me.StatusStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -108,6 +112,7 @@ Partial Class JournalEntryEditor
         '
         'txtID
         '
+        Me.txtID.Enabled = False
         Me.txtID.Location = New System.Drawing.Point(130, 9)
         Me.txtID.Name = "txtID"
         Me.txtID.ReadOnly = True
@@ -159,32 +164,6 @@ Partial Class JournalEntryEditor
         Me.lblBalance.Size = New System.Drawing.Size(67, 17)
         Me.lblBalance.Text = "Saldo: 0.00"
         '
-        'txtEntryDate
-        '
-        Me.txtEntryDate.Location = New System.Drawing.Point(130, 34)
-        Me.txtEntryDate.Name = "txtEntryDate"
-        Me.txtEntryDate.Size = New System.Drawing.Size(118, 24)
-        Me.txtEntryDate.TabIndex = 56
-        Me.txtEntryDate.Value = Nothing
-        '
-        'ListBox_SubGroup1
-        '
-        Me.ListBox_SubGroup1.EntitiesScopeCollection = Nothing
-        Me.ListBox_SubGroup1.Location = New System.Drawing.Point(130, 60)
-        Me.ListBox_SubGroup1.Name = "ListBox_SubGroup1"
-        Me.ListBox_SubGroup1.Size = New System.Drawing.Size(425, 21)
-        Me.ListBox_SubGroup1.TabIndex = 57
-        Me.ListBox_SubGroup1.Value = Nothing
-        '
-        'ListBox_Deposit1
-        '
-        Me.ListBox_Deposit1.EntitiesScopeCollection = Nothing
-        Me.ListBox_Deposit1.Location = New System.Drawing.Point(130, 87)
-        Me.ListBox_Deposit1.Name = "ListBox_Deposit1"
-        Me.ListBox_Deposit1.Size = New System.Drawing.Size(425, 21)
-        Me.ListBox_Deposit1.TabIndex = 59
-        Me.ListBox_Deposit1.Value = Nothing
-        '
         'chkDeposit
         '
         Me.chkDeposit.AutoSize = True
@@ -195,10 +174,79 @@ Partial Class JournalEntryEditor
         Me.chkDeposit.Text = "Dipòsit"
         Me.chkDeposit.UseVisualStyleBackColor = True
         '
+        'lblCancelled
+        '
+        Me.lblCancelled.AutoSize = True
+        Me.lblCancelled.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblCancelled.ForeColor = System.Drawing.Color.Red
+        Me.lblCancelled.Location = New System.Drawing.Point(465, 12)
+        Me.lblCancelled.Name = "lblCancelled"
+        Me.lblCancelled.Size = New System.Drawing.Size(82, 13)
+        Me.lblCancelled.TabIndex = 61
+        Me.lblCancelled.Text = "CANCEL·LAT"
+        Me.lblCancelled.Visible = False
+        '
+        'txtBaseObjectID
+        '
+        Me.txtBaseObjectID.Enabled = False
+        Me.txtBaseObjectID.Location = New System.Drawing.Point(257, 164)
+        Me.txtBaseObjectID.Name = "txtBaseObjectID"
+        Me.txtBaseObjectID.ReadOnly = True
+        Me.txtBaseObjectID.Size = New System.Drawing.Size(100, 20)
+        Me.txtBaseObjectID.TabIndex = 62
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Location = New System.Drawing.Point(13, 171)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(40, 13)
+        Me.Label9.TabIndex = 64
+        Me.Label9.Text = "Orígen"
+        '
+        'cbObjTypes
+        '
+        Me.cbObjTypes.Enabled = False
+        Me.cbObjTypes.FormattingEnabled = True
+        Me.cbObjTypes.Location = New System.Drawing.Point(130, 164)
+        Me.cbObjTypes.Name = "cbObjTypes"
+        Me.cbObjTypes.Size = New System.Drawing.Size(121, 21)
+        Me.cbObjTypes.TabIndex = 63
+        '
+        'ListBox_Deposit1
+        '
+        Me.ListBox_Deposit1.EntitiesScopeCollection = Nothing
+        Me.ListBox_Deposit1.Location = New System.Drawing.Point(130, 87)
+        Me.ListBox_Deposit1.Name = "ListBox_Deposit1"
+        Me.ListBox_Deposit1.Size = New System.Drawing.Size(425, 21)
+        Me.ListBox_Deposit1.TabIndex = 59
+        Me.ListBox_Deposit1.Value = Nothing
+        '
+        'ListBox_SubGroup1
+        '
+        Me.ListBox_SubGroup1.EntitiesScopeCollection = Nothing
+        Me.ListBox_SubGroup1.Location = New System.Drawing.Point(130, 60)
+        Me.ListBox_SubGroup1.Name = "ListBox_SubGroup1"
+        Me.ListBox_SubGroup1.Size = New System.Drawing.Size(425, 21)
+        Me.ListBox_SubGroup1.TabIndex = 57
+        Me.ListBox_SubGroup1.Value = Nothing
+        '
+        'txtEntryDate
+        '
+        Me.txtEntryDate.Location = New System.Drawing.Point(130, 34)
+        Me.txtEntryDate.Name = "txtEntryDate"
+        Me.txtEntryDate.Size = New System.Drawing.Size(118, 24)
+        Me.txtEntryDate.TabIndex = 56
+        Me.txtEntryDate.Value = Nothing
+        '
         'JournalEntryEditor
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.Label9)
+        Me.Controls.Add(Me.cbObjTypes)
+        Me.Controls.Add(Me.txtBaseObjectID)
+        Me.Controls.Add(Me.lblCancelled)
         Me.Controls.Add(Me.chkDeposit)
         Me.Controls.Add(Me.ListBox_Deposit1)
         Me.Controls.Add(Me.ListBox_SubGroup1)
@@ -238,4 +286,8 @@ Partial Class JournalEntryEditor
     Friend WithEvents chkDeposit As CheckBox
     Friend WithEvents ToolStripStatusLabel2 As ToolStripStatusLabel
     Friend WithEvents ToolStripStatusLabel1 As ToolStripStatusLabel
+    Friend WithEvents lblCancelled As Label
+    Friend WithEvents txtBaseObjectID As TextBox
+    Friend WithEvents Label9 As Label
+    Friend WithEvents cbObjTypes As ComboBox
 End Class

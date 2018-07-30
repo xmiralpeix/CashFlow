@@ -204,7 +204,7 @@ Public Class FinancialProduct
 
             For Each entry As JournalEntry In From xEntry In ctx.JournalEntries
                                               Where 1 = 1 AndAlso
-                                                  xEntry.CancelDate IsNot Nothing AndAlso
+                                                  xEntry.CancelDate Is Nothing AndAlso
                                                   xEntry.BaseObjectID = fp.ID AndAlso
                                                   xEntry.BaseObjectName = NameOf(FinancialProduct)
                 entry.CancelDate = Now

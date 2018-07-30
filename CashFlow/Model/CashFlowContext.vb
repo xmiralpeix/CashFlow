@@ -70,7 +70,26 @@ Public Class PurchaseInvoice
         Status = DocumentStatus.Status.Open
     End Sub
 
-    Public Sub CreateJournalEntry(ByRef ctx As CashFlowContext)
+    Public Sub AddJournalEntry(ByRef ctx As CashFlowContext)
+
+        If Me.ID = 0 Then
+            Throw New Exception(Locate("Es requereix de codi de compra per crear el moviment contable.", CAT))
+        End If
+
+        ctx.Deposits.Attach(Me.Deposit)
+        ctx.SubGroups.Attach(Me.SubGroup)
+
+        Dim je As New JournalEntry
+        je.BaseObjectID = Me.ID
+        je.BaseObjectName = NameOf(PurchaseInvoice)
+        je.Concept = Me.Concept
+        je.CreationDate = Now
+        je.Deposit = Me.Deposit
+        je.EntryDate = Me.DocDate
+        je.Import = Me.Import
+        je.SubGroup = Me.SubGroup
+        '
+        ctx.JournalEntries.Add(je)
 
     End Sub
 
