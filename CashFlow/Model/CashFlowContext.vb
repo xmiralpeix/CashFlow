@@ -86,7 +86,7 @@ Public Class PurchaseInvoice
         je.CreationDate = Now
         je.Deposit = Me.Deposit
         je.EntryDate = Me.DocDate
-        je.Import = Me.Import
+        je.Import = -Me.Import
         je.SubGroup = Me.SubGroup
         '
         ctx.JournalEntries.Add(je)
