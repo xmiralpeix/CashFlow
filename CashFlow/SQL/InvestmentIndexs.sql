@@ -14,9 +14,7 @@ SELECT O.Name
   INNER JOIN Owners O WITH (NOLOCK) ON  O.ID = c.Owner_ID
   where 1 = 1 
   AND COALESCE(ToDate, GETDATE() + 1) >= GETDATE()
-  AND "Status" = 0
-  AND "IncomeImport" > 0
-  AND "AssetsImport" > 0 )
+  AND "Status" = 0)
 
 SELECT Name
 	, Concept

@@ -9,25 +9,25 @@ Namespace Migrations
         Public Overrides Sub Up()
             DropForeignKey("dbo.JournalEntries", "FinancialProduct_ID", "dbo.FinancialProducts")
             DropIndex("dbo.JournalEntries", New String() { "FinancialProduct_ID" })
-            CreateTable(
-                "dbo.MontlyReceipts",
-                Function(c) New With
-                    {
-                        .ID = c.Int(nullable := False, identity := True),
-                        .Name = c.String(maxLength := 100),
-                        .CreationDate = c.DateTime(nullable := False),
-                        .Status = c.Int(nullable := False),
-                        .Import = c.Decimal(nullable := False, precision := 18, scale := 2),
-                        .Comments = c.String(unicode := false, storeType := "text"),
-                        .Deposit_ID = c.Int(),
-                        .Owner_ID = c.Int()
-                    }) _
-                .PrimaryKey(Function(t) t.ID) _
-                .ForeignKey("dbo.Deposits", Function(t) t.Deposit_ID) _
-                .ForeignKey("dbo.Owners", Function(t) t.Owner_ID) _
-                .Index(Function(t) t.Deposit_ID) _
-                .Index(Function(t) t.Owner_ID)
-            
+            'CreateTable(
+            '    "dbo.MontlyReceipts",
+            '    Function(c) New With
+            '        {
+            '            .ID = c.Int(nullable := False, identity := True),
+            '            .Name = c.String(maxLength := 100),
+            '            .CreationDate = c.DateTime(nullable := False),
+            '            .Status = c.Int(nullable := False),
+            '            .Import = c.Decimal(nullable := False, precision := 18, scale := 2),
+            '            .Comments = c.String(unicode := false, storeType := "text"),
+            '            .Deposit_ID = c.Int(),
+            '            .Owner_ID = c.Int()
+            '        }) _
+            '    .PrimaryKey(Function(t) t.ID) _
+            '    .ForeignKey("dbo.Deposits", Function(t) t.Deposit_ID) _
+            '    .ForeignKey("dbo.Owners", Function(t) t.Owner_ID) _
+            '    .Index(Function(t) t.Deposit_ID) _
+            '    .Index(Function(t) t.Owner_ID)
+
             AddColumn("dbo.JournalEntries", "BaseObjectName", Function(c) c.String())
             AddColumn("dbo.JournalEntries", "BaseObjectID", Function(c) c.Int(nullable := False))
             DropColumn("dbo.JournalEntries", "FinancialProduct_ID")
