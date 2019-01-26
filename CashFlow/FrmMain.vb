@@ -168,4 +168,8 @@ Public Class FrmMain
                                        frm.Dispose()
                                    End Sub
     End Sub
+
+    Private Sub FrmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+    End Sub
 End Class
