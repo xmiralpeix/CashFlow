@@ -320,5 +320,15 @@ Public Class PurchaseInvoiceEditor
 
     End Function
 
+    Private Sub CancellarToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CancellarToolStripMenuItem.Click
 
+        Try
+
+
+            PurchaseInvoice.Cancel()
+        Catch ex As Exception
+
+        End Try
+
+    End Sub
 End Class

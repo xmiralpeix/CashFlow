@@ -264,4 +264,43 @@ Public Class JournalEntryEditor
         Return col
 
     End Function
+
+    Private Sub CopiarToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CopiarToolStripMenuItem.Click
+
+        If IsEmpty(Me._entry.ID) Then
+            MsgBox(Locate("Opció disponible només en mode de consulta", CAT))
+            Return
+        End If
+
+        If Not IsEmpty(Me._entry.CancelDate) Then
+            MsgBox(Locate("Aquest assentament està cancel·lat.", CAT))
+            Return
+        End If
+
+        If Not IsEmpty(Me._entry.BaseObjectID) Then
+            MsgBox(Locate("Aquest assentament ja té un orígen.", CAT))
+            Return
+        End If
+
+        Using ctx As New CashFlowContext()
+
+        End Using
+
+
+    End Sub
+
+    Private Sub CancellarToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CancellarToolStripMenuItem.Click
+        If IsEmpty(Me._entry.ID) Then
+            MsgBox(Locate("Opció disponible només en mode de consulta", CAT))
+            Return
+        End If
+
+        Try
+            JournalEntry.Cancel(_entry.ID)
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        Finally
+            LoadFormByID(_entry.ID)
+        End Try
+    End Sub
 End Class

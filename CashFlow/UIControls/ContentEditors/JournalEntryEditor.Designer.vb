@@ -22,6 +22,7 @@ Partial Class JournalEntryEditor
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.txtImport = New System.Windows.Forms.TextBox()
         Me.chkImport = New System.Windows.Forms.CheckBox()
@@ -44,7 +45,11 @@ Partial Class JournalEntryEditor
         Me.ListBox_Deposit1 = New CashFlow.ListBox_Deposit()
         Me.ListBox_SubGroup1 = New CashFlow.ListBox_SubGroup()
         Me.txtEntryDate = New CashFlow.TextEditor_Date()
+        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.CopiarToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CancellarToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StatusStrip1.SuspendLayout()
+        Me.ContextMenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'Label1
@@ -239,6 +244,24 @@ Partial Class JournalEntryEditor
         Me.txtEntryDate.TabIndex = 56
         Me.txtEntryDate.Value = Nothing
         '
+        'ContextMenuStrip1
+        '
+        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CopiarToolStripMenuItem, Me.CancellarToolStripMenuItem})
+        Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(219, 70)
+        '
+        'CopiarToolStripMenuItem
+        '
+        Me.CopiarToolStripMenuItem.Name = "CopiarToolStripMenuItem"
+        Me.CopiarToolStripMenuItem.Size = New System.Drawing.Size(218, 22)
+        Me.CopiarToolStripMenuItem.Text = "Copiar a factura de compra"
+        '
+        'CancellarToolStripMenuItem
+        '
+        Me.CancellarToolStripMenuItem.Name = "CancellarToolStripMenuItem"
+        Me.CancellarToolStripMenuItem.Size = New System.Drawing.Size(218, 22)
+        Me.CancellarToolStripMenuItem.Text = "Cancel·lar"
+        '
         'JournalEntryEditor
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -264,6 +287,7 @@ Partial Class JournalEntryEditor
         Me.Size = New System.Drawing.Size(565, 248)
         Me.StatusStrip1.ResumeLayout(False)
         Me.StatusStrip1.PerformLayout()
+        Me.ContextMenuStrip1.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -290,4 +314,7 @@ Partial Class JournalEntryEditor
     Friend WithEvents txtBaseObjectID As TextBox
     Friend WithEvents Label9 As Label
     Friend WithEvents cbObjTypes As ComboBox
+    Friend WithEvents ContextMenuStrip1 As ContextMenuStrip
+    Friend WithEvents CopiarToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents CancellarToolStripMenuItem As ToolStripMenuItem
 End Class

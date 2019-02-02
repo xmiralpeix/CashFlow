@@ -211,40 +211,7 @@ End Class
 
 
 
-Public Class JournalEntry
-    Implements IJournalEntry
 
-    <Key>
-    <DatabaseGenerated(DatabaseGeneratedOption.Identity)>
-    Public Property ID As Integer Implements IJournalEntry.ID
-
-    <MaxLength(100)>
-    Public Property ExternalID As String
-
-    '
-    Public Property CreationDate As System.DateTime Implements IJournalEntry.CreationDate
-    Public Property EntryDate As System.DateTime Implements IJournalEntry.EntryDate
-    Public Property CancelDate As System.DateTime? Implements IJournalEntry.CancelDate
-    '
-    Public Property FiscalYear As Integer? Implements IJournalEntry.FiscalYear ' NULL in current period
-    '
-    'Public Property FinancialProduct As FinancialProduct Implements IJournalEntry.FinancialProduct ' Optional Field
-    Public Property Deposit As Deposit Implements IJournalEntry.Deposit ' Cash / FinancialDeposit
-    '
-    Public Property SubGroup As SubGroup Implements IJournalEntry.SubGroup
-    '
-    Public Property Concept As System.String Implements IJournalEntry.Concept
-    Public Property Import As System.Double Implements IJournalEntry.Import
-    Public Property Validated As System.Boolean Implements IJournalEntry.Validated
-
-    Public Property BaseObjectName As String Implements IJournalEntry.BaseObjectName
-    Public Property BaseObjectID As Integer Implements IJournalEntry.BaseObjectID
-
-
-    Public Sub New()
-        Me.CreationDate = Now
-    End Sub
-End Class
 
 
 ' Templates of Journal Entries
