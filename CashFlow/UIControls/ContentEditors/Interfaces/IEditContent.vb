@@ -14,6 +14,8 @@ Public Interface IEditContent
                             ByRef invalidControl As Control) As Boolean
     Sub SaveEntry()
 
+
+
 End Interface
 
 Public Interface IFindBehaviour

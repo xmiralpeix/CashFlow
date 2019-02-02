@@ -209,6 +209,7 @@ Public Class CashFlowEntryEditor
 
     End Sub
 
+
     Public Function CanDelete(ByVal ctx As CashFlow.CashFlowContext,
                               ByRef msgError As String,
                               ByVal OwnerIDs As IEnumerable(Of Integer)) As Boolean
@@ -291,7 +292,6 @@ Public Class CashFlowEntryEditor
         Return col
 
     End Function
-
 
 
 End Class

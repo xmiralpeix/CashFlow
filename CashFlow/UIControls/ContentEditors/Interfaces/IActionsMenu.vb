@@ -5,6 +5,7 @@
     '
     Event DeleteObject()
     Event DuplicateObject()
+    Event CancelObject()
 
 End Interface
 

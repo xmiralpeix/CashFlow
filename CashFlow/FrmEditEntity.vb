@@ -149,6 +149,9 @@ Public Class FrmEdit
             Case TypeOf (appEvent) Is LastAppEvent : MoveToLast()
             Case TypeOf (appEvent) Is PrintAppEvent : ProcessPrintBehaviour()
             Case TypeOf (appEvent) Is MoveToIDAppEvent : MoveToID(DirectCast(appEvent, MoveToIDAppEvent).ID)
+            Case TypeOf (appEvent) Is CancelAppEvent : ProcessCancel()
+            Case TypeOf (appEvent) Is DeleteAppEvent : ProcessDelete()
+            Case TypeOf (appEvent) Is DuplicateAppEvent : ProcessDuplicate()
         End Select
 
     End Sub
@@ -199,6 +202,39 @@ Public Class FrmEdit
     Private Sub MoveToNew()
         Me._ID = Nothing
         MoveToCurrentID()
+    End Sub
+
+    Private Sub ProcessCancel()
+
+        If Me.Status <> eStatus.Consulting Then
+            MsgBox(Locate("Només es pot cancel·lar en mode de consulta.", CAT))
+            Return
+        End If
+
+        DirectCast(Content, ICancelContent).Cancel()
+
+    End Sub
+
+    Private Sub ProcessDelete()
+
+        If Me.Status <> eStatus.Consulting Then
+            MsgBox(Locate("Només es pot eliminar en mode de consulta.", CAT))
+            Return
+        End If
+
+        DirectCast(Content, IDeleteContent).Delete()
+
+    End Sub
+
+    Private Sub ProcessDuplicate()
+
+        If Me.Status <> eStatus.Consulting Then
+            MsgBox(Locate("Només es pot duplicar en mode de consulta.", CAT))
+            Return
+        End If
+
+        DirectCast(Content, IDuplicateContent).Duplicate()
+
     End Sub
 
     Public Sub MoveToPrevious()
@@ -294,6 +330,10 @@ Public Class FrmEdit
                     Case NameOf(PrintAppEvent) : ApplicationEvents.ChangeToPrint.Attach(Me)
                 End Select
             Next
+            ' Actions Menu
+            If TypeOf Content Is ICancelContent Then ApplicationEvents.ProcessCancel.Attach(Me)
+            If TypeOf Content Is IDeleteContent Then ApplicationEvents.ProcessDelete.Attach(Me)
+            If TypeOf Content Is IDuplicateContent Then ApplicationEvents.ProcessDuplicate.Attach(Me)
             '
             ApplicationEvents.RefreshStatus(Me)
 
@@ -312,6 +352,10 @@ Public Class FrmEdit
         ApplicationEvents.ChangeToNext.Detach(Me)
         ApplicationEvents.ChangeToLast.Detach(Me)
         ApplicationEvents.ChangeToPrint.Detach(Me)
+        '
+        ApplicationEvents.ProcessDelete.Detach(Me)
+        ApplicationEvents.ProcessDuplicate.Detach(Me)
+        ApplicationEvents.ProcessCancel.Detach(Me)
         '
         ApplicationEvents.RefreshStatus(Me)
 

@@ -272,6 +272,9 @@
     <Compile Include="UIControls\ContentEditors\EvaluationEditor.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="UIControls\ContentEditors\Interfaces\IDeleteContent.vb" />
+    <Compile Include="UIControls\ContentEditors\Interfaces\IDuplicate.vb" />
+    <Compile Include="UIControls\ContentEditors\Interfaces\ICancelContent.vb" />
     <Compile Include="UIControls\ContentEditors\Interfaces\IFindContent.vb" />
     <Compile Include="Migrations\Configuration.vb" />
     <Compile Include="Model\CashFlowContext.vb" />

@@ -1,4 +1,7 @@
-﻿Public Class JournalEntry
+﻿Imports System.ComponentModel.DataAnnotations
+Imports System.ComponentModel.DataAnnotations.Schema
+
+Public Class JournalEntry
     Implements IJournalEntry
 
     <Key>
@@ -57,4 +60,7 @@
         End Using
 
     End Sub
+
+
+
 End Class

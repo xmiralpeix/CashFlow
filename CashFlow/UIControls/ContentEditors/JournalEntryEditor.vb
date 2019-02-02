@@ -1,7 +1,7 @@
 ﻿Imports CashFlow
 
 Public Class JournalEntryEditor
-    Implements IEditContent, IFindContent
+    Implements IEditContent, IFindContent, ICancelContent
 
     Private ReadOnly Property IEditContent_Text As String Implements IEditContent.Text
         Get
@@ -58,7 +58,14 @@ Public Class JournalEntryEditor
             Me.txtImport.Text = Me._entry.Import
             Me.ListBox_SubGroup1.AssignValue(_entry.SubGroup)
 
-            Me.lblCancelled.Visible = Not IsEmpty(_entry.CancelDate)
+            If Not IsEmpty(_entry.CancelDate) Then
+                Me.txtStatus.Text = Locate("Cancel·lat", CAT)
+            ElseIf Not IsEmpty(_entry.FiscalYear) Then
+                Me.txtStatus.Text = Locate("Tancat", CAT)
+            Else
+                Me.txtStatus.Text = Locate("Obert", CAT)
+            End If
+
 
             If IsEmpty(Me._entry.BaseObjectID) Then
                 Me.cbObjTypes.SelectedValue = NameOf(IsEmpty)
@@ -289,7 +296,7 @@ Public Class JournalEntryEditor
 
     End Sub
 
-    Private Sub CancellarToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CancellarToolStripMenuItem.Click
+    Private Sub ICancelContent_Cancel() Implements ICancelContent.Cancel
         If IsEmpty(Me._entry.ID) Then
             MsgBox(Locate("Opció disponible només en mode de consulta", CAT))
             Return
@@ -303,4 +310,5 @@ Public Class JournalEntryEditor
             LoadFormByID(_entry.ID)
         End Try
     End Sub
+
 End Class

@@ -10,8 +10,9 @@ Public Class ApplicationEvents
     Public Shared ChangeToLast As New LastAppEvent()
     Public Shared ChangeToPrint As New PrintAppEvent()
     Public Shared ChangeToImportExport As New ImportExportAppEvent()
-    Public Shared ChangeToDelete As New DeleteAppEvent()
-    Public Shared ChangeToDuplicate As New DuplicateAppEvent()
+    Public Shared ProcessDelete As New DeleteAppEvent()
+    Public Shared ProcessDuplicate As New DuplicateAppEvent()
+    Public Shared ProcessCancel As New CancelAppEvent()
 
     Private Shared WithEvents _menu As INavigateMenu
     Private Shared WithEvents _actionsMenu As IActionsMenu
@@ -35,8 +36,9 @@ Public Class ApplicationEvents
 
         _actionsMenu = actionsMenu
         '
-        AddHandler _actionsMenu.DeleteObject, Sub() ChangeToDelete.Notify()
-        AddHandler _actionsMenu.DuplicateObject, Sub() ChangeToDuplicate.Notify()
+        AddHandler _actionsMenu.DeleteObject, Sub() ProcessDelete.Notify()
+        AddHandler _actionsMenu.DuplicateObject, Sub() ProcessDuplicate.Notify()
+        AddHandler _actionsMenu.CancelObject, Sub() ProcessCancel.Notify()
 
     End Sub
 
@@ -53,10 +55,13 @@ Public Class ApplicationEvents
         If ChangeToLast.Contains(listener) Then appEventNames.Add(NameOf(INavigateMenu.LastObject))
         If ChangeToPrint.Contains(listener) Then appEventNames.Add(NameOf(INavigateMenu.Print))
         If ChangeToPrint.Contains(listener) Then appEventNames.Add(NameOf(INavigateMenu.ImportExport))
-        If ChangeToDelete.Contains(listener) Then appEventNames.Add(NameOf(IActionsMenu.DeleteObject))
-        If ChangeToDuplicate.Contains(listener) Then appEventNames.Add(NameOf(IActionsMenu.DuplicateObject))
+        '
+        If ProcessDelete.Contains(listener) Then appEventNames.Add(NameOf(IActionsMenu.DeleteObject))
+        If ProcessDuplicate.Contains(listener) Then appEventNames.Add(NameOf(IActionsMenu.DuplicateObject))
+        If ProcessCancel.Contains(listener) Then appEventNames.Add(NameOf(IActionsMenu.CancelObject))
         '
         _menu.PerformAvailable(appEventNames.ToArray())
+        _actionsMenu.PerformAvailable(appEventNames.ToArray())
 
     End Sub
 
@@ -189,6 +194,14 @@ Public Class DuplicateAppEvent
 
     Public Sub New()
         MyBase.New(NameOf(DuplicateAppEvent))
+    End Sub
+End Class
+
+Public Class CancelAppEvent
+    Inherits AppEvent
+
+    Public Sub New()
+        MyBase.New(NameOf(CancelAppEvent))
     End Sub
 End Class
 

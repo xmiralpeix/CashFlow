@@ -325,7 +325,7 @@ Public Class PurchaseInvoiceEditor
         Try
 
 
-            PurchaseInvoice.Cancel()
+            'PurchaseInvoice.Cancel()
         Catch ex As Exception
 
         End Try
