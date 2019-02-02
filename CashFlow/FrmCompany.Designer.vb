@@ -32,8 +32,8 @@ Partial Class FrmCompany
         Me.btnLoad = New System.Windows.Forms.Button()
         Me.grid = New System.Windows.Forms.DataGridView()
         Me.pButtons = New System.Windows.Forms.Panel()
-        Me.btnOK = New System.Windows.Forms.Button()
         Me.btnCancel = New System.Windows.Forms.Button()
+        Me.btnOK = New System.Windows.Forms.Button()
         CType(Me.grid, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pButtons.SuspendLayout()
         Me.SuspendLayout()
@@ -126,15 +126,6 @@ Partial Class FrmCompany
         Me.pButtons.Size = New System.Drawing.Size(446, 33)
         Me.pButtons.TabIndex = 9
         '
-        'btnOK
-        '
-        Me.btnOK.Location = New System.Drawing.Point(13, 3)
-        Me.btnOK.Name = "btnOK"
-        Me.btnOK.Size = New System.Drawing.Size(75, 23)
-        Me.btnOK.TabIndex = 0
-        Me.btnOK.Text = "OK"
-        Me.btnOK.UseVisualStyleBackColor = True
-        '
         'btnCancel
         '
         Me.btnCancel.Location = New System.Drawing.Point(94, 3)
@@ -143,6 +134,15 @@ Partial Class FrmCompany
         Me.btnCancel.TabIndex = 1
         Me.btnCancel.Text = "Cancelar"
         Me.btnCancel.UseVisualStyleBackColor = True
+        '
+        'btnOK
+        '
+        Me.btnOK.Location = New System.Drawing.Point(13, 3)
+        Me.btnOK.Name = "btnOK"
+        Me.btnOK.Size = New System.Drawing.Size(75, 23)
+        Me.btnOK.TabIndex = 0
+        Me.btnOK.Text = "OK"
+        Me.btnOK.UseVisualStyleBackColor = True
         '
         'FrmCompany
         '
