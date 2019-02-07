@@ -2,6 +2,11 @@
 
     Private Sub btnOK_Click(sender As Object, e As EventArgs) Handles btnOK.Click
 
+        If Me.txtPwd.Text <> "MRB" Then
+            MsgBox("Contraseña incorrecta")
+            Return
+        End If
+
         Me.Hide()
 
         Using frm As New FrmMain()

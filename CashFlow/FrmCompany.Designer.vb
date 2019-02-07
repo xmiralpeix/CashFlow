@@ -76,6 +76,7 @@ Partial Class FrmCompany
         '
         Me.txtPwd.Location = New System.Drawing.Point(294, 18)
         Me.txtPwd.Name = "txtPwd"
+        Me.txtPwd.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
         Me.txtPwd.Size = New System.Drawing.Size(100, 20)
         Me.txtPwd.TabIndex = 3
         '
