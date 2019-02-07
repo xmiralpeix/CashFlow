@@ -1,3 +1,3 @@
 ﻿Public Interface ICancelContent
-    Sub Cancel()
+    Function Cancel(ByRef ResultMsg As String) As Boolean
 End Interface

@@ -1,5 +1,16 @@
 ﻿Public Module mUtils
 
+    Public Function GetSubscribers(Of T)() As List(Of Type)
+        Dim type = GetType(T)
+        Dim subscribers = AppDomain.CurrentDomain.GetAssemblies() _
+                      .SelectMany(Function(x) x.GetTypes()) _
+                      .Where(Function(x) type.IsAssignableFrom(x)).AsEnumerable()
+
+        Return subscribers.Where(Function(x) Not x.IsAbstract)
+
+    End Function
+
+
     Public Const NOTUSEDCHAR As String = "•"
 
     Public Function IsEmpty(ByVal value As Object) As Boolean

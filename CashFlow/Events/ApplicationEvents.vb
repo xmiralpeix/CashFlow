@@ -12,7 +12,8 @@ Public Class ApplicationEvents
     Public Shared ChangeToImportExport As New ImportExportAppEvent()
     Public Shared ProcessDelete As New DeleteAppEvent()
     Public Shared ProcessDuplicate As New DuplicateAppEvent()
-    Public Shared ProcessCancel As New CancelAppEvent()
+    'Public Shared ProcessCancel As New CancelAppEvent()
+    Public Shared ActionProcessCollection As New List(Of EntityActionAppEvent)()
 
     Private Shared WithEvents _menu As INavigateMenu
     Private Shared WithEvents _actionsMenu As IActionsMenu
@@ -36,9 +37,17 @@ Public Class ApplicationEvents
 
         _actionsMenu = actionsMenu
         '
+        For Each subscriberType As Type In GetSubscribers(Of IEntityAction)()
+            Dim specificAction As IEntityAction = Activator.CreateInstance(subscriberType)
+            Dim oAppEvent As New EntityActionAppEvent(specificAction)
+            '
+            AddHandler _actionsMenu.PerformAction, Sub() oAppEvent.Notify()
+            ActionProcessCollection.Add(oAppEvent)
+        Next
+
         AddHandler _actionsMenu.DeleteObject, Sub() ProcessDelete.Notify()
         AddHandler _actionsMenu.DuplicateObject, Sub() ProcessDuplicate.Notify()
-        AddHandler _actionsMenu.CancelObject, Sub() ProcessCancel.Notify()
+        'AddHandler _actionsMenu.CancelObject, Sub() ProcessCancel.Notify()
 
     End Sub
 
@@ -58,7 +67,14 @@ Public Class ApplicationEvents
         '
         If ProcessDelete.Contains(listener) Then appEventNames.Add(NameOf(IActionsMenu.DeleteObject))
         If ProcessDuplicate.Contains(listener) Then appEventNames.Add(NameOf(IActionsMenu.DuplicateObject))
-        If ProcessCancel.Contains(listener) Then appEventNames.Add(NameOf(IActionsMenu.CancelObject))
+        '
+        For Each oAppEvent As AppEvent In ActionProcessCollection
+            If oAppEvent.Contains(listener) Then
+                appEventNames.Add(oAppEvent.Name)
+            End If
+        Next
+        'If ProcessCancel.Contains(listener) Then appEventNames.Add(NameOf(IActionsMenu.CancelObject))
+
         '
         _menu.PerformAvailable(appEventNames.ToArray())
         _actionsMenu.PerformAvailable(appEventNames.ToArray())
@@ -186,6 +202,19 @@ Public Class DeleteAppEvent
 
     Public Sub New()
         MyBase.New(NameOf(DeleteAppEvent))
+    End Sub
+End Class
+
+
+Public Class EntityActionAppEvent
+    Inherits AppEvent
+
+    ReadOnly Property EntityAction As IEntityAction
+
+    Public Sub New(ByVal oAction As IEntityAction)
+        MyBase.New(oAction.VisualName)
+        '
+        _EntityAction = oAction
     End Sub
 End Class
 

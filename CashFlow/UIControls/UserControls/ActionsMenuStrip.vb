@@ -6,11 +6,13 @@ Public Class ActionsMenuStrip
 
     Public Event DeleteObject() Implements IActionsMenu.DeleteObject
     Public Event DuplicateObject() Implements IActionsMenu.DuplicateObject
-    Public Event CancelObject() Implements IActionsMenu.CancelObject
+    Public Event PerformAction() Implements IActionsMenu.PerformAction
+    'Public Event CancelObject() Implements IActionsMenu.CancelObject
 
     Public WithEvents menuDelete As New ToolStripButton()
     Public WithEvents menuDuplicate As New ToolStripButton()
-    Public WithEvents menuCancel As New ToolStripButton()
+    'Public WithEvents menuCancel As New ToolStripButton()
+    'Public MenuCollection As New List(Of ToolStripButton)()
 
     Public Sub New()
         ConfigureControls()
@@ -35,6 +37,7 @@ Public Class ActionsMenuStrip
         Me.menuDelete.Text = Locate("Eliminar", CAT)
         '
         AddHandler Me.menuDelete.Click, Sub() RaiseEvent DeleteObject()
+
 
         '
         'CancelarToolStripMenuItem

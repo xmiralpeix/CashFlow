@@ -5,7 +5,9 @@
     '
     Event DeleteObject()
     Event DuplicateObject()
-    Event CancelObject()
+    'Event CancelObject()
+    '
+    Event PerformAction()
 
 End Interface
 
