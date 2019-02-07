@@ -27,29 +27,5 @@ CashFlow
   Looks up a localized string similar to Nom.
 </summary>
 </member>
-<member name="M:CashFlow.FinancialProduct.OpenProduct(System.Int32)">
- <summary>
- 1. Change status to OPEN
- 2. Create product deposit
- 3. Add imports transfers between deposits until product deposit
- 4. Change status of cashflow entries to OPEN
- </summary>
- <param name="ID"></param>
-</member>
-<member name="M:CashFlow.FinancialProduct.CancelProduct(System.Int32)">
- <summary>
- 1. Change status to cancel
- 2. Cancel journal entries
- 3. Change cashflow entries to cancel
- </summary>
- <param name="ID"></param>
-</member>
-<member name="M:CashFlow.FinancialProduct.CloseProduct(System.Int32)">
- <summary>
- 1. Change status to close
- 3. Change cashflow entries to close
- </summary>
- <param name="ID"></param>
-</member>
 </members>
 </doc>

@@ -17,6 +17,7 @@ C:\Users\merce\Documents\CashFlow\CashFlow\obj\Debug\CashFlow.FrmMain.resources
 C:\Users\merce\Documents\CashFlow\CashFlow\obj\Debug\CashFlow.Migrations.m001.resources
 C:\Users\merce\Documents\CashFlow\CashFlow\obj\Debug\CashFlow.Resources.resources
 C:\Users\merce\Documents\CashFlow\CashFlow\obj\Debug\CashFlow.FrmViewerReport.resources
+C:\Users\merce\Documents\CashFlow\CashFlow\obj\Debug\CashFlow.CashFlowEditor.resources
 C:\Users\merce\Documents\CashFlow\CashFlow\obj\Debug\CashFlow.DepositEditor.resources
 C:\Users\merce\Documents\CashFlow\CashFlow\obj\Debug\CashFlow.FinancialEntityEditor.resources
 C:\Users\merce\Documents\CashFlow\CashFlow\obj\Debug\CashFlow.FinancialProductEditor.resources
@@ -109,19 +110,3 @@ C:\Users\xavim\OneDrive\Documentos\CashFlow\CashFlow\obj\Debug\CashFlow.exe
 C:\Users\xavim\OneDrive\Documentos\CashFlow\CashFlow\obj\Debug\CashFlow.xml
 C:\Users\xavim\OneDrive\Documentos\CashFlow\CashFlow\obj\Debug\CashFlow.pdb
 C:\Users\xavim\OneDrive\Documentos\CashFlow\CashFlow\obj\Debug\CashFlow.Migrations.M008.resources
-C:\Users\merce\Documents\CashFlow\CashFlow\obj\Debug\CashFlow.Migrations.M008.resources
-C:\Users\merce\Documents\CashFlow\CashFlow\obj\Debug\CashFlow.Migrations.M009.resources
-C:\Users\merce\Documents\CashFlow\CashFlow\obj\Debug\CashFlow.Migrations.M010.resources
-C:\Users\merce\Documents\CashFlow\CashFlow\obj\Debug\CashFlow.Migrations.M11.resources
-C:\Users\merce\Documents\CashFlow\CashFlow\obj\Debug\CashFlow.Migrations.M012.resources
-C:\Users\merce\Documents\CashFlow\CashFlow\obj\Debug\CashFlow.Migrations.M013.resources
-C:\Users\merce\Documents\CashFlow\CashFlow\obj\Debug\CashFlow.Migrations.M014.resources
-C:\Users\merce\Documents\CashFlow\CashFlow\obj\Debug\CashFlow.Migrations.M015.resources
-C:\Users\merce\Documents\CashFlow\CashFlow\obj\Debug\CashFlow.Migrations.M016.resources
-C:\Users\merce\Documents\CashFlow\CashFlow\obj\Debug\CashFlow.Migrations.M017.resources
-C:\Users\merce\Documents\CashFlow\CashFlow\obj\Debug\CashFlow.CashFlowEntryEditor.resources
-C:\Users\merce\Documents\CashFlow\CashFlow\obj\Debug\CashFlow.JournalEntryTemplateEditor.resources
-C:\Users\merce\Documents\CashFlow\CashFlow\obj\Debug\CashFlow.DBFilesEditor.resources
-C:\Users\merce\Documents\CashFlow\CashFlow\obj\Debug\CashFlow.Migrations.M018.resources
-C:\Users\merce\Documents\CashFlow\CashFlow\obj\Debug\CashFlow.Migrations.M019.resources
-C:\Users\merce\Documents\CashFlow\CashFlow\obj\Debug\CashFlow.PurchaseInvoiceEditor.resources

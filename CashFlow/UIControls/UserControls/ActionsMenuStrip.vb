@@ -6,12 +6,13 @@ Public Class ActionsMenuStrip
 
     Public Event DeleteObject() Implements IActionsMenu.DeleteObject
     Public Event DuplicateObject() Implements IActionsMenu.DuplicateObject
-
-    Private WithEvents DuplicarToolStripMenuItem As New System.Windows.Forms.ToolStripMenuItem()
-    Private WithEvents EliminarToolStripMenuItem As New System.Windows.Forms.ToolStripMenuItem()
+    Public Event PerformAction() Implements IActionsMenu.PerformAction
+    'Public Event CancelObject() Implements IActionsMenu.CancelObject
 
     Public WithEvents menuDelete As New ToolStripButton()
     Public WithEvents menuDuplicate As New ToolStripButton()
+    'Public WithEvents menuCancel As New ToolStripButton()
+    'Public MenuCollection As New List(Of ToolStripButton)()
 
     Public Sub New()
         ConfigureControls()
@@ -22,17 +23,32 @@ Public Class ActionsMenuStrip
         '
         'DuplicarToolStripMenuItem
         '
-        Me.DuplicarToolStripMenuItem.Name = "DuplicarToolStripMenuItem"
-        Me.DuplicarToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.DuplicarToolStripMenuItem.Text = "Duplicar"
+        Me.menuDuplicate.Name = "DuplicarToolStripMenuItem"
+        Me.menuDuplicate.Size = New System.Drawing.Size(152, 22)
+        Me.menuDuplicate.Text = Locate("Duplicar", CAT)
+        '
+        AddHandler Me.menuDuplicate.Click, Sub() RaiseEvent DuplicateObject()
+
         '
         'EliminarToolStripMenuItem
         '
-        Me.EliminarToolStripMenuItem.Name = "EliminarToolStripMenuItem"
-        Me.EliminarToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.EliminarToolStripMenuItem.Text = "Eliminar"
+        Me.menuDelete.Name = "EliminarToolStripMenuItem"
+        Me.menuDelete.Size = New System.Drawing.Size(152, 22)
+        Me.menuDelete.Text = Locate("Eliminar", CAT)
+        '
+        AddHandler Me.menuDelete.Click, Sub() RaiseEvent DeleteObject()
 
-        Me.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DuplicarToolStripMenuItem, Me.EliminarToolStripMenuItem})
+
+        '
+        'CancelarToolStripMenuItem
+        '
+        Me.menuCancel.Name = "EliminarToolStripMenuItem"
+        Me.menuCancel.Size = New System.Drawing.Size(152, 22)
+        Me.menuCancel.Text = Locate("Cancel·lar", CAT)
+        '
+        AddHandler Me.menuCancel.Click, Sub() RaiseEvent CancelObject()
+
+        Me.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.menuDuplicate, Me.menuDelete, menuCancel})
         Me.Text = Locate("Dades", CAT)
 
         DisableAll()
@@ -49,17 +65,18 @@ Public Class ActionsMenuStrip
             Select Case appEventName
                 Case NameOf(IActionsMenu.DeleteObject) : menuDelete.Enabled = True
                 Case NameOf(IActionsMenu.DuplicateObject) : menuDuplicate.Enabled = True
+                Case NameOf(IActionsMenu.CancelObject) : menuCancel.Enabled = True
             End Select
         Next
 
     End Sub
 
     Private _toolStripButtonItems = From item In Me.DropDownItems
-                                    Where item.GetType Is GetType(ToolStripMenuItem)
+                                    Where item.GetType Is GetType(ToolStripButton)
 
     Public Sub DisableAll() Implements IActionsMenu.DisableAll
 
-        For Each item As ToolStripMenuItem In _toolStripButtonItems
+        For Each item As ToolStripButton In _toolStripButtonItems
             item.Enabled = False
         Next
 

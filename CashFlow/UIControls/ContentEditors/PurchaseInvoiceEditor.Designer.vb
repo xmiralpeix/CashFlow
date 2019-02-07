@@ -22,6 +22,7 @@ Partial Class PurchaseInvoiceEditor
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
@@ -43,7 +44,10 @@ Partial Class PurchaseInvoiceEditor
         Me.Label1 = New System.Windows.Forms.Label()
         Me.txtID = New System.Windows.Forms.TextBox()
         Me.txtConcept = New System.Windows.Forms.TextBox()
+        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.CancellarToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GroupBox1.SuspendLayout()
+        Me.ContextMenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'GroupBox1
@@ -247,6 +251,18 @@ Partial Class PurchaseInvoiceEditor
         Me.txtConcept.Size = New System.Drawing.Size(297, 20)
         Me.txtConcept.TabIndex = 6
         '
+        'ContextMenuStrip1
+        '
+        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CancellarToolStripMenuItem})
+        Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(153, 48)
+        '
+        'CancellarToolStripMenuItem
+        '
+        Me.CancellarToolStripMenuItem.Name = "CancellarToolStripMenuItem"
+        Me.CancellarToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.CancellarToolStripMenuItem.Text = "Cancel·lar"
+        '
         'PurchaseInvoiceEditor
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -256,6 +272,7 @@ Partial Class PurchaseInvoiceEditor
         Me.Size = New System.Drawing.Size(553, 285)
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
+        Me.ContextMenuStrip1.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -280,4 +297,6 @@ Partial Class PurchaseInvoiceEditor
     Friend WithEvents Label9 As Label
     Friend WithEvents Label10 As Label
     Friend WithEvents cbDocStatus As ComboBox
+    Friend WithEvents ContextMenuStrip1 As ContextMenuStrip
+    Friend WithEvents CancellarToolStripMenuItem As ToolStripMenuItem
 End Class

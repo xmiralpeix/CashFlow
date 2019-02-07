@@ -1,14 +1,11 @@
-﻿/****** Script for SelectTopNRows command from SSMS  ******/
+﻿WITH TSQL AS (
 
-WITH TIPC AS (
-	SELECT COALESCE(MAX(Value), 0) AS IPC FROM IPCs WHERE COALESCE(ToDate, CAST(GETDATE() + 1 AS DATE)) >=  CAST(GETDATE() AS DATE)
-)
-, TSQL AS (
 SELECT O.Name
 	, Concept
+	, c.FromDate
 	, ToDate	
 	, CAST( (IncomeImport / AssetsImport) * 100 as decimal(3,2)) AS "MIndex"
-	
+	, coalesce((SELECT SUM([Value]) as IPC FROM [IPCs] I where 1 = 1 AND I.FromDate > c.FromDate and I.FromDate <= cast(coalesce(c.ToDate, getdate()) as date)), 0) AS IPC
 	
   FROM [CashFlowEntries] C WITH (NOLOCK)
   INNER JOIN Owners O WITH (NOLOCK) ON  O.ID = c.Owner_ID
@@ -16,11 +13,11 @@ SELECT O.Name
   AND COALESCE(ToDate, GETDATE() + 1) >= GETDATE()
   AND "Status" = 0)
 
-SELECT Name
-	, Concept
-	, ToDate	
-	, "MIndex" - (TIPC.IPC / 12) AS "MonthlyIndex"
-	, ("MIndex" * 12) - TIPC.IPC  AS "YearlyIndex"
+SELECT Name as "Propietari"
+	, Concept as "Concepte"
+	, "MIndex" - (IPC / 12) AS "Índex mensual"
+	, ("MIndex" * 12) - IPC  AS "Índex anual"
+	, IPC
+    , FromDate as "Data inici"	
+	, ToDate as "Data fi"	
 	FROM TSQL
-	INNER JOIN TIPC ON 1 = 1
-

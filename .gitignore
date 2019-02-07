@@ -247,6 +247,8 @@ ModelManifest.xml
 
 # Other
 dotfuscated/
+bin/
+obj/
 *.zip
 *.rar
 *.7z

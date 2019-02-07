@@ -80,6 +80,10 @@
     </Reference>
     <Reference Include="Microsoft.ReportViewer.Common, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
     <Reference Include="Microsoft.ReportViewer.WinForms, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Ninject, Version=3.3.4.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.3.3.4\lib\net45\Ninject.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
@@ -109,6 +113,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Events\ApplicationEvents.vb" />
+    <Compile Include="Events\IEntityAction.vb" />
     <Compile Include="FrmCalendar.Designer.vb">
       <DependentUpon>FrmCalendar.vb</DependentUpon>
     </Compile>
@@ -230,6 +235,7 @@
     <Compile Include="Migrations\201807281015363_M019.vb" />
     <Compile Include="Model\Deposit.vb" />
     <Compile Include="Model\FinancialProduct.vb" />
+    <Compile Include="Model\JournalEntry.vb" />
     <Compile Include="Objects\ObjTypes.vb" />
     <Compile Include="Objects\DocumentStatus.vb" />
     <Compile Include="Reports\Viewer\IPrintContent.vb" />
@@ -271,6 +277,9 @@
     <Compile Include="UIControls\ContentEditors\EvaluationEditor.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="UIControls\ContentEditors\Interfaces\IDeleteContent.vb" />
+    <Compile Include="UIControls\ContentEditors\Interfaces\IDuplicate.vb" />
+    <Compile Include="UIControls\ContentEditors\Interfaces\ICancelContent.vb" />
     <Compile Include="UIControls\ContentEditors\Interfaces\IFindContent.vb" />
     <Compile Include="Migrations\Configuration.vb" />
     <Compile Include="Model\CashFlowContext.vb" />
@@ -556,6 +565,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="SQL\IPCs.sql" />
     <Content Include="SQL\PurchaseInvoices.sql" />
     <Content Include="SQL\InvestmentIndexs.sql" />
     <Content Include="SQL\CashFlow.sql" />

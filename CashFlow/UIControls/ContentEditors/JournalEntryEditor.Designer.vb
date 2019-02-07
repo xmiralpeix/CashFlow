@@ -22,6 +22,7 @@ Partial Class JournalEntryEditor
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.txtImport = New System.Windows.Forms.TextBox()
         Me.chkImport = New System.Windows.Forms.CheckBox()
@@ -37,14 +38,18 @@ Partial Class JournalEntryEditor
         Me.ToolStripStatusLabel1 = New System.Windows.Forms.ToolStripStatusLabel()
         Me.lblBalance = New System.Windows.Forms.ToolStripStatusLabel()
         Me.chkDeposit = New System.Windows.Forms.CheckBox()
-        Me.lblCancelled = New System.Windows.Forms.Label()
         Me.txtBaseObjectID = New System.Windows.Forms.TextBox()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.cbObjTypes = New System.Windows.Forms.ComboBox()
+        Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.CopiarToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.txtStatus = New System.Windows.Forms.TextBox()
         Me.ListBox_Deposit1 = New CashFlow.ListBox_Deposit()
         Me.ListBox_SubGroup1 = New CashFlow.ListBox_SubGroup()
         Me.txtEntryDate = New CashFlow.TextEditor_Date()
         Me.StatusStrip1.SuspendLayout()
+        Me.ContextMenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'Label1
@@ -174,22 +179,10 @@ Partial Class JournalEntryEditor
         Me.chkDeposit.Text = "Dipòsit"
         Me.chkDeposit.UseVisualStyleBackColor = True
         '
-        'lblCancelled
-        '
-        Me.lblCancelled.AutoSize = True
-        Me.lblCancelled.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblCancelled.ForeColor = System.Drawing.Color.Red
-        Me.lblCancelled.Location = New System.Drawing.Point(465, 12)
-        Me.lblCancelled.Name = "lblCancelled"
-        Me.lblCancelled.Size = New System.Drawing.Size(82, 13)
-        Me.lblCancelled.TabIndex = 61
-        Me.lblCancelled.Text = "CANCEL·LAT"
-        Me.lblCancelled.Visible = False
-        '
         'txtBaseObjectID
         '
         Me.txtBaseObjectID.Enabled = False
-        Me.txtBaseObjectID.Location = New System.Drawing.Point(257, 164)
+        Me.txtBaseObjectID.Location = New System.Drawing.Point(257, 165)
         Me.txtBaseObjectID.Name = "txtBaseObjectID"
         Me.txtBaseObjectID.ReadOnly = True
         Me.txtBaseObjectID.Size = New System.Drawing.Size(100, 20)
@@ -198,7 +191,7 @@ Partial Class JournalEntryEditor
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(13, 171)
+        Me.Label9.Location = New System.Drawing.Point(13, 172)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(40, 13)
         Me.Label9.TabIndex = 64
@@ -208,10 +201,40 @@ Partial Class JournalEntryEditor
         '
         Me.cbObjTypes.Enabled = False
         Me.cbObjTypes.FormattingEnabled = True
-        Me.cbObjTypes.Location = New System.Drawing.Point(130, 164)
+        Me.cbObjTypes.Location = New System.Drawing.Point(130, 165)
         Me.cbObjTypes.Name = "cbObjTypes"
         Me.cbObjTypes.Size = New System.Drawing.Size(121, 21)
         Me.cbObjTypes.TabIndex = 63
+        '
+        'ContextMenuStrip1
+        '
+        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CopiarToolStripMenuItem})
+        Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(219, 48)
+        '
+        'CopiarToolStripMenuItem
+        '
+        Me.CopiarToolStripMenuItem.Name = "CopiarToolStripMenuItem"
+        Me.CopiarToolStripMenuItem.Size = New System.Drawing.Size(218, 22)
+        Me.CopiarToolStripMenuItem.Text = "Copiar a factura de compra"
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(387, 16)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(31, 13)
+        Me.Label2.TabIndex = 65
+        Me.Label2.Text = "Estat"
+        '
+        'txtStatus
+        '
+        Me.txtStatus.Enabled = False
+        Me.txtStatus.Location = New System.Drawing.Point(424, 13)
+        Me.txtStatus.Name = "txtStatus"
+        Me.txtStatus.ReadOnly = True
+        Me.txtStatus.Size = New System.Drawing.Size(131, 20)
+        Me.txtStatus.TabIndex = 66
         '
         'ListBox_Deposit1
         '
@@ -243,10 +266,11 @@ Partial Class JournalEntryEditor
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.txtStatus)
+        Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label9)
         Me.Controls.Add(Me.cbObjTypes)
         Me.Controls.Add(Me.txtBaseObjectID)
-        Me.Controls.Add(Me.lblCancelled)
         Me.Controls.Add(Me.chkDeposit)
         Me.Controls.Add(Me.ListBox_Deposit1)
         Me.Controls.Add(Me.ListBox_SubGroup1)
@@ -264,6 +288,7 @@ Partial Class JournalEntryEditor
         Me.Size = New System.Drawing.Size(565, 248)
         Me.StatusStrip1.ResumeLayout(False)
         Me.StatusStrip1.PerformLayout()
+        Me.ContextMenuStrip1.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -286,8 +311,11 @@ Partial Class JournalEntryEditor
     Friend WithEvents chkDeposit As CheckBox
     Friend WithEvents ToolStripStatusLabel2 As ToolStripStatusLabel
     Friend WithEvents ToolStripStatusLabel1 As ToolStripStatusLabel
-    Friend WithEvents lblCancelled As Label
     Friend WithEvents txtBaseObjectID As TextBox
     Friend WithEvents Label9 As Label
     Friend WithEvents cbObjTypes As ComboBox
+    Friend WithEvents ContextMenuStrip1 As ContextMenuStrip
+    Friend WithEvents CopiarToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents Label2 As Label
+    Friend WithEvents txtStatus As TextBox
 End Class
