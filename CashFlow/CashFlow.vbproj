@@ -245,6 +245,12 @@
     <Compile Include="_API\Objects\ObjTypes.vb" />
     <Compile Include="_API\Objects\DocumentStatus.vb" />
     <Compile Include="_API\StringExtensions.vb" />
+    <Compile Include="_WinForms\FrmNewTransfer.Designer.vb">
+      <DependentUpon>FrmNewTransfer.vb</DependentUpon>
+    </Compile>
+    <Compile Include="_WinForms\FrmNewTransfer.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="_WinForms\UIControls\ContentEditors\CashFlowEntryEditor.Designer.vb">
       <DependentUpon>CashFlowEntryEditor.vb</DependentUpon>
     </Compile>
@@ -318,6 +324,9 @@
     <Compile Include="_WinForms\UIControls\ContentEditors\Interfaces\INavigationMenu\INewID.vb" />
     <Compile Include="_WinForms\UIControls\ContentEditors\Interfaces\INavigationMenu\IProcessSearchBehaviour.vb" />
     <Compile Include="_WinForms\UIControls\ContentEditors\Interfaces\INavigationMenu\IReloadID.vb" />
+    <Compile Include="_WinForms\UIControls\ContentEditors\IRequestDataCollection.vb" />
+    <Compile Include="_WinForms\UIControls\ContentEditors\ISubGrupCollection.vb" />
+    <Compile Include="_WinForms\UIControls\ContentEditors\ITransferInfo.vb" />
     <Compile Include="_WinForms\UIControls\ContentEditors\JournalEntryEditor.Designer.vb">
       <DependentUpon>JournalEntryEditor.vb</DependentUpon>
     </Compile>

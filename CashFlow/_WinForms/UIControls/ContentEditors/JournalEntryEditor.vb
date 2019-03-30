@@ -34,7 +34,7 @@ Public Class JournalEntryEditor
     Public Sub LoadFormByID(ID? As Integer) Implements IEditContent.LoadFormByID
 
         Try
-
+            Dim keepValues As Boolean = False
             If ID.HasValue Then
 
                 Using ctx As New CashFlow.CashFlowContext()
@@ -46,17 +46,28 @@ Public Class JournalEntryEditor
 
             Else
                 _entry = New JournalEntry()
+                keepValues = True
             End If
 
             Me.txtID.Text = _entry.ID
-            Me.txtConcept.Text = _entry.Concept
-            Me.ListBox_Deposit1.AssignValue(_entry.Deposit)
+            If keepValues AndAlso Me.chkConcept.Checked Then
+                Me.txtConcept.Text = _entry.Concept
+            End If
+            If keepValues AndAlso Me.chkDeposit.Checked Then
+                Me.ListBox_Deposit1.AssignValue(_entry.Deposit)
+            End If
             AddHandler ListBox_Deposit1.OnEntityChanged, Sub() LoadBalance()
             '
-            Me.txtEntryDate.AssignValue(If(IsEmpty(_entry.EntryDate), DirectCast(Nothing, DateTime?), _entry.EntryDate))
+            If keepValues AndAlso Me.chkDate.Checked Then
+                Me.txtEntryDate.AssignValue(If(IsEmpty(_entry.EntryDate), DirectCast(Nothing, DateTime?), _entry.EntryDate))
+            End If
             'Me.ListBox_FinancialProduct1.AssignValue(_entry.FinancialProduct)
-            Me.txtImport.Text = Me._entry.Import
-            Me.ListBox_SubGroup1.AssignValue(_entry.SubGroup)
+            If keepValues AndAlso Me.chkImport.Checked Then
+                Me.txtImport.Text = Me._entry.Import
+            End If
+            If keepValues AndAlso Me.chkGroup.Checked Then
+                Me.ListBox_SubGroup1.AssignValue(_entry.SubGroup)
+            End If
 
             If Not IsEmpty(_entry.CancelDate) Then
                 Me.txtStatus.Text = Locate("Cancel·lat", CAT)
@@ -296,13 +307,50 @@ Public Class JournalEntryEditor
             JournalEntry.Cancel(_entry.ID)
             ResultMsg.Push(Locate("Moviment cancel·lat correctament", CAT))
             Return True
-            'LoadFormByID(_entry.ID)
         Catch ex As Exception
             ResultMsg.Push(ex.Message)
             Return False
             'LoadFormByID(_entry.ID)
         End Try
     End Function
+
+    Private Sub CrearUnTraspàsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CrearUnTraspàsToolStripMenuItem.Click
+
+        ' Movement from deposit to deposit
+
+        Dim transInfo As ITransferInfo = CreateInstance(Of IRequestDataCollection).RequestTransferInfo
+        '
+
+        Using ctx As New CashFlowContext()
+
+            Dim oEntryOut As IJournalEntry = CreateInstance(Of IJournalEntry)()
+            oEntryOut.Concept = transInfo.Concept
+            oEntryOut.Deposit = transInfo.FromDeposit
+            oEntryOut.EntryDate = transInfo.EntryDate
+            oEntryOut.Import = transInfo.Import
+            oEntryOut.SubGroup = CreateInstance(Of ISubGrupCollection).Transfer
+            '
+            ctx.JournalEntries.Add(oEntryOut)
+
+            Dim oEntryIn As IJournalEntry = CreateInstance(Of IJournalEntry)()
+            oEntryIn.Concept = transInfo.Concept
+            oEntryIn.Deposit = transInfo.ToDeposit
+            oEntryIn.EntryDate = transInfo.EntryDate
+            oEntryIn.Import = transInfo.Import * -1
+            oEntryIn.SubGroup = CreateInstance(Of ISubGrupCollection).Transfer
+            oEntryIn.BaseObjectID = oEntryOut.ID
+            oEntryIn.BaseObjectName = NameOf(IJournalEntry)
+            '
+            ctx.JournalEntries.Add(oEntryIn)
+
+            ctx.SaveChanges()
+
+        End Using
+
+
+    End Sub
+
+
 
 
     'Public Function Cancel(ByRef ResultMsg As Stack(Of String)) As Boolean Implements ICancelContent.Cancel

@@ -26,9 +26,9 @@ Partial Class JournalEntryEditor
         Me.Label1 = New System.Windows.Forms.Label()
         Me.txtImport = New System.Windows.Forms.TextBox()
         Me.chkImport = New System.Windows.Forms.CheckBox()
-        Me.CheckBox4 = New System.Windows.Forms.CheckBox()
-        Me.CheckBox2 = New System.Windows.Forms.CheckBox()
-        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
+        Me.chkConcept = New System.Windows.Forms.CheckBox()
+        Me.chkGroup = New System.Windows.Forms.CheckBox()
+        Me.chkDate = New System.Windows.Forms.CheckBox()
         Me.txtConcept = New System.Windows.Forms.TextBox()
         Me.txtID = New System.Windows.Forms.TextBox()
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
@@ -48,6 +48,7 @@ Partial Class JournalEntryEditor
         Me.ListBox_Deposit1 = New CashFlow.ListBox_Deposit()
         Me.ListBox_SubGroup1 = New CashFlow.ListBox_SubGroup()
         Me.txtEntryDate = New CashFlow.TextEditor_Date()
+        Me.CrearUnTraspàsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StatusStrip1.SuspendLayout()
         Me.ContextMenuStrip1.SuspendLayout()
         Me.SuspendLayout()
@@ -66,7 +67,7 @@ Partial Class JournalEntryEditor
         Me.txtImport.Location = New System.Drawing.Point(131, 138)
         Me.txtImport.Name = "txtImport"
         Me.txtImport.Size = New System.Drawing.Size(100, 20)
-        Me.txtImport.TabIndex = 48
+        Me.txtImport.TabIndex = 5
         '
         'chkImport
         '
@@ -75,45 +76,49 @@ Partial Class JournalEntryEditor
         Me.chkImport.Name = "chkImport"
         Me.chkImport.Size = New System.Drawing.Size(55, 17)
         Me.chkImport.TabIndex = 47
+        Me.chkImport.TabStop = False
         Me.chkImport.Text = "Import"
         Me.chkImport.UseVisualStyleBackColor = True
         '
-        'CheckBox4
+        'chkConcept
         '
-        Me.CheckBox4.AutoSize = True
-        Me.CheckBox4.Location = New System.Drawing.Point(14, 117)
-        Me.CheckBox4.Name = "CheckBox4"
-        Me.CheckBox4.Size = New System.Drawing.Size(72, 17)
-        Me.CheckBox4.TabIndex = 46
-        Me.CheckBox4.Text = "Concepte"
-        Me.CheckBox4.UseVisualStyleBackColor = True
+        Me.chkConcept.AutoSize = True
+        Me.chkConcept.Location = New System.Drawing.Point(14, 117)
+        Me.chkConcept.Name = "chkConcept"
+        Me.chkConcept.Size = New System.Drawing.Size(72, 17)
+        Me.chkConcept.TabIndex = 46
+        Me.chkConcept.TabStop = False
+        Me.chkConcept.Text = "Concepte"
+        Me.chkConcept.UseVisualStyleBackColor = True
         '
-        'CheckBox2
+        'chkGroup
         '
-        Me.CheckBox2.AutoSize = True
-        Me.CheckBox2.Location = New System.Drawing.Point(14, 67)
-        Me.CheckBox2.Name = "CheckBox2"
-        Me.CheckBox2.Size = New System.Drawing.Size(49, 17)
-        Me.CheckBox2.TabIndex = 44
-        Me.CheckBox2.Text = "Grup"
-        Me.CheckBox2.UseVisualStyleBackColor = True
+        Me.chkGroup.AutoSize = True
+        Me.chkGroup.Location = New System.Drawing.Point(14, 67)
+        Me.chkGroup.Name = "chkGroup"
+        Me.chkGroup.Size = New System.Drawing.Size(49, 17)
+        Me.chkGroup.TabIndex = 44
+        Me.chkGroup.TabStop = False
+        Me.chkGroup.Text = "Grup"
+        Me.chkGroup.UseVisualStyleBackColor = True
         '
-        'CheckBox1
+        'chkDate
         '
-        Me.CheckBox1.AutoSize = True
-        Me.CheckBox1.Location = New System.Drawing.Point(14, 41)
-        Me.CheckBox1.Name = "CheckBox1"
-        Me.CheckBox1.Size = New System.Drawing.Size(49, 17)
-        Me.CheckBox1.TabIndex = 43
-        Me.CheckBox1.Text = "Data"
-        Me.CheckBox1.UseVisualStyleBackColor = True
+        Me.chkDate.AutoSize = True
+        Me.chkDate.Location = New System.Drawing.Point(14, 41)
+        Me.chkDate.Name = "chkDate"
+        Me.chkDate.Size = New System.Drawing.Size(49, 17)
+        Me.chkDate.TabIndex = 43
+        Me.chkDate.TabStop = False
+        Me.chkDate.Text = "Data"
+        Me.chkDate.UseVisualStyleBackColor = True
         '
         'txtConcept
         '
         Me.txtConcept.Location = New System.Drawing.Point(130, 114)
         Me.txtConcept.Name = "txtConcept"
         Me.txtConcept.Size = New System.Drawing.Size(417, 20)
-        Me.txtConcept.TabIndex = 38
+        Me.txtConcept.TabIndex = 4
         '
         'txtID
         '
@@ -122,7 +127,7 @@ Partial Class JournalEntryEditor
         Me.txtID.Name = "txtID"
         Me.txtID.ReadOnly = True
         Me.txtID.Size = New System.Drawing.Size(100, 20)
-        Me.txtID.TabIndex = 36
+        Me.txtID.TabIndex = 0
         '
         'StatusStrip1
         '
@@ -176,6 +181,7 @@ Partial Class JournalEntryEditor
         Me.chkDeposit.Name = "chkDeposit"
         Me.chkDeposit.Size = New System.Drawing.Size(58, 17)
         Me.chkDeposit.TabIndex = 60
+        Me.chkDeposit.TabStop = False
         Me.chkDeposit.Text = "Dipòsit"
         Me.chkDeposit.UseVisualStyleBackColor = True
         '
@@ -186,7 +192,7 @@ Partial Class JournalEntryEditor
         Me.txtBaseObjectID.Name = "txtBaseObjectID"
         Me.txtBaseObjectID.ReadOnly = True
         Me.txtBaseObjectID.Size = New System.Drawing.Size(100, 20)
-        Me.txtBaseObjectID.TabIndex = 62
+        Me.txtBaseObjectID.TabIndex = 7
         '
         'Label9
         '
@@ -204,13 +210,13 @@ Partial Class JournalEntryEditor
         Me.cbObjTypes.Location = New System.Drawing.Point(130, 165)
         Me.cbObjTypes.Name = "cbObjTypes"
         Me.cbObjTypes.Size = New System.Drawing.Size(121, 21)
-        Me.cbObjTypes.TabIndex = 63
+        Me.cbObjTypes.TabIndex = 6
         '
         'ContextMenuStrip1
         '
-        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CopiarToolStripMenuItem})
+        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CopiarToolStripMenuItem, Me.CrearUnTraspàsToolStripMenuItem})
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(219, 48)
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(219, 70)
         '
         'CopiarToolStripMenuItem
         '
@@ -242,7 +248,7 @@ Partial Class JournalEntryEditor
         Me.ListBox_Deposit1.Location = New System.Drawing.Point(130, 87)
         Me.ListBox_Deposit1.Name = "ListBox_Deposit1"
         Me.ListBox_Deposit1.Size = New System.Drawing.Size(425, 21)
-        Me.ListBox_Deposit1.TabIndex = 59
+        Me.ListBox_Deposit1.TabIndex = 3
         Me.ListBox_Deposit1.Value = Nothing
         '
         'ListBox_SubGroup1
@@ -251,7 +257,7 @@ Partial Class JournalEntryEditor
         Me.ListBox_SubGroup1.Location = New System.Drawing.Point(130, 60)
         Me.ListBox_SubGroup1.Name = "ListBox_SubGroup1"
         Me.ListBox_SubGroup1.Size = New System.Drawing.Size(425, 21)
-        Me.ListBox_SubGroup1.TabIndex = 57
+        Me.ListBox_SubGroup1.TabIndex = 2
         Me.ListBox_SubGroup1.Value = Nothing
         '
         'txtEntryDate
@@ -259,8 +265,14 @@ Partial Class JournalEntryEditor
         Me.txtEntryDate.Location = New System.Drawing.Point(130, 34)
         Me.txtEntryDate.Name = "txtEntryDate"
         Me.txtEntryDate.Size = New System.Drawing.Size(118, 24)
-        Me.txtEntryDate.TabIndex = 56
+        Me.txtEntryDate.TabIndex = 1
         Me.txtEntryDate.Value = Nothing
+        '
+        'CrearUnTraspàsToolStripMenuItem
+        '
+        Me.CrearUnTraspàsToolStripMenuItem.Name = "CrearUnTraspàsToolStripMenuItem"
+        Me.CrearUnTraspàsToolStripMenuItem.Size = New System.Drawing.Size(218, 22)
+        Me.CrearUnTraspàsToolStripMenuItem.Text = "Nou traspàs"
         '
         'JournalEntryEditor
         '
@@ -279,9 +291,9 @@ Partial Class JournalEntryEditor
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.txtImport)
         Me.Controls.Add(Me.chkImport)
-        Me.Controls.Add(Me.CheckBox4)
-        Me.Controls.Add(Me.CheckBox2)
-        Me.Controls.Add(Me.CheckBox1)
+        Me.Controls.Add(Me.chkConcept)
+        Me.Controls.Add(Me.chkGroup)
+        Me.Controls.Add(Me.chkDate)
         Me.Controls.Add(Me.txtConcept)
         Me.Controls.Add(Me.txtID)
         Me.Name = "JournalEntryEditor"
@@ -296,9 +308,9 @@ Partial Class JournalEntryEditor
     Friend WithEvents Label1 As Label
     Friend WithEvents txtImport As TextBox
     Friend WithEvents chkImport As CheckBox
-    Friend WithEvents CheckBox4 As CheckBox
-    Friend WithEvents CheckBox2 As CheckBox
-    Friend WithEvents CheckBox1 As CheckBox
+    Friend WithEvents chkConcept As CheckBox
+    Friend WithEvents chkGroup As CheckBox
+    Friend WithEvents chkDate As CheckBox
     Friend WithEvents txtConcept As TextBox
     Friend WithEvents txtID As TextBox
     Friend WithEvents StatusStrip1 As StatusStrip
@@ -318,4 +330,5 @@ Partial Class JournalEntryEditor
     Friend WithEvents CopiarToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents Label2 As Label
     Friend WithEvents txtStatus As TextBox
+    Friend WithEvents CrearUnTraspàsToolStripMenuItem As ToolStripMenuItem
 End Class

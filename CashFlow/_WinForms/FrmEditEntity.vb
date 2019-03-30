@@ -154,6 +154,7 @@ Public Class FrmEdit
                     resultMsg.ShowMessage()
                     Return
                 End If
+                MoveToCurrentID()
 
             Case TypeOf (appEvent) Is NavigationAppEvent
                 Dim x As NavigationAppEvent = appEvent
@@ -215,22 +216,22 @@ Public Class FrmEdit
         MoveToCurrentID()
     End Sub
 
-    Private Sub ProcessCancel()
+    'Private Sub ProcessCancel()
 
-        If Me.Status <> eStatus.Consulting Then
-            MsgBox(Locate("Només es pot cancel·lar en mode de consulta.", CAT))
-            Return
-        End If
+    '    If Me.Status <> eStatus.Consulting Then
+    '        MsgBox(Locate("Només es pot cancel·lar en mode de consulta.", CAT))
+    '        Return
+    '    End If
 
-        Dim resultMsg As New Stack(Of String)()
-        If Not DirectCast(Content, ICancelContent).Cancel(resultMsg) Then
-            MsgBox(Locate(resultMsg.First(), CAT))
-            Return
-        End If
+    '    Dim resultMsg As New Stack(Of String)()
+    '    If Not DirectCast(Content, ICancelContent).Cancel(resultMsg) Then
+    '        MsgBox(Locate(resultMsg.First(), CAT))
+    '        Return
+    '    End If
 
-        MoveToCurrentID()
+    '    MoveToCurrentID()
 
-    End Sub
+    'End Sub
 
     Private Sub ProcessDelete()
 
