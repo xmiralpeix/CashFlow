@@ -78,8 +78,6 @@
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.ReportViewer.Common, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
-    <Reference Include="Microsoft.ReportViewer.WinForms, Version=12.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
     <Reference Include="Ninject, Version=3.3.4.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <HintPath>..\packages\Ninject.3.3.4\lib\net45\Ninject.dll</HintPath>
       <Private>True</Private>
@@ -112,48 +110,56 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Events\ApplicationEvents.vb" />
-    <Compile Include="Events\IEntityAction.vb" />
-    <Compile Include="FrmCalendar.Designer.vb">
+    <Compile Include="_API\Events\ApplicationEvents.vb" />
+    <Compile Include="_API\Events\IEntityAction.vb" />
+    <Compile Include="_API\Events\INavigationAction.vb" />
+    <Compile Include="_API\IStackMsg.vb" />
+    <Compile Include="Migrations\201902160835528_2019-02-16.Designer.vb">
+      <DependentUpon>201902160835528_2019-02-16.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902160835528_2019-02-16.vb" />
+    <Compile Include="Model\IEntity.vb" />
+    <Compile Include="_API\mSubscribers.vb" />
+    <Compile Include="_WinForms\FrmCalendar.Designer.vb">
       <DependentUpon>FrmCalendar.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmCalendar.vb">
+    <Compile Include="_WinForms\FrmCalendar.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmCompany.Designer.vb">
+    <Compile Include="_WinForms\FrmCompany.Designer.vb">
       <DependentUpon>FrmCompany.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmCompany.vb">
+    <Compile Include="_WinForms\FrmCompany.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmEditEntity.Designer.vb">
+    <Compile Include="_WinForms\FrmEditEntity.Designer.vb">
       <DependentUpon>FrmEditEntity.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmEditEntity.vb">
+    <Compile Include="_WinForms\FrmEditEntity.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmEntries.Designer.vb">
+    <Compile Include="_WinForms\FrmEntries.Designer.vb">
       <DependentUpon>FrmEntries.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmEntries.vb">
+    <Compile Include="_WinForms\FrmEntries.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmFindEntityIDs.Designer.vb">
+    <Compile Include="_WinForms\FrmFindEntityIDs.Designer.vb">
       <DependentUpon>FrmFindEntityIDs.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmFindEntityIDs.vb">
+    <Compile Include="_WinForms\FrmFindEntityIDs.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmGroups.Designer.vb">
+    <Compile Include="_WinForms\FrmGroups.Designer.vb">
       <DependentUpon>FrmGroups.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmGroups.vb">
+    <Compile Include="_WinForms\FrmGroups.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmMain.vb">
+    <Compile Include="_WinForms\FrmMain.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmMain.Designer.vb">
+    <Compile Include="_WinForms\FrmMain.Designer.vb">
       <DependentUpon>FrmMain.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
@@ -236,56 +242,53 @@
     <Compile Include="Model\Deposit.vb" />
     <Compile Include="Model\FinancialProduct.vb" />
     <Compile Include="Model\JournalEntry.vb" />
-    <Compile Include="Objects\ObjTypes.vb" />
-    <Compile Include="Objects\DocumentStatus.vb" />
-    <Compile Include="Reports\Viewer\IPrintContent.vb" />
-    <Compile Include="StringExtensions.vb" />
-    <Compile Include="UIControls\ContentEditors\CashFlowEntryEditor.Designer.vb">
+    <Compile Include="_API\Objects\ObjTypes.vb" />
+    <Compile Include="_API\Objects\DocumentStatus.vb" />
+    <Compile Include="_API\StringExtensions.vb" />
+    <Compile Include="_WinForms\UIControls\ContentEditors\CashFlowEntryEditor.Designer.vb">
       <DependentUpon>CashFlowEntryEditor.vb</DependentUpon>
     </Compile>
-    <Compile Include="UIControls\ContentEditors\CashFlowEntryEditor.vb">
+    <Compile Include="_WinForms\UIControls\ContentEditors\CashFlowEntryEditor.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UIControls\ContentEditors\DepositEditor.Designer.vb">
+    <Compile Include="_WinForms\UIControls\ContentEditors\DepositEditor.Designer.vb">
       <DependentUpon>DepositEditor.vb</DependentUpon>
     </Compile>
-    <Compile Include="UIControls\ContentEditors\DepositEditor.vb">
+    <Compile Include="_WinForms\UIControls\ContentEditors\DepositEditor.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UIControls\ContentEditors\ExternalApplicationEditor.Designer.vb">
+    <Compile Include="_WinForms\UIControls\ContentEditors\ExternalApplicationEditor.Designer.vb">
       <DependentUpon>ExternalApplicationEditor.vb</DependentUpon>
     </Compile>
-    <Compile Include="UIControls\ContentEditors\ExternalApplicationEditor.vb">
+    <Compile Include="_WinForms\UIControls\ContentEditors\ExternalApplicationEditor.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UIControls\ContentEditors\Interfaces\IActionsMenu.vb" />
-    <Compile Include="UIControls\ContentEditors\FinancialEntityEditor.Designer.vb">
+    <Compile Include="_WinForms\UIControls\ContentEditors\Interfaces\IActionsMenu\_IActionMenuBehaviour.vb" />
+    <Compile Include="_WinForms\UIControls\ContentEditors\FinancialEntityEditor.Designer.vb">
       <DependentUpon>FinancialEntityEditor.vb</DependentUpon>
     </Compile>
-    <Compile Include="UIControls\ContentEditors\FinancialEntityEditor.vb">
+    <Compile Include="_WinForms\UIControls\ContentEditors\FinancialEntityEditor.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UIControls\ContentEditors\FinancialProductEditor.Designer.vb">
+    <Compile Include="_WinForms\UIControls\ContentEditors\FinancialProductEditor.Designer.vb">
       <DependentUpon>FinancialProductEditor.vb</DependentUpon>
     </Compile>
-    <Compile Include="UIControls\ContentEditors\FinancialProductEditor.vb">
+    <Compile Include="_WinForms\UIControls\ContentEditors\FinancialProductEditor.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UIControls\ContentEditors\EvaluationEditor.Designer.vb">
+    <Compile Include="_WinForms\UIControls\ContentEditors\EvaluationEditor.Designer.vb">
       <DependentUpon>EvaluationEditor.vb</DependentUpon>
     </Compile>
-    <Compile Include="UIControls\ContentEditors\EvaluationEditor.vb">
+    <Compile Include="_WinForms\UIControls\ContentEditors\EvaluationEditor.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UIControls\ContentEditors\Interfaces\IDeleteContent.vb" />
-    <Compile Include="UIControls\ContentEditors\Interfaces\IDuplicate.vb" />
-    <Compile Include="UIControls\ContentEditors\Interfaces\ICancelContent.vb" />
-    <Compile Include="UIControls\ContentEditors\Interfaces\IFindContent.vb" />
+    <Compile Include="_WinForms\UIControls\ContentEditors\Interfaces\IActionsMenu\IDeleteContent.vb" />
+    <Compile Include="_WinForms\UIControls\ContentEditors\Interfaces\IActionsMenu\ICancelContent.vb" />
+    <Compile Include="_WinForms\UIControls\ContentEditors\Interfaces\IFindContent.vb" />
     <Compile Include="Migrations\Configuration.vb" />
     <Compile Include="Model\CashFlowContext.vb" />
     <Compile Include="Model\IDeposit.vb" />
-    <Compile Include="Model\IJournalEntry.vb" />
-    <Compile Include="mUtils.vb" />
+    <Compile Include="_API\mUtils.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -301,121 +304,115 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="UIControls\ContentEditors\GroupEditor.Designer.vb">
+    <Compile Include="_WinForms\UIControls\ContentEditors\GroupEditor.Designer.vb">
       <DependentUpon>GroupEditor.vb</DependentUpon>
     </Compile>
-    <Compile Include="UIControls\ContentEditors\GroupEditor.vb">
+    <Compile Include="_WinForms\UIControls\ContentEditors\GroupEditor.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UIControls\ContentEditors\Interfaces\INavigateMenu.vb" />
-    <Compile Include="UIControls\ContentEditors\Interfaces\IPrintBehaviour.vb" />
-    <Compile Include="UIControls\ContentEditors\JournalEntryEditor.Designer.vb">
+    <Compile Include="_WinForms\UIControls\ContentEditors\Interfaces\INavigationMenu\_INavigateMenuBehaviour.vb" />
+    <Compile Include="_WinForms\UIControls\ContentEditors\Interfaces\INavigationMenu\IMoveToFirstID.vb" />
+    <Compile Include="_WinForms\UIControls\ContentEditors\Interfaces\INavigationMenu\IMoveToLastID.vb" />
+    <Compile Include="_WinForms\UIControls\ContentEditors\Interfaces\INavigationMenu\IMoveToNextID.vb" />
+    <Compile Include="_WinForms\UIControls\ContentEditors\Interfaces\INavigationMenu\IMoveToPreviousID.vb" />
+    <Compile Include="_WinForms\UIControls\ContentEditors\Interfaces\INavigationMenu\INewID.vb" />
+    <Compile Include="_WinForms\UIControls\ContentEditors\Interfaces\INavigationMenu\IProcessSearchBehaviour.vb" />
+    <Compile Include="_WinForms\UIControls\ContentEditors\Interfaces\INavigationMenu\IReloadID.vb" />
+    <Compile Include="_WinForms\UIControls\ContentEditors\JournalEntryEditor.Designer.vb">
       <DependentUpon>JournalEntryEditor.vb</DependentUpon>
     </Compile>
-    <Compile Include="UIControls\ContentEditors\JournalEntryEditor.vb">
+    <Compile Include="_WinForms\UIControls\ContentEditors\JournalEntryEditor.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UIControls\ContentEditors\JournalEntryTemplateEditor.Designer.vb">
-      <DependentUpon>JournalEntryTemplateEditor.vb</DependentUpon>
-    </Compile>
-    <Compile Include="UIControls\ContentEditors\JournalEntryTemplateEditor.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UIControls\ContentEditors\OwnerEditor.Designer.vb">
+    <Compile Include="_WinForms\UIControls\ContentEditors\OwnerEditor.Designer.vb">
       <DependentUpon>OwnerEditor.vb</DependentUpon>
     </Compile>
-    <Compile Include="UIControls\ContentEditors\OwnerEditor.vb">
+    <Compile Include="_WinForms\UIControls\ContentEditors\OwnerEditor.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UIControls\ContentEditors\PurchaseInvoiceEditor.Designer.vb">
+    <Compile Include="_WinForms\UIControls\ContentEditors\PurchaseInvoiceEditor.Designer.vb">
       <DependentUpon>PurchaseInvoiceEditor.vb</DependentUpon>
     </Compile>
-    <Compile Include="UIControls\ContentEditors\PurchaseInvoiceEditor.vb">
+    <Compile Include="_WinForms\UIControls\ContentEditors\PurchaseInvoiceEditor.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UIControls\ContentEditors\SubGroupEditor.Designer.vb">
+    <Compile Include="_WinForms\UIControls\ContentEditors\SubGroupEditor.Designer.vb">
       <DependentUpon>SubGroupFinder.vb</DependentUpon>
     </Compile>
-    <Compile Include="UIControls\ContentEditors\SubGroupFinder.vb">
+    <Compile Include="_WinForms\UIControls\ContentEditors\SubGroupFinder.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UIControls\ListBoxes\IListBoxEditor.vb" />
-    <Compile Include="UIControls\ListBoxes\ListBox.Designer.vb">
+    <Compile Include="_WinForms\UIControls\ListBoxes\IListBoxEditor.vb" />
+    <Compile Include="_WinForms\UIControls\ListBoxes\ListBox.Designer.vb">
       <DependentUpon>ListBox.vb</DependentUpon>
     </Compile>
-    <Compile Include="UIControls\ListBoxes\ListBox.vb">
+    <Compile Include="_WinForms\UIControls\ListBoxes\ListBox.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UIControls\ListBoxes\ListBox_Deposit.vb">
+    <Compile Include="_WinForms\UIControls\ListBoxes\ListBox_Deposit.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UIControls\ListBoxes\ListBox_FinancialProduct.vb">
+    <Compile Include="_WinForms\UIControls\ListBoxes\ListBox_FinancialProduct.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UIControls\ListBoxes\ListBox_SubGroup.vb">
+    <Compile Include="_WinForms\UIControls\ListBoxes\ListBox_SubGroup.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UIControls\ListBoxes\ListBox_Evaluation.vb">
+    <Compile Include="_WinForms\UIControls\ListBoxes\ListBox_Evaluation.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UIControls\ListBoxes\ListBox_Owner.vb">
+    <Compile Include="_WinForms\UIControls\ListBoxes\ListBox_Owner.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UIControls\ListBoxes\ListBox_FinancialEntity.vb">
+    <Compile Include="_WinForms\UIControls\ListBoxes\ListBox_FinancialEntity.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UIControls\TextBoxes\ITextEditor.vb" />
-    <Compile Include="UIControls\TextBoxes\TextEditor.Designer.vb">
+    <Compile Include="_WinForms\UIControls\TextBoxes\ITextEditor.vb" />
+    <Compile Include="_WinForms\UIControls\TextBoxes\TextEditor.Designer.vb">
       <DependentUpon>TextEditor.vb</DependentUpon>
     </Compile>
-    <Compile Include="UIControls\TextBoxes\TextEditor.vb">
+    <Compile Include="_WinForms\UIControls\TextBoxes\TextEditor.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UIControls\TextBoxes\TextEditor_Date.vb">
+    <Compile Include="_WinForms\UIControls\TextBoxes\TextEditor_Date.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UIControls\UserControls\ActionsMenuStrip.vb">
+    <Compile Include="_WinForms\UIControls\UserControls\ActionsMenuStrip.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="UIControls\UserControls\DBFilesEditor.Designer.vb">
+    <Compile Include="_WinForms\UIControls\UserControls\DBFilesEditor.Designer.vb">
       <DependentUpon>DBFilesEditor.vb</DependentUpon>
     </Compile>
-    <Compile Include="UIControls\UserControls\DBFilesEditor.vb">
+    <Compile Include="_WinForms\UIControls\UserControls\DBFilesEditor.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UIControls\UserControls\NavigateToolStrip.vb">
+    <Compile Include="_WinForms\UIControls\UserControls\NavigateToolStrip.vb">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports\Interface\IRptGroupsRow.vb" />
     <Compile Include="Reports\Class\RptGroupsRow.vb" />
-    <Compile Include="Reports\Viewer\FrmViewerReport.Designer.vb">
-      <DependentUpon>FrmViewerReport.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Reports\Viewer\FrmViewerReport.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UIControls\ContentEditors\Interfaces\IEditContent.vb" />
+    <Compile Include="_WinForms\UIControls\ContentEditors\Interfaces\IEditContent.vb" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="FrmCalendar.resx">
+    <EmbeddedResource Include="_WinForms\FrmCalendar.resx">
       <DependentUpon>FrmCalendar.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmCompany.resx">
+    <EmbeddedResource Include="_WinForms\FrmCompany.resx">
       <DependentUpon>FrmCompany.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmEditEntity.resx">
+    <EmbeddedResource Include="_WinForms\FrmEditEntity.resx">
       <DependentUpon>FrmEditEntity.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmEntries.resx">
+    <EmbeddedResource Include="_WinForms\FrmEntries.resx">
       <DependentUpon>FrmEntries.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmFindEntityIDs.resx">
+    <EmbeddedResource Include="_WinForms\FrmFindEntityIDs.resx">
       <DependentUpon>FrmFindEntityIDs.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmGroups.resx">
+    <EmbeddedResource Include="_WinForms\FrmGroups.resx">
       <DependentUpon>FrmGroups.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmMain.resx">
+    <EmbeddedResource Include="_WinForms\FrmMain.resx">
       <DependentUpon>FrmMain.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201807071354489_m001.resx">
@@ -475,6 +472,9 @@
     <EmbeddedResource Include="Migrations\201807281015363_M019.resx">
       <DependentUpon>201807281015363_M019.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902160835528_2019-02-16.resx">
+      <DependentUpon>201902160835528_2019-02-16.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
@@ -482,70 +482,64 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Rdlc\RptGroups.rdlc" />
-    <EmbeddedResource Include="Reports\Viewer\FrmViewerReport.resx">
-      <DependentUpon>FrmViewerReport.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UIControls\ContentEditors\CashFlowEntryEditor.resx">
+    <EmbeddedResource Include="_WinForms\UIControls\ContentEditors\CashFlowEntryEditor.resx">
       <DependentUpon>CashFlowEntryEditor.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UIControls\ContentEditors\DepositEditor.resx">
+    <EmbeddedResource Include="_WinForms\UIControls\ContentEditors\DepositEditor.resx">
       <DependentUpon>DepositEditor.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UIControls\ContentEditors\ExternalApplicationEditor.resx">
+    <EmbeddedResource Include="_WinForms\UIControls\ContentEditors\ExternalApplicationEditor.resx">
       <DependentUpon>ExternalApplicationEditor.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UIControls\ContentEditors\FinancialEntityEditor.resx">
+    <EmbeddedResource Include="_WinForms\UIControls\ContentEditors\FinancialEntityEditor.resx">
       <DependentUpon>FinancialEntityEditor.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UIControls\ContentEditors\FinancialProductEditor.resx">
+    <EmbeddedResource Include="_WinForms\UIControls\ContentEditors\FinancialProductEditor.resx">
       <DependentUpon>FinancialProductEditor.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UIControls\ContentEditors\EvaluationEditor.resx">
+    <EmbeddedResource Include="_WinForms\UIControls\ContentEditors\EvaluationEditor.resx">
       <DependentUpon>EvaluationEditor.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UIControls\ContentEditors\GroupEditor.resx">
+    <EmbeddedResource Include="_WinForms\UIControls\ContentEditors\GroupEditor.resx">
       <DependentUpon>GroupEditor.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UIControls\ContentEditors\JournalEntryEditor.resx">
+    <EmbeddedResource Include="_WinForms\UIControls\ContentEditors\JournalEntryEditor.resx">
       <DependentUpon>JournalEntryEditor.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UIControls\ContentEditors\JournalEntryTemplateEditor.resx">
-      <DependentUpon>JournalEntryTemplateEditor.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UIControls\ContentEditors\OwnerEditor.resx">
+    <EmbeddedResource Include="_WinForms\UIControls\ContentEditors\OwnerEditor.resx">
       <DependentUpon>OwnerEditor.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UIControls\ContentEditors\PurchaseInvoiceEditor.resx">
+    <EmbeddedResource Include="_WinForms\UIControls\ContentEditors\PurchaseInvoiceEditor.resx">
       <DependentUpon>PurchaseInvoiceEditor.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UIControls\ContentEditors\SubGroupEditor.resx">
+    <EmbeddedResource Include="_WinForms\UIControls\ContentEditors\SubGroupEditor.resx">
       <DependentUpon>SubGroupFinder.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UIControls\ListBoxes\ListBox.resx">
+    <EmbeddedResource Include="_WinForms\UIControls\ListBoxes\ListBox.resx">
       <DependentUpon>ListBox.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UIControls\ListBoxes\ListBox_Deposit.resx">
+    <EmbeddedResource Include="_WinForms\UIControls\ListBoxes\ListBox_Deposit.resx">
       <DependentUpon>ListBox_Deposit.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UIControls\ListBoxes\ListBox_FinancialProduct.resx">
+    <EmbeddedResource Include="_WinForms\UIControls\ListBoxes\ListBox_FinancialProduct.resx">
       <DependentUpon>ListBox_FinancialProduct.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UIControls\ListBoxes\ListBox_SubGroup.resx">
+    <EmbeddedResource Include="_WinForms\UIControls\ListBoxes\ListBox_SubGroup.resx">
       <DependentUpon>ListBox_SubGroup.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UIControls\ListBoxes\ListBox_Evaluation.resx">
+    <EmbeddedResource Include="_WinForms\UIControls\ListBoxes\ListBox_Evaluation.resx">
       <DependentUpon>ListBox_Evaluation.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UIControls\ListBoxes\ListBox_Owner.resx">
+    <EmbeddedResource Include="_WinForms\UIControls\ListBoxes\ListBox_Owner.resx">
       <DependentUpon>ListBox_Owner.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UIControls\ListBoxes\ListBox_FinancialEntity.resx">
+    <EmbeddedResource Include="_WinForms\UIControls\ListBoxes\ListBox_FinancialEntity.resx">
       <DependentUpon>ListBox_FinancialEntity.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UIControls\TextBoxes\TextEditor.resx">
+    <EmbeddedResource Include="_WinForms\UIControls\TextBoxes\TextEditor.resx">
       <DependentUpon>TextEditor.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UIControls\UserControls\DBFilesEditor.resx">
+    <EmbeddedResource Include="_WinForms\UIControls\UserControls\DBFilesEditor.resx">
       <DependentUpon>DBFilesEditor.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
@@ -563,12 +557,16 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
+    <Compile Include="_WinForms\UIControls\ContentEditors\Interfaces\IActionsMenu\IDuplicateContent.vb" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="SQL\IPCs.sql" />
     <Content Include="SQL\PurchaseInvoices.sql" />
     <Content Include="SQL\InvestmentIndexs.sql" />
     <Content Include="SQL\CashFlow.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Reports\Viewer\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

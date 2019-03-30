@@ -1,12 +1,31 @@
 ﻿Imports System.ComponentModel.DataAnnotations
 Imports System.ComponentModel.DataAnnotations.Schema
+Imports CashFlow
+
+Public Interface IJournalEntry
+    Property CancelDate As Date?
+    Property Concept As String
+    Property CreationDate As Date
+    Property Deposit As Deposit
+    Property EntryDate As Date
+    Property FiscalYear As Integer?
+    Property ID As Integer
+    Property Import As Double
+    Property SubGroup As SubGroup
+    'Property FinancialProduct As FinancialProduct
+    'Property PurchaseInvoice As PurchaseInvoice
+    Property BaseObjectName As String
+    Property BaseObjectID As Integer
+    Property Validated As Boolean
+End Interface
 
 Public Class JournalEntry
     Implements IJournalEntry
+    Implements IEntity
 
     <Key>
     <DatabaseGenerated(DatabaseGeneratedOption.Identity)>
-    Public Property ID As Integer Implements IJournalEntry.ID
+    Public Property ID As Integer Implements IJournalEntry.ID, IEntity.ID
 
     <MaxLength(100)>
     Public Property ExternalID As String
@@ -29,6 +48,7 @@ Public Class JournalEntry
 
     Public Property BaseObjectName As String Implements IJournalEntry.BaseObjectName
     Public Property BaseObjectID As Integer Implements IJournalEntry.BaseObjectID
+
 
 
     Public Sub New()

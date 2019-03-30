@@ -8,9 +8,6 @@ Public Class CashFlowContext
     Inherits DbContext
 
     Public Property JournalEntries As DbSet(Of JournalEntry)
-    <Obsolete("Utilitzar v2", True)>
-    Public Property JournalEntryTemplates As DbSet(Of JournalEntryTemplate)
-    Public Property JournalEntryTemplatesv2 As DbSet(Of JournalEntryTemplatev2)
     Public Property Groups As DbSet(Of Group)
     Public Property SubGroups As DbSet(Of SubGroup)
     Public Property Owners As DbSet(Of Owner)
@@ -214,49 +211,49 @@ End Class
 
 
 
-' Templates of Journal Entries
-Public Class JournalEntryTemplatev2
-    Implements IJournalEntryTemplatev2
+'' Templates of Journal Entries
+'Public Class JournalEntryTemplatev2
+'    Implements IJournalEntryTemplatev2
 
-    <Key>
-    <DatabaseGenerated(DatabaseGeneratedOption.Identity)>
-    Public Property ID As Integer Implements IJournalEntryTemplatev2.ID
+'    <Key>
+'    <DatabaseGenerated(DatabaseGeneratedOption.Identity)>
+'    Public Property ID As Integer Implements IJournalEntryTemplatev2.ID
 
-    <MaxLength(100)>
-    Public Property Name As String Implements IJournalEntryTemplatev2.Name
-    '
-    Public Property EntryDate As System.DateTime? Implements IJournalEntryTemplatev2.EntryDate
-    '
-    Public Property SubGroup As SubGroup Implements IJournalEntryTemplatev2.SubGroup
-    '
-    Public Property FinancialProduct As FinancialProduct Implements IJournalEntryTemplatev2.FinancialProduct
-    Public Property Deposit As Deposit Implements IJournalEntryTemplatev2.Deposit ' Cash / FinancialDeposit
-    '
-    Public Property Concept As System.String Implements IJournalEntryTemplatev2.Concept
-    Public Property Import As System.Double Implements IJournalEntryTemplatev2.Import
+'    <MaxLength(100)>
+'    Public Property Name As String Implements IJournalEntryTemplatev2.Name
+'    '
+'    Public Property EntryDate As System.DateTime? Implements IJournalEntryTemplatev2.EntryDate
+'    '
+'    Public Property SubGroup As SubGroup Implements IJournalEntryTemplatev2.SubGroup
+'    '
+'    Public Property FinancialProduct As FinancialProduct Implements IJournalEntryTemplatev2.FinancialProduct
+'    Public Property Deposit As Deposit Implements IJournalEntryTemplatev2.Deposit ' Cash / FinancialDeposit
+'    '
+'    Public Property Concept As System.String Implements IJournalEntryTemplatev2.Concept
+'    Public Property Import As System.Double Implements IJournalEntryTemplatev2.Import
 
-End Class
+'End Class
 
 
-' Templates of Journal Entries
-<Obsolete("Utilitzar v2", False)>
-Public Class JournalEntryTemplate
-    Implements IJournalEntryTemplate
+'' Templates of Journal Entries
+'<Obsolete("Utilitzar v2", False)>
+'Public Class JournalEntryTemplate
+'    Implements IJournalEntryTemplate
 
-    <Key>
-    Public Property ID As String Implements IJournalEntryTemplate.ID
-    Public Property Name As String Implements IJournalEntryTemplate.Name
-    '
-    Public Property EntryDate As System.DateTime? Implements IJournalEntryTemplate.EntryDate
-    '
-    Public Property SubGroup As SubGroup Implements IJournalEntryTemplate.SubGroup
-    '
-    Public Property Deposit As Deposit Implements IJournalEntryTemplate.Deposit ' Cash / FinancialDeposit
-    '
-    Public Property Concept As System.String Implements IJournalEntryTemplate.Concept
-    Public Property Import As System.Double Implements IJournalEntryTemplate.Import
+'    <Key>
+'    Public Property ID As String Implements IJournalEntryTemplate.ID
+'    Public Property Name As String Implements IJournalEntryTemplate.Name
+'    '
+'    Public Property EntryDate As System.DateTime? Implements IJournalEntryTemplate.EntryDate
+'    '
+'    Public Property SubGroup As SubGroup Implements IJournalEntryTemplate.SubGroup
+'    '
+'    Public Property Deposit As Deposit Implements IJournalEntryTemplate.Deposit ' Cash / FinancialDeposit
+'    '
+'    Public Property Concept As System.String Implements IJournalEntryTemplate.Concept
+'    Public Property Import As System.Double Implements IJournalEntryTemplate.Import
 
-End Class
+'End Class
 
 
 
@@ -328,8 +325,6 @@ Public Class Activity
     ' Linked Object
     Public Property LinkedObjectName As String
     Public Property LinkedID As Integer?
-    '
-    Public Property JournalEntryTemplates As ICollection(Of JournalEntryTemplate)
     '
     Public Property CancelDate As System.DateTime?
 
