@@ -14,6 +14,8 @@ Public Class ApplicationEvents
     Public Shared Sub AttachAction(ByVal oListener As IAppEventListener,
                                    ByVal oActionsExecuter As Object)
 
+
+
         Dim actionsFilter = (From x In EntityActionCollection
                              Where x.EntityAction.CanExecuteAction(oActionsExecuter)).ToList()
 

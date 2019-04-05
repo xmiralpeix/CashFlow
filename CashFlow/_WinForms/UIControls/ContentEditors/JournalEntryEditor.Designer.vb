@@ -42,13 +42,12 @@ Partial Class JournalEntryEditor
         Me.Label9 = New System.Windows.Forms.Label()
         Me.cbObjTypes = New System.Windows.Forms.ComboBox()
         Me.ContextMenuStrip1 = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.CopiarToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CrearUnTraspàsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.txtStatus = New System.Windows.Forms.TextBox()
         Me.ListBox_Deposit1 = New CashFlow.ListBox_Deposit()
         Me.ListBox_SubGroup1 = New CashFlow.ListBox_SubGroup()
         Me.txtEntryDate = New CashFlow.TextEditor_Date()
-        Me.CrearUnTraspàsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.StatusStrip1.SuspendLayout()
         Me.ContextMenuStrip1.SuspendLayout()
         Me.SuspendLayout()
@@ -214,15 +213,15 @@ Partial Class JournalEntryEditor
         '
         'ContextMenuStrip1
         '
-        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CopiarToolStripMenuItem, Me.CrearUnTraspàsToolStripMenuItem})
+        Me.ContextMenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CrearUnTraspàsToolStripMenuItem})
         Me.ContextMenuStrip1.Name = "ContextMenuStrip1"
-        Me.ContextMenuStrip1.Size = New System.Drawing.Size(219, 70)
+        Me.ContextMenuStrip1.Size = New System.Drawing.Size(153, 48)
         '
-        'CopiarToolStripMenuItem
+        'CrearUnTraspàsToolStripMenuItem
         '
-        Me.CopiarToolStripMenuItem.Name = "CopiarToolStripMenuItem"
-        Me.CopiarToolStripMenuItem.Size = New System.Drawing.Size(218, 22)
-        Me.CopiarToolStripMenuItem.Text = "Copiar a factura de compra"
+        Me.CrearUnTraspàsToolStripMenuItem.Name = "CrearUnTraspàsToolStripMenuItem"
+        Me.CrearUnTraspàsToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.CrearUnTraspàsToolStripMenuItem.Text = "Nou traspàs"
         '
         'Label2
         '
@@ -268,16 +267,11 @@ Partial Class JournalEntryEditor
         Me.txtEntryDate.TabIndex = 1
         Me.txtEntryDate.Value = Nothing
         '
-        'CrearUnTraspàsToolStripMenuItem
-        '
-        Me.CrearUnTraspàsToolStripMenuItem.Name = "CrearUnTraspàsToolStripMenuItem"
-        Me.CrearUnTraspàsToolStripMenuItem.Size = New System.Drawing.Size(218, 22)
-        Me.CrearUnTraspàsToolStripMenuItem.Text = "Nou traspàs"
-        '
         'JournalEntryEditor
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.ContextMenuStrip = Me.ContextMenuStrip1
         Me.Controls.Add(Me.txtStatus)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label9)
@@ -327,7 +321,6 @@ Partial Class JournalEntryEditor
     Friend WithEvents Label9 As Label
     Friend WithEvents cbObjTypes As ComboBox
     Friend WithEvents ContextMenuStrip1 As ContextMenuStrip
-    Friend WithEvents CopiarToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents Label2 As Label
     Friend WithEvents txtStatus As TextBox
     Friend WithEvents CrearUnTraspàsToolStripMenuItem As ToolStripMenuItem

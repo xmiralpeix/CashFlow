@@ -52,8 +52,12 @@
         Return CreateInstance(GetFirstSubscriber(Of T))
     End Function
 
-    Public Function CreateInstance(ByVal ClassType As Type) As Object
-        Return Activator.CreateInstance(ClassType)
+    Public Function CreateContextInstance(Of T)(ctx As CashFlowContext) As Object
+        Return CreateInstance(GetFirstSubscriber(Of T), ctx)
+    End Function
+
+    Public Function CreateInstance(ByVal ClassType As Type, ParamArray Args() As Object) As Object
+        Return Activator.CreateInstance(ClassType, Args)
     End Function
 
 End Module

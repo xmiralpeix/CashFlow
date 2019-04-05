@@ -35,6 +35,7 @@ Public Class JournalEntryEditor
 
         Try
             Dim keepValues As Boolean = False
+            Dim existLink As Boolean = False
             If ID.HasValue Then
 
                 Using ctx As New CashFlow.CashFlowContext()
@@ -42,6 +43,7 @@ Public Class JournalEntryEditor
                     _entry = (From g1 In ctx.JournalEntries.Include(NameOf(JournalEntry.SubGroup)).Include(NameOf(JournalEntry.Deposit))
                               Where g1.ID = ID.Value).First()
 
+                    existLink = ctx.JournalEntries.Any(Function(x) x.BaseObjectName = NameOf(IJournalEntry) AndAlso x.BaseObjectID = _entry.ID)
                 End Using
 
             Else
@@ -50,35 +52,35 @@ Public Class JournalEntryEditor
             End If
 
             Me.txtID.Text = _entry.ID
-            If keepValues AndAlso Me.chkConcept.Checked Then
+            If Not keepValues OrElse Me.chkConcept.Checked Then
                 Me.txtConcept.Text = _entry.Concept
             End If
-            If keepValues AndAlso Me.chkDeposit.Checked Then
+            If Not keepValues OrElse Me.chkDeposit.Checked Then
                 Me.ListBox_Deposit1.AssignValue(_entry.Deposit)
             End If
             AddHandler ListBox_Deposit1.OnEntityChanged, Sub() LoadBalance()
             '
-            If keepValues AndAlso Me.chkDate.Checked Then
+            If Not keepValues OrElse Me.chkDate.Checked Then
                 Me.txtEntryDate.AssignValue(If(IsEmpty(_entry.EntryDate), DirectCast(Nothing, DateTime?), _entry.EntryDate))
             End If
             'Me.ListBox_FinancialProduct1.AssignValue(_entry.FinancialProduct)
-            If keepValues AndAlso Me.chkImport.Checked Then
+            If Not keepValues OrElse Me.chkImport.Checked Then
                 Me.txtImport.Text = Me._entry.Import
             End If
-            If keepValues AndAlso Me.chkGroup.Checked Then
+            If Not keepValues OrElse Me.chkGroup.Checked Then
                 Me.ListBox_SubGroup1.AssignValue(_entry.SubGroup)
             End If
 
             If Not IsEmpty(_entry.CancelDate) Then
                 Me.txtStatus.Text = Locate("Cancel·lat", CAT)
-            ElseIf Not IsEmpty(_entry.FiscalYear) Then
+            ElseIf Not IsEmpty(_entry.FiscalYear) OrElse existLink Then
                 Me.txtStatus.Text = Locate("Tancat", CAT)
             Else
                 Me.txtStatus.Text = Locate("Obert", CAT)
             End If
 
 
-            If IsEmpty(Me._entry.BaseObjectID) Then
+            If IsEmpty(Me._entry.BaseObjectName) Then
                 Me.cbObjTypes.SelectedValue = NameOf(IsEmpty)
                 Me.txtBaseObjectID.Text = ""
             Else
@@ -87,7 +89,7 @@ Public Class JournalEntryEditor
             End If
 
 
-            ChangeReadOnly(Not IsEmpty(_entry.CancelDate) OrElse Not IsEmpty(_entry.BaseObjectID), Me.Controls)
+            ChangeReadOnly(Not IsEmpty(_entry.CancelDate) OrElse Not IsEmpty(_entry.BaseObjectID) OrElse existLink, Me.Controls)
 
         Catch ex As Exception
             MsgBox(ex.Message)
@@ -273,7 +275,7 @@ Public Class JournalEntryEditor
 
     End Function
 
-    Private Sub CopiarToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CopiarToolStripMenuItem.Click
+    Private Sub CopiarToolStripMenuItem_Click(sender As Object, e As EventArgs)
 
         If IsEmpty(Me._entry.ID) Then
             MsgBox(Locate("Opció disponible només en mode de consulta", CAT))
@@ -319,33 +321,44 @@ Public Class JournalEntryEditor
         ' Movement from deposit to deposit
 
         Dim transInfo As ITransferInfo = CreateInstance(Of IRequestDataCollection).RequestTransferInfo
+        If IsEmpty(transInfo) Then
+            Return
+        End If
         '
+
+        Dim newId As Integer
 
         Using ctx As New CashFlowContext()
 
+            Dim sgCollection As ISubGroupCollection = CreateContextInstance(Of ISubGroupCollection)(ctx)
+
             Dim oEntryOut As IJournalEntry = CreateInstance(Of IJournalEntry)()
             oEntryOut.Concept = transInfo.Concept
-            oEntryOut.Deposit = transInfo.FromDeposit
+            oEntryOut.Deposit = ctx.Deposits.Find(transInfo.FromDeposit.ID)
             oEntryOut.EntryDate = transInfo.EntryDate
             oEntryOut.Import = transInfo.Import
-            oEntryOut.SubGroup = CreateInstance(Of ISubGrupCollection).Transfer
+            oEntryOut.SubGroup = sgCollection.Transfer
             '
             ctx.JournalEntries.Add(oEntryOut)
+            ctx.SaveChanges() ' To retreive new object Id
 
             Dim oEntryIn As IJournalEntry = CreateInstance(Of IJournalEntry)()
             oEntryIn.Concept = transInfo.Concept
-            oEntryIn.Deposit = transInfo.ToDeposit
+            oEntryIn.Deposit = ctx.Deposits.Find(transInfo.ToDeposit.ID)
             oEntryIn.EntryDate = transInfo.EntryDate
             oEntryIn.Import = transInfo.Import * -1
-            oEntryIn.SubGroup = CreateInstance(Of ISubGrupCollection).Transfer
+            oEntryIn.SubGroup = sgCollection.Transfer
             oEntryIn.BaseObjectID = oEntryOut.ID
             oEntryIn.BaseObjectName = NameOf(IJournalEntry)
             '
             ctx.JournalEntries.Add(oEntryIn)
-
             ctx.SaveChanges()
 
+            newId = oEntryIn.ID
+
         End Using
+
+
 
 
     End Sub

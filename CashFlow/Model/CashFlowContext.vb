@@ -452,7 +452,12 @@ Public Class Group
 
 End Class
 
+Public Interface ISubGroup
+
+End Interface
+
 Public Class SubGroup
+    Implements ISubGroup
 
     ' Ex: Watter
 

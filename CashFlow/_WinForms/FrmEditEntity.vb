@@ -347,7 +347,6 @@ Public Class FrmEdit
     Private Sub FrmEdit_Activated(sender As Object, e As EventArgs) Handles Me.Activated
 
         Try
-
             ApplicationEvents.AttachAction(Me, Me.Content)
             ApplicationEvents.AttachAction(Me, Me)
             ApplicationEvents.RefreshStatus(Me)
