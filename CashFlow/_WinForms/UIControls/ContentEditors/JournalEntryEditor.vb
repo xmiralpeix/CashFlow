@@ -52,22 +52,22 @@ Public Class JournalEntryEditor
             End If
 
             Me.txtID.Text = _entry.ID
-            If Not keepValues OrElse Me.chkConcept.Checked Then
+            If Not keepValues OrElse (keepValues AndAlso Not Me.chkConcept.Checked) Then
                 Me.txtConcept.Text = _entry.Concept
             End If
-            If Not keepValues OrElse Me.chkDeposit.Checked Then
+            If Not keepValues OrElse (keepValues AndAlso Not Me.chkDeposit.Checked) Then
                 Me.ListBox_Deposit1.AssignValue(_entry.Deposit)
             End If
             AddHandler ListBox_Deposit1.OnEntityChanged, Sub() LoadBalance()
             '
-            If Not keepValues OrElse Me.chkDate.Checked Then
+            If Not keepValues OrElse (keepValues AndAlso Not Me.chkDate.Checked) Then
                 Me.txtEntryDate.AssignValue(If(IsEmpty(_entry.EntryDate), DirectCast(Nothing, DateTime?), _entry.EntryDate))
             End If
             'Me.ListBox_FinancialProduct1.AssignValue(_entry.FinancialProduct)
-            If Not keepValues OrElse Me.chkImport.Checked Then
+            If Not keepValues OrElse (keepValues AndAlso Not Me.chkImport.Checked) Then
                 Me.txtImport.Text = Me._entry.Import
             End If
-            If Not keepValues OrElse Me.chkGroup.Checked Then
+            If Not keepValues OrElse (keepValues AndAlso Not Me.chkGroup.Checked) Then
                 Me.ListBox_SubGroup1.AssignValue(_entry.SubGroup)
             End If
 
@@ -336,7 +336,7 @@ Public Class JournalEntryEditor
             oEntryOut.Concept = transInfo.Concept
             oEntryOut.Deposit = ctx.Deposits.Find(transInfo.FromDeposit.ID)
             oEntryOut.EntryDate = transInfo.EntryDate
-            oEntryOut.Import = transInfo.Import
+            oEntryOut.Import = transInfo.Import * -1
             oEntryOut.SubGroup = sgCollection.Transfer
             '
             ctx.JournalEntries.Add(oEntryOut)
@@ -346,7 +346,7 @@ Public Class JournalEntryEditor
             oEntryIn.Concept = transInfo.Concept
             oEntryIn.Deposit = ctx.Deposits.Find(transInfo.ToDeposit.ID)
             oEntryIn.EntryDate = transInfo.EntryDate
-            oEntryIn.Import = transInfo.Import * -1
+            oEntryIn.Import = transInfo.Import
             oEntryIn.SubGroup = sgCollection.Transfer
             oEntryIn.BaseObjectID = oEntryOut.ID
             oEntryIn.BaseObjectName = NameOf(IJournalEntry)
