@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="AccountGroup\Application\Commands\" />
+    <Folder Include="AccountGroup\Application\Queries\" />
+    <Folder Include="AccountGroup\Domain\" />
+    <Folder Include="AccountGroup\Infrastructure\" />
+    <Folder Include="FinancialEntity\Application\Commands\" />
+    <Folder Include="FinancialEntity\Application\Queries\" />
+    <Folder Include="FinancialEntity\Domain\" />
+    <Folder Include="FinancialEntity\Infrastructure\" />
+    <Folder Include="FinancialProduct\Application\Commands\" />
+    <Folder Include="FinancialProduct\Application\Queries\" />
+    <Folder Include="JournalEntry\Application\Commands\" />
+    <Folder Include="JournalEntry\Application\Queries\" />
+    <Folder Include="Owner\Application\Commands\" />
+    <Folder Include="Owner\Application\Queries\" />
+    <Folder Include="_DDDTemplate\Application\Commands\" />
+    <Folder Include="_DDDTemplate\Application\Queries\" />
+    <Folder Include="_DDDTemplate\Domain\" />
+    <Folder Include="_DDDTemplate\Infrastructure\" />
+    <Folder Include="FinancialProduct\Domain\" />
+    <Folder Include="FinancialProduct\Infrastructure\" />
+    <Folder Include="JournalEntry\Domain\" />
+    <Folder Include="JournalEntry\Infrastructure\" />
+    <Folder Include="Owner\Infrastructure\" />
+  </ItemGroup>
+
+</Project>
