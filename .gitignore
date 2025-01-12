@@ -258,3 +258,5 @@ obj/
 *.chm
 *.suo
 Thumbs.db
+CashFlow/obj
+CashFlow/bin
